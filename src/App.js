@@ -1,4 +1,35 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB07mKDD9cK5zKOs7Oe1Z_qIvAWL8AXnGA",
+  authDomain: "pharmtech-path.firebaseapp.com",
+  projectId: "pharmtech-path",
+  storageBucket: "pharmtech-path.firebasestorage.app",
+  messagingSenderId: "644485599873",
+  appId: "1:644485599873:web:43db9494de7d05185eb380",
+  measurementId: "G-BLE75YJQT3"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+
+async function loadUserData(uid) {
+  try {
+    const snap = await getDoc(doc(db, "users", uid));
+    return snap.exists() ? snap.data() : null;
+  } catch { return null; }
+}
+
+async function saveUserData(uid, data) {
+  try {
+    await setDoc(doc(db, "users", uid), data, { merge: true });
+  } catch {}
+}
 
 const RESOURCES = [
   { name:"PTCB", full:"Pharmacy Technician Certification Board", url:"https://www.ptcb.org", desc:"Primary national CPhT certification & advanced credentials", color:"#1a8fa8", cat:"Certification" },
@@ -325,6 +356,7 @@ function Footer({go}){
 export default function App(){
   const [legalAccepted,setLegalAccepted]=useState(false);
   const [user,setUser]=useState(null);
+  const [authLoading,setAuthLoading]=useState(true);
   const [isPro,setIsPro]=useState(false);
   const [view,setView]=useState("home");
   const [sec,setSec]=useState(null);
@@ -346,6 +378,31 @@ export default function App(){
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
+  useEffect(()=>{
+    const unsub=onAuthStateChanged(auth,async fbUser=>{
+      if(fbUser){
+        setUser({email:fbUser.email,displayName:fbUser.displayName||fbUser.email.split("@")[0],uid:fbUser.uid});
+        const data=await loadUserData(fbUser.uid);
+        if(data){
+          setIsPro(data.isPro||false);
+          setDone(data.completed||{});
+          setNotes(data.notes||{});
+          setTracker(data.tracker||{});
+          setPlanData(data.planner||{});
+          if(data.legalAccepted) setLegalAccepted(true);
+        }
+      } else {
+        setUser(null);setIsPro(false);setDone({});setNotes({});
+      }
+      setAuthLoading(false);
+    });
+    return unsub;
+  },[]);
+
+  useEffect(()=>{
+    if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted});
+  },[done,notes,tracker,planData,isPro,legalAccepted]);
+
   const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
   const allL=sections.flatMap(s=>s.modules.flatMap(m=>m.lessons));
   const doneN=allL.filter(l=>done[l.id]).length;
@@ -358,13 +415,45 @@ export default function App(){
     else if(sec)setSec(null);
     else go("learn");
   };
-  const doAuth=()=>{
+
+  const doAuth=async()=>{
     if(!em.trim()||!pw.trim()){setEr("Please fill in all fields.");return;}
     if(pw.length<6){setEr("Password must be at least 6 characters.");return;}
-    setUser({email:em,displayName:nm||em.split("@")[0]});
-    setEr(""); go("home"); pop("Welcome to PharmTech Path!");
+    setEr("loading");
+    try{
+      if(authMode==="signup"){
+        const cred=await createUserWithEmailAndPassword(auth,em,pw);
+        if(nm) await updateProfile(cred.user,{displayName:nm});
+        await saveUserData(cred.user.uid,{email:em,displayName:nm||em.split("@")[0],isPro:false,completed:{},notes:{},createdAt:Date.now()});
+      } else {
+        await signInWithEmailAndPassword(auth,em,pw);
+      }
+      setEr(""); go("home"); pop("Welcome to PharmTech Path!");
+    } catch(e){
+      const msg=e.code==="auth/user-not-found"?"No account found with that email.":e.code==="auth/wrong-password"?"Incorrect password.":e.code==="auth/email-already-in-use"?"An account already exists with this email.":"Something went wrong. Please try again.";
+      setEr(msg);
+    }
   };
-  const doOut=()=>{setUser(null);setIsPro(false);setDone({});setNotes({});go("home");};
+
+  const doGoogle=async()=>{
+    try{
+      const cred=await signInWithPopup(auth,googleProvider);
+      const data=await loadUserData(cred.user.uid);
+      if(!data) await saveUserData(cred.user.uid,{email:cred.user.email,displayName:cred.user.displayName,isPro:false,completed:{},notes:{},createdAt:Date.now()});
+      go("home"); pop("Welcome to PharmTech Path!");
+    } catch(e){ setEr("Google sign-in failed. Please try again."); }
+  };
+
+  const doOut=async()=>{
+    await signOut(auth);
+    setUser(null);setIsPro(false);setDone({});setNotes({});go("home");
+  };
+
+  if(authLoading) return(
+    <div style={{minHeight:"100vh",background:bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
+      <div style={{color:ac,fontSize:14,fontWeight:700}}>Loading PharmTech Path…</div>
+    </div>
+  );
 
   const wrap=ch=>(
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
@@ -392,6 +481,12 @@ export default function App(){
         <div style={{marginBottom:16}}><div style={{fontSize:11,color:mu,marginBottom:4}}>Password</div><Inp type="password" placeholder="••••••••" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doAuth()}/></div>
         {er&&<div style={{color:"#ff6b6b",fontSize:12,marginBottom:11,background:"rgba(255,107,107,.08)",padding:"6px 10px",borderRadius:7}}>{er}</div>}
         <Bp ch={authMode==="login"?"Sign In":"Create Account"} on={doAuth} sx={{width:"100%"}}/>
+        <div style={{display:"flex",alignItems:"center",gap:10,margin:"14px 0"}}>
+          <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:11,color:mu}}>or</span><div style={{flex:1,height:1,background:br}}/>
+        </div>
+        <Bs ch="Continue with Google" on={doGoogle} sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+          <span style={{fontSize:15}}>G</span> Continue with Google
+        </Bs>
         <div style={{textAlign:"center",marginTop:14,fontSize:12,color:mu}}>
           {authMode==="login"?"No account? ":"Have an account? "}
           <button onClick={()=>{setAuthMode(authMode==="login"?"signup":"login");setEr("");}} style={{background:"none",border:"none",color:ac,fontWeight:700,cursor:"pointer",fontSize:12}}>{authMode==="login"?"Sign up free":"Sign in"}</button>
