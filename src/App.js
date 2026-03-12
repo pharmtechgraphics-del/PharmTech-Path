@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, si
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB07mKDD9cK5zKOs7Oe1Z_qIvAWL8AXnGA",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "pharmtech-path.firebaseapp.com",
   projectId: "pharmtech-path",
   storageBucket: "pharmtech-path.firebasestorage.app",
@@ -183,7 +183,6 @@ const TOOLS = [
   {id:"firstmonth",title:"First Month Planner",icon:"🗓️"},
 ];
 
-// Career roadmap milestone definitions
 const CAREER_MILESTONES = [
   { id:"m_start",  label:"Starting Out",       icon:"🌱", desc:"Exploring pharmacy as a career path", lessonIds:["l1","l2","l3"] },
   { id:"m_workflow",label:"Workflow Ready",    icon:"⚙️", desc:"Understanding daily operations",       lessonIds:["l4","l5","l6"] },
@@ -199,11 +198,9 @@ const CAREER_MILESTONES = [
 const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flatMap(m=>m.lessons));
 const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
-// ── Design tokens ────────────────────────────────────────────────────────────
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
 const ac="#00c9a7", bl="#0094ff", tx="#e8f0fe", mu="#8899bb";
 
-// ── Tiny components ──────────────────────────────────────────────────────────
 function Ring({p,size=44,sw=3}){
   const r=(size-sw)/2,c=2*Math.PI*r;
   return <svg width={size} height={size} style={{transform:"rotate(-90deg)",flexShrink:0}}>
@@ -221,13 +218,11 @@ const Inp=({ta,sx,...p})=>ta
   ?<textarea style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",...sx}} {...p}/>
   :<input style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",...sx}} {...p}/>;
 
-// ── Legal Disclaimer Popup ────────────────────────────────────────────────────
 function LegalPopup({onAccept}){
   const [checked,setChecked]=useState(false);
   return (
     <div style={{position:"fixed",inset:0,background:"rgba(5,10,22,0.95)",zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
       <div style={{background:"#0f1e35",border:`1px solid ${br}`,borderRadius:20,maxWidth:540,width:"100%",maxHeight:"85vh",overflow:"hidden",display:"flex",flexDirection:"column"}}>
-        {/* Header */}
         <div style={{padding:"24px 24px 0",flexShrink:0}}>
           <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:4}}>
             <span style={{fontSize:24}}>⬡</span>
@@ -236,7 +231,6 @@ function LegalPopup({onAccept}){
           <div style={{fontSize:13,color:mu,marginBottom:16}}>Please read and acknowledge the following before using PharmTech Path.</div>
           <div style={{height:1,background:br}}/>
         </div>
-        {/* Scrollable body */}
         <div style={{overflowY:"auto",padding:"16px 24px",flex:1}}>
           {[
             {title:"📚 Educational Use Only",body:"PharmTech Path is an educational platform. All content — including modules, drug references, law summaries, and workflow descriptions — is for informational and career development purposes only. It does not constitute medical advice, clinical guidance, legal advice, or official pharmacy policy."},
@@ -251,7 +245,6 @@ function LegalPopup({onAccept}){
             </div>
           ))}
         </div>
-        {/* Footer */}
         <div style={{padding:"16px 24px 24px",borderTop:`1px solid ${br}`,flexShrink:0}}>
           <label style={{display:"flex",alignItems:"flex-start",gap:12,cursor:"pointer",marginBottom:18}}>
             <div onClick={()=>setChecked(!checked)} style={{width:20,height:20,borderRadius:5,border:`2px solid ${checked?ac:br}`,background:checked?ac:"transparent",flexShrink:0,marginTop:1,display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s"}}>
@@ -267,14 +260,12 @@ function LegalPopup({onAccept}){
   );
 }
 
-// ── Career Roadmap ────────────────────────────────────────────────────────────
 function CareerRoadmap({done,isPro}){
   const milestones = CAREER_MILESTONES;
   return (
     <div>
       <div style={{fontSize:13,color:mu,marginBottom:20}}>Your journey mapped — each milestone unlocks as you complete lessons.</div>
       <div style={{position:"relative"}}>
-        {/* Vertical connector line */}
         <div style={{position:"absolute",left:21,top:20,bottom:20,width:2,background:`linear-gradient(to bottom,${ac},${bl})`,opacity:0.3,borderRadius:99}}/>
         {milestones.map((ms,i)=>{
           const totalL=ms.lessonIds.length;
@@ -284,11 +275,9 @@ function CareerRoadmap({done,isPro}){
           const locked=ms.pro&&!isPro;
           return (
             <div key={ms.id} style={{display:"flex",gap:16,alignItems:"flex-start",marginBottom:16,position:"relative"}}>
-              {/* Node */}
               <div style={{width:44,height:44,borderRadius:"50%",flexShrink:0,background:locked?"#1a2a3a":complete?`linear-gradient(135deg,${ac},${bl})`:pct>0?"#1a3a4a":"#1a2a3a",border:locked?`2px solid ${br}`:complete?"none":pct>0?`2px solid ${ac}`:`2px solid ${br}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,zIndex:1,transition:"all .3s"}}>
                 {locked?"🔒":complete?"✓":ms.icon}
               </div>
-              {/* Content */}
               <div style={{flex:1,background:locked?"rgba(255,255,255,.02)":complete?"rgba(0,201,167,.07)":sf,border:complete?`1px solid rgba(0,201,167,.25)`:`1px solid ${br}`,borderRadius:12,padding:"12px 16px",opacity:locked?0.5:1}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:6}}>
                   <div>
@@ -307,7 +296,6 @@ function CareerRoadmap({done,isPro}){
           );
         })}
       </div>
-      {/* Legend */}
       <div style={{display:"flex",gap:16,flexWrap:"wrap",marginTop:8}}>
         {[{color:ac,label:"Complete"},{color:"#1a3a4a",borderColor:ac,label:"In Progress"},{color:"#1a2a3a",label:"Not Started"}].map((l,i)=>(
           <div key={i} style={{display:"flex",alignItems:"center",gap:6,fontSize:11,color:mu}}>
@@ -320,7 +308,6 @@ function CareerRoadmap({done,isPro}){
   );
 }
 
-// ── Nav ───────────────────────────────────────────────────────────────────────
 function Nav({view,go,user,isPro,out}){
   const items=[["learn","Learn"],["resources","Resources"],["tools","Tools"],["career","My Career"],["contact","Contact"]];
   return <div style={{background:"rgba(10,22,40,.97)",backdropFilter:"blur(14px)",borderBottom:`1px solid ${br}`,height:56,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 16px",position:"sticky",top:0,zIndex:200}}>
@@ -338,7 +325,6 @@ function Nav({view,go,user,isPro,out}){
   </div>;
 }
 
-// ── Footer ────────────────────────────────────────────────────────────────────
 function Footer({go}){
   return (
     <div style={{borderTop:`1px solid ${br}`,marginTop:44,paddingTop:18,textAlign:"center"}}>
@@ -352,7 +338,6 @@ function Footer({go}){
   );
 }
 
-// ── Main App ──────────────────────────────────────────────────────────────────
 export default function App(){
   const [legalAccepted,setLegalAccepted]=useState(false);
   const [user,setUser]=useState(null);
@@ -466,7 +451,6 @@ export default function App(){
   const Bk=({lb})=><button onClick={back} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← {lb||"Back"}</button>;
   const H1=({ch,sub})=><><div style={{fontSize:20,fontWeight:800,color:"#fff",marginBottom:sub?3:18}}>{ch}</div>{sub&&<div style={{fontSize:13,color:mu,marginBottom:18}}>{sub}</div>}</>;
 
-  // ── AUTH ────────────────────────────────────────────────────────────────────
   if(view==="auth") return wrap(
     <div style={{maxWidth:400,margin:"0 auto"}}>
       <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
@@ -491,14 +475,10 @@ export default function App(){
           {authMode==="login"?"No account? ":"Have an account? "}
           <button onClick={()=>{setAuthMode(authMode==="login"?"signup":"login");setEr("");}} style={{background:"none",border:"none",color:ac,fontWeight:700,cursor:"pointer",fontSize:12}}>{authMode==="login"?"Sign up free":"Sign in"}</button>
         </div>
-        <div style={{marginTop:14,padding:"10px 12px",background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.2)",borderRadius:9,fontSize:11,color:mu,textAlign:"center"}}>
-          Preview mode — sign-in is simulated. Full cloud sync on deployment.
-        </div>
       </div>
     </div>
   );
 
-  // ── LESSON ──────────────────────────────────────────────────────────────────
   if(view==="learn"&&lesson) return wrap(<>
     <Bk lb="Back to lessons"/>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
@@ -534,7 +514,6 @@ export default function App(){
     )}
   </>);
 
-  // ── MODULE ──────────────────────────────────────────────────────────────────
   if(view==="learn"&&mod) return wrap(<>
     <Bk/>
     <H1 ch={mod.title}/>
@@ -553,7 +532,6 @@ export default function App(){
     </div>
   </>);
 
-  // ── SECTION ─────────────────────────────────────────────────────────────────
   if(view==="learn"&&sec) return wrap(<>
     <Bk/>
     <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:3}}><span style={{fontSize:26}}>{sec.icon}</span><div style={{fontSize:20,fontWeight:800,color:"#fff"}}>{sec.title}</div></div>
@@ -573,7 +551,6 @@ export default function App(){
     </div>
   </>);
 
-  // ── LEARN ───────────────────────────────────────────────────────────────────
   if(view==="learn") return wrap(<>
     <H1 ch="Learning Path" sub="Your personalized pharmacy tech mentorship journey"/>
     <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:16}}>
@@ -604,7 +581,6 @@ export default function App(){
     </div>
   </>);
 
-  // ── RESOURCES ───────────────────────────────────────────────────────────────
   if(view==="resources"){
     const cats=["All",...Array.from(new Set(RESOURCES.map(r=>r.cat)))];
     const fil=resCat==="All"?RESOURCES:RESOURCES.filter(r=>r.cat===resCat);
@@ -631,7 +607,6 @@ export default function App(){
     </>);
   }
 
-  // ── TOOLS ───────────────────────────────────────────────────────────────────
   if(view==="tools"){
     if(!user||!isPro) return wrap(
       <div style={{textAlign:"center",padding:"48px 0"}}>
@@ -665,7 +640,6 @@ export default function App(){
     </>);
   }
 
-  // ── MY CAREER ───────────────────────────────────────────────────────────────
   if(view==="career"){
     if(!user) return wrap(
       <div style={{textAlign:"center",padding:"48px 0"}}>
@@ -680,7 +654,6 @@ export default function App(){
     const totalNotes=allNoted.reduce((a,[,v])=>a+v.length,0);
 
     return wrap(<>
-      {/* Profile header */}
       <div style={{background:`linear-gradient(135deg,rgba(0,201,167,.1),rgba(0,148,255,.08))`,border:`1px solid rgba(0,201,167,.2)`,borderRadius:16,padding:"22px 24px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
         <div style={{display:"flex",alignItems:"center",gap:16}}>
           <div style={{width:56,height:56,borderRadius:"50%",background:`linear-gradient(135deg,${ac},${bl})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,fontWeight:800,color:"#fff",flexShrink:0}}>
@@ -699,7 +672,6 @@ export default function App(){
         <Ring p={pct} size={62} sw={5}/>
       </div>
 
-      {/* Stats row */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(120px,1fr))",gap:10,marginBottom:24}}>
         {[{n:doneN,l:"Lessons Done",c:ac},{n:allL.length,l:"Total Lessons",c:tx},{n:totalNotes,l:"Notes Saved",c:"#f59e0b"},{n:Object.values(CAREER_MILESTONES).filter(ms=>ms.lessonIds.every(id=>done[id])).length,l:"Milestones",c:bl}].map(s=>(
           <div key={s.l} style={{background:sf,border:`1px solid ${br}`,borderRadius:12,padding:"12px 14px",textAlign:"center"}}>
@@ -709,17 +681,14 @@ export default function App(){
         ))}
       </div>
 
-      {/* Tabs */}
       <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`}}>
         {[["roadmap","🗺️ Career Roadmap"],["notes","📝 My Notes"],["settings","⚙️ Account"]].map(([id,lb])=>(
           <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 8px",fontSize:12,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
         ))}
       </div>
 
-      {/* Roadmap tab */}
       {careerTab==="roadmap"&&<CareerRoadmap done={done} isPro={isPro}/>}
 
-      {/* Notes tab */}
       {careerTab==="notes"&&(
         <div>
           {allNoted.length===0
@@ -739,7 +708,6 @@ export default function App(){
         </div>
       )}
 
-      {/* Account tab */}
       {careerTab==="settings"&&(
         <div>
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:14}}>
@@ -761,7 +729,6 @@ export default function App(){
     </>);
   }
 
-  // ── UPGRADE ──────────────────────────────────────────────────────────────────
   if(view==="upgrade") return wrap(<>
     <div style={{textAlign:"center",padding:"14px 0 32px"}}>
       <Tag label="PharmTech Path Pro"/>
@@ -784,7 +751,6 @@ export default function App(){
     </div>
   </>);
 
-  // ── CONTACT ──────────────────────────────────────────────────────────────────
   if(view==="contact") return wrap(<>
     <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
@@ -828,7 +794,6 @@ export default function App(){
     </div>
   </>);
 
-  // ── LEGAL ────────────────────────────────────────────────────────────────────
   if(view==="legal") return wrap(<>
     <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
     <H1 ch="Legal & Policies"/>
@@ -844,14 +809,12 @@ export default function App(){
     ))}
   </>);
 
-  // ── HOME ─────────────────────────────────────────────────────────────────────
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
 
-      {/* Hero */}
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
         <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>A Mentorship System</span>
         <h1 style={{fontSize:"clamp(28px,6vw,50px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"12px 0 11px"}}><span style={{color:ac}}>PharmTech</span> Path</h1>
@@ -863,13 +826,11 @@ export default function App(){
       </div>
 
       <div style={{maxWidth:920,margin:"0 auto",padding:"0 16px 20px"}}>
-        {/* Welcome back bar */}
         {user&&<div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.2)",borderRadius:12,padding:"13px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:9}}>
           <div><div style={{fontSize:13,fontWeight:700,color:ac}}>Welcome back{user.displayName?`, ${user.displayName.split(" ")[0]}`:""}! {isPro?"⭐ Pro":""}</div><div style={{fontSize:11,color:mu,marginTop:2}}>{doneN}/{allL.length} lessons complete — {pct}% through your path</div></div>
           <Ring p={pct} size={46} sw={3}/>
         </div>}
 
-        {/* Navigation cards — Contact & Legal removed */}
         <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:13}}>Where do you want to go?</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
           {[
@@ -887,7 +848,6 @@ export default function App(){
           ))}
         </div>
 
-        {/* Merch Store placeholder */}
         <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
           <div style={{display:"flex",alignItems:"center",gap:14}}>
             <div style={{fontSize:36}}>👕</div>
@@ -902,7 +862,6 @@ export default function App(){
           </button>
         </div>
 
-        {/* Sign up / upgrade nudge */}
         {!user&&<div style={{background:`linear-gradient(135deg,rgba(0,201,167,.08),rgba(0,148,255,.08))`,border:"1px solid rgba(0,201,167,.2)",borderRadius:16,padding:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:14}}>
           <div><div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>Save your progress across devices</div><div style={{fontSize:12,color:mu,maxWidth:340}}>Create a free account to sync notes, track lessons, and unlock Pro when you're ready.</div></div>
           <Bp ch="Sign Up Free →" on={()=>go("auth")}/>
