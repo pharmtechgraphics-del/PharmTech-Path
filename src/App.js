@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -198,6 +198,8 @@ const CAREER_MILESTONES = [
 const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flatMap(m=>m.lessons));
 const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
+const MERCH_URL = "https://pharmtechgraphics.printify.me/";
+
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
 const ac="#00c9a7", bl="#0094ff", tx="#e8f0fe", mu="#8899bb";
 
@@ -217,6 +219,125 @@ const Bs=({ch,on,sx={}})=><button onClick={on} style={{background:sf,color:tx,bo
 const Inp=({ta,sx,...p})=>ta
   ?<textarea style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",...sx}} {...p}/>
   :<input style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",...sx}} {...p}/>;
+
+// ── CHANGE 1: Floating Feedback Button ──────────────────────────────────────
+function FeedbackButton({user, pop}) {
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState("general");
+  const [msg, setMsg] = useState("");
+  const [rating, setRating] = useState(0);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const submit = async () => {
+    if (!msg.trim()) return;
+    setSending(true);
+    try {
+      await addDoc(collection(db, "feedback"), {
+        message: msg.trim(),
+        type,
+        rating,
+        uid: user?.uid || "anonymous",
+        email: user?.email || "anonymous",
+        displayName: user?.displayName || "Anonymous",
+        createdAt: serverTimestamp(),
+      });
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        setOpen(false);
+        setMsg("");
+        setRating(0);
+        setType("general");
+        pop("Thanks for your feedback! 🙏");
+      }, 1800);
+    } catch {
+      pop("Something went wrong. Please try again.");
+    }
+    setSending(false);
+  };
+
+  return (
+    <>
+      {/* Floating button */}
+      <button
+        onClick={() => setOpen(true)}
+        title="Share feedback"
+        style={{
+          position:"fixed", bottom:24, right:24, zIndex:900,
+          background:`linear-gradient(135deg,${ac},${bl})`,
+          color:"#fff", border:"none", borderRadius:50,
+          width:52, height:52, fontSize:22, cursor:"pointer",
+          boxShadow:"0 4px 20px rgba(0,201,167,.4)",
+          display:"flex", alignItems:"center", justifyContent:"center",
+          transition:"transform .2s",
+        }}
+        onMouseEnter={e=>e.currentTarget.style.transform="scale(1.1)"}
+        onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}
+      >
+        💬
+      </button>
+
+      {/* Modal overlay */}
+      {open && (
+        <div
+          style={{position:"fixed",inset:0,background:"rgba(5,10,22,.85)",zIndex:950,display:"flex",alignItems:"flex-end",justifyContent:"flex-end",padding:"0 24px 90px"}}
+          onClick={e=>{ if(e.target===e.currentTarget) setOpen(false); }}
+        >
+          <div style={{background:"#0f1e35",border:`1px solid ${br}`,borderRadius:20,width:"100%",maxWidth:360,padding:24,boxShadow:"0 8px 40px rgba(0,0,0,.6)"}}>
+            {sent ? (
+              <div style={{textAlign:"center",padding:"24px 0"}}>
+                <div style={{fontSize:36,marginBottom:10}}>🙏</div>
+                <div style={{fontSize:16,fontWeight:800,color:"#fff",marginBottom:6}}>Thank you!</div>
+                <div style={{fontSize:12,color:mu}}>Your feedback helps make PharmTech Path better.</div>
+              </div>
+            ) : (
+              <>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
+                  <div>
+                    <div style={{fontSize:15,fontWeight:800,color:"#fff"}}>Share Feedback</div>
+                    <div style={{fontSize:11,color:mu,marginTop:2}}>Help us improve PharmTech Path</div>
+                  </div>
+                  <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:mu,fontSize:20,cursor:"pointer",lineHeight:1}}>×</button>
+                </div>
+
+                {/* Star rating */}
+                <div style={{marginBottom:14}}>
+                  <div style={{fontSize:11,color:mu,marginBottom:6}}>How's your experience?</div>
+                  <div style={{display:"flex",gap:6}}>
+                    {[1,2,3,4,5].map(s=>(
+                      <button key={s} onClick={()=>setRating(s)} style={{background:"none",border:"none",fontSize:24,cursor:"pointer",opacity:s<=rating?1:0.3,transition:"opacity .15s"}}>⭐</button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Type selector */}
+                <div style={{marginBottom:12}}>
+                  <div style={{fontSize:11,color:mu,marginBottom:6}}>Type</div>
+                  <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                    {[["general","💬 General"],["bug","🐛 Bug"],["idea","💡 Idea"],["content","📚 Content"]].map(([v,l])=>(
+                      <button key={v} onClick={()=>setType(v)} style={{background:type===v?"rgba(0,201,167,.15)":sf,color:type===v?ac:mu,border:type===v?`1px solid rgba(0,201,167,.4)`:`1px solid ${br}`,borderRadius:20,padding:"4px 10px",fontSize:11,fontWeight:600,cursor:"pointer"}}>{l}</button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div style={{marginBottom:16}}>
+                  <div style={{fontSize:11,color:mu,marginBottom:6}}>Your message</div>
+                  <Inp ta sx={{minHeight:88}} placeholder="Tell us what's on your mind…" value={msg} onChange={e=>setMsg(e.target.value)}/>
+                </div>
+
+                <Bp ch={sending?"Sending…":"Send Feedback →"} on={submit} sx={{width:"100%",opacity:msg.trim()&&!sending?1:0.5,cursor:msg.trim()&&!sending?"pointer":"not-allowed"}}/>
+                <div style={{textAlign:"center",marginTop:10,fontSize:10,color:mu}}>{user?`Submitting as ${user.displayName||user.email}`:"Submitting anonymously"}</div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+// ────────────────────────────────────────────────────────────────────────────
 
 function LegalPopup({onAccept}){
   const [checked,setChecked]=useState(false);
@@ -308,8 +429,9 @@ function CareerRoadmap({done,isPro}){
   );
 }
 
+// ── CHANGE 2: Nav updated — Merch Store added, opens in new tab ──────────────
 function Nav({view,go,user,isPro,out}){
-  const items=[["learn","Learn"],["resources","Resources"],["tools","Tools"],["career","My Career"],["contact","Contact"]];
+  const items=[["learn","Learn"],["resources","Resources"],["tools","Tools"],["career","My Career"]];
   return <div style={{background:"rgba(10,22,40,.97)",backdropFilter:"blur(14px)",borderBottom:`1px solid ${br}`,height:56,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 16px",position:"sticky",top:0,zIndex:200}}>
     <div onClick={()=>go("home")} style={{fontWeight:800,fontSize:18,color:"#fff",cursor:"pointer",display:"flex",alignItems:"center",gap:7}}>
       <span style={{color:ac}}>⬡</span>PharmTech<span style={{color:ac}}>Path</span>
@@ -317,6 +439,21 @@ function Nav({view,go,user,isPro,out}){
     </div>
     <div style={{display:"flex",gap:2,alignItems:"center",flexWrap:"wrap"}}>
       {items.map(([id,lb])=><button key={id} onClick={()=>go(id)} style={{background:view===id?"rgba(0,201,167,.12)":"transparent",color:view===id?ac:mu,border:view===id?`1px solid rgba(0,201,167,.3)`:"1px solid transparent",borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:600,cursor:"pointer"}}>{lb}</button>)}
+      {/* Merch Store link — opens Printify store in new tab */}
+      <a
+        href={MERCH_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background:"linear-gradient(135deg,rgba(168,85,247,.2),rgba(236,72,153,.15))",
+          color:"#c084fc",
+          border:"1px solid rgba(168,85,247,.35)",
+          borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:700,
+          cursor:"pointer",textDecoration:"none",whiteSpace:"nowrap",
+        }}
+      >
+        👕 Merch
+      </a>
       {user
         ?<button onClick={out} style={{background:"transparent",color:"#ff6b6b",border:"none",borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Sign Out</button>
         :<button onClick={()=>go("auth")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:7,padding:"6px 13px",fontSize:12,fontWeight:700,cursor:"pointer"}}>Sign In</button>
@@ -324,6 +461,7 @@ function Nav({view,go,user,isPro,out}){
     </div>
   </div>;
 }
+// ────────────────────────────────────────────────────────────────────────────
 
 function Footer({go}){
   return (
@@ -420,14 +558,17 @@ export default function App(){
     }
   };
 
+  // ── CHANGE 3: Mobile sign-in persistence fix ─────────────────────────────
   const doGoogle=async()=>{
     try{
+      await setPersistence(auth, browserLocalPersistence);
       const cred=await signInWithPopup(auth,googleProvider);
       const data=await loadUserData(cred.user.uid);
       if(!data) await saveUserData(cred.user.uid,{email:cred.user.email,displayName:cred.user.displayName,isPro:false,completed:{},notes:{},createdAt:Date.now()});
       go("home"); pop("Welcome to PharmTech Path!");
     } catch(e){ setEr("Google sign-in failed. Please try again."); }
   };
+  // ─────────────────────────────────────────────────────────────────────────
 
   const doOut=async()=>{
     await signOut(auth);
@@ -446,6 +587,8 @@ export default function App(){
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
       <div style={{maxWidth:920,margin:"0 auto",padding:"24px 16px 80px"}}>{ch}</div>
+      {/* CHANGE 1: Feedback button rendered on every page */}
+      <FeedbackButton user={user} pop={pop}/>
     </div>
   );
   const Bk=({lb})=><button onClick={back} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← {lb||"Back"}</button>;
@@ -809,11 +952,13 @@ export default function App(){
     ))}
   </>);
 
+  // ── CHANGE 4: Home page merch banner → live Printify link ────────────────
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
+      <FeedbackButton user={user} pop={pop}/>
 
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
         <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>A Mentorship System</span>
@@ -848,19 +993,28 @@ export default function App(){
           ))}
         </div>
 
-        <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
-          <div style={{display:"flex",alignItems:"center",gap:14}}>
-            <div style={{fontSize:36}}>👕</div>
-            <div>
-              <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>PharmTechGraphics — Merch Store</div>
-              <div style={{fontSize:12,color:mu,maxWidth:360}}>Pharmacy-themed apparel, accessories & designs made for techs, by a tech. Shop the collection.</div>
-              <div style={{marginTop:8}}><Tag label="Coming Soon" color="#a855f7"/></div>
+        {/* CHANGE 4: Merch banner now links to live Printify store */}
+        <a href={MERCH_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginBottom:22}}>
+          <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16,cursor:"pointer",transition:"border-color .2s"}}
+            onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.6)"}
+            onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.3)"}
+          >
+            <div style={{display:"flex",alignItems:"center",gap:14}}>
+              <div style={{fontSize:36}}>👕</div>
+              <div>
+                <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>PharmTechGraphics — Merch Store</div>
+                <div style={{fontSize:12,color:mu,maxWidth:360}}>Pharmacy-themed apparel, accessories & designs made for techs, by a tech. Shop the collection.</div>
+                <div style={{marginTop:8,display:"flex",gap:6,flexWrap:"wrap"}}>
+                  <Tag label="39 Products" color="#a855f7"/>
+                  <Tag label="Shop Now" color="#ec4899"/>
+                </div>
+              </div>
+            </div>
+            <div style={{background:"linear-gradient(135deg,#a855f7,#ec4899)",color:"#fff",border:"none",borderRadius:10,padding:"10px 20px",fontSize:13,fontWeight:700,whiteSpace:"nowrap"}}>
+              Visit Store →
             </div>
           </div>
-          <button style={{background:"linear-gradient(135deg,#a855f7,#ec4899)",color:"#fff",border:"none",borderRadius:10,padding:"10px 20px",fontSize:13,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}} onClick={()=>pop("Merch store coming soon! 🛍️")}>
-            Visit Store →
-          </button>
-        </div>
+        </a>
 
         {!user&&<div style={{background:`linear-gradient(135deg,rgba(0,201,167,.08),rgba(0,148,255,.08))`,border:"1px solid rgba(0,201,167,.2)",borderRadius:16,padding:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:14}}>
           <div><div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>Save your progress across devices</div><div style={{fontSize:12,color:mu,maxWidth:340}}>Create a free account to sync notes, track lessons, and unlock Pro when you're ready.</div></div>
@@ -875,6 +1029,7 @@ export default function App(){
       </div>
     </div>
   );
+  // ─────────────────────────────────────────────────────────────────────────
 }
 
 function StudyTracker({tracker,set}){
