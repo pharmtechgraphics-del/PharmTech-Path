@@ -883,8 +883,8 @@ export default function App(){
       </div>
 
       <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`}}>
-        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["settings","⚙️ Account"]].map(([id,lb])=>(
-          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:11,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
+        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
+          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:10,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
         ))}
       </div>
 
@@ -922,6 +922,7 @@ export default function App(){
       )}
 
       {careerTab==="profile"&&<CareerProfile profile={profile} setProfile={setProfile} isPro={isPro} go={go} pop={pop}/>}
+      {careerTab==="ai"&&<AICareerAssistant profile={profile} isPro={isPro} go={go} setProfile={setProfile} pop={pop}/>}
 
       {careerTab==="settings"&&(
         <div>
@@ -1134,6 +1135,127 @@ export default function App(){
     </div>
   );
   // ─────────────────────────────────────────────────────────────────────────
+}
+
+function AICareerAssistant({profile,isPro,go,setProfile,pop}){
+  const [messages,setMessages]=useState([]);
+  const [input,setInput]=useState("");
+  const [loading,setLoading]=useState(false);
+  const bottomRef=useState(null);
+
+  const QUICK_PROMPTS=[
+    {label:"📝 Resume bullet points",text:"Help me write strong resume bullet points based on my experience and current role."},
+    {label:"🎓 Next certification",text:"Based on my background, what certification should I pursue next to advance my career?"},
+    {label:"💼 Interview prep",text:"Give me pharmacy technician interview questions and how to answer them based on my experience."},
+    {label:"🗺️ Career path advice",text:"What career paths are available to me based on my current role and certifications?"},
+    {label:"⭐ Job match",text:"What pharmacy roles would I be well-qualified for based on my experience and skills?"},
+    {label:"✍️ Job description help",text:"Help me write a professional job description summary for my current role."},
+  ];
+
+  const buildSystemPrompt=()=>{
+    const name=profile.preferredName||"this pharmacy technician";
+    const job=profile.currentJob||"pharmacy technician";
+    const workplace=profile.workplace?"at "+profile.workplace:"";
+    const certs=(profile.certifications||[]).filter(c=>c.trim()).join(", ")||"none listed";
+    const jobDesc=profile.jobDesc?"Current role description: "+profile.jobDesc:"";
+    const employment=(profile.employment||[]).map(e=>`${e.title} at ${e.workplace||"unknown"} (${e.start||""}${e.current?" — Present":e.end?" — "+e.end:""})`).join("; ")||"none listed";
+    const resumeNote=profile.resumeNote?"Resume notes/skills: "+profile.resumeNote:"";
+
+    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path — a career development platform for pharmacy techs.
+
+You are speaking with ${name}, who works as a ${job}${workplace}.
+
+Their profile:
+- Certifications: ${certs}
+- Employment history: ${employment}
+- ${jobDesc}
+- ${resumeNote}
+
+Your role is to:
+1. Give specific, actionable career advice tailored to their actual background
+2. Help write resume bullet points, job descriptions, and professional summaries
+3. Prep them for pharmacy tech interviews with real questions and strong answers
+4. Recommend certifications (PTCB CPhT, CPhT-Adv, BPS specialties, etc.) based on their goals
+5. Suggest career pathways and job types they'd be qualified for
+6. Be encouraging, direct, and practical — like a mentor who has been in pharmacy
+
+Keep responses focused, practical, and specific to pharmacy. If their profile is sparse, ask a clarifying question to give better advice. Always be warm but professional.`;
+  };
+
+  const sendMessage=async(text)=>{
+    const userMsg=text||input.trim();
+    if(!userMsg||loading) return;
+    setInput("");
+    const newMessages=[...messages,{role:"user",content:userMsg}];
+    setMessages(newMessages);
+    setLoading(true);
+    try{
+      const response=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "x-api-key": process.env.REACT_APP_ANTHROPIC_API_KEY,
+          "anthropic-version":"2023-06-01",
+          "anthropic-dangerous-direct-browser-calls":"true",
+        },
+        body:JSON.stringify({
+          model:"claude-haiku-4-5-20251001",
+          max_tokens:1000,
+          system:buildSystemPrompt(),
+          messages:newMessages.map(m=>({role:m.role,content:m.content})),
+        }),
+      });
+      const data=await response.json();
+      const reply=data.content?.[0]?.text||"Sorry, I couldn't generate a response. Please try again.";
+      setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
+    }catch(e){
+      setMessages(prev=>[...prev,{role:"assistant",content:"Something went wrong. Please check your connection and try again."}]);
+    }
+    setLoading(false);
+  };
+
+  const copyToResumeNotes=(text)=>{
+    setProfile(p=>({...p,resumeNote:(p.resumeNote?p.resumeNote+"\n\n":"")+text}));
+    pop("Copied to Resume Notes! ✓");
+  };
+
+  if(!isPro) return (
+    <div style={{textAlign:"center",padding:"48px 0"}}>
+      <div style={{fontSize:42,marginBottom:12}}>🤖</div>
+      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:8}}>AI Career Assistant</div>
+      <div style={{fontSize:13,color:mu,marginBottom:20,maxWidth:360,margin:"0 auto 20px"}}>Get personalized career guidance, resume help, interview prep, and job match advice — powered by AI and built around your profile.</div>
+      <Tag label="Pro Only" color={bl}/>
+      <div style={{marginTop:20}}>
+        <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"11px 24px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Upgrade to Pro →</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{textAlign:"center",padding:"48px 24px"}}>
+      <div style={{fontSize:48,marginBottom:16}}>🤖</div>
+      <div style={{display:"inline-block",marginBottom:16}}><Tag label="Coming Soon" color="#a855f7"/></div>
+      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:10}}>AI Career Assistant</div>
+      <div style={{fontSize:13,color:mu,maxWidth:400,margin:"0 auto 24px",lineHeight:1.8}}>
+        Your personal pharmacy career coach is almost here. It will know your profile, your certifications, and your goals — and give you advice that actually fits your career.
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10,maxWidth:520,margin:"0 auto",textAlign:"left"}}>
+        {[
+          {icon:"📝",label:"Resume bullet points"},
+          {icon:"🎓",label:"Certification advice"},
+          {icon:"💼",label:"Interview prep"},
+          {icon:"🗺️",label:"Career path guidance"},
+          {icon:"⭐",label:"Job match suggestions"},
+          {icon:"✍️",label:"Job description help"},
+        ].map((f,i)=>(
+          <div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:10,padding:"10px 13px",fontSize:12,color:mu,display:"flex",alignItems:"center",gap:8}}>
+            <span>{f.icon}</span>{f.label}
+          </div>
+        ))}
+      </div>
+      <div style={{marginTop:24,fontSize:11,color:mu}}>Stay tuned — this feature is launching soon! 🚀</div>
+    </div>
+  );
 }
 
 function CareerProfile({profile,setProfile,isPro,go,pop}){
