@@ -883,8 +883,8 @@ export default function App(){
       </div>
 
       <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`}}>
-        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["settings","⚙️ Account"]].map(([id,lb])=>(
-          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:11,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
+        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
+          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:10,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
         ))}
       </div>
 
@@ -922,6 +922,7 @@ export default function App(){
       )}
 
       {careerTab==="profile"&&<CareerProfile profile={profile} setProfile={setProfile} isPro={isPro} go={go} pop={pop}/>}
+      {careerTab==="ai"&&<AICareerAssistant profile={profile} isPro={isPro} go={go} setProfile={setProfile} pop={pop}/>}
 
       {careerTab==="settings"&&(
         <div>
@@ -1134,6 +1135,179 @@ export default function App(){
     </div>
   );
   // ─────────────────────────────────────────────────────────────────────────
+}
+
+function AICareerAssistant({profile,isPro,go,setProfile,pop}){
+  const [messages,setMessages]=useState([]);
+  const [input,setInput]=useState("");
+  const [loading,setLoading]=useState(false);
+  const bottomRef=useState(null);
+
+  const QUICK_PROMPTS=[
+    {label:"📝 Resume bullet points",text:"Help me write strong resume bullet points based on my experience and current role."},
+    {label:"🎓 Next certification",text:"Based on my background, what certification should I pursue next to advance my career?"},
+    {label:"💼 Interview prep",text:"Give me pharmacy technician interview questions and how to answer them based on my experience."},
+    {label:"🗺️ Career path advice",text:"What career paths are available to me based on my current role and certifications?"},
+    {label:"⭐ Job match",text:"What pharmacy roles would I be well-qualified for based on my experience and skills?"},
+    {label:"✍️ Job description help",text:"Help me write a professional job description summary for my current role."},
+  ];
+
+  const buildSystemPrompt=()=>{
+    const name=profile.preferredName||"this pharmacy technician";
+    const job=profile.currentJob||"pharmacy technician";
+    const workplace=profile.workplace?"at "+profile.workplace:"";
+    const certs=(profile.certifications||[]).filter(c=>c.trim()).join(", ")||"none listed";
+    const jobDesc=profile.jobDesc?"Current role description: "+profile.jobDesc:"";
+    const employment=(profile.employment||[]).map(e=>`${e.title} at ${e.workplace||"unknown"} (${e.start||""}${e.current?" — Present":e.end?" — "+e.end:""})`).join("; ")||"none listed";
+    const resumeNote=profile.resumeNote?"Resume notes/skills: "+profile.resumeNote:"";
+
+    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path — a career development platform for pharmacy techs.
+
+You are speaking with ${name}, who works as a ${job}${workplace}.
+
+Their profile:
+- Certifications: ${certs}
+- Employment history: ${employment}
+- ${jobDesc}
+- ${resumeNote}
+
+Your role is to:
+1. Give specific, actionable career advice tailored to their actual background
+2. Help write resume bullet points, job descriptions, and professional summaries
+3. Prep them for pharmacy tech interviews with real questions and strong answers
+4. Recommend certifications (PTCB CPhT, CPhT-Adv, BPS specialties, etc.) based on their goals
+5. Suggest career pathways and job types they'd be qualified for
+6. Be encouraging, direct, and practical — like a mentor who has been in pharmacy
+
+Keep responses focused, practical, and specific to pharmacy. If their profile is sparse, ask a clarifying question to give better advice. Always be warm but professional.`;
+  };
+
+  const sendMessage=async(text)=>{
+    const userMsg=text||input.trim();
+    if(!userMsg||loading) return;
+    setInput("");
+    const newMessages=[...messages,{role:"user",content:userMsg}];
+    setMessages(newMessages);
+    setLoading(true);
+    try{
+      const response=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          model:"claude-sonnet-4-20250514",
+          max_tokens:1000,
+          system:buildSystemPrompt(),
+          messages:newMessages.map(m=>({role:m.role,content:m.content})),
+        }),
+      });
+      const data=await response.json();
+      const reply=data.content?.[0]?.text||"Sorry, I couldn't generate a response. Please try again.";
+      setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
+    }catch{
+      setMessages(prev=>[...prev,{role:"assistant",content:"Something went wrong. Please check your connection and try again."}]);
+    }
+    setLoading(false);
+  };
+
+  const copyToResumeNotes=(text)=>{
+    setProfile(p=>({...p,resumeNote:(p.resumeNote?p.resumeNote+"\n\n":"")+text}));
+    pop("Copied to Resume Notes! ✓");
+  };
+
+  if(!isPro) return (
+    <div style={{textAlign:"center",padding:"48px 0"}}>
+      <div style={{fontSize:42,marginBottom:12}}>🤖</div>
+      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:8}}>AI Career Assistant</div>
+      <div style={{fontSize:13,color:mu,marginBottom:20,maxWidth:360,margin:"0 auto 20px"}}>Get personalized career guidance, resume help, interview prep, and job match advice — powered by AI and built around your profile.</div>
+      <Tag label="Pro Only" color={bl}/>
+      <div style={{marginTop:20}}>
+        <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"11px 24px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Upgrade to Pro →</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
+        <div>
+          <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>🤖 AI Career Assistant</div>
+          <div style={{fontSize:11,color:mu}}>Powered by your profile. Ask anything about your pharmacy career.</div>
+        </div>
+        {messages.length>0&&<button onClick={()=>setMessages([])} style={{background:"none",border:`1px solid ${br}`,color:mu,borderRadius:8,padding:"5px 11px",fontSize:11,cursor:"pointer"}}>Clear chat</button>}
+      </div>
+
+      {/* Quick prompts — show when no messages */}
+      {messages.length===0&&(
+        <div style={{marginBottom:20}}>
+          <div style={{fontSize:11,color:mu,marginBottom:10}}>Quick start — tap a prompt:</div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:8}}>
+            {QUICK_PROMPTS.map((p,i)=>(
+              <button key={i} onClick={()=>sendMessage(p.text)}
+                style={{background:sf,border:`1px solid ${br}`,borderRadius:10,padding:"10px 13px",textAlign:"left",color:tx,fontSize:12,fontWeight:600,cursor:"pointer",lineHeight:1.4}}>
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Chat messages */}
+      {messages.length>0&&(
+        <div style={{display:"flex",flexDirection:"column",gap:12,marginBottom:16,maxHeight:420,overflowY:"auto",padding:"4px 0"}}>
+          {messages.map((m,i)=>(
+            <div key={i} style={{display:"flex",flexDirection:"column",alignItems:m.role==="user"?"flex-end":"flex-start"}}>
+              <div style={{
+                maxWidth:"85%",
+                background:m.role==="user"?`linear-gradient(135deg,${ac},${bl})`:"rgba(255,255,255,.06)",
+                border:m.role==="user"?"none":`1px solid ${br}`,
+                borderRadius:m.role==="user"?"16px 16px 4px 16px":"16px 16px 16px 4px",
+                padding:"11px 14px",
+                fontSize:13,
+                color:m.role==="user"?"#fff":"#c8d8f0",
+                lineHeight:1.7,
+                whiteSpace:"pre-wrap",
+              }}>
+                {m.content}
+              </div>
+              {m.role==="assistant"&&(
+                <button onClick={()=>copyToResumeNotes(m.content)}
+                  style={{background:"none",border:"none",color:mu,fontSize:10,cursor:"pointer",marginTop:4,padding:"2px 4px"}}>
+                  📋 Copy to Resume Notes
+                </button>
+              )}
+            </div>
+          ))}
+          {loading&&(
+            <div style={{display:"flex",alignItems:"flex-start"}}>
+              <div style={{background:"rgba(255,255,255,.06)",border:`1px solid ${br}`,borderRadius:"16px 16px 16px 4px",padding:"11px 14px",fontSize:13,color:mu}}>
+                <span style={{animation:"pulse 1s infinite"}}>Thinking…</span>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Input area */}
+      <div style={{display:"flex",gap:8,alignItems:"flex-end"}}>
+        <textarea
+          placeholder="Ask anything — resume help, interview prep, career advice…"
+          value={input}
+          onChange={e=>setInput(e.target.value)}
+          onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage();}}}
+          style={{flex:1,background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:12,color:tx,fontSize:13,padding:"10px 13px",outline:"none",fontFamily:"inherit",resize:"none",minHeight:44,maxHeight:120}}
+          rows={1}
+        />
+        <button
+          onClick={()=>sendMessage()}
+          disabled={!input.trim()||loading}
+          style={{background:input.trim()&&!loading?`linear-gradient(135deg,${ac},${bl})`:"rgba(255,255,255,.08)",color:input.trim()&&!loading?"#fff":mu,border:"none",borderRadius:12,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:input.trim()&&!loading?"pointer":"not-allowed",flexShrink:0,height:44}}
+        >
+          {loading?"…":"Send"}
+        </button>
+      </div>
+      <div style={{fontSize:10,color:mu,marginTop:6,textAlign:"center"}}>Press Enter to send · Shift+Enter for new line · Fill out your Profile tab for better responses</div>
+    </div>
+  );
 }
 
 function CareerProfile({profile,setProfile,isPro,go,pop}){
