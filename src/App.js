@@ -507,7 +507,13 @@ export default function App(){
   const [careerTab,setCareerTab]=useState("roadmap");
   const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
   const [freeNotes,setFreeNotes]=useState([]);
-  const [freeNoteForm,setFreeNoteForm]=useState(null); // null=hidden, {}=new, {id,...}=editing
+  const [freeNoteForm,setFreeNoteForm]=useState(null);
+  // ── Career Profile state ─────────────────────────────────────────────────
+  const [profile,setProfile]=useState({
+    preferredName:"", currentJob:"", workplace:"",
+    jobDesc:"", employment:[], certifications:["","",""], resumeNote:""
+  });
+  const [profileSaving,setProfileSaving]=useState(false); // null=hidden, {}=new, {id,...}=editing
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
@@ -523,6 +529,7 @@ export default function App(){
           setTracker(data.tracker||{});
           setPlanData(data.planner||{});
           setFreeNotes(data.freeNotes||[]);
+          if(data.profile) setProfile(p=>({...p,...data.profile}));
           if(data.legalAccepted) setLegalAccepted(true);
         }
       } else {
@@ -534,8 +541,8 @@ export default function App(){
   },[]);
 
   useEffect(()=>{
-    if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted,freeNotes});
-  },[done,notes,tracker,planData,isPro,legalAccepted,freeNotes]);
+    if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted,freeNotes,profile});
+  },[done,notes,tracker,planData,isPro,legalAccepted,freeNotes,profile]);
 
   const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
   const allL=sections.flatMap(s=>s.modules.flatMap(m=>m.lessons));
@@ -854,8 +861,8 @@ export default function App(){
             {user.displayName?user.displayName[0].toUpperCase():"P"}
           </div>
           <div>
-            <div style={{fontSize:18,fontWeight:800,color:"#fff"}}>{user.displayName||"Pharmacy Tech"}</div>
-            <div style={{fontSize:12,color:mu,marginTop:2}}>{user.email}</div>
+            <div style={{fontSize:18,fontWeight:800,color:"#fff"}}>{profile.preferredName||user.displayName||"Pharmacy Tech"}</div>
+            <div style={{fontSize:12,color:mu,marginTop:2}}>{profile.currentJob?`${profile.currentJob}${profile.workplace?" · "+profile.workplace:""}`:user.email}</div>
             <div style={{marginTop:6,display:"flex",gap:7,flexWrap:"wrap"}}>
               {isPro&&<Tag label="Pro Member" color={ac}/>}
               <Tag label={`${doneN} lessons complete`} color={bl}/>
@@ -876,8 +883,8 @@ export default function App(){
       </div>
 
       <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`}}>
-        {[["roadmap","🗺️ Career Roadmap"],["notes","📝 My Notes"],["settings","⚙️ Account"]].map(([id,lb])=>(
-          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 8px",fontSize:12,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
+        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["settings","⚙️ Account"]].map(([id,lb])=>(
+          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:11,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
         ))}
       </div>
 
@@ -913,6 +920,8 @@ export default function App(){
           }
         </div>
       )}
+
+      {careerTab==="profile"&&<CareerProfile profile={profile} setProfile={setProfile} isPro={isPro} go={go} pop={pop}/>}
 
       {careerTab==="settings"&&(
         <div>
@@ -1125,6 +1134,172 @@ export default function App(){
     </div>
   );
   // ─────────────────────────────────────────────────────────────────────────
+}
+
+function CareerProfile({profile,setProfile,isPro,go,pop}){
+  const upd=(k,v)=>setProfile(p=>({...p,[k]:v}));
+  const [newJob,setNewJob]=useState({title:"",workplace:"",start:"",end:"",current:false,desc:""});
+  const [showJobForm,setShowJobForm]=useState(false);
+
+  const addJob=()=>{
+    if(!newJob.title.trim()) return;
+    setProfile(p=>({...p,employment:[...(p.employment||[]),{...newJob,id:Date.now().toString()}]}));
+    setNewJob({title:"",workplace:"",start:"",end:"",current:false,desc:""});
+    setShowJobForm(false);
+    pop("Employment added!");
+  };
+
+  const removeJob=(id)=>{
+    setProfile(p=>({...p,employment:(p.employment||[]).filter(e=>e.id!==id)}));
+    pop("Removed.");
+  };
+
+  const inpStyle={width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:9,color:tx,fontSize:13,padding:"9px 12px",outline:"none",fontFamily:"inherit",boxSizing:"border-box"};
+  const label=(txt)=><div style={{fontSize:11,color:mu,marginBottom:5}}>{txt}</div>;
+
+  return (
+    <div>
+      {/* ── FREE: Basic Profile ── */}
+      <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
+        <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Basic Profile</div>
+        <div style={{fontSize:11,color:mu,marginBottom:16}}>Visible on your career dashboard. Free for all users.</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:12}}>
+          <div>
+            {label("Preferred Name")}
+            <input placeholder="What should we call you?" value={profile.preferredName||""} onChange={e=>upd("preferredName",e.target.value)} style={inpStyle}/>
+          </div>
+          <div>
+            {label("Current Job Title")}
+            <input placeholder="e.g. Pharmacy Technician, CPhT" value={profile.currentJob||""} onChange={e=>upd("currentJob",e.target.value)} style={inpStyle}/>
+          </div>
+          <div>
+            {label("Current Workplace")}
+            <input placeholder="e.g. CVS, St. Mary's Hospital" value={profile.workplace||""} onChange={e=>upd("workplace",e.target.value)} style={inpStyle}/>
+          </div>
+        </div>
+        <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>Changes save automatically as you type.</div>
+      </div>
+
+      {/* ── PRO: Advanced Profile ── */}
+      {!isPro?(
+        <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:14,padding:24,textAlign:"center"}}>
+          <div style={{fontSize:22,marginBottom:8}}>🔒</div>
+          <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:6}}>Advanced Profile — Pro Only</div>
+          <div style={{fontSize:12,color:mu,marginBottom:16,maxWidth:360,margin:"0 auto 16px"}}>Upgrade to Pro to unlock employment history, certifications, resume notes and more — your full career portfolio in one place.</div>
+          <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Upgrade to Pro →</button>
+        </div>
+      ):(
+        <>
+          {/* Job Description */}
+          <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Current Role Description</div>
+            <div style={{fontSize:11,color:mu,marginBottom:12}}>Briefly describe what you do in your current role.</div>
+            <textarea
+              placeholder="e.g. Responsible for controlled substance reconciliation, cart fills, and inpatient dispensing in a 400-bed hospital…"
+              value={profile.jobDesc||""}
+              onChange={e=>upd("jobDesc",e.target.value)}
+              style={{...inpStyle,resize:"vertical",minHeight:90}}
+            />
+          </div>
+
+          {/* Employment History */}
+          <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
+              <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>Employment History</div>
+              {!showJobForm&&<button onClick={()=>setShowJobForm(true)} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:8,padding:"6px 13px",fontSize:12,fontWeight:700,cursor:"pointer"}}>+ Add</button>}
+            </div>
+            <div style={{fontSize:11,color:mu,marginBottom:16}}>Add previous or current positions with dates.</div>
+
+            {/* Existing jobs */}
+            {(profile.employment||[]).length===0&&!showJobForm&&(
+              <div style={{textAlign:"center",padding:"16px 0",color:mu,fontSize:12}}>No employment history yet. Click "+ Add" to get started.</div>
+            )}
+            {(profile.employment||[]).map(job=>(
+              <div key={job.id} style={{background:"rgba(255,255,255,.03)",border:`1px solid ${br}`,borderRadius:10,padding:"12px 14px",marginBottom:10}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:10}}>
+                  <div>
+                    <div style={{fontSize:13,fontWeight:700,color:"#fff"}}>{job.title}</div>
+                    {job.workplace&&<div style={{fontSize:11,color:ac,marginTop:2}}>{job.workplace}</div>}
+                    <div style={{fontSize:11,color:mu,marginTop:2}}>
+                      {job.start}{job.start&&(job.current||job.end)?" — ":""}{job.current?"Present":job.end}
+                    </div>
+                    {job.desc&&<div style={{fontSize:12,color:"#c8d8f0",marginTop:6,lineHeight:1.6}}>{job.desc}</div>}
+                  </div>
+                  <button onClick={()=>removeJob(job.id)} style={{background:"none",border:"none",color:"rgba(255,107,107,.6)",fontSize:18,cursor:"pointer",flexShrink:0,lineHeight:1}}>×</button>
+                </div>
+              </div>
+            ))}
+
+            {/* Add job form */}
+            {showJobForm&&(
+              <div style={{background:"rgba(0,201,167,.05)",border:"1px solid rgba(0,201,167,.2)",borderRadius:11,padding:16,marginTop:10}}>
+                <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:12}}>New Position</div>
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:10,marginBottom:10}}>
+                  <div>{label("Job Title *")}<input placeholder="e.g. Pharmacy Technician" value={newJob.title} onChange={e=>setNewJob(p=>({...p,title:e.target.value}))} style={inpStyle}/></div>
+                  <div>{label("Workplace")}<input placeholder="e.g. Walgreens" value={newJob.workplace} onChange={e=>setNewJob(p=>({...p,workplace:e.target.value}))} style={inpStyle}/></div>
+                  <div>{label("Start Date")}<input placeholder="e.g. Jan 2022" value={newJob.start} onChange={e=>setNewJob(p=>({...p,start:e.target.value}))} style={inpStyle}/></div>
+                  <div>
+                    {label("End Date")}
+                    <input placeholder="e.g. Dec 2023" value={newJob.end} onChange={e=>setNewJob(p=>({...p,end:e.target.value}))} disabled={newJob.current} style={{...inpStyle,opacity:newJob.current?0.4:1}}/>
+                    <label style={{display:"flex",alignItems:"center",gap:6,marginTop:6,cursor:"pointer"}}>
+                      <input type="checkbox" checked={newJob.current} onChange={e=>setNewJob(p=>({...p,current:e.target.checked,end:""}))} style={{accentColor:ac}}/>
+                      <span style={{fontSize:11,color:mu}}>Currently working here</span>
+                    </label>
+                  </div>
+                </div>
+                <div style={{marginBottom:12}}>
+                  {label("Brief Description (optional)")}
+                  <textarea placeholder="Key responsibilities or achievements…" value={newJob.desc} onChange={e=>setNewJob(p=>({...p,desc:e.target.value}))} style={{...inpStyle,resize:"vertical",minHeight:60}}/>
+                </div>
+                <div style={{display:"flex",gap:8}}>
+                  <button onClick={addJob} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:8,padding:"8px 16px",fontSize:12,fontWeight:700,cursor:"pointer",opacity:newJob.title.trim()?1:0.4}}>Save Position</button>
+                  <button onClick={()=>setShowJobForm(false)} style={{background:sf,color:tx,border:`1px solid ${br}`,borderRadius:8,padding:"8px 14px",fontSize:12,fontWeight:700,cursor:"pointer"}}>Cancel</button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Certifications */}
+          <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Certifications</div>
+            <div style={{fontSize:11,color:mu,marginBottom:14}}>List your pharmacy certifications (e.g. CPhT, CPhT-Adv, BPS specialty).</div>
+            {(profile.certifications||["","",""]).map((cert,i)=>(
+              <div key={i} style={{display:"flex",gap:8,marginBottom:8,alignItems:"center"}}>
+                <div style={{fontSize:11,color:mu,width:20,textAlign:"right",flexShrink:0}}>{i+1}.</div>
+                <input
+                  placeholder={i===0?"e.g. CPhT":i===1?"e.g. CPhT-Adv":"e.g. BPS Specialty"}
+                  value={cert}
+                  onChange={e=>{
+                    const updated=[...(profile.certifications||["","",""])];
+                    updated[i]=e.target.value;
+                    upd("certifications",updated);
+                  }}
+                  style={{...inpStyle,flex:1}}
+                />
+              </div>
+            ))}
+            <button
+              onClick={()=>upd("certifications",[...(profile.certifications||["","",""]),""]) }
+              style={{background:"none",border:"none",color:ac,fontSize:12,fontWeight:600,cursor:"pointer",marginTop:4,padding:0}}
+            >+ Add another certification</button>
+          </div>
+
+          {/* Resume Notes */}
+          <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Resume Notes</div>
+            <div style={{fontSize:11,color:mu,marginBottom:12}}>Use this space to draft resume bullet points, skills, or anything you want to remember when updating your resume.</div>
+            <textarea
+              placeholder="e.g. Key skills: controlled substance management, IV workflow, automated dispensing systems…&#10;&#10;Achievements to highlight:&#10;• Reduced dispensing errors by…&#10;• Led training for 3 new technicians…"
+              value={profile.resumeNote||""}
+              onChange={e=>upd("resumeNote",e.target.value)}
+              style={{...inpStyle,resize:"vertical",minHeight:130}}
+            />
+            <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>💡 Tip: Use this to keep track of accomplishments as they happen — don't wait until you need your resume to start writing!</div>
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 function FreeNotes({notes,setNotes,form,setForm,pop}){
