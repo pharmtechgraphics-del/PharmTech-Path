@@ -181,6 +181,7 @@ const TOOLS = [
   {id:"abbrev",title:"Rx Abbreviations",icon:"📋"},
   {id:"tracker",title:"4-Week Study Tracker",icon:"📅"},
   {id:"firstmonth",title:"First Month Planner",icon:"🗓️"},
+  {id:"mynotes",title:"My Notes",icon:"🗒️"},
 ];
 
 const CAREER_MILESTONES = [
@@ -505,6 +506,8 @@ export default function App(){
   const [sent,setSent]=useState(false);
   const [careerTab,setCareerTab]=useState("roadmap");
   const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
+  const [freeNotes,setFreeNotes]=useState([]);
+  const [freeNoteForm,setFreeNoteForm]=useState(null); // null=hidden, {}=new, {id,...}=editing
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
@@ -519,6 +522,7 @@ export default function App(){
           setNotes(data.notes||{});
           setTracker(data.tracker||{});
           setPlanData(data.planner||{});
+          setFreeNotes(data.freeNotes||[]);
           if(data.legalAccepted) setLegalAccepted(true);
         }
       } else {
@@ -530,8 +534,8 @@ export default function App(){
   },[]);
 
   useEffect(()=>{
-    if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted});
-  },[done,notes,tracker,planData,isPro,legalAccepted]);
+    if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted,freeNotes});
+  },[done,notes,tracker,planData,isPro,legalAccepted,freeNotes]);
 
   const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
   const allL=sections.flatMap(s=>s.modules.flatMap(m=>m.lessons));
@@ -816,6 +820,7 @@ export default function App(){
         {toolId==="abbrev"&&<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:8}}>{ABBREVS.map((a,i)=><div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:9,padding:"10px 13px"}}><div style={{fontFamily:"monospace",color:ac,fontWeight:700,fontSize:13,marginBottom:2}}>{a.a}</div><div style={{fontSize:12,color:"#c8d8f0"}}>{a.m}</div></div>)}</div>}
         {toolId==="tracker"&&<StudyTracker tracker={tracker} set={setTracker}/>}
         {toolId==="firstmonth"&&<MonthPlan plan={planData} set={setPlanData} pop={pop}/>}
+        {toolId==="mynotes"&&<FreeNotes notes={freeNotes} setNotes={setFreeNotes} form={freeNoteForm} setForm={setFreeNoteForm} pop={pop}/>}
       </>);
     }
     return wrap(<>
@@ -1120,6 +1125,95 @@ export default function App(){
     </div>
   );
   // ─────────────────────────────────────────────────────────────────────────
+}
+
+function FreeNotes({notes,setNotes,form,setForm,pop}){
+  const empty={subject:"",body:""};
+
+  const saveNote=()=>{
+    if(!form?.body?.trim()) return;
+    if(form.id){
+      setNotes(prev=>prev.map(n=>n.id===form.id?{...n,subject:form.subject,body:form.body,updatedAt:Date.now()}:n));
+      pop("Note updated!");
+    } else {
+      setNotes(prev=>[{id:Date.now().toString(),subject:form.subject||"Untitled",body:form.body,createdAt:Date.now()},...prev]);
+      pop("Note saved!");
+    }
+    setForm(null);
+  };
+
+  const deleteNote=(id)=>{
+    setNotes(prev=>prev.filter(n=>n.id!==id));
+    pop("Note deleted.");
+  };
+
+  if(form!==null) return (
+    <div>
+      <button onClick={()=>setForm(null)} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back to notes</button>
+      <div style={{fontSize:16,fontWeight:800,color:"#fff",marginBottom:16}}>{form.id?"Edit Note":"New Note"}</div>
+      <div style={{marginBottom:12}}>
+        <div style={{fontSize:11,color:mu,marginBottom:5}}>Subject</div>
+        <input
+          placeholder="e.g. Study tips, Work reminders…"
+          value={form.subject||""}
+          onChange={e=>setForm(f=>({...f,subject:e.target.value}))}
+          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box"}}
+        />
+      </div>
+      <div style={{marginBottom:16}}>
+        <div style={{fontSize:11,color:mu,marginBottom:5}}>Note</div>
+        <textarea
+          placeholder="Write anything…"
+          value={form.body||""}
+          onChange={e=>setForm(f=>({...f,body:e.target.value}))}
+          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",minHeight:180}}
+        />
+      </div>
+      <div style={{display:"flex",gap:9}}>
+        <button onClick={saveNote} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontSize:14,fontWeight:700,cursor:"pointer",opacity:form.body?.trim()?1:0.4}}>
+          {form.id?"Save Changes":"Save Note"}
+        </button>
+        <button onClick={()=>setForm(null)} style={{background:sf,color:tx,border:`1px solid ${br}`,borderRadius:10,padding:"10px 18px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Cancel</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
+        <div style={{fontSize:13,color:mu}}>{notes.length===0?"No notes yet. Create your first one!": `${notes.length} note${notes.length!==1?"s":""}`}</div>
+        <button
+          onClick={()=>setForm(empty)}
+          style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"8px 16px",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",gap:6}}
+        >
+          + Create Note
+        </button>
+      </div>
+      {notes.length===0&&(
+        <div style={{textAlign:"center",padding:"40px 0",color:mu}}>
+          <div style={{fontSize:40,marginBottom:12}}>🗒️</div>
+          <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:6}}>Your personal notepad</div>
+          <div style={{fontSize:12,color:mu,marginBottom:20}}>Jot down anything — study tips, work reminders, questions to ask your pharmacist.</div>
+          <button onClick={()=>setForm(empty)} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontSize:14,fontWeight:700,cursor:"pointer"}}>+ Create your first note</button>
+        </div>
+      )}
+      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+        {notes.map(n=>(
+          <div key={n.id} style={{background:sf,border:`1px solid ${br}`,borderRadius:12,padding:"14px 16px"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:10,marginBottom:6}}>
+              <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>{n.subject||"Untitled"}</div>
+              <div style={{display:"flex",gap:8,flexShrink:0}}>
+                <button onClick={()=>setForm({...n})} style={{background:"none",border:"none",color:ac,fontSize:11,fontWeight:600,cursor:"pointer"}}>Edit</button>
+                <button onClick={()=>deleteNote(n.id)} style={{background:"none",border:"none",color:"rgba(255,107,107,.7)",fontSize:11,fontWeight:600,cursor:"pointer"}}>Delete</button>
+              </div>
+            </div>
+            <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.7,whiteSpace:"pre-wrap"}}>{n.body}</div>
+            <div style={{fontSize:10,color:mu,marginTop:8}}>{new Date(n.updatedAt||n.createdAt).toLocaleDateString()}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function StudyTracker({tracker,set}){
