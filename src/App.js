@@ -1192,9 +1192,14 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
     try{
       const response=await fetch("https://api.anthropic.com/v1/messages",{
         method:"POST",
-        headers:{"Content-Type":"application/json"},
+        headers:{
+          "Content-Type":"application/json",
+          "x-api-key": process.env.REACT_APP_ANTHROPIC_API_KEY,
+          "anthropic-version":"2023-06-01",
+          "anthropic-dangerous-direct-browser-calls":"true",
+        },
         body:JSON.stringify({
-          model:"claude-sonnet-4-20250514",
+          model:"claude-haiku-4-5-20251001",
           max_tokens:1000,
           system:buildSystemPrompt(),
           messages:newMessages.map(m=>({role:m.role,content:m.content})),
@@ -1203,7 +1208,7 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
       const data=await response.json();
       const reply=data.content?.[0]?.text||"Sorry, I couldn't generate a response. Please try again.";
       setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
-    }catch{
+    }catch(e){
       setMessages(prev=>[...prev,{role:"assistant",content:"Something went wrong. Please check your connection and try again."}]);
     }
     setLoading(false);
@@ -1227,6 +1232,30 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
   );
 
   return (
+    <div style={{textAlign:"center",padding:"48px 24px"}}>
+      <div style={{fontSize:48,marginBottom:16}}>🤖</div>
+      <div style={{display:"inline-block",marginBottom:16}}><Tag label="Coming Soon" color="#a855f7"/></div>
+      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:10}}>AI Career Assistant</div>
+      <div style={{fontSize:13,color:mu,maxWidth:400,margin:"0 auto 24px",lineHeight:1.8}}>
+        Your personal pharmacy career coach is almost here. It will know your profile, your certifications, and your goals — and give you advice that actually fits your career.
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10,maxWidth:520,margin:"0 auto",textAlign:"left"}}>
+        {[
+          {icon:"📝",label:"Resume bullet points"},
+          {icon:"🎓",label:"Certification advice"},
+          {icon:"💼",label:"Interview prep"},
+          {icon:"🗺️",label:"Career path guidance"},
+          {icon:"⭐",label:"Job match suggestions"},
+          {icon:"✍️",label:"Job description help"},
+        ].map((f,i)=>(
+          <div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:10,padding:"10px 13px",fontSize:12,color:mu,display:"flex",alignItems:"center",gap:8}}>
+            <span>{f.icon}</span>{f.label}
+          </div>
+        ))}
+      </div>
+      <div style={{marginTop:24,fontSize:11,color:mu}}>Stay tuned — this feature is launching soon! 🚀</div>
+    </div>
+  );
     <div>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
         <div>
