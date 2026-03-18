@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence, sendPasswordResetEmail } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -199,6 +199,11 @@ const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flat
 const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
 const MERCH_URL = "https://pharmtechgraphics.printify.me/";
+
+// ── Stripe config (test mode — safe for frontend) ────────────────────────────
+const STRIPE_PUBLISHABLE_KEY = "pk_test_51TC3oNBBUppYTTEqQJguPmjVXTZsP4jZ1lv2S2NqklV9vh6qviVH2XItaLpr2JRFs1zUWTMlhhe2vrPyDsaLHrez00WN2lP72m";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_aFabJ065s4Jl5Qm8gQdIA00";
+// ─────────────────────────────────────────────────────────────────────────────
 
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
 const ac="#00c9a7", bl="#0094ff", tx="#e8f0fe", mu="#8899bb";
@@ -494,6 +499,7 @@ export default function App(){
   const [toast,setToast]=useState(null);
   const [resCat,setResCat]=useState("All");
   const [authMode,setAuthMode]=useState("login");
+  const [resetSent,setResetSent]=useState(false);
   const [em,setEm]=useState(""); const [pw,setPw]=useState(""); const [nm,setNm]=useState(""); const [er,setEr]=useState("");
   const [cf,setCf]=useState({name:"",email:"",subject:"question",message:""});
   const [sent,setSent]=useState(false);
@@ -570,6 +576,19 @@ export default function App(){
   };
   // ─────────────────────────────────────────────────────────────────────────
 
+  // ── CHANGE: Password Reset ────────────────────────────────────────────────
+  const doReset = async () => {
+    if (!em.trim()) { setEr("Please enter your email address first."); return; }
+    try {
+      await sendPasswordResetEmail(auth, em.trim());
+      setResetSent(true);
+      setEr("");
+    } catch(e) {
+      setEr("Couldn't send reset email. Please check the address and try again.");
+    }
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
   const doOut=async()=>{
     await signOut(auth);
     setUser(null);setIsPro(false);setDone({});setNotes({});go("home");
@@ -605,7 +624,14 @@ export default function App(){
         </div>
         {authMode==="signup"&&<div style={{marginBottom:11}}><div style={{fontSize:11,color:mu,marginBottom:4}}>Full Name</div><Inp placeholder="Your name" value={nm} onChange={e=>setNm(e.target.value)}/></div>}
         <div style={{marginBottom:11}}><div style={{fontSize:11,color:mu,marginBottom:4}}>Email</div><Inp type="email" placeholder="you@email.com" value={em} onChange={e=>setEm(e.target.value)}/></div>
-        <div style={{marginBottom:16}}><div style={{fontSize:11,color:mu,marginBottom:4}}>Password</div><Inp type="password" placeholder="••••••••" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doAuth()}/></div>
+        <div style={{marginBottom:16}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
+            <div style={{fontSize:11,color:mu}}>Password</div>
+            {authMode==="login"&&<button onClick={doReset} style={{background:"none",border:"none",color:ac,fontSize:11,cursor:"pointer",fontWeight:600}}>Forgot password?</button>}
+          </div>
+          <Inp type="password" placeholder="••••••••" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doAuth()}/>
+        </div>
+        {resetSent&&<div style={{color:ac,fontSize:12,marginBottom:11,background:"rgba(0,201,167,.08)",padding:"6px 10px",borderRadius:7}}>✓ Reset email sent! Check your inbox.</div>}
         {er&&<div style={{color:"#ff6b6b",fontSize:12,marginBottom:11,background:"rgba(255,107,107,.08)",padding:"6px 10px",borderRadius:7}}>{er}</div>}
         <Bp ch={authMode==="login"?"Sign In":"Create Account"} on={doAuth} sx={{width:"100%"}}/>
         <div style={{display:"flex",alignItems:"center",gap:10,margin:"14px 0"}}>
@@ -888,7 +914,20 @@ export default function App(){
           <div style={{fontSize:17,fontWeight:800,color:"#fff"}}>{p.label}</div>
           <div style={{fontSize:24,fontWeight:900,color:p.hi?ac:tx,margin:"6px 0 16px"}}>{p.price}</div>
           <div style={{marginBottom:20}}>{p.features.map((f,i)=><div key={i} style={{display:"flex",gap:6,marginBottom:8}}><span style={{color:ac,flexShrink:0}}>✓</span><span style={{fontSize:12,color:"#c8d8f0"}}>{f}</span></div>)}</div>
-          {p.hi?<Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>:<Bs ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>}
+          {p.hi?<>
+            <Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>
+            {!isPro&&<>
+              <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
+                <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or pay now</span><div style={{flex:1,height:1,background:br}}/>
+              </div>
+              <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
+                <button style={{width:"100%",padding:"11px 0",background:"transparent",border:`1px solid rgba(0,201,167,.4)`,borderRadius:10,color:ac,fontSize:14,fontWeight:700,cursor:"pointer"}}>
+                  💳 Subscribe with Stripe →
+                </button>
+              </a>
+              <div style={{textAlign:"center",marginTop:8,fontSize:10,color:mu}}>Secure checkout via Stripe</div>
+            </>}
+          </>:<Bs ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>}
         </div>
       ))}
     </div>
