@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence, sendPasswordResetEmail } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence, sendPasswordResetEmail, deleteUser } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -504,6 +504,7 @@ export default function App(){
   const [cf,setCf]=useState({name:"",email:"",subject:"question",message:""});
   const [sent,setSent]=useState(false);
   const [careerTab,setCareerTab]=useState("roadmap");
+  const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
@@ -594,6 +595,22 @@ export default function App(){
     setUser(null);setIsPro(false);setDone({});setNotes({});go("home");
   };
 
+  const doDeleteAccount = async () => {
+    try {
+      const fbUser = auth.currentUser;
+      if (!fbUser) return;
+      await deleteDoc(doc(db, "users", fbUser.uid));
+      await deleteUser(fbUser);
+      setUser(null); setIsPro(false); setDone({}); setNotes({});
+      setShowDeleteConfirm(false);
+      go("home");
+      pop("Account deleted.");
+    } catch(e) {
+      pop("Couldn't delete account. Please sign out and sign back in, then try again.");
+      setShowDeleteConfirm(false);
+    }
+  };
+
   if(authLoading) return(
     <div style={{minHeight:"100vh",background:bg,display:"flex",alignItems:"center",justifyContent:"center"}}>
       <div style={{color:ac,fontSize:14,fontWeight:700}}>Loading PharmTech Path…</div>
@@ -631,7 +648,10 @@ export default function App(){
           </div>
           <Inp type="password" placeholder="••••••••" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&doAuth()}/>
         </div>
-        {resetSent&&<div style={{color:ac,fontSize:12,marginBottom:11,background:"rgba(0,201,167,.08)",padding:"6px 10px",borderRadius:7}}>✓ Reset email sent! Check your inbox.</div>}
+        {resetSent&&<div style={{color:ac,fontSize:12,marginBottom:11,background:"rgba(0,201,167,.08)",padding:"8px 12px",borderRadius:7,lineHeight:1.6}}>
+          ✓ Reset email sent! Check your inbox.<br/>
+          <span style={{color:mu,fontSize:11}}>Don't see it? Check your spam or junk folder.</span>
+        </div>}
         {er&&<div style={{color:"#ff6b6b",fontSize:12,marginBottom:11,background:"rgba(255,107,107,.08)",padding:"6px 10px",borderRadius:7}}>{er}</div>}
         <Bp ch={authMode==="login"?"Sign In":"Create Account"} on={doAuth} sx={{width:"100%"}}/>
         <div style={{display:"flex",alignItems:"center",gap:10,margin:"14px 0"}}>
@@ -864,7 +884,19 @@ export default function App(){
             ?<div style={{textAlign:"center",padding:"32px 0",color:mu}}><div style={{fontSize:34,marginBottom:9}}>📝</div>No notes yet. Open any lesson and start taking notes.</div>
             :allNoted.map(([lid,ln])=>(
               <div key={lid} style={{marginBottom:16}}>
-                <div style={{fontSize:13,fontWeight:700,color:ac,marginBottom:6}}>{LESSON_MAP[lid]?.title||lid}</div>
+                <div
+                  onClick={()=>{
+                    const foundLesson=LESSON_MAP[lid];
+                    if(!foundLesson) return;
+                    const foundSec=[...FREE_SECTIONS,...PRO_SECTIONS].find(s=>s.modules.some(m=>m.lessons.some(l=>l.id===lid)));
+                    const foundMod=foundSec?.modules.find(m=>m.lessons.some(l=>l.id===lid));
+                    if(foundSec&&foundMod){setSec(foundSec);setMod(foundMod);setLesson(foundLesson);setView("learn");}
+                  }}
+                  style={{fontSize:13,fontWeight:700,color:ac,marginBottom:6,cursor:"pointer",display:"flex",alignItems:"center",gap:6}}
+                >
+                  {LESSON_MAP[lid]?.title||lid}
+                  <span style={{fontSize:10,color:mu,fontWeight:400}}>→ Go to lesson</span>
+                </div>
                 {ln.map((n,i)=>(
                   <div key={i} style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.15)",borderRadius:9,padding:"9px 12px",marginBottom:5,fontSize:13,color:"#c8d8f0",display:"flex",justifyContent:"space-between",gap:10}}>
                     <span>{n.text}</span>
@@ -892,7 +924,18 @@ export default function App(){
             <div><div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:3}}>Upgrade to Pro</div><div style={{fontSize:12,color:mu}}>Unlock all sections, bonus tools, and more.</div></div>
             <Bp ch="Upgrade →" on={()=>go("upgrade")}/>
           </div>}
-          <Bs ch="Sign Out" on={doOut} sx={{marginTop:14,width:"100%",color:"#ff6b6b",borderColor:"rgba(255,107,107,.3)"}}/>
+          <Bs ch="Sign Out" on={doOut} sx={{marginTop:14,width:"100%",color:"#ff6b6b",borderColor:"rgba(255,107,107,.3)",marginBottom:10}}/>
+          {!showDeleteConfirm
+            ?<button onClick={()=>setShowDeleteConfirm(true)} style={{background:"none",border:"none",color:"rgba(255,107,107,.5)",fontSize:11,cursor:"pointer",textDecoration:"underline",width:"100%",textAlign:"center",padding:"6px 0"}}>Delete Account</button>
+            :<div style={{background:"rgba(255,107,107,.07)",border:"1px solid rgba(255,107,107,.3)",borderRadius:12,padding:18,marginTop:4}}>
+              <div style={{fontSize:13,fontWeight:700,color:"#ff6b6b",marginBottom:6}}>⚠️ Delete your account?</div>
+              <div style={{fontSize:12,color:mu,marginBottom:14,lineHeight:1.6}}>This will permanently delete your account and all your data including notes and progress. This cannot be undone.</div>
+              <div style={{display:"flex",gap:8}}>
+                <button onClick={doDeleteAccount} style={{flex:1,background:"#ff6b6b",color:"#fff",border:"none",borderRadius:8,padding:"9px 0",fontSize:12,fontWeight:700,cursor:"pointer"}}>Yes, delete my account</button>
+                <button onClick={()=>setShowDeleteConfirm(false)} style={{flex:1,background:sf,color:tx,border:`1px solid ${br}`,borderRadius:8,padding:"9px 0",fontSize:12,fontWeight:700,cursor:"pointer"}}>Cancel</button>
+              </div>
+            </div>
+          }
         </div>
       )}
     </>);
@@ -937,8 +980,16 @@ export default function App(){
     <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
       <div>
-        <div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:6}}>Contact & About</div>
-        <div style={{fontSize:13,color:mu,marginBottom:20,lineHeight:1.7}}>PharmTech Path was built for pharmacy technicians — current, aspiring, and experienced — who want more than exam prep. This is the mentorship system that reshapes how you think about your career.</div>
+        <div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:6}}>Meet MJ — CPhT-Adv & Controlled Substance Lead</div>
+        <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:20,marginBottom:16}}>
+          <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.9}}>
+            I started where most of you are right now. One year in retail, learning the pace, the pressure, and what it really takes to keep things moving. Then inpatient pharmacy, where I've spent the last five years growing into a CPhT-Adv and Controlled Substance Lead role.
+            <br/><br/>
+            Nobody showed me the path. No mentor pulled me aside and said "here's how to actually grow in this field." I figured it out through trial, error, and a lot of determination.
+            <br/><br/>
+            That's why I built PharmTech Path. Whether you're behind a retail counter or inside a hospital pharmacy, the career growth you're looking for is possible. This is the mentorship system I wish existed when I was starting out.
+          </div>
+        </div>
         <div style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:16,marginBottom:11}}>
           <div style={{fontSize:11,fontWeight:700,color:ac,marginBottom:4}}>📧 Email Us Directly</div>
           <a href="mailto:pharmtechgraphics@gmail.com" style={{color:tx,fontSize:13,textDecoration:"none"}}>pharmtechgraphics@gmail.com</a>
@@ -1000,9 +1051,9 @@ export default function App(){
       <FeedbackButton user={user} pop={pop}/>
 
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
-        <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>A Mentorship System</span>
+        <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>Built by a tech. For techs.</span>
         <h1 style={{fontSize:"clamp(28px,6vw,50px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"12px 0 11px"}}><span style={{color:ac}}>PharmTech</span> Path</h1>
-        <p style={{fontSize:14,color:mu,maxWidth:460,margin:"0 auto 26px",lineHeight:1.6}}>What no one explained to you about pharmacy — structured, strategic, and built for real career growth.</p>
+        <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>No one handed MJ a roadmap from CPhT to Controlled Substance Lead — so she built one. PharmTech Path is the structured career system pharmacy technicians actually deserve.</p>
         <div style={{display:"flex",gap:9,justifyContent:"center",flexWrap:"wrap"}}>
           <Bp ch="Start Learning →" on={()=>go("learn")}/>
           {!user&&<Bs ch="Sign In / Sign Up" on={()=>go("auth")}/>}
