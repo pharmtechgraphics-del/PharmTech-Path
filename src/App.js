@@ -48,7 +48,7 @@ const RESOURCES = [
   { name:"ISMP", full:"Institute for Safe Medication Practices", url:"https://www.ismp.org", desc:"Medication safety alerts & error prevention tools", color:"#117a65", cat:"Safety" },
   { name:"MedlinePlus", full:"MedlinePlus Drug Information (NIH)", url:"https://medlineplus.gov/druginfo", desc:"Free NIH drug database", color:"#1f618d", cat:"Reference" },
   { name:"DailyMed", full:"DailyMed — Official FDA Drug Labels", url:"https://dailymed.nlm.nih.gov", desc:"Official FDA drug label database, free access", color:"#0e6655", cat:"Reference" },
-  { name:"Top 200 Drugs", full:"Top 200 Drugs — PTCB Flashcard Set", url:"https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/", desc:"Free PTCB-focused flashcard set covering brand names, generics, drug classes & indications", color:"#b7650a", cat:"Reference" },
+  
 ];
 
 const FREE_SECTIONS = [
@@ -147,6 +147,17 @@ const PRO_SECTIONS = [
     ]
   },
 ];
+<a href="https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/" 
+   target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+  <div style={{background:sf, border:"1px solid rgba(168,85,247,.3)", borderRadius:13, padding:18, cursor:"pointer", marginBottom:16}}
+    onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.7)"}
+    onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.3)"}
+  >
+    <div style={{fontSize:24, marginBottom:8}}>💊</div>
+    <div style={{fontSize:13, fontWeight:700, color:"#fff", marginBottom:4}}>Top 200 Drugs</div>
+    <div style={{fontSize:11, color:mu}}>Free PTCB-focused flashcard set covering brand names, generics, drug classes and indications. Opens in Quizlet.</div>
+  </div>
+</a>
 
 const CONVERSIONS = [
   {f:"1 g",t:"1,000 mg"},{f:"1 kg",t:"2.2 lb"},{f:"1 mg",t:"1,000 mcg"},
