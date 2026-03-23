@@ -48,7 +48,6 @@ const RESOURCES = [
   { name:"ISMP", full:"Institute for Safe Medication Practices", url:"https://www.ismp.org", desc:"Medication safety alerts & error prevention tools", color:"#117a65", cat:"Safety" },
   { name:"MedlinePlus", full:"MedlinePlus Drug Information (NIH)", url:"https://medlineplus.gov/druginfo", desc:"Free NIH drug database", color:"#1f618d", cat:"Reference" },
   { name:"DailyMed", full:"DailyMed — Official FDA Drug Labels", url:"https://dailymed.nlm.nih.gov", desc:"Official FDA drug label database, free access", color:"#0e6655", cat:"Reference" },
-  
 ];
 
 const FREE_SECTIONS = [
@@ -147,17 +146,6 @@ const PRO_SECTIONS = [
     ]
   },
 ];
-<a href="https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/" 
-   target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
-  <div style={{background:sf, border:"1px solid rgba(168,85,247,.3)", borderRadius:13, padding:18, cursor:"pointer", marginBottom:16}}
-    onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.7)"}
-    onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.3)"}
-  >
-    <div style={{fontSize:24, marginBottom:8}}>💊</div>
-    <div style={{fontSize:13, fontWeight:700, color:"#fff", marginBottom:4}}>Top 200 Drugs</div>
-    <div style={{fontSize:11, color:mu}}>Free PTCB-focused flashcard set covering brand names, generics, drug classes and indications. Opens in Quizlet.</div>
-  </div>
-</a>
 
 const CONVERSIONS = [
   {f:"1 g",t:"1,000 mg"},{f:"1 kg",t:"2.2 lb"},{f:"1 mg",t:"1,000 mcg"},
@@ -198,9 +186,11 @@ const ABBREVS = [
   {a:"AC",m:"Before meals"},{a:"PC",m:"After meals"},{a:"HS",m:"At bedtime"},
   {a:"UD",m:"As directed"},{a:"DAW 1",m:"Prescriber requests brand"},{a:"DAW 2",m:"Patient requests brand"},
 ];
+
 const TOOLS = [
+  {id:"top200",title:"Top 200 Drugs",icon:"💊"},
   {id:"conversions",title:"Conversion Reference",icon:"⚖️"},
-  {id:"drugclasses",title:"Drug Class Quick Reference",icon:"💊"},
+  {id:"drugclasses",title:"Drug Class Quick Reference",icon:"📖"},
   {id:"schedules",title:"CS Schedules",icon:"🔒"},
   {id:"abbrev",title:"Rx Abbreviations",icon:"📋"},
   {id:"tracker",title:"4-Week Study Tracker",icon:"📅"},
@@ -227,7 +217,6 @@ const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
 const MERCH_URL = "https://pharmtechgraphics.printify.me/";
 
-const STRIPE_PUBLISHABLE_KEY = "pk_test_51TC3oNBBUppYTTEqQJguPmjVXTZsP4jZ1lv2S2NqklV9vh6qviVH2XItaLpr2JRFs1zUWTMlhhe2vrPyDsaLHrez00WN2lP72m";
 const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_aFabJ065s4Jl5Qm8gQdIA00";
 
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
@@ -443,7 +432,6 @@ function Nav({view,go,user,isPro,out}){
   </div>;
 }
 
-// ── CHANGE: Footer now rendered on every page via wrap() ──────────────────────
 function Footer({go}){
   return (
     <div style={{borderTop:`1px solid ${br}`,marginTop:44,paddingTop:18,textAlign:"center"}}>
@@ -595,7 +583,6 @@ export default function App(){
     </div>
   );
 
-  // ── CHANGE: wrap() now includes Footer on every page ──────────────────────
   const wrap=ch=>(
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
@@ -792,6 +779,28 @@ export default function App(){
       return wrap(<>
         <button onClick={()=>setToolId(null)} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back to tools</button>
         <div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:16}}>{tl.icon} {tl.title}</div>
+
+        {toolId==="top200"&&(
+          <div>
+            <div style={{background:sf,border:`1px solid rgba(0,201,167,.2)`,borderRadius:13,padding:24,marginBottom:16}}>
+              <div style={{fontSize:13,color:mu,marginBottom:6}}>Free PTCB-focused flashcard set. Covers brand names, generics, drug classes and indications for the top 200 drugs tested on the CPhT exam.</div>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:20,marginTop:14}}>
+                {[{icon:"💊",label:"200 drug cards"},{icon:"🏷️",label:"Brand + generic names"},{icon:"🧬",label:"Drug classes"},{icon:"📋",label:"Indications"}].map((f,i)=>(
+                  <div key={i} style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.2)",borderRadius:9,padding:"7px 12px",fontSize:12,color:ac,display:"flex",alignItems:"center",gap:6}}>
+                    <span>{f.icon}</span>{f.label}
+                  </div>
+                ))}
+              </div>
+              <a href="https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+                <button style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"11px 28px",fontSize:14,fontWeight:700,cursor:"pointer"}}>
+                  Open Flashcards on Quizlet →
+                </button>
+              </a>
+              <div style={{marginTop:10,fontSize:11,color:mu}}>Free · No account required · Opens in a new tab</div>
+            </div>
+          </div>
+        )}
+
         {toolId==="conversions"&&<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:8}}>{CONVERSIONS.map((c,i)=><div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:9,padding:"11px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}><span style={{fontFamily:"monospace",color:ac,fontWeight:700,fontSize:12}}>{c.f}</span><span style={{color:mu}}>→</span><span style={{fontFamily:"monospace",color:tx,fontWeight:700,fontSize:12}}>{c.t}</span></div>)}</div>}
         {toolId==="drugclasses"&&<div style={{overflowX:"auto"}}><table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}><thead><tr style={{borderBottom:"2px solid rgba(0,201,167,.3)"}}>{["Suffix","Class","Use","Examples"].map(h=><th key={h} style={{padding:"8px 11px",textAlign:"left",color:ac,fontWeight:700,fontFamily:"monospace",fontSize:10,letterSpacing:1,textTransform:"uppercase"}}>{h}</th>)}</tr></thead><tbody>{DRUG_CLASSES.map((r,i)=><tr key={i} style={{borderBottom:`1px solid ${br}`,background:i%2===0?"rgba(255,255,255,.02)":"transparent"}}><td style={{padding:"8px 11px",color:ac,fontFamily:"monospace",fontWeight:700}}>{r.s}</td><td style={{padding:"8px 11px",color:"#fff",fontWeight:600}}>{r.c}</td><td style={{padding:"8px 11px",color:mu}}>{r.u}</td><td style={{padding:"8px 11px",color:"#c8d8f0"}}>{r.e}</td></tr>)}</tbody></table></div>}
         {toolId==="schedules"&&<div style={{display:"flex",flexDirection:"column",gap:11}}>{CS_SCHEDULES.map((s,i)=><div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:18}}><div style={{fontSize:14,fontWeight:800,color:ac,marginBottom:6}}>{s.s}</div><div style={{fontSize:12,color:"#c8d8f0",marginBottom:4}}><strong style={{color:"#fff"}}>Examples:</strong> {s.e}</div><div style={{fontSize:12,color:mu}}>{s.r}</div></div>)}<div style={{background:"rgba(255,107,107,.06)",border:"1px solid rgba(255,107,107,.2)",borderRadius:9,padding:12,fontSize:11,color:mu}}>⚠️ Schedule I substances have no accepted medical use and are not dispensed in pharmacies.</div></div>}
@@ -935,8 +944,8 @@ export default function App(){
     </div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
-        {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","17 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
-        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","The Tech Ladder (Tech I, II & III)","Advanced Certifications (CPhT-Adv, BPTS & PTCB)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
+        {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","16 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
+        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","The Tech Ladder (Tech I, II & III)","Advanced Certifications (CPhT-Adv, BPTS & PTCB)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
           <div style={{fontSize:24,marginBottom:6}}>{p.icon}</div>
@@ -1028,7 +1037,7 @@ export default function App(){
     ))}
   </>);
 
-  // ── HOME PAGE ─────────────────────────────────────────────────────────────
+  // HOME PAGE
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
@@ -1036,7 +1045,6 @@ export default function App(){
       {toast&&<Toast msg={toast}/>}
       <FeedbackButton user={user} pop={pop}/>
 
-      {/* ── CHANGE: Updated tagline — removed first sentence ── */}
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
         <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>Built by a tech. For techs.</span>
         <h1 style={{fontSize:"clamp(28px,6vw,50px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"12px 0 11px"}}><span style={{color:ac}}>PharmTech</span> Path</h1>
@@ -1057,7 +1065,7 @@ export default function App(){
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
           {[
             {icon:"📚",title:"Learning Path",desc:"Modules from day one to advanced growth",action:()=>go("learn"),color:ac},
-            {icon:"🔗",title:"Resources",desc:"17 official sites — PTCB, BPTS, FDA & more",action:()=>go("resources"),color:bl},
+            {icon:"🔗",title:"Resources",desc:"16 official sites — PTCB, BPTS, FDA & more",action:()=>go("resources"),color:bl},
             {icon:"🧰",title:"Bonus Tools",desc:"Drug tables, conversions & trackers",action:()=>go("tools"),color:"#a855f7",locked:!user||!isPro},
             {icon:"🗺️",title:"My Career",desc:"Roadmap, notes & your profile",action:()=>go("career"),color:"#f59e0b",locked:!user},
           ].map(item=>(
@@ -1070,7 +1078,6 @@ export default function App(){
           ))}
         </div>
 
-        {/* ── CHANGE: Merch banner now uses PharmTechGraphics logo image ── */}
         <a href={MERCH_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginBottom:22}}>
           <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16,cursor:"pointer",transition:"border-color .2s"}}
             onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.6)"}
@@ -1116,7 +1123,6 @@ function AICareerAssistant({profile,isPro,go,setProfile,pop}){
   const [messages,setMessages]=useState([]);
   const [input,setInput]=useState("");
   const [loading,setLoading]=useState(false);
-  const bottomRef=useState(null);
 
   const buildSystemPrompt=()=>{
     const name=profile.preferredName||"this pharmacy technician";
@@ -1306,10 +1312,9 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
               onChange={e=>upd("resumeNote",e.target.value)}
               style={{...inpStyle,resize:"vertical",minHeight:130}}
             />
-            <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>💡 Tip: Keep track of accomplishments as they happen — don't wait until you need your resume to start writing!</div>
+            <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>Tip: Keep track of accomplishments as they happen. Don't wait until you need your resume to start writing!</div>
           </div>
 
-          {/* ── CHANGE: Resume Upload — Coming Soon ── */}
           <div style={{textAlign:"center",padding:"32px 24px",background:"rgba(0,201,167,.04)",border:`1px solid rgba(0,201,167,.15)`,borderRadius:14,marginBottom:16}}>
             <div style={{fontSize:36,marginBottom:12}}>📄</div>
             <div style={{display:"inline-block",marginBottom:12}}><Tag label="Coming Soon" color="#a855f7"/></div>
@@ -1324,7 +1329,7 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
                 </div>
               ))}
             </div>
-            <div style={{marginTop:16,fontSize:11,color:mu}}>This feature is on the way. Stay tuned! 🚀</div>
+            <div style={{marginTop:16,fontSize:11,color:mu}}>This feature is on the way. Stay tuned!</div>
           </div>
         </>
       )}
