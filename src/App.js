@@ -35,10 +35,12 @@ const RESOURCES = [
   { name:"PTCB", full:"Pharmacy Technician Certification Board", url:"https://www.ptcb.org", desc:"Primary national CPhT certification & advanced credentials", color:"#1a8fa8", cat:"Certification" },
   { name:"NHA",  full:"National Healthcareer Association", url:"https://www.nhanow.com", desc:"ExCPT certification — widely accepted nationally", color:"#2e9d68", cat:"Certification" },
   { name:"BPS",  full:"Board of Pharmacy Specialties", url:"https://www.bpsweb.org", desc:"Specialty certifications for advanced practice", color:"#4a7fc1", cat:"Certification" },
+  { name:"BPTS", full:"Board of Pharmacy Technician Specialties", url:"https://bpts.org", desc:"Advanced certifications including CPhT-Adv, BCSCPT, BCHCPT & specialty certificates for pharmacy technicians", color:"#1a6fa8", cat:"Certification" },
   { name:"ACPE", full:"Accreditation Council for Pharmacy Education", url:"https://www.acpe-accredit.org", desc:"Pharmacy program accreditation & CE standards", color:"#27ae60", cat:"Education" },
   { name:"ASHP", full:"American Society of Health-System Pharmacists", url:"https://www.ashp.org", desc:"Hospital pharmacy training, residencies & advocacy", color:"#8e44ad", cat:"Professional Org" },
   { name:"NPTA", full:"National Pharmacy Technician Association", url:"https://www.pharmacytechnician.org", desc:"CE credits, community & technician advocacy", color:"#c0392b", cat:"Professional Org" },
   { name:"APhA", full:"American Pharmacists Association", url:"https://www.pharmacist.com", desc:"CE, career development & pharmacy resources", color:"#d35400", cat:"Professional Org" },
+  { name:"PharmTech Society", full:"Pharmacy Technician Society", url:"https://www.pharmtechsociety.org", desc:"Professional community and resources for pharmacy technicians", color:"#2e7d52", cat:"Professional Org" },
   { name:"NABP", full:"National Association of Boards of Pharmacy", url:"https://nabp.pharmacy", desc:"Licensure, accreditation & pharmacy law standards", color:"#6c3483", cat:"Regulatory" },
   { name:"FDA",  full:"U.S. Food & Drug Administration", url:"https://www.fda.gov/drugs", desc:"Drug approvals, safety alerts & recalls", color:"#a93226", cat:"Regulatory" },
   { name:"DEA",  full:"Drug Enforcement Administration", url:"https://www.deadiversion.usdoj.gov", desc:"Controlled substance regulations & schedules", color:"#922b21", cat:"Regulatory" },
@@ -131,6 +133,16 @@ const PRO_SECTIONS = [
       { id:"a2", title:"Quality & Compliance Basics", lessons:[{ id:"a2l1", title:"What Audits Look For", content:`• What audits look for\n• Why documentation matters\n• Risk mindset\n• Professional accountability` }]},
       { id:"a3", title:"Leadership Without Title", lessons:[{ id:"a3l1", title:"Influence, Mentoring & Professional Boundaries", content:`You don't need a title to:\n• Mentor new techs\n• Model professionalism\n• Encourage documentation accuracy\n• Protect workflow culture\n\nReputation compounds over time.` }]},
       { id:"a4", title:"Career Pathways & Long-Term Positioning", lessons:[{ id:"a4l1", title:"Your Career Map", content:`PATHWAYS:\n• Retail → Hospital\n• Hospital → Specialist\n• Certification stacking\n• Resume framing\n• Interview confidence\n\nCertification stacking accelerates your trajectory. Each credential opens a new tier.` }]},
+      { id:"a5", title:"Module 4 — The Tech Ladder", lessons:[
+        { id:"a5l1", title:"Tech I — Entry Level", content:`TECH I — ENTRY LEVEL\n\nTech I is where every pharmacy career begins. You are new to the environment, learning the pace, the people, and the processes.\n\nRESPONSIBILITIES:\n• Data entry and prescription intake\n• Filling and labeling prescriptions\n• Stocking shelves and supplies\n• Cashier duties (retail)\n• Printing and organizing labels\n• Working under direct pharmacist supervision\n\nCERTIFICATION STATUS:\n• May or may not be certified yet, depending on state requirements\n• Some states allow technicians to work while pursuing certification\n\nINPATIENT SETTING:\nIn a hospital or inpatient environment, Tech I is typically assigned to one pool or area of the pharmacy. You are learning the workflow of that specific area before any cross-training begins.\n\nFOCUS AT THIS LEVEL:\n• Accuracy before speed\n• Learning the environment\n• Asking questions before assuming\n• Building documentation habits early\n\nRemember: Everyone starts here. Your job is to observe, absorb, and build your foundation.` },
+        { id:"a5l2", title:"Tech II — Intermediate", content:`TECH II — INTERMEDIATE\n\nYou have your footing. You are certified, experienced, and trusted to work more independently.\n\nEXPERIENCE:\n• CPhT certified\n• Typically 1–3 years of pharmacy experience\n\nRESPONSIBILITIES:\n• Insurance billing and prior authorization support\n• Basic compounding\n• Inventory management\n• Training and orienting new technicians\n• Serving as a go-to resource on the floor\n\nINPATIENT SETTING:\nThis is where cross-training begins. A Tech II would be trained in a second pool or area of the pharmacy.\n\nExamples of cross-training combinations:\n• Pyxis restocking + IV room\n• Mainside dispensing + running narcotics\n• Cart fill + controlled substance reconciliation\n\nThis cross-training builds your versatility and makes you a stronger, more valuable team member.\n\nFOCUS AT THIS LEVEL:\n• Efficiency and reliability\n• Problem-solving before escalating\n• Taking ownership of your area\n• Beginning to mentor others informally` },
+        { id:"a5l3", title:"Tech III — Senior / Lead", content:`TECH III — SENIOR / LEAD\n\nThis is advanced pharmacy technician territory. You are experienced, credentialed, and trusted with responsibilities that extend beyond daily tasks.\n\nEXPERIENCE:\n• 3+ years of pharmacy experience\n• Often holds specialty certificates or advanced credentials\n\nROLES AT THIS LEVEL:\n• Lead Technician\n• Supervisor\n• Senior Technician\n\nRESPONSIBILITIES:\n• Scheduling and shift coordination\n• Mentoring and training newer technicians\n• Quality control and process compliance\n• Policy enforcement and documentation oversight\n• Working alongside pharmacists on operational and clinical initiatives\n\nFOCUS AT THIS LEVEL:\n• Leadership without needing a title\n• Protecting workflow culture\n• Accountability and consistency\n• Career positioning through certifications\n\nADVANCED CERTIFICATIONS AT THIS LEVEL:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nThe gold standard for experienced techs. Requires active CPhT + specialty certificates + 2 years experience. No separate exam — application-based. Renews every 2 years (25 ACPE CE hours).\nOffered by: BPTS (bpts.org) and PTCB (ptcb.org)\n\nCSPT — Certified Compounded Sterile Preparation Technician\nDemonstrates expertise in sterile compounding practice.\nOffered by: PTCB (ptcb.org)\n\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nBoard-level credential in sterile compounding.\nOffered by: BPTS (bpts.org)\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nSpecialized credential in hazardous drug compounding.\nOffered by: BPTS (bpts.org)\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nBoard-level credential in nonsterile compounding.\nOffered by: BPTS (bpts.org)\n\nCPTEd — Certified Pharmacy Technician Educator\nFor technicians who train, teach, or mentor other techs.\nOffered by: PTCB (ptcb.org)\n\n────────────────────────────────────\n📌 Reference Links:\n• BPTS: https://bpts.org\n• PTCB: https://ptcb.org/credentials` },
+      ]},
+      { id:"a6", title:"Module 5 — Advanced Certifications", lessons:[
+        { id:"a6l1", title:"CPhT-Adv — Advanced Certified Pharmacy Technician", content:`CPhT-Adv — ADVANCED CERTIFIED PHARMACY TECHNICIAN\n\nThe CPhT-Adv is the most recognized advanced credential for pharmacy technicians. It signals that you have moved beyond entry-level practice and demonstrated specialized knowledge across multiple areas.\n\nOFFERED BY:\n• BPTS — Board of Pharmacy Technician Specialties (bpts.org)\n• PTCB — Pharmacy Technician Certification Board (ptcb.org)\n\nELIGIBILITY REQUIREMENTS:\n1. Active CPhT (through NHA or PTCB)\n2. One of the following:\n   Option A: Any four BPTS assessment-based specialty certificates\n   Option B: Any three specialty certificates + one board cert (BCSCPT, BCNCPT, or CSPT)\n   Note: At least one certificate must be from BPTS\n3. Minimum 2 years of supervised pharmacy experience\n\nEXAM:\nThere is no separate exam. The CPhT-Adv is earned through an application process once all requirements are met.\n\nAFTER APPROVAL:\nYou receive a digital badge and certificate through Credly — display it on LinkedIn, your resume, and email signature.\n\nRENEWAL:\nEvery 2 years | 25 hours of ACPE-accredited CE required\n\n📌 Apply through BPTS:\nhttps://bpts.org/credentials/advanced-certified-pharmacy-technician-cpht-adv/\n\n📌 Learn more at PTCB:\nhttps://ptcb.org/credentials/certification/advanced-certified-pharmacy-technician-cpht-adv/` },
+        { id:"a6l2", title:"BPTS Specialty Certifications", content:`BPTS — BOARD OF PHARMACY TECHNICIAN SPECIALTIES\nbpts.org\n\nBPTS offers board-level credentials for technicians who want to specialize. These go beyond general certification and demonstrate mastery in a specific area of pharmacy practice.\n\nBOARD CERTIFICATIONS:\n────────────────────────────────────\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nFor technicians specializing in sterile compounding. Covers cleanroom standards, IV preparation, and USP 797 compliance.\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nFor technicians working with hazardous drugs. Covers safe handling, PPE protocols, and USP 800 compliance.\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nFor technicians who compound non-sterile preparations. Covers formulation, documentation, and quality assurance.\n\nASSESSMENT-BASED CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing & Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Safety\n• Medication Therapy Management\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain Management\n• Technician Product Verification\n• Veterinary Pharmacy\n\n📌 Explore all credentials: https://bpts.org` },
+        { id:"a6l3", title:"PTCB Advanced Credentials", content:`PTCB — PHARMACY TECHNICIAN CERTIFICATION BOARD\nptcb.org/credentials\n\nPTCB is the nation's first and most widely recognized pharmacy technician credentialing organization. Beyond the foundational CPhT, PTCB offers several advanced pathways.\n\nADVANCED CERTIFICATIONS:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nRecognizes experienced, multi-certified technicians.\nRequires: Active CPhT + specialty certificates + 2 years experience\n\nCSPT — Certified Compounded Sterile Preparation Technician\nFor technicians with expertise in sterile compounding practice.\nDemonstrates advanced knowledge of IV prep, cleanroom standards, and patient safety.\n\nCPTEd — Certified Pharmacy Technician Educator\nDesigned for technicians who train, teach, or instruct other pharmacy technicians.\nIdeal for Lead Techs, supervisors, or those moving into training roles.\n\nSPECIALTY CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing and Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Therapy Management\n• Nonsterile Compounding\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain and Inventory Management\n• Technician Product Verification\n\nPTCB certificates do not expire and do not require CE to maintain.\n\n📌 Full credential catalog: https://ptcb.org/credentials` },
+      ]},
     ]
   },
 ];
@@ -194,6 +206,8 @@ const CAREER_MILESTONES = [
   { id:"m_retail", label:"Retail Foundations", icon:"🏪", desc:"Advanced retail skills (Pro)",          lessonIds:["r1l1","r1l2","r1l3","r2l1","r2l2","r3l1","r4l1"], pro:true },
   { id:"m_inpat",  label:"Inpatient Ready",    icon:"🏥", desc:"Hospital pharmacy skills (Pro)",        lessonIds:["i1l1","i2l1","i3l1","i4l1","i5l1"], pro:true },
   { id:"m_adv",    label:"Advanced Growth",    icon:"🚀", desc:"Leadership & career strategy (Pro)",    lessonIds:["a1l1","a2l1","a3l1","a4l1"], pro:true },
+  { id:"m_ladder", label:"The Tech Ladder",    icon:"🪜", desc:"Tech I, II & III career levels (Pro)",  lessonIds:["a5l1","a5l2","a5l3"], pro:true },
+  { id:"m_advcert",label:"Advanced Certifications", icon:"🏅", desc:"CPhT-Adv, BPTS & PTCB credentials (Pro)", lessonIds:["a6l1","a6l2","a6l3"], pro:true },
 ];
 
 const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flatMap(m=>m.lessons));
@@ -226,7 +240,7 @@ const Inp=({ta,sx,...p})=>ta
   ?<textarea style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",...sx}} {...p}/>
   :<input style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",...sx}} {...p}/>;
 
-// ── CHANGE 1: Floating Feedback Button ──────────────────────────────────────
+// ── Floating Feedback Button ──────────────────────────────────────
 function FeedbackButton({user, pop}) {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("general");
@@ -265,7 +279,6 @@ function FeedbackButton({user, pop}) {
 
   return (
     <>
-      {/* Floating button */}
       <button
         onClick={() => setOpen(true)}
         title="Share feedback"
@@ -284,7 +297,6 @@ function FeedbackButton({user, pop}) {
         💬
       </button>
 
-      {/* Modal overlay */}
       {open && (
         <div
           style={{position:"fixed",inset:0,background:"rgba(5,10,22,.85)",zIndex:950,display:"flex",alignItems:"flex-end",justifyContent:"flex-end",padding:"0 24px 90px"}}
@@ -307,7 +319,6 @@ function FeedbackButton({user, pop}) {
                   <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:mu,fontSize:20,cursor:"pointer",lineHeight:1}}>×</button>
                 </div>
 
-                {/* Star rating */}
                 <div style={{marginBottom:14}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>How's your experience?</div>
                   <div style={{display:"flex",gap:6}}>
@@ -317,7 +328,6 @@ function FeedbackButton({user, pop}) {
                   </div>
                 </div>
 
-                {/* Type selector */}
                 <div style={{marginBottom:12}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>Type</div>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
@@ -327,7 +337,6 @@ function FeedbackButton({user, pop}) {
                   </div>
                 </div>
 
-                {/* Message */}
                 <div style={{marginBottom:16}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>Your message</div>
                   <Inp ta sx={{minHeight:88}} placeholder="Tell us what's on your mind…" value={msg} onChange={e=>setMsg(e.target.value)}/>
@@ -343,7 +352,6 @@ function FeedbackButton({user, pop}) {
     </>
   );
 }
-// ────────────────────────────────────────────────────────────────────────────
 
 function LegalPopup({onAccept}){
   const [checked,setChecked]=useState(false);
@@ -435,7 +443,6 @@ function CareerRoadmap({done,isPro}){
   );
 }
 
-// ── CHANGE 2: Nav updated — Merch Store added, opens in new tab ──────────────
 function Nav({view,go,user,isPro,out}){
   const items=[["learn","Learn"],["resources","Resources"],["tools","Tools"],["career","My Career"]];
   return <div style={{background:"rgba(10,22,40,.97)",backdropFilter:"blur(14px)",borderBottom:`1px solid ${br}`,height:56,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 16px",position:"sticky",top:0,zIndex:200}}>
@@ -445,7 +452,6 @@ function Nav({view,go,user,isPro,out}){
     </div>
     <div style={{display:"flex",gap:2,alignItems:"center",flexWrap:"wrap"}}>
       {items.map(([id,lb])=><button key={id} onClick={()=>go(id)} style={{background:view===id?"rgba(0,201,167,.12)":"transparent",color:view===id?ac:mu,border:view===id?`1px solid rgba(0,201,167,.3)`:"1px solid transparent",borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:600,cursor:"pointer"}}>{lb}</button>)}
-      {/* Merch Store link — opens Printify store in new tab */}
       <a
         href={MERCH_URL}
         target="_blank"
@@ -467,7 +473,6 @@ function Nav({view,go,user,isPro,out}){
     </div>
   </div>;
 }
-// ────────────────────────────────────────────────────────────────────────────
 
 function Footer({go}){
   return (
@@ -508,12 +513,11 @@ export default function App(){
   const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
   const [freeNotes,setFreeNotes]=useState([]);
   const [freeNoteForm,setFreeNoteForm]=useState(null);
-  // ── Career Profile state ─────────────────────────────────────────────────
   const [profile,setProfile]=useState({
     preferredName:"", currentJob:"", workplace:"",
     jobDesc:"", employment:[], certifications:["","",""], resumeNote:""
   });
-  const [profileSaving,setProfileSaving]=useState(false); // null=hidden, {}=new, {id,...}=editing
+  const [profileSaving,setProfileSaving]=useState(false);
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
@@ -576,7 +580,6 @@ export default function App(){
     }
   };
 
-  // ── CHANGE 3: Mobile sign-in persistence fix ─────────────────────────────
   const doGoogle=async()=>{
     try{
       await setPersistence(auth, browserLocalPersistence);
@@ -586,9 +589,7 @@ export default function App(){
       go("home"); pop("Welcome to PharmTech Path!");
     } catch(e){ setEr("Google sign-in failed. Please try again."); }
   };
-  // ─────────────────────────────────────────────────────────────────────────
 
-  // ── CHANGE: Password Reset ────────────────────────────────────────────────
   const doReset = async () => {
     if (!em.trim()) { setEr("Please enter your email address first."); return; }
     try {
@@ -599,7 +600,6 @@ export default function App(){
       setEr("Couldn't send reset email. Please check the address and try again.");
     }
   };
-  // ─────────────────────────────────────────────────────────────────────────
 
   const doOut=async()=>{
     await signOut(auth);
@@ -634,7 +634,6 @@ export default function App(){
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
       <div style={{maxWidth:920,margin:"0 auto",padding:"24px 16px 80px"}}>{ch}</div>
-      {/* CHANGE 1: Feedback button rendered on every page */}
       <FeedbackButton user={user} pop={pop}/>
     </div>
   );
@@ -965,7 +964,7 @@ export default function App(){
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
         {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","14 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
-        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
+        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","The Tech Ladder (Tech I, II & III)","Advanced Certifications (CPhT-Adv, BPTS & PTCB)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
           <div style={{fontSize:24,marginBottom:6}}>{p.icon}</div>
@@ -1057,7 +1056,6 @@ export default function App(){
     ))}
   </>);
 
-  // ── CHANGE 4: Home page merch banner → live Printify link ────────────────
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
@@ -1085,7 +1083,7 @@ export default function App(){
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
           {[
             {icon:"📚",title:"Learning Path",desc:"Modules from day one to advanced growth",action:()=>go("learn"),color:ac},
-            {icon:"🔗",title:"Resources",desc:"14 official sites — PTCB, NHA, FDA & more",action:()=>go("resources"),color:bl},
+            {icon:"🔗",title:"Resources",desc:"16 official sites — PTCB, BPTS, FDA & more",action:()=>go("resources"),color:bl},
             {icon:"🧰",title:"Bonus Tools",desc:"Drug tables, conversions & trackers",action:()=>go("tools"),color:"#a855f7",locked:!user||!isPro},
             {icon:"🗺️",title:"My Career",desc:"Roadmap, notes & your profile",action:()=>go("career"),color:"#f59e0b",locked:!user},
           ].map(item=>(
@@ -1098,7 +1096,6 @@ export default function App(){
           ))}
         </div>
 
-        {/* CHANGE 4: Merch banner now links to live Printify store */}
         <a href={MERCH_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginBottom:22}}>
           <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16,cursor:"pointer",transition:"border-color .2s"}}
             onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.6)"}
@@ -1134,7 +1131,6 @@ export default function App(){
       </div>
     </div>
   );
-  // ─────────────────────────────────────────────────────────────────────────
 }
 
 function AICareerAssistant({profile,isPro,go,setProfile,pop}){
@@ -1281,7 +1277,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
 
   return (
     <div>
-      {/* ── FREE: Basic Profile ── */}
       <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
         <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Basic Profile</div>
         <div style={{fontSize:11,color:mu,marginBottom:16}}>Visible on your career dashboard. Free for all users.</div>
@@ -1302,7 +1297,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
         <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>Changes save automatically as you type.</div>
       </div>
 
-      {/* ── PRO: Advanced Profile ── */}
       {!isPro?(
         <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:14,padding:24,textAlign:"center"}}>
           <div style={{fontSize:22,marginBottom:8}}>🔒</div>
@@ -1312,7 +1306,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
         </div>
       ):(
         <>
-          {/* Job Description */}
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Current Role Description</div>
             <div style={{fontSize:11,color:mu,marginBottom:12}}>Briefly describe what you do in your current role.</div>
@@ -1324,7 +1317,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
             />
           </div>
 
-          {/* Employment History */}
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
               <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>Employment History</div>
@@ -1332,7 +1324,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
             </div>
             <div style={{fontSize:11,color:mu,marginBottom:16}}>Add previous or current positions with dates.</div>
 
-            {/* Existing jobs */}
             {(profile.employment||[]).length===0&&!showJobForm&&(
               <div style={{textAlign:"center",padding:"16px 0",color:mu,fontSize:12}}>No employment history yet. Click "+ Add" to get started.</div>
             )}
@@ -1352,7 +1343,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
               </div>
             ))}
 
-            {/* Add job form */}
             {showJobForm&&(
               <div style={{background:"rgba(0,201,167,.05)",border:"1px solid rgba(0,201,167,.2)",borderRadius:11,padding:16,marginTop:10}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:12}}>New Position</div>
@@ -1381,7 +1371,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
             )}
           </div>
 
-          {/* Certifications */}
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Certifications</div>
             <div style={{fontSize:11,color:mu,marginBottom:14}}>List your pharmacy certifications (e.g. CPhT, CPhT-Adv, BPS specialty).</div>
@@ -1406,7 +1395,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
             >+ Add another certification</button>
           </div>
 
-          {/* Resume Notes */}
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Resume Notes</div>
             <div style={{fontSize:11,color:mu,marginBottom:12}}>Use this space to draft resume bullet points, skills, or anything you want to remember when updating your resume.</div>
