@@ -48,6 +48,7 @@ const RESOURCES = [
   { name:"ISMP", full:"Institute for Safe Medication Practices", url:"https://www.ismp.org", desc:"Medication safety alerts & error prevention tools", color:"#117a65", cat:"Safety" },
   { name:"MedlinePlus", full:"MedlinePlus Drug Information (NIH)", url:"https://medlineplus.gov/druginfo", desc:"Free NIH drug database", color:"#1f618d", cat:"Reference" },
   { name:"DailyMed", full:"DailyMed — Official FDA Drug Labels", url:"https://dailymed.nlm.nih.gov", desc:"Official FDA drug label database, free access", color:"#0e6655", cat:"Reference" },
+  { name:"Top 200 Drugs", full:"Top 200 Drugs — PTCB Flashcard Set", url:"https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/", desc:"Free PTCB-focused flashcard set covering brand names, generics, drug classes & indications", color:"#b7650a", cat:"Reference" },
 ];
 
 const FREE_SECTIONS = [
@@ -215,10 +216,8 @@ const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
 const MERCH_URL = "https://pharmtechgraphics.printify.me/";
 
-// ── Stripe config (test mode — safe for frontend) ────────────────────────────
 const STRIPE_PUBLISHABLE_KEY = "pk_test_51TC3oNBBUppYTTEqQJguPmjVXTZsP4jZ1lv2S2NqklV9vh6qviVH2XItaLpr2JRFs1zUWTMlhhe2vrPyDsaLHrez00WN2lP72m";
 const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_aFabJ065s4Jl5Qm8gQdIA00";
-// ─────────────────────────────────────────────────────────────────────────────
 
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
 const ac="#00c9a7", bl="#0094ff", tx="#e8f0fe", mu="#8899bb";
@@ -240,7 +239,6 @@ const Inp=({ta,sx,...p})=>ta
   ?<textarea style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",...sx}} {...p}/>
   :<input style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",...sx}} {...p}/>;
 
-// ── Floating Feedback Button ──────────────────────────────────────
 function FeedbackButton({user, pop}) {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("general");
@@ -254,9 +252,7 @@ function FeedbackButton({user, pop}) {
     setSending(true);
     try {
       await addDoc(collection(db, "feedback"), {
-        message: msg.trim(),
-        type,
-        rating,
+        message: msg.trim(), type, rating,
         uid: user?.uid || "anonymous",
         email: user?.email || "anonymous",
         displayName: user?.displayName || "Anonymous",
@@ -264,44 +260,23 @@ function FeedbackButton({user, pop}) {
       });
       setSent(true);
       setTimeout(() => {
-        setSent(false);
-        setOpen(false);
-        setMsg("");
-        setRating(0);
-        setType("general");
+        setSent(false); setOpen(false); setMsg(""); setRating(0); setType("general");
         pop("Thanks for your feedback! 🙏");
       }, 1800);
-    } catch {
-      pop("Something went wrong. Please try again.");
-    }
+    } catch { pop("Something went wrong. Please try again."); }
     setSending(false);
   };
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        title="Share feedback"
-        style={{
-          position:"fixed", bottom:24, right:24, zIndex:900,
-          background:`linear-gradient(135deg,${ac},${bl})`,
-          color:"#fff", border:"none", borderRadius:50,
-          width:52, height:52, fontSize:22, cursor:"pointer",
-          boxShadow:"0 4px 20px rgba(0,201,167,.4)",
-          display:"flex", alignItems:"center", justifyContent:"center",
-          transition:"transform .2s",
-        }}
+      <button onClick={() => setOpen(true)} title="Share feedback"
+        style={{position:"fixed",bottom:24,right:24,zIndex:900,background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:50,width:52,height:52,fontSize:22,cursor:"pointer",boxShadow:"0 4px 20px rgba(0,201,167,.4)",display:"flex",alignItems:"center",justifyContent:"center",transition:"transform .2s"}}
         onMouseEnter={e=>e.currentTarget.style.transform="scale(1.1)"}
         onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}
-      >
-        💬
-      </button>
-
+      >💬</button>
       {open && (
-        <div
-          style={{position:"fixed",inset:0,background:"rgba(5,10,22,.85)",zIndex:950,display:"flex",alignItems:"flex-end",justifyContent:"flex-end",padding:"0 24px 90px"}}
-          onClick={e=>{ if(e.target===e.currentTarget) setOpen(false); }}
-        >
+        <div style={{position:"fixed",inset:0,background:"rgba(5,10,22,.85)",zIndex:950,display:"flex",alignItems:"flex-end",justifyContent:"flex-end",padding:"0 24px 90px"}}
+          onClick={e=>{ if(e.target===e.currentTarget) setOpen(false); }}>
           <div style={{background:"#0f1e35",border:`1px solid ${br}`,borderRadius:20,width:"100%",maxWidth:360,padding:24,boxShadow:"0 8px 40px rgba(0,0,0,.6)"}}>
             {sent ? (
               <div style={{textAlign:"center",padding:"24px 0"}}>
@@ -312,13 +287,9 @@ function FeedbackButton({user, pop}) {
             ) : (
               <>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
-                  <div>
-                    <div style={{fontSize:15,fontWeight:800,color:"#fff"}}>Share Feedback</div>
-                    <div style={{fontSize:11,color:mu,marginTop:2}}>Help us improve PharmTech Path</div>
-                  </div>
+                  <div><div style={{fontSize:15,fontWeight:800,color:"#fff"}}>Share Feedback</div><div style={{fontSize:11,color:mu,marginTop:2}}>Help us improve PharmTech Path</div></div>
                   <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:mu,fontSize:20,cursor:"pointer",lineHeight:1}}>×</button>
                 </div>
-
                 <div style={{marginBottom:14}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>How's your experience?</div>
                   <div style={{display:"flex",gap:6}}>
@@ -327,7 +298,6 @@ function FeedbackButton({user, pop}) {
                     ))}
                   </div>
                 </div>
-
                 <div style={{marginBottom:12}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>Type</div>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
@@ -336,12 +306,10 @@ function FeedbackButton({user, pop}) {
                     ))}
                   </div>
                 </div>
-
                 <div style={{marginBottom:16}}>
                   <div style={{fontSize:11,color:mu,marginBottom:6}}>Your message</div>
                   <Inp ta sx={{minHeight:88}} placeholder="Tell us what's on your mind…" value={msg} onChange={e=>setMsg(e.target.value)}/>
                 </div>
-
                 <Bp ch={sending?"Sending…":"Send Feedback →"} on={submit} sx={{width:"100%",opacity:msg.trim()&&!sending?1:0.5,cursor:msg.trim()&&!sending?"pointer":"not-allowed"}}/>
                 <div style={{textAlign:"center",marginTop:10,fontSize:10,color:mu}}>{user?`Submitting as ${user.displayName||user.email}`:"Submitting anonymously"}</div>
               </>
@@ -452,18 +420,8 @@ function Nav({view,go,user,isPro,out}){
     </div>
     <div style={{display:"flex",gap:2,alignItems:"center",flexWrap:"wrap"}}>
       {items.map(([id,lb])=><button key={id} onClick={()=>go(id)} style={{background:view===id?"rgba(0,201,167,.12)":"transparent",color:view===id?ac:mu,border:view===id?`1px solid rgba(0,201,167,.3)`:"1px solid transparent",borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:600,cursor:"pointer"}}>{lb}</button>)}
-      <a
-        href={MERCH_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          background:"linear-gradient(135deg,rgba(168,85,247,.2),rgba(236,72,153,.15))",
-          color:"#c084fc",
-          border:"1px solid rgba(168,85,247,.35)",
-          borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:700,
-          cursor:"pointer",textDecoration:"none",whiteSpace:"nowrap",
-        }}
-      >
+      <a href={MERCH_URL} target="_blank" rel="noopener noreferrer"
+        style={{background:"linear-gradient(135deg,rgba(168,85,247,.2),rgba(236,72,153,.15))",color:"#c084fc",border:"1px solid rgba(168,85,247,.35)",borderRadius:7,padding:"5px 10px",fontSize:12,fontWeight:700,cursor:"pointer",textDecoration:"none",whiteSpace:"nowrap"}}>
         👕 Merch
       </a>
       {user
@@ -474,6 +432,7 @@ function Nav({view,go,user,isPro,out}){
   </div>;
 }
 
+// ── CHANGE: Footer now rendered on every page via wrap() ──────────────────────
 function Footer({go}){
   return (
     <div style={{borderTop:`1px solid ${br}`,marginTop:44,paddingTop:18,textAlign:"center"}}>
@@ -594,11 +553,8 @@ export default function App(){
     if (!em.trim()) { setEr("Please enter your email address first."); return; }
     try {
       await sendPasswordResetEmail(auth, em.trim());
-      setResetSent(true);
-      setEr("");
-    } catch(e) {
-      setEr("Couldn't send reset email. Please check the address and try again.");
-    }
+      setResetSent(true); setEr("");
+    } catch(e) { setEr("Couldn't send reset email. Please check the address and try again."); }
   };
 
   const doOut=async()=>{
@@ -628,15 +584,20 @@ export default function App(){
     </div>
   );
 
+  // ── CHANGE: wrap() now includes Footer on every page ──────────────────────
   const wrap=ch=>(
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
-      <div style={{maxWidth:920,margin:"0 auto",padding:"24px 16px 80px"}}>{ch}</div>
+      <div style={{maxWidth:920,margin:"0 auto",padding:"24px 16px 80px"}}>
+        {ch}
+        <Footer go={go}/>
+      </div>
       <FeedbackButton user={user} pop={pop}/>
     </div>
   );
+
   const Bk=({lb})=><button onClick={back} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← {lb||"Back"}</button>;
   const H1=({ch,sub})=><><div style={{fontSize:20,fontWeight:800,color:"#fff",marginBottom:sub?3:18}}>{ch}</div>{sub&&<div style={{fontSize:13,color:mu,marginBottom:18}}>{sub}</div>}</>;
 
@@ -963,7 +924,7 @@ export default function App(){
     </div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
-        {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","14 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
+        {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","17 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
         {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","The Tech Ladder (Tech I, II & III)","Advanced Certifications (CPhT-Adv, BPTS & PTCB)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
@@ -1056,6 +1017,7 @@ export default function App(){
     ))}
   </>);
 
+  // ── HOME PAGE ─────────────────────────────────────────────────────────────
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
@@ -1063,10 +1025,11 @@ export default function App(){
       {toast&&<Toast msg={toast}/>}
       <FeedbackButton user={user} pop={pop}/>
 
+      {/* ── CHANGE: Updated tagline — removed first sentence ── */}
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
         <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>Built by a tech. For techs.</span>
         <h1 style={{fontSize:"clamp(28px,6vw,50px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"12px 0 11px"}}><span style={{color:ac}}>PharmTech</span> Path</h1>
-        <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>No one handed MJ a roadmap from CPhT to Controlled Substance Lead — so she built one. PharmTech Path is the structured career system pharmacy technicians actually deserve.</p>
+        <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>PharmTech Path is the structured career system pharmacy technicians actually deserve.</p>
         <div style={{display:"flex",gap:9,justifyContent:"center",flexWrap:"wrap"}}>
           <Bp ch="Start Learning →" on={()=>go("learn")}/>
           {!user&&<Bs ch="Sign In / Sign Up" on={()=>go("auth")}/>}
@@ -1083,7 +1046,7 @@ export default function App(){
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
           {[
             {icon:"📚",title:"Learning Path",desc:"Modules from day one to advanced growth",action:()=>go("learn"),color:ac},
-            {icon:"🔗",title:"Resources",desc:"16 official sites — PTCB, BPTS, FDA & more",action:()=>go("resources"),color:bl},
+            {icon:"🔗",title:"Resources",desc:"17 official sites — PTCB, BPTS, FDA & more",action:()=>go("resources"),color:bl},
             {icon:"🧰",title:"Bonus Tools",desc:"Drug tables, conversions & trackers",action:()=>go("tools"),color:"#a855f7",locked:!user||!isPro},
             {icon:"🗺️",title:"My Career",desc:"Roadmap, notes & your profile",action:()=>go("career"),color:"#f59e0b",locked:!user},
           ].map(item=>(
@@ -1096,13 +1059,18 @@ export default function App(){
           ))}
         </div>
 
+        {/* ── CHANGE: Merch banner now uses PharmTechGraphics logo image ── */}
         <a href={MERCH_URL} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginBottom:22}}>
           <div style={{background:"linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08))",border:"1px solid rgba(168,85,247,.3)",borderRadius:16,padding:24,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16,cursor:"pointer",transition:"border-color .2s"}}
             onMouseEnter={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.6)"}
             onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.3)"}
           >
             <div style={{display:"flex",alignItems:"center",gap:14}}>
-              <div style={{fontSize:36}}>👕</div>
+              <img
+                src="/PharmTechGraphics_logo.png"
+                alt="PharmTech Graphics"
+                style={{width:64,height:64,borderRadius:"50%",objectFit:"cover",flexShrink:0,border:"2px solid rgba(168,85,247,.4)"}}
+              />
               <div>
                 <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>PharmTechGraphics — Merch Store</div>
                 <div style={{fontSize:12,color:mu,maxWidth:360}}>Pharmacy-themed apparel, accessories & designs made for techs, by a tech. Shop the collection.</div>
@@ -1139,15 +1107,6 @@ function AICareerAssistant({profile,isPro,go,setProfile,pop}){
   const [loading,setLoading]=useState(false);
   const bottomRef=useState(null);
 
-  const QUICK_PROMPTS=[
-    {label:"📝 Resume bullet points",text:"Help me write strong resume bullet points based on my experience and current role."},
-    {label:"🎓 Next certification",text:"Based on my background, what certification should I pursue next to advance my career?"},
-    {label:"💼 Interview prep",text:"Give me pharmacy technician interview questions and how to answer them based on my experience."},
-    {label:"🗺️ Career path advice",text:"What career paths are available to me based on my current role and certifications?"},
-    {label:"⭐ Job match",text:"What pharmacy roles would I be well-qualified for based on my experience and skills?"},
-    {label:"✍️ Job description help",text:"Help me write a professional job description summary for my current role."},
-  ];
-
   const buildSystemPrompt=()=>{
     const name=profile.preferredName||"this pharmacy technician";
     const job=profile.currentJob||"pharmacy technician";
@@ -1156,26 +1115,7 @@ function AICareerAssistant({profile,isPro,go,setProfile,pop}){
     const jobDesc=profile.jobDesc?"Current role description: "+profile.jobDesc:"";
     const employment=(profile.employment||[]).map(e=>`${e.title} at ${e.workplace||"unknown"} (${e.start||""}${e.current?" — Present":e.end?" — "+e.end:""})`).join("; ")||"none listed";
     const resumeNote=profile.resumeNote?"Resume notes/skills: "+profile.resumeNote:"";
-
-    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path — a career development platform for pharmacy techs.
-
-You are speaking with ${name}, who works as a ${job}${workplace}.
-
-Their profile:
-- Certifications: ${certs}
-- Employment history: ${employment}
-- ${jobDesc}
-- ${resumeNote}
-
-Your role is to:
-1. Give specific, actionable career advice tailored to their actual background
-2. Help write resume bullet points, job descriptions, and professional summaries
-3. Prep them for pharmacy tech interviews with real questions and strong answers
-4. Recommend certifications (PTCB CPhT, CPhT-Adv, BPS specialties, etc.) based on their goals
-5. Suggest career pathways and job types they'd be qualified for
-6. Be encouraging, direct, and practical — like a mentor who has been in pharmacy
-
-Keep responses focused, practical, and specific to pharmacy. If their profile is sparse, ask a clarifying question to give better advice. Always be warm but professional.`;
+    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path.\nYou are speaking with ${name}, who works as a ${job}${workplace}.\nProfile:\n- Certifications: ${certs}\n- Employment: ${employment}\n- ${jobDesc}\n- ${resumeNote}\nGive specific, actionable career advice. Be warm, direct, and practical.`;
   };
 
   const sendMessage=async(text)=>{
@@ -1188,18 +1128,8 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
     try{
       const response=await fetch("https://api.anthropic.com/v1/messages",{
         method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          "x-api-key": process.env.REACT_APP_ANTHROPIC_API_KEY,
-          "anthropic-version":"2023-06-01",
-          "anthropic-dangerous-direct-browser-calls":"true",
-        },
-        body:JSON.stringify({
-          model:"claude-haiku-4-5-20251001",
-          max_tokens:1000,
-          system:buildSystemPrompt(),
-          messages:newMessages.map(m=>({role:m.role,content:m.content})),
-        }),
+        headers:{"Content-Type":"application/json","x-api-key":process.env.REACT_APP_ANTHROPIC_API_KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-calls":"true"},
+        body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:1000,system:buildSystemPrompt(),messages:newMessages.map(m=>({role:m.role,content:m.content}))}),
       });
       const data=await response.json();
       const reply=data.content?.[0]?.text||"Sorry, I couldn't generate a response. Please try again.";
@@ -1208,11 +1138,6 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
       setMessages(prev=>[...prev,{role:"assistant",content:"Something went wrong. Please check your connection and try again."}]);
     }
     setLoading(false);
-  };
-
-  const copyToResumeNotes=(text)=>{
-    setProfile(p=>({...p,resumeNote:(p.resumeNote?p.resumeNote+"\n\n":"")+text}));
-    pop("Copied to Resume Notes! ✓");
   };
 
   if(!isPro) return (
@@ -1236,14 +1161,7 @@ Keep responses focused, practical, and specific to pharmacy. If their profile is
         Your personal pharmacy career coach is almost here. It will know your profile, your certifications, and your goals — and give you advice that actually fits your career.
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10,maxWidth:520,margin:"0 auto",textAlign:"left"}}>
-        {[
-          {icon:"📝",label:"Resume bullet points"},
-          {icon:"🎓",label:"Certification advice"},
-          {icon:"💼",label:"Interview prep"},
-          {icon:"🗺️",label:"Career path guidance"},
-          {icon:"⭐",label:"Job match suggestions"},
-          {icon:"✍️",label:"Job description help"},
-        ].map((f,i)=>(
+        {[{icon:"📝",label:"Resume bullet points"},{icon:"🎓",label:"Certification advice"},{icon:"💼",label:"Interview prep"},{icon:"🗺️",label:"Career path guidance"},{icon:"⭐",label:"Job match suggestions"},{icon:"✍️",label:"Job description help"}].map((f,i)=>(
           <div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:10,padding:"10px 13px",fontSize:12,color:mu,display:"flex",alignItems:"center",gap:8}}>
             <span>{f.icon}</span>{f.label}
           </div>
@@ -1281,18 +1199,9 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
         <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Basic Profile</div>
         <div style={{fontSize:11,color:mu,marginBottom:16}}>Visible on your career dashboard. Free for all users.</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:12}}>
-          <div>
-            {label("Preferred Name")}
-            <input placeholder="What should we call you?" value={profile.preferredName||""} onChange={e=>upd("preferredName",e.target.value)} style={inpStyle}/>
-          </div>
-          <div>
-            {label("Current Job Title")}
-            <input placeholder="e.g. Pharmacy Technician, CPhT" value={profile.currentJob||""} onChange={e=>upd("currentJob",e.target.value)} style={inpStyle}/>
-          </div>
-          <div>
-            {label("Current Workplace")}
-            <input placeholder="e.g. CVS, St. Mary's Hospital" value={profile.workplace||""} onChange={e=>upd("workplace",e.target.value)} style={inpStyle}/>
-          </div>
+          <div>{label("Preferred Name")}<input placeholder="What should we call you?" value={profile.preferredName||""} onChange={e=>upd("preferredName",e.target.value)} style={inpStyle}/></div>
+          <div>{label("Current Job Title")}<input placeholder="e.g. Pharmacy Technician, CPhT" value={profile.currentJob||""} onChange={e=>upd("currentJob",e.target.value)} style={inpStyle}/></div>
+          <div>{label("Current Workplace")}<input placeholder="e.g. CVS, St. Mary's Hospital" value={profile.workplace||""} onChange={e=>upd("workplace",e.target.value)} style={inpStyle}/></div>
         </div>
         <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>Changes save automatically as you type.</div>
       </div>
@@ -1301,7 +1210,7 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
         <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:14,padding:24,textAlign:"center"}}>
           <div style={{fontSize:22,marginBottom:8}}>🔒</div>
           <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:6}}>Advanced Profile — Pro Only</div>
-          <div style={{fontSize:12,color:mu,marginBottom:16,maxWidth:360,margin:"0 auto 16px"}}>Upgrade to Pro to unlock employment history, certifications, resume notes and more — your full career portfolio in one place.</div>
+          <div style={{fontSize:12,color:mu,marginBottom:16,maxWidth:360,margin:"0 auto 16px"}}>Upgrade to Pro to unlock employment history, certifications, resume notes and more.</div>
           <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Upgrade to Pro →</button>
         </div>
       ):(
@@ -1309,12 +1218,7 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Current Role Description</div>
             <div style={{fontSize:11,color:mu,marginBottom:12}}>Briefly describe what you do in your current role.</div>
-            <textarea
-              placeholder="e.g. Responsible for controlled substance reconciliation, cart fills, and inpatient dispensing in a 400-bed hospital…"
-              value={profile.jobDesc||""}
-              onChange={e=>upd("jobDesc",e.target.value)}
-              style={{...inpStyle,resize:"vertical",minHeight:90}}
-            />
+            <textarea placeholder="e.g. Responsible for controlled substance reconciliation, cart fills, and inpatient dispensing in a 400-bed hospital…" value={profile.jobDesc||""} onChange={e=>upd("jobDesc",e.target.value)} style={{...inpStyle,resize:"vertical",minHeight:90}}/>
           </div>
 
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
@@ -1323,7 +1227,6 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
               {!showJobForm&&<button onClick={()=>setShowJobForm(true)} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:8,padding:"6px 13px",fontSize:12,fontWeight:700,cursor:"pointer"}}>+ Add</button>}
             </div>
             <div style={{fontSize:11,color:mu,marginBottom:16}}>Add previous or current positions with dates.</div>
-
             {(profile.employment||[]).length===0&&!showJobForm&&(
               <div style={{textAlign:"center",padding:"16px 0",color:mu,fontSize:12}}>No employment history yet. Click "+ Add" to get started.</div>
             )}
@@ -1333,16 +1236,13 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
                   <div>
                     <div style={{fontSize:13,fontWeight:700,color:"#fff"}}>{job.title}</div>
                     {job.workplace&&<div style={{fontSize:11,color:ac,marginTop:2}}>{job.workplace}</div>}
-                    <div style={{fontSize:11,color:mu,marginTop:2}}>
-                      {job.start}{job.start&&(job.current||job.end)?" — ":""}{job.current?"Present":job.end}
-                    </div>
+                    <div style={{fontSize:11,color:mu,marginTop:2}}>{job.start}{job.start&&(job.current||job.end)?" — ":""}{job.current?"Present":job.end}</div>
                     {job.desc&&<div style={{fontSize:12,color:"#c8d8f0",marginTop:6,lineHeight:1.6}}>{job.desc}</div>}
                   </div>
                   <button onClick={()=>removeJob(job.id)} style={{background:"none",border:"none",color:"rgba(255,107,107,.6)",fontSize:18,cursor:"pointer",flexShrink:0,lineHeight:1}}>×</button>
                 </div>
               </div>
             ))}
-
             {showJobForm&&(
               <div style={{background:"rgba(0,201,167,.05)",border:"1px solid rgba(0,201,167,.2)",borderRadius:11,padding:16,marginTop:10}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:12}}>New Position</div>
@@ -1377,34 +1277,43 @@ function CareerProfile({profile,setProfile,isPro,go,pop}){
             {(profile.certifications||["","",""]).map((cert,i)=>(
               <div key={i} style={{display:"flex",gap:8,marginBottom:8,alignItems:"center"}}>
                 <div style={{fontSize:11,color:mu,width:20,textAlign:"right",flexShrink:0}}>{i+1}.</div>
-                <input
-                  placeholder={i===0?"e.g. CPhT":i===1?"e.g. CPhT-Adv":"e.g. BPS Specialty"}
-                  value={cert}
-                  onChange={e=>{
-                    const updated=[...(profile.certifications||["","",""])];
-                    updated[i]=e.target.value;
-                    upd("certifications",updated);
-                  }}
-                  style={{...inpStyle,flex:1}}
-                />
+                <input placeholder={i===0?"e.g. CPhT":i===1?"e.g. CPhT-Adv":"e.g. BPS Specialty"} value={cert}
+                  onChange={e=>{const updated=[...(profile.certifications||["","",""])];updated[i]=e.target.value;upd("certifications",updated);}}
+                  style={{...inpStyle,flex:1}}/>
               </div>
             ))}
-            <button
-              onClick={()=>upd("certifications",[...(profile.certifications||["","",""]),""]) }
-              style={{background:"none",border:"none",color:ac,fontSize:12,fontWeight:600,cursor:"pointer",marginTop:4,padding:0}}
-            >+ Add another certification</button>
+            <button onClick={()=>upd("certifications",[...(profile.certifications||["","",""]),""]) }
+              style={{background:"none",border:"none",color:ac,fontSize:12,fontWeight:600,cursor:"pointer",marginTop:4,padding:0}}>+ Add another certification</button>
           </div>
 
           <div style={{background:sf,border:`1px solid ${br}`,borderRadius:14,padding:22,marginBottom:16}}>
             <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:4}}>Resume Notes</div>
             <div style={{fontSize:11,color:mu,marginBottom:12}}>Use this space to draft resume bullet points, skills, or anything you want to remember when updating your resume.</div>
             <textarea
-              placeholder="e.g. Key skills: controlled substance management, IV workflow, automated dispensing systems…&#10;&#10;Achievements to highlight:&#10;• Reduced dispensing errors by…&#10;• Led training for 3 new technicians…"
+              placeholder="e.g. Key skills: controlled substance management, IV workflow, automated dispensing systems…"
               value={profile.resumeNote||""}
               onChange={e=>upd("resumeNote",e.target.value)}
               style={{...inpStyle,resize:"vertical",minHeight:130}}
             />
-            <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>💡 Tip: Use this to keep track of accomplishments as they happen — don't wait until you need your resume to start writing!</div>
+            <div style={{marginTop:10,fontSize:11,color:mu,fontStyle:"italic"}}>💡 Tip: Keep track of accomplishments as they happen — don't wait until you need your resume to start writing!</div>
+          </div>
+
+          {/* ── CHANGE: Resume Upload — Coming Soon ── */}
+          <div style={{textAlign:"center",padding:"32px 24px",background:"rgba(0,201,167,.04)",border:`1px solid rgba(0,201,167,.15)`,borderRadius:14,marginBottom:16}}>
+            <div style={{fontSize:36,marginBottom:12}}>📄</div>
+            <div style={{display:"inline-block",marginBottom:12}}><Tag label="Coming Soon" color="#a855f7"/></div>
+            <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:8}}>Resume Upload</div>
+            <div style={{fontSize:13,color:mu,maxWidth:380,margin:"0 auto 16px",lineHeight:1.8}}>
+              Upload your resume as a PDF and keep it on file. Once the AI Career Assistant launches, it will pull from your resume to give you personalized advice, help you write bullet points, and prep you for interviews.
+            </div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))",gap:8,maxWidth:420,margin:"0 auto",textAlign:"left"}}>
+              {[{icon:"📤",label:"Upload PDF resume"},{icon:"📁",label:"Store multiple versions"},{icon:"🤖",label:"AI reads your resume"},{icon:"✍️",label:"Personalized advice"}].map((f,i)=>(
+                <div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:9,padding:"9px 12px",fontSize:11,color:mu,display:"flex",alignItems:"center",gap:7}}>
+                  <span>{f.icon}</span>{f.label}
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:16,fontSize:11,color:mu}}>This feature is on the way. Stay tuned! 🚀</div>
           </div>
         </>
       )}
@@ -1438,21 +1347,13 @@ function FreeNotes({notes,setNotes,form,setForm,pop}){
       <div style={{fontSize:16,fontWeight:800,color:"#fff",marginBottom:16}}>{form.id?"Edit Note":"New Note"}</div>
       <div style={{marginBottom:12}}>
         <div style={{fontSize:11,color:mu,marginBottom:5}}>Subject</div>
-        <input
-          placeholder="e.g. Study tips, Work reminders…"
-          value={form.subject||""}
-          onChange={e=>setForm(f=>({...f,subject:e.target.value}))}
-          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box"}}
-        />
+        <input placeholder="e.g. Study tips, Work reminders…" value={form.subject||""} onChange={e=>setForm(f=>({...f,subject:e.target.value}))}
+          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box"}}/>
       </div>
       <div style={{marginBottom:16}}>
         <div style={{fontSize:11,color:mu,marginBottom:5}}>Note</div>
-        <textarea
-          placeholder="Write anything…"
-          value={form.body||""}
-          onChange={e=>setForm(f=>({...f,body:e.target.value}))}
-          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",minHeight:180}}
-        />
+        <textarea placeholder="Write anything…" value={form.body||""} onChange={e=>setForm(f=>({...f,body:e.target.value}))}
+          style={{width:"100%",background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:14,padding:"10px 13px",outline:"none",fontFamily:"inherit",boxSizing:"border-box",resize:"vertical",minHeight:180}}/>
       </div>
       <div style={{display:"flex",gap:9}}>
         <button onClick={saveNote} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontSize:14,fontWeight:700,cursor:"pointer",opacity:form.body?.trim()?1:0.4}}>
@@ -1466,13 +1367,8 @@ function FreeNotes({notes,setNotes,form,setForm,pop}){
   return (
     <div>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
-        <div style={{fontSize:13,color:mu}}>{notes.length===0?"No notes yet. Create your first one!": `${notes.length} note${notes.length!==1?"s":""}`}</div>
-        <button
-          onClick={()=>setForm(empty)}
-          style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"8px 16px",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",gap:6}}
-        >
-          + Create Note
-        </button>
+        <div style={{fontSize:13,color:mu}}>{notes.length===0?"No notes yet. Create your first one!":`${notes.length} note${notes.length!==1?"s":""}`}</div>
+        <button onClick={()=>setForm(empty)} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"8px 16px",fontSize:13,fontWeight:700,cursor:"pointer",display:"flex",alignItems:"center",gap:6}}>+ Create Note</button>
       </div>
       {notes.length===0&&(
         <div style={{textAlign:"center",padding:"40px 0",color:mu}}>
