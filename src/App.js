@@ -1191,22 +1191,20 @@ Your role:
 
   const sendMessage = async (text) => {
     const userMsg = text || input.trim();
+    const sendMessage = async (text) => {
+    const userMsg = text || input.trim();
     if (!userMsg || loading) return;
     setInput("");
     const newMessages = [...messages, { role: "user", content: userMsg }];
     setMessages(newMessages);
     setLoading(true);
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-calls": "true",
         },
         body: JSON.stringify({
-          model: "claude-haiku-4-5-20251001",
-          max_tokens: 1000,
           system: buildSystemPrompt(),
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
         }),
