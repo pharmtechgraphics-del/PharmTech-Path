@@ -1189,8 +1189,6 @@ Your role:
 - Never give clinical or medical advice — stay in the lane of career development and professional growth`;
   };
 
-  const sendMessage = async (text) => {
-    const userMsg = text || input.trim();
     const sendMessage = async (text) => {
     const userMsg = text || input.trim();
     if (!userMsg || loading) return;
