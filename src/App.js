@@ -1300,8 +1300,16 @@ Your role:
             <div style={{ width: 30, height: 30, borderRadius: "50%", flexShrink: 0, background: m.role === "user" ? `linear-gradient(135deg,${ac},${bl})` : "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>
               {m.role === "user" ? (profile.preferredName?.[0]?.toUpperCase() || "👤") : "🤖"}
             </div>
-            <div style={{ maxWidth: "78%", background: m.role === "user" ? `linear-gradient(135deg,rgba(0,201,167,.15),rgba(0,148,255,.12))` : "rgba(255,255,255,.05)", border: m.role === "user" ? "1px solid rgba(0,201,167,.25)" : `1px solid ${br}`, borderRadius: m.role === "user" ? "14px 4px 14px 14px" : "4px 14px 14px 14px", padding: "10px 13px", fontSize: 13, color: tx, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
-              {m.content}
+            <div style={{ maxWidth: "78%", background: m.role === "user" ? `linear-gradient(135deg,rgba(0,201,167,.15),rgba(0,148,255,.12))` : "rgba(255,255,255,.05)", border: m.role === "user" ? "1px solid rgba(0,201,167,.25)" : `1px solid ${br}`, borderRadius: m.role === "user" ? "14px 4px 14px 14px" : "4px 14px 14px 14px", padding: "10px 13px", fontSize: 13, color: tx, lineHeight: 1.7}}>
+              {m.content.split('\n').map((line, i) => {
+  const formatted = line
+    .replace(/^### (.+)/, '<strong style="font-size:13px;color:#fff">$1</strong>')
+    .replace(/^## (.+)/, '<strong style="font-size:14px;color:#fff">$1</strong>')
+    .replace(/^# (.+)/, '<strong style="font-size:15px;color:#fff">$1</strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^- (.+)/, '• $1');
+  return <span key={i} dangerouslySetInnerHTML={{__html: formatted}} style={{display:'block', marginBottom: line.startsWith('#') ? 8 : 2}}/>;
+})}
             </div>
           </div>
         ))}
