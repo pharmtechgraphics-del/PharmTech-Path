@@ -478,6 +478,7 @@ export default function App(){
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
+  // Listen for profile tab switch events fired from AICareerAssistant nudge button
   useEffect(()=>{
     const handler=(e)=>setCareerTab(e.detail);
     document.addEventListener("pharmtech-tab",handler);
@@ -1124,12 +1125,6 @@ export default function App(){
   );
 }
 
-// ─────────────────────────────────────────────
-// AI CAREER ASSISTANT
-// THE ONLY CHANGE FROM YOUR ORIGINAL CODE IS HERE:
-// Added "x-api-key": process.env.REACT_APP_ANTHROPIC_API_KEY
-// to the fetch headers inside the sendMessage function.
-// ─────────────────────────────────────────────
 function AICareerAssistant({ profile, isPro, go }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -1208,8 +1203,6 @@ Your role:
           "Content-Type": "application/json",
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-calls": "true",
-          // ✅ THIS IS THE FIX — API key pulled from Vercel environment variable
-          "x-api-key": process.env.REACT_APP_ANTHROPIC_API_KEY,
         },
         body: JSON.stringify({
           model: "claude-haiku-4-5-20251001",
