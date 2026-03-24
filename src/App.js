@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, browserLocalPersistence, setPersistence, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp, deleteDoc } from "firebase/firestore";
@@ -216,7 +216,6 @@ const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flat
 const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
 const MERCH_URL = "https://pharmtechgraphics.printify.me/";
-
 const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_aFabJ065s4Jl5Qm8gQdIA00";
 
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
@@ -478,6 +477,13 @@ export default function App(){
   const [profileSaving,setProfileSaving]=useState(false);
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
+
+  // Listen for profile tab switch events fired from AICareerAssistant nudge button
+  useEffect(()=>{
+    const handler=(e)=>setCareerTab(e.detail);
+    document.addEventListener("pharmtech-tab",handler);
+    return ()=>document.removeEventListener("pharmtech-tab",handler);
+  },[]);
 
   useEffect(()=>{
     const unsub=onAuthStateChanged(auth,async fbUser=>{
@@ -1119,72 +1125,228 @@ export default function App(){
   );
 }
 
-function AICareerAssistant({profile,isPro,go,setProfile,pop}){
-  const [messages,setMessages]=useState([]);
-  const [input,setInput]=useState("");
-  const [loading,setLoading]=useState(false);
+function AICareerAssistant({ profile, isPro, go }) {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  const buildSystemPrompt=()=>{
-    const name=profile.preferredName||"this pharmacy technician";
-    const job=profile.currentJob||"pharmacy technician";
-    const workplace=profile.workplace?"at "+profile.workplace:"";
-    const certs=(profile.certifications||[]).filter(c=>c.trim()).join(", ")||"none listed";
-    const jobDesc=profile.jobDesc?"Current role description: "+profile.jobDesc:"";
-    const employment=(profile.employment||[]).map(e=>`${e.title} at ${e.workplace||"unknown"} (${e.start||""}${e.current?" — Present":e.end?" — "+e.end:""})`).join("; ")||"none listed";
-    const resumeNote=profile.resumeNote?"Resume notes/skills: "+profile.resumeNote:"";
-    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path.\nYou are speaking with ${name}, who works as a ${job}${workplace}.\nProfile:\n- Certifications: ${certs}\n- Employment: ${employment}\n- ${jobDesc}\n- ${resumeNote}\nGive specific, actionable career advice. Be warm, direct, and practical.`;
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  const profileFields = [
+    { key: "preferredName", label: "Preferred Name" },
+    { key: "currentJob", label: "Current Job Title" },
+    { key: "workplace", label: "Workplace" },
+    { key: "jobDesc", label: "Role Description" },
+    { key: "resumeNote", label: "Resume Notes" },
+  ];
+  const certsFilled = (profile.certifications || []).filter(c => c.trim()).length > 0;
+  const employmentFilled = (profile.employment || []).length > 0;
+  const missingFields = profileFields.filter(f => !profile[f.key]?.trim()).map(f => f.label);
+  if (!certsFilled) missingFields.push("Certifications");
+  if (!employmentFilled) missingFields.push("Employment History");
+  const profileComplete = missingFields.length === 0;
+  const profilePct = Math.round(
+    ((profileFields.filter(f => profile[f.key]?.trim()).length + (certsFilled ? 1 : 0) + (employmentFilled ? 1 : 0)) /
+      (profileFields.length + 2)) * 100
+  );
+
+  const STARTER_PROMPTS = [
+    { icon: "📝", text: "Help me write strong resume bullet points for my current role" },
+    { icon: "🎓", text: "What certification should I pursue next based on my background?" },
+    { icon: "💼", text: "How do I prepare for a pharmacy technician interview?" },
+    { icon: "🗺️", text: "What are my best career growth options from here?" },
+  ];
+
+  const buildSystemPrompt = () => {
+    const name = profile.preferredName || "this pharmacy technician";
+    const job = profile.currentJob || "pharmacy technician";
+    const workplace = profile.workplace ? "at " + profile.workplace : "";
+    const certs = (profile.certifications || []).filter(c => c.trim()).join(", ") || "none listed";
+    const jobDesc = profile.jobDesc ? "Current role description: " + profile.jobDesc : "";
+    const employment = (profile.employment || [])
+      .map(e => `${e.title} at ${e.workplace || "unknown"} (${e.start || ""}${e.current ? " — Present" : e.end ? " — " + e.end : ""})`)
+      .join("; ") || "none listed";
+    const resumeNote = profile.resumeNote ? "Resume notes/skills: " + profile.resumeNote : "";
+    return `You are a dedicated career coach and mentor for pharmacy technicians, built into PharmTech Path — an educational platform created by a CPhT-Adv with 5+ years of experience.
+
+You are speaking with ${name}, who works as a ${job}${workplace}.
+
+Profile:
+- Certifications: ${certs}
+- Employment history: ${employment}
+- ${jobDesc}
+- ${resumeNote}
+
+Your role:
+- Give specific, actionable career advice tailored to pharmacy technicians
+- Cover topics like certifications, resume writing, interview prep, job titles, career paths, retail vs inpatient transitions, and healthcare career growth
+- Be warm, direct, and practical — like a knowledgeable colleague who has been through it
+- When profile info is missing or vague, give useful general advice and note what additional context would help you personalize further
+- Keep responses focused and easy to read. Use bullet points or numbered lists when helpful.
+- Never give clinical or medical advice — stay in the lane of career development and professional growth`;
   };
 
-  const sendMessage=async(text)=>{
-    const userMsg=text||input.trim();
-    if(!userMsg||loading) return;
+  const sendMessage = async (text) => {
+    const userMsg = text || input.trim();
+    if (!userMsg || loading) return;
     setInput("");
-    const newMessages=[...messages,{role:"user",content:userMsg}];
+    const newMessages = [...messages, { role: "user", content: userMsg }];
     setMessages(newMessages);
     setLoading(true);
-    try{
-      const response=await fetch("https://api.anthropic.com/v1/messages",{
-        method:"POST",
-        headers:{"Content-Type":"application/json","x-api-key":process.env.REACT_APP_ANTHROPIC_API_KEY,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-calls":"true"},
-        body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:1000,system:buildSystemPrompt(),messages:newMessages.map(m=>({role:m.role,content:m.content}))}),
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-calls": "true",
+        },
+        body: JSON.stringify({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 1000,
+          system: buildSystemPrompt(),
+          messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+        }),
       });
-      const data=await response.json();
-      const reply=data.content?.[0]?.text||"Sorry, I couldn't generate a response. Please try again.";
-      setMessages(prev=>[...prev,{role:"assistant",content:reply}]);
-    }catch(e){
-      setMessages(prev=>[...prev,{role:"assistant",content:"Something went wrong. Please check your connection and try again."}]);
+      const data = await response.json();
+      const reply = data.content?.[0]?.text || "Sorry, I couldn't generate a response. Please try again.";
+      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
+    } catch (e) {
+      setMessages(prev => [...prev, { role: "assistant", content: "Something went wrong. Please check your connection and try again." }]);
     }
     setLoading(false);
   };
 
-  if(!isPro) return (
-    <div style={{textAlign:"center",padding:"48px 0"}}>
-      <div style={{fontSize:42,marginBottom:12}}>🤖</div>
-      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:8}}>AI Career Assistant</div>
-      <div style={{fontSize:13,color:mu,marginBottom:20,maxWidth:360,margin:"0 auto 20px"}}>Get personalized career guidance, resume help, interview prep, and job match advice — powered by AI and built around your profile.</div>
-      <Tag label="Pro Only" color={bl}/>
-      <div style={{marginTop:20}}>
-        <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"11px 24px",fontSize:14,fontWeight:700,cursor:"pointer"}}>Upgrade to Pro →</button>
+  const clearChat = () => setMessages([]);
+
+  if (!isPro) return (
+    <div style={{ textAlign: "center", padding: "48px 0" }}>
+      <div style={{ fontSize: 42, marginBottom: 12 }}>🤖</div>
+      <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", marginBottom: 8 }}>AI Career Assistant</div>
+      <div style={{ fontSize: 13, color: mu, marginBottom: 20, maxWidth: 360, margin: "0 auto 20px" }}>
+        Get personalized career guidance, resume help, interview prep, and job match advice — powered by AI and built around your profile.
+      </div>
+      <Tag label="Pro Only" color={bl} />
+      <div style={{ marginTop: 20 }}>
+        <button onClick={() => go("upgrade")} style={{ background: `linear-gradient(135deg,${ac},${bl})`, color: "#fff", border: "none", borderRadius: 10, padding: "11px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
+          Upgrade to Pro →
+        </button>
       </div>
     </div>
   );
 
   return (
-    <div style={{textAlign:"center",padding:"48px 24px"}}>
-      <div style={{fontSize:48,marginBottom:16}}>🤖</div>
-      <div style={{display:"inline-block",marginBottom:16}}><Tag label="Coming Soon" color="#a855f7"/></div>
-      <div style={{fontSize:18,fontWeight:800,color:"#fff",marginBottom:10}}>AI Career Assistant</div>
-      <div style={{fontSize:13,color:mu,maxWidth:400,margin:"0 auto 24px",lineHeight:1.8}}>
-        Your personal pharmacy career coach is almost here. It will know your profile, your certifications, and your goals — and give you advice that actually fits your career.
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div>
+          <div style={{ fontSize: 15, fontWeight: 800, color: "#fff" }}>🤖 AI Career Assistant</div>
+          <div style={{ fontSize: 11, color: mu, marginTop: 2 }}>Powered by PharmTech Path · Pro feature</div>
+        </div>
+        {messages.length > 0 && (
+          <button onClick={clearChat} style={{ background: "none", border: `1px solid ${br}`, color: mu, borderRadius: 8, padding: "5px 11px", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+            Clear chat
+          </button>
+        )}
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10,maxWidth:520,margin:"0 auto",textAlign:"left"}}>
-        {[{icon:"📝",label:"Resume bullet points"},{icon:"🎓",label:"Certification advice"},{icon:"💼",label:"Interview prep"},{icon:"🗺️",label:"Career path guidance"},{icon:"⭐",label:"Job match suggestions"},{icon:"✍️",label:"Job description help"}].map((f,i)=>(
-          <div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:10,padding:"10px 13px",fontSize:12,color:mu,display:"flex",alignItems:"center",gap:8}}>
-            <span>{f.icon}</span>{f.label}
+
+      {!profileComplete && (
+        <div style={{ background: "rgba(245,158,11,.07)", border: "1px solid rgba(245,158,11,.3)", borderRadius: 12, padding: "12px 16px", marginBottom: 16, display: "flex", gap: 12, alignItems: "flex-start" }}>
+          <span style={{ fontSize: 18, flexShrink: 0 }}>💡</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#f59e0b", marginBottom: 4 }}>
+              Your profile is {profilePct}% complete — fill it in for more accurate advice
+            </div>
+            <div style={{ fontSize: 11, color: mu, lineHeight: 1.7, marginBottom: 8 }}>
+              Missing: {missingFields.join(", ")}. The more context the assistant has about you, the better it personalizes its answers.
+            </div>
+            <button
+              onClick={() => document.dispatchEvent(new CustomEvent("pharmtech-tab", { detail: "profile" }))}
+              style={{ background: "rgba(245,158,11,.15)", border: "1px solid rgba(245,158,11,.35)", color: "#f59e0b", borderRadius: 8, padding: "5px 12px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}
+            >
+              Complete my profile →
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div style={{ background: "rgba(255,255,255,.02)", border: `1px solid ${br}`, borderRadius: 14, minHeight: 320, maxHeight: 460, overflowY: "auto", padding: "16px", marginBottom: 12, display: "flex", flexDirection: "column", gap: 12 }}>
+        {messages.length === 0 && (
+          <div style={{ flex: 1 }}>
+            <div style={{ textAlign: "center", padding: "12px 0 20px" }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>👋</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 4 }}>
+                Hey{profile.preferredName ? `, ${profile.preferredName.split(" ")[0]}` : ""}! What are you working on?
+              </div>
+              <div style={{ fontSize: 12, color: mu }}>Ask anything about your pharmacy tech career.</div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 8 }}>
+              {STARTER_PROMPTS.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => sendMessage(p.text)}
+                  style={{ background: "rgba(255,255,255,.04)", border: `1px solid ${br}`, borderRadius: 10, padding: "11px 13px", fontSize: 12, color: tx, cursor: "pointer", textAlign: "left", lineHeight: 1.5, display: "flex", gap: 8, alignItems: "flex-start", transition: "border-color .15s" }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(0,201,167,.4)"}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = br}
+                >
+                  <span style={{ flexShrink: 0 }}>{p.icon}</span>
+                  <span>{p.text}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {messages.map((m, i) => (
+          <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", flexDirection: m.role === "user" ? "row-reverse" : "row" }}>
+            <div style={{ width: 30, height: 30, borderRadius: "50%", flexShrink: 0, background: m.role === "user" ? `linear-gradient(135deg,${ac},${bl})` : "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>
+              {m.role === "user" ? (profile.preferredName?.[0]?.toUpperCase() || "👤") : "🤖"}
+            </div>
+            <div style={{ maxWidth: "78%", background: m.role === "user" ? `linear-gradient(135deg,rgba(0,201,167,.15),rgba(0,148,255,.12))` : "rgba(255,255,255,.05)", border: m.role === "user" ? "1px solid rgba(0,201,167,.25)" : `1px solid ${br}`, borderRadius: m.role === "user" ? "14px 4px 14px 14px" : "4px 14px 14px 14px", padding: "10px 13px", fontSize: 13, color: tx, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
+              {m.content}
+            </div>
           </div>
         ))}
+
+        {loading && (
+          <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+            <div style={{ width: 30, height: 30, borderRadius: "50%", flexShrink: 0, background: "rgba(255,255,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14 }}>🤖</div>
+            <div style={{ background: "rgba(255,255,255,.05)", border: `1px solid ${br}`, borderRadius: "4px 14px 14px 14px", padding: "12px 16px", display: "flex", gap: 5, alignItems: "center" }}>
+              {[0, 1, 2].map(d => (
+                <div key={d} style={{ width: 7, height: 7, borderRadius: "50%", background: ac, opacity: 0.6, animation: "pulse 1.2s ease-in-out infinite", animationDelay: `${d * 0.2}s` }} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
       </div>
-      <div style={{marginTop:24,fontSize:11,color:mu}}>Stay tuned — this feature is launching soon! 🚀</div>
+
+      <div style={{ display: "flex", gap: 9 }}>
+        <input
+          placeholder="Ask about certifications, resume, career paths…"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
+          style={{ flex: 1, background: "rgba(255,255,255,.05)", border: `1px solid ${br}`, borderRadius: 10, color: tx, fontSize: 13, padding: "10px 13px", outline: "none", fontFamily: "inherit" }}
+        />
+        <button
+          onClick={() => sendMessage()}
+          disabled={!input.trim() || loading}
+          style={{ background: `linear-gradient(135deg,${ac},${bl})`, color: "#fff", border: "none", borderRadius: 10, padding: "10px 18px", fontSize: 13, fontWeight: 700, cursor: input.trim() && !loading ? "pointer" : "not-allowed", opacity: input.trim() && !loading ? 1 : 0.45, flexShrink: 0 }}
+        >
+          Send →
+        </button>
+      </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 0.4; }
+          50% { transform: scale(1.4); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
