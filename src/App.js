@@ -221,6 +221,255 @@ const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_aFabJ065s4Jl5Qm8gQdIA00
 const bg="#0a1628", sf="rgba(255,255,255,0.04)", br="rgba(255,255,255,0.09)";
 const ac="#00c9a7", bl="#0094ff", tx="#e8f0fe", mu="#8899bb";
 
+// ─── ONBOARDING SLIDES ────────────────────────────────────────────────────────
+const ONBOARDING_SLIDES = [
+  {
+    id: 1,
+    icon: "⬡",
+    headline: "You made it. Welcome to PharmTech Path.",
+    body: "This is the career advancement resource built for techs who want to go further. Whether you are just getting started or ready to level up, you are in the right place.",
+    cta: "Let's go",
+  },
+  {
+    id: 2,
+    icon: "🗺️",
+    headline: "This is not just another study app.",
+    body: "PharmTech Path gives you a real career roadmap. Explore job titles, certifications, advancement paths and tools that show you what is possible beyond retail and inpatient pharmacy.",
+    cta: "Next",
+  },
+  {
+    id: 3,
+    icon: "👤",
+    headline: "Your profile makes everything more personal.",
+    body: "When you fill out your profile, the AI Career Assistant gives you advice based on where you actually are in your career. The more you put in, the more you get out.",
+    cta: "Next",
+  },
+  {
+    id: 4,
+    icon: "⭐",
+    headline: "Want the full experience?",
+    body: "Pro unlocks the AI Career Assistant, advanced career tools and everything we are building next. You can activate it anytime from your profile.",
+    cta: "Activate Pro",
+    isProSlide: true,
+  },
+];
+
+// ─── ONBOARDING MODAL ─────────────────────────────────────────────────────────
+function OnboardingModal({ user, onDismiss, onActivatePro }) {
+  const [slide, setSlide] = useState(0);
+  const total = ONBOARDING_SLIDES.length;
+  const current = ONBOARDING_SLIDES[slide];
+  const isLast = slide === total - 1;
+
+  const handleCta = () => {
+    if (isLast) {
+      onActivatePro();
+    } else {
+      setSlide(s => s + 1);
+    }
+  };
+
+  const handleSkip = () => onDismiss();
+
+  return (
+    <div style={{
+      position: "fixed", inset: 0,
+      background: "rgba(5,10,22,0.88)",
+      zIndex: 8000,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 16,
+      backdropFilter: "blur(4px)",
+    }}>
+      <div style={{
+        background: "#0d1e36",
+        border: `1px solid ${br}`,
+        borderRadius: 24,
+        width: "100%",
+        maxWidth: 480,
+        padding: "36px 32px 28px",
+        position: "relative",
+        boxShadow: "0 24px 64px rgba(0,0,0,.7)",
+        animation: "onboardFadeIn .25s ease",
+      }}>
+
+        {/* Skip / Maybe later */}
+        {!isLast ? (
+          <button
+            onClick={handleSkip}
+            style={{
+              position: "absolute", top: 18, right: 20,
+              background: "none", border: "none",
+              color: mu, fontSize: 12, cursor: "pointer",
+              fontWeight: 500, letterSpacing: 0.2,
+            }}
+          >
+            Skip for now
+          </button>
+        ) : null}
+
+        {/* Icon */}
+        <div style={{
+          width: 56, height: 56, borderRadius: "50%",
+          background: `linear-gradient(135deg,${ac}22,${bl}22)`,
+          border: `1px solid rgba(0,201,167,.25)`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 26, marginBottom: 22,
+        }}>
+          {current.icon}
+        </div>
+
+        {/* Headline */}
+        <div style={{
+          fontSize: 20, fontWeight: 800, color: "#fff",
+          lineHeight: 1.25, marginBottom: 14,
+        }}>
+          {current.headline}
+        </div>
+
+        {/* Body */}
+        <div style={{
+          fontSize: 14, color: "#c8d8f0",
+          lineHeight: 1.8, marginBottom: 32,
+        }}>
+          {current.body}
+        </div>
+
+        {/* CTA button */}
+        <button
+          onClick={handleCta}
+          style={{
+            width: "100%",
+            background: `linear-gradient(135deg,${ac},${bl})`,
+            color: "#fff", border: "none", borderRadius: 12,
+            padding: "13px 0", fontSize: 15, fontWeight: 800,
+            cursor: "pointer", marginBottom: isLast ? 14 : 0,
+            letterSpacing: 0.2,
+          }}
+        >
+          {current.cta}
+        </button>
+
+        {/* Maybe later — last slide only */}
+        {isLast && (
+          <button
+            onClick={handleSkip}
+            style={{
+              display: "block", width: "100%",
+              background: "none", border: "none",
+              color: mu, fontSize: 12, cursor: "pointer",
+              textAlign: "center", padding: "4px 0",
+              fontWeight: 500,
+            }}
+          >
+            Maybe later
+          </button>
+        )}
+
+        {/* Dot progress indicator */}
+        <div style={{
+          display: "flex", justifyContent: "center",
+          gap: 7, marginTop: 24,
+        }}>
+          {ONBOARDING_SLIDES.map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: i === slide ? 20 : 7,
+                height: 7,
+                borderRadius: 99,
+                background: i === slide
+                  ? ac
+                  : "rgba(255,255,255,.18)",
+                transition: "all .3s ease",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes onboardFadeIn {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ─── PROFILE INCOMPLETE REMINDER BANNER ───────────────────────────────────────
+function ProfileReminderBanner({ profile, go, onDismiss }) {
+  const fields = [
+    profile.preferredName,
+    profile.currentJob,
+    profile.workplace,
+    profile.jobDesc,
+    profile.resumeNote,
+  ];
+  const certsFilled = (profile.certifications || []).filter(c => c.trim()).length > 0;
+  const employmentFilled = (profile.employment || []).length > 0;
+  const filled = fields.filter(f => f && f.trim()).length + (certsFilled ? 1 : 0) + (employmentFilled ? 1 : 0);
+  const total = fields.length + 2;
+  const pct = Math.round((filled / total) * 100);
+
+  if (pct === 100) return null;
+
+  return (
+    <div style={{
+      background: "rgba(0,201,167,.06)",
+      border: "1px solid rgba(0,201,167,.2)",
+      borderRadius: 12,
+      padding: "12px 16px",
+      marginBottom: 18,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 12,
+      flexWrap: "wrap",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, minWidth: 0 }}>
+        <span style={{ fontSize: 18, flexShrink: 0 }}>👤</span>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: ac, marginBottom: 2 }}>
+            Your profile is {pct}% complete
+          </div>
+          <div style={{ fontSize: 11, color: mu, lineHeight: 1.5 }}>
+            Finish your profile so the AI Career Assistant gives you advice that actually fits your career.
+          </div>
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", flexShrink: 0 }}>
+        <button
+          onClick={() => {
+            go("career");
+            setTimeout(() => document.dispatchEvent(new CustomEvent("pharmtech-tab", { detail: "profile" })), 80);
+          }}
+          style={{
+            background: `linear-gradient(135deg,${ac},${bl})`,
+            color: "#fff", border: "none", borderRadius: 8,
+            padding: "7px 14px", fontSize: 12, fontWeight: 700, cursor: "pointer",
+          }}
+        >
+          Complete profile →
+        </button>
+        <button
+          onClick={onDismiss}
+          style={{
+            background: "none", border: "none",
+            color: mu, fontSize: 18, cursor: "pointer",
+            lineHeight: 1, padding: "0 2px",
+          }}
+          title="Dismiss"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Ring({p,size=44,sw=3}){
   const r=(size-sw)/2,c=2*Math.PI*r;
   return <svg width={size} height={size} style={{transform:"rotate(-90deg)",flexShrink:0}}>
@@ -474,7 +723,10 @@ export default function App(){
     preferredName:"", currentJob:"", workplace:"",
     jobDesc:"", employment:[], certifications:["","",""], resumeNote:""
   });
-  const [profileSaving,setProfileSaving]=useState(false);
+
+  // ─── Onboarding state ───────────────────────────────────────────────────────
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showProfileBanner, setShowProfileBanner] = useState(true);
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
@@ -498,9 +750,15 @@ export default function App(){
           setFreeNotes(data.freeNotes||[]);
           if(data.profile) setProfile(p=>({...p,...data.profile}));
           if(data.legalAccepted) setLegalAccepted(true);
+          // Show onboarding only if not yet seen
+          if(!data.hasSeenOnboarding) setShowOnboarding(true);
+        } else {
+          // Brand new user — always show onboarding
+          setShowOnboarding(true);
         }
       } else {
         setUser(null);setIsPro(false);setDone({});setNotes({});
+        setShowOnboarding(false);
       }
       setAuthLoading(false);
     });
@@ -510,6 +768,20 @@ export default function App(){
   useEffect(()=>{
     if(user?.uid) saveUserData(user.uid,{completed:done,notes,tracker,planner:planData,isPro,legalAccepted,freeNotes,profile});
   },[done,notes,tracker,planData,isPro,legalAccepted,freeNotes,profile]);
+
+  // ─── Onboarding handlers ────────────────────────────────────────────────────
+  const dismissOnboarding = useCallback(() => {
+    setShowOnboarding(false);
+    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true });
+  }, [user]);
+
+  const handleOnboardingPro = useCallback(() => {
+    setShowOnboarding(false);
+    setIsPro(true);
+    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true, isPro: true });
+    go("career");
+    pop("Pro unlocked! 🎉");
+  }, [user]);
 
   const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
   const allL=sections.flatMap(s=>s.modules.flatMap(m=>m.lessons));
@@ -532,7 +804,7 @@ export default function App(){
       if(authMode==="signup"){
         const cred=await createUserWithEmailAndPassword(auth,em,pw);
         if(nm) await updateProfile(cred.user,{displayName:nm});
-        await saveUserData(cred.user.uid,{email:em,displayName:nm||em.split("@")[0],isPro:false,completed:{},notes:{},createdAt:Date.now()});
+        await saveUserData(cred.user.uid,{email:em,displayName:nm||em.split("@")[0],isPro:false,completed:{},notes:{},createdAt:Date.now(),hasSeenOnboarding:false});
       } else {
         await signInWithEmailAndPassword(auth,em,pw);
       }
@@ -548,7 +820,7 @@ export default function App(){
       await setPersistence(auth, browserLocalPersistence);
       const cred=await signInWithPopup(auth,googleProvider);
       const data=await loadUserData(cred.user.uid);
-      if(!data) await saveUserData(cred.user.uid,{email:cred.user.email,displayName:cred.user.displayName,isPro:false,completed:{},notes:{},createdAt:Date.now()});
+      if(!data) await saveUserData(cred.user.uid,{email:cred.user.email,displayName:cred.user.displayName,isPro:false,completed:{},notes:{},createdAt:Date.now(),hasSeenOnboarding:false});
       go("home"); pop("Welcome to PharmTech Path!");
     } catch(e){ setEr("Google sign-in failed. Please try again."); }
   };
@@ -591,6 +863,13 @@ export default function App(){
   const wrap=ch=>(
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
+      {showOnboarding&&user&&legalAccepted&&(
+        <OnboardingModal
+          user={user}
+          onDismiss={dismissOnboarding}
+          onActivatePro={handleOnboardingPro}
+        />
+      )}
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
       <div style={{maxWidth:920,margin:"0 auto",padding:"24px 16px 80px"}}>
@@ -784,7 +1063,6 @@ export default function App(){
       return wrap(<>
         <button onClick={()=>setToolId(null)} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back to tools</button>
         <div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:16}}>{tl.icon} {tl.title}</div>
-
         {toolId==="top200"&&(
           <div>
             <div style={{background:sf,border:`1px solid rgba(0,201,167,.2)`,borderRadius:13,padding:24,marginBottom:16}}>
@@ -805,7 +1083,6 @@ export default function App(){
             </div>
           </div>
         )}
-
         {toolId==="conversions"&&<div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:8}}>{CONVERSIONS.map((c,i)=><div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:9,padding:"11px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}><span style={{fontFamily:"monospace",color:ac,fontWeight:700,fontSize:12}}>{c.f}</span><span style={{color:mu}}>→</span><span style={{fontFamily:"monospace",color:tx,fontWeight:700,fontSize:12}}>{c.t}</span></div>)}</div>}
         {toolId==="drugclasses"&&<div style={{overflowX:"auto"}}><table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}><thead><tr style={{borderBottom:"2px solid rgba(0,201,167,.3)"}}>{["Suffix","Class","Use","Examples"].map(h=><th key={h} style={{padding:"8px 11px",textAlign:"left",color:ac,fontWeight:700,fontFamily:"monospace",fontSize:10,letterSpacing:1,textTransform:"uppercase"}}>{h}</th>)}</tr></thead><tbody>{DRUG_CLASSES.map((r,i)=><tr key={i} style={{borderBottom:`1px solid ${br}`,background:i%2===0?"rgba(255,255,255,.02)":"transparent"}}><td style={{padding:"8px 11px",color:ac,fontFamily:"monospace",fontWeight:700}}>{r.s}</td><td style={{padding:"8px 11px",color:"#fff",fontWeight:600}}>{r.c}</td><td style={{padding:"8px 11px",color:mu}}>{r.u}</td><td style={{padding:"8px 11px",color:"#c8d8f0"}}>{r.e}</td></tr>)}</tbody></table></div>}
         {toolId==="schedules"&&<div style={{display:"flex",flexDirection:"column",gap:11}}>{CS_SCHEDULES.map((s,i)=><div key={i} style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:18}}><div style={{fontSize:14,fontWeight:800,color:ac,marginBottom:6}}>{s.s}</div><div style={{fontSize:12,color:"#c8d8f0",marginBottom:4}}><strong style={{color:"#fff"}}>Examples:</strong> {s.e}</div><div style={{fontSize:12,color:mu}}>{s.r}</div></div>)}<div style={{background:"rgba(255,107,107,.06)",border:"1px solid rgba(255,107,107,.2)",borderRadius:9,padding:12,fontSize:11,color:mu}}>⚠️ Schedule I substances have no accepted medical use and are not dispensed in pharmacies.</div></div>}
@@ -976,11 +1253,10 @@ export default function App(){
     </div>
   </>);
 
-  // ─── CONTACT PAGE (updated with new bio and headshot) ───────────────────────
+  // ─── CONTACT PAGE ─────────────────────────────────────────────────────────
   if(view==="contact") return wrap(<>
     <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 24px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
 
-    {/* Bio + Photo hero block */}
     <div style={{
       background:"rgba(255,255,255,.03)",
       border:`1px solid ${br}`,
@@ -992,58 +1268,18 @@ export default function App(){
       gap:32,
       alignItems:"center"
     }}>
-      {/* Photo */}
       <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-        <div style={{
-          position:"relative",
-          width:220,
-          height:220,
-          flexShrink:0
-        }}>
-          {/* Decorative accent ring */}
-          <div style={{
-            position:"absolute",
-            inset:-4,
-            borderRadius:20,
-            background:`linear-gradient(135deg,${ac},${bl})`,
-            opacity:0.35,
-            zIndex:0
-          }}/>
+        <div style={{position:"relative",width:220,height:220,flexShrink:0}}>
+          <div style={{position:"absolute",inset:-4,borderRadius:20,background:`linear-gradient(135deg,${ac},${bl})`,opacity:0.35,zIndex:0}}/>
           <img
             src="/profile_headshot.jpg"
             alt="MJ — CPhT-Adv, Founder of PharmTech Path"
-            style={{
-              width:"100%",
-              height:"100%",
-              objectFit:"cover",
-              borderRadius:16,
-              position:"relative",
-              zIndex:1,
-              display:"block"
-            }}
-            onError={e=>{
-              e.currentTarget.style.display="none";
-              e.currentTarget.nextSibling.style.display="flex";
-            }}
+            style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:16,position:"relative",zIndex:1,display:"block"}}
+            onError={e=>{e.currentTarget.style.display="none";e.currentTarget.nextSibling.style.display="flex";}}
           />
-          {/* Fallback avatar if image fails to load */}
-          <div style={{
-            display:"none",
-            width:"100%",
-            height:"100%",
-            borderRadius:16,
-            background:`linear-gradient(135deg,${ac}22,${bl}22)`,
-            border:`1px solid ${br}`,
-            alignItems:"center",
-            justifyContent:"center",
-            fontSize:64,
-            position:"relative",
-            zIndex:1
-          }}>👩‍⚕️</div>
+          <div style={{display:"none",width:"100%",height:"100%",borderRadius:16,background:`linear-gradient(135deg,${ac}22,${bl}22)`,border:`1px solid ${br}`,alignItems:"center",justifyContent:"center",fontSize:64,position:"relative",zIndex:1}}>👩‍⚕️</div>
         </div>
       </div>
-
-      {/* Bio text */}
       <div>
         <div style={{marginBottom:14,display:"flex",gap:8,flexWrap:"wrap",alignItems:"center"}}>
           <Tag label="CPhT-Adv" color={ac}/>
@@ -1066,9 +1302,7 @@ export default function App(){
       </div>
     </div>
 
-    {/* Contact form + sidebar */}
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
-      {/* Sidebar */}
       <div>
         <div style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:16,marginBottom:11}}>
           <div style={{fontSize:11,fontWeight:700,color:ac,marginBottom:4}}>📧 Email Us Directly</div>
@@ -1083,8 +1317,6 @@ export default function App(){
           ))}
         </div>
       </div>
-
-      {/* Contact form */}
       <div>
         {sent?(
           <div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.3)",borderRadius:16,padding:32,textAlign:"center"}}>
@@ -1128,10 +1360,17 @@ export default function App(){
     ))}
   </>);
 
-  // HOME PAGE
+  // ─── HOME PAGE ─────────────────────────────────────────────────────────────
   return (
     <div style={{minHeight:"100vh",background:bg,color:tx,fontFamily:"'Segoe UI',system-ui,sans-serif",overflowX:"hidden"}}>
       {!legalAccepted&&<LegalPopup onAccept={()=>setLegalAccepted(true)}/>}
+      {showOnboarding&&user&&legalAccepted&&(
+        <OnboardingModal
+          user={user}
+          onDismiss={dismissOnboarding}
+          onActivatePro={handleOnboardingPro}
+        />
+      )}
       <Nav view={view} go={go} user={user} isPro={isPro} out={doOut}/>
       {toast&&<Toast msg={toast}/>}
       <FeedbackButton user={user} pop={pop}/>
@@ -1148,10 +1387,19 @@ export default function App(){
       </div>
 
       <div style={{maxWidth:920,margin:"0 auto",padding:"0 16px 20px"}}>
-        {user&&<div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.2)",borderRadius:12,padding:"13px 18px",marginBottom:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:9}}>
+        {user&&<div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.2)",borderRadius:12,padding:"13px 18px",marginBottom:16,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:9}}>
           <div><div style={{fontSize:13,fontWeight:700,color:ac}}>Welcome back{user.displayName?`, ${user.displayName.split(" ")[0]}`:""}! {isPro?"⭐ Pro":""}</div><div style={{fontSize:11,color:mu,marginTop:2}}>{doneN}/{allL.length} lessons complete — {pct}% through your path</div></div>
           <Ring p={pct} size={46} sw={3}/>
         </div>}
+
+        {/* Profile reminder banner — shows on homepage until profile is complete */}
+        {user&&showProfileBanner&&(
+          <ProfileReminderBanner
+            profile={profile}
+            go={go}
+            onDismiss={()=>setShowProfileBanner(false)}
+          />
+        )}
 
         <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:13}}>Where do you want to go?</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
