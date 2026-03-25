@@ -976,29 +976,115 @@ export default function App(){
     </div>
   </>);
 
+  // ─── CONTACT PAGE (updated with new bio and headshot) ───────────────────────
   if(view==="contact") return wrap(<>
-    <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 16px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
-      <div>
-        <div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:6}}>Meet MJ — CPhT-Adv & Controlled Substance Lead</div>
-        <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:20,marginBottom:16}}>
-          <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.9}}>
-            I started where most of you are right now. One year in retail, learning the pace, the pressure, and what it really takes to keep things moving. Then inpatient pharmacy, where I've spent the last five years growing into a CPhT-Adv and Controlled Substance Lead role.
-            <br/><br/>
-            Nobody showed me the path. No mentor pulled me aside and said "here's how to actually grow in this field." I figured it out through trial, error, and a lot of determination.
-            <br/><br/>
-            That's why I built PharmTech Path. Whether you're behind a retail counter or inside a hospital pharmacy, the career growth you're looking for is possible. This is the mentorship system I wish existed when I was starting out.
-          </div>
+    <button onClick={()=>go("home")} style={{background:"transparent",color:mu,border:"none",fontSize:13,cursor:"pointer",padding:"0 0 24px",display:"flex",alignItems:"center",gap:5}}>← Back</button>
+
+    {/* Bio + Photo hero block */}
+    <div style={{
+      background:"rgba(255,255,255,.03)",
+      border:`1px solid ${br}`,
+      borderRadius:20,
+      padding:"28px 28px",
+      marginBottom:28,
+      display:"grid",
+      gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",
+      gap:32,
+      alignItems:"center"
+    }}>
+      {/* Photo */}
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+        <div style={{
+          position:"relative",
+          width:220,
+          height:220,
+          flexShrink:0
+        }}>
+          {/* Decorative accent ring */}
+          <div style={{
+            position:"absolute",
+            inset:-4,
+            borderRadius:20,
+            background:`linear-gradient(135deg,${ac},${bl})`,
+            opacity:0.35,
+            zIndex:0
+          }}/>
+          <img
+            src="/profile_headshot.jpg"
+            alt="MJ — CPhT-Adv, Founder of PharmTech Path"
+            style={{
+              width:"100%",
+              height:"100%",
+              objectFit:"cover",
+              borderRadius:16,
+              position:"relative",
+              zIndex:1,
+              display:"block"
+            }}
+            onError={e=>{
+              e.currentTarget.style.display="none";
+              e.currentTarget.nextSibling.style.display="flex";
+            }}
+          />
+          {/* Fallback avatar if image fails to load */}
+          <div style={{
+            display:"none",
+            width:"100%",
+            height:"100%",
+            borderRadius:16,
+            background:`linear-gradient(135deg,${ac}22,${bl}22)`,
+            border:`1px solid ${br}`,
+            alignItems:"center",
+            justifyContent:"center",
+            fontSize:64,
+            position:"relative",
+            zIndex:1
+          }}>👩‍⚕️</div>
         </div>
+      </div>
+
+      {/* Bio text */}
+      <div>
+        <div style={{marginBottom:14,display:"flex",gap:8,flexWrap:"wrap",alignItems:"center"}}>
+          <Tag label="CPhT-Adv" color={ac}/>
+          <Tag label="Founder" color={bl}/>
+          <Tag label="Controlled Substance Lead" color="#a855f7"/>
+        </div>
+        <div style={{fontSize:22,fontWeight:800,color:"#fff",marginBottom:4,lineHeight:1.2}}>Hi, I'm MJ.</div>
+        <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.9}}>
+          CPhT-Adv, pharmacy technician with years of hands-on pharmacy experience and a straightforward reason for building this app. Nobody told me what my career could actually look like.
+        </div>
+        <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.9,marginTop:12}}>
+          When career coaching resources fell short and the advice was to keep doing what I was already doing, I started researching on my own. What I found changed how I saw the profession entirely.
+        </div>
+        <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.9,marginTop:12}}>
+          PharmTech Path exists so no tech has to figure that out alone. You deserve a resource that actually shows you what is possible.
+        </div>
+        <div style={{fontSize:14,fontWeight:700,color:ac,marginTop:14,fontStyle:"italic"}}>
+          Your career doesn't stop at the counter.
+        </div>
+      </div>
+    </div>
+
+    {/* Contact form + sidebar */}
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
+      {/* Sidebar */}
+      <div>
         <div style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:16,marginBottom:11}}>
           <div style={{fontSize:11,fontWeight:700,color:ac,marginBottom:4}}>📧 Email Us Directly</div>
           <a href="mailto:pharmtechgraphics@gmail.com" style={{color:tx,fontSize:13,textDecoration:"none"}}>pharmtechgraphics@gmail.com</a>
         </div>
         <div style={{background:sf,border:`1px solid ${br}`,borderRadius:11,padding:16}}>
           <div style={{fontSize:11,fontWeight:700,color:ac,marginBottom:8}}>We love hearing about:</div>
-          {["Content you want added","Topics needing more depth","Tools or features you need","Bugs or technical issues","Pro subscription questions"].map((item,i)=><div key={i} style={{display:"flex",alignItems:"center",gap:6,marginBottom:6,fontSize:12,color:"#c8d8f0"}}><span style={{color:ac}}>→</span>{item}</div>)}
+          {["Content you want added","Topics needing more depth","Tools or features you need","Bugs or technical issues","Pro subscription questions"].map((item,i)=>(
+            <div key={i} style={{display:"flex",alignItems:"center",gap:6,marginBottom:6,fontSize:12,color:"#c8d8f0"}}>
+              <span style={{color:ac}}>→</span>{item}
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Contact form */}
       <div>
         {sent?(
           <div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.3)",borderRadius:16,padding:32,textAlign:"center"}}>
