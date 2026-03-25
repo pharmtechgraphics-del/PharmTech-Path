@@ -1282,6 +1282,81 @@ export default function App(){
     const fil=resCat==="All"?RESOURCES:RESOURCES.filter(r=>r.cat===resCat);
     return wrap(<>
       <H1 ch="Professional Resources" sub="Official certification bodies, associations, regulatory agencies & reference tools"/>
+
+      {/* ─── ASHP FEATURED SCHOLARSHIP CARD ─────────────────────────────── */}
+      <div style={{
+        position:"relative",
+        background:"linear-gradient(135deg,rgba(0,201,167,.13) 0%,rgba(0,148,255,.09) 100%)",
+        border:"1.5px solid rgba(0,201,167,.4)",
+        borderRadius:18,
+        padding:"24px 26px",
+        marginBottom:24,
+        overflow:"hidden",
+      }}>
+        {/* Background accent glow */}
+        <div style={{position:"absolute",top:-40,right:-40,width:180,height:180,borderRadius:"50%",background:"rgba(0,201,167,.07)",pointerEvents:"none"}}/>
+
+        {/* Top row */}
+        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",flexWrap:"wrap",gap:14,marginBottom:14}}>
+          <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+            <div style={{
+              background:"linear-gradient(135deg,rgba(0,201,167,.2),rgba(0,148,255,.15))",
+              border:"1px solid rgba(0,201,167,.35)",
+              borderRadius:12,
+              width:48,height:48,
+              display:"flex",alignItems:"center",justifyContent:"center",
+              fontSize:24,flexShrink:0,
+            }}>🏆</div>
+            <div>
+              <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:4}}>
+                <span style={{
+                  background:"rgba(0,201,167,.15)",color:ac,
+                  border:"1px solid rgba(0,201,167,.35)",
+                  borderRadius:20,fontSize:9,fontWeight:700,
+                  padding:"2px 9px",letterSpacing:1.2,
+                  textTransform:"uppercase",fontFamily:"monospace",
+                }}>Featured Opportunity</span>
+                <span style={{
+                  background:"rgba(0,148,255,.12)",color:bl,
+                  border:"1px solid rgba(0,148,255,.3)",
+                  borderRadius:20,fontSize:9,fontWeight:700,
+                  padding:"2px 9px",letterSpacing:1.2,
+                  textTransform:"uppercase",fontFamily:"monospace",
+                }}>Scholarship</span>
+              </div>
+              <div style={{fontSize:17,fontWeight:800,color:"#fff",lineHeight:1.2}}>
+                ASHP Professional Advancement Scholarship Program
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Description */}
+        <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.8,marginBottom:16,maxWidth:680}}>
+          This scholarship program supports pharmacy technicians and graduating pharmacy students who want to attend the ASHP Midyear Clinical Meeting — one of the largest pharmacy conferences in the country.
+          It is a real opportunity to expand your professional network, earn CE credit and get exposure to career paths that most techs never see from behind the counter.
+        </div>
+
+        {/* CTA row */}
+        <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
+          <a href="https://www.ashp.org" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <button style={{
+              background:`linear-gradient(135deg,${ac},${bl})`,
+              color:"#fff",border:"none",borderRadius:10,
+              padding:"10px 22px",fontSize:13,fontWeight:700,
+              cursor:"pointer",letterSpacing:0.2,
+            }}>
+              Learn More at ASHP.org →
+            </button>
+          </a>
+          <div style={{fontSize:11,color:mu,lineHeight:1.6,maxWidth:400}}>
+            ⚠️ Scholarship details, eligibility and deadlines are subject to change. Always verify current information directly at{" "}
+            <a href="https://www.ashp.org" target="_blank" rel="noopener noreferrer" style={{color:ac,textDecoration:"underline"}}>ashp.org</a>.
+          </div>
+        </div>
+      </div>
+      {/* ─────────────────────────────────────────────────────────────────── */}
+
       <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:18}}>
         {cats.map(c=><button key={c} onClick={()=>setResCat(c)} style={{background:resCat===c?"rgba(0,201,167,.15)":sf,color:resCat===c?ac:mu,border:resCat===c?`1px solid rgba(0,201,167,.4)`:`1px solid ${br}`,borderRadius:20,padding:"4px 12px",fontSize:11,fontWeight:600,cursor:"pointer"}}>{c}</button>)}
       </div>
