@@ -127,18 +127,18 @@ const PRO_SECTIONS = [
       { id:"i5", title:"Sterile Compounding Awareness", lessons:[{ id:"i5l1", title:"Cleanroom Principles (High-Level)", content:`• Cleanroom principles\n• Why environment matters\n• Documentation significance\n\nAlways defer to your facility's SOPs and licensed pharmacist supervision.` }]},
     ]
   },
-  { id:"advanced", title:"Advanced Growth", icon:"🚀", desc:"Leadership, career pathways & long-term positioning",
+  { id:"advanced", title:"Beyond the Counter", icon:"🚀", desc:"Leadership, career pathways & long-term positioning",
     modules:[
       { id:"a1", title:"Thinking Beyond Task Completion", lessons:[{ id:"a1l1", title:"Process Awareness & Being Proactive", content:`• Process awareness\n• Identifying inefficiencies\n• Documentation clarity\n• Being proactive\n\nYou notice things before they become problems.` }]},
-      { id:"a2", title:"Quality & Compliance Basics", lessons:[{ id:"a2l1", title:"What Audits Look For", content:`• What audits look for\n• Why documentation matters\n• Risk mindset\n• Professional accountability` }]},
+      { id:"a2", title:"Quality and Safety Mindset", lessons:[{ id:"a2l1", title:"What Audits Look For", content:`• What audits look for\n• Why documentation matters\n• Risk mindset\n• Professional accountability` }]},
       { id:"a3", title:"Leadership Without Title", lessons:[{ id:"a3l1", title:"Influence, Mentoring & Professional Boundaries", content:`You don't need a title to:\n• Mentor new techs\n• Model professionalism\n• Encourage documentation accuracy\n• Protect workflow culture\n\nReputation compounds over time.` }]},
       { id:"a4", title:"Career Pathways & Long-Term Positioning", lessons:[{ id:"a4l1", title:"Your Career Map", content:`PATHWAYS:\n• Retail → Hospital\n• Hospital → Specialist\n• Certification stacking\n• Resume framing\n• Interview confidence\n\nCertification stacking accelerates your trajectory. Each credential opens a new tier.` }]},
-      { id:"a5", title:"Module 4 — The Tech Ladder", lessons:[
+      { id:"a5", title:"The Tech Ladder", lessons:[
         { id:"a5l1", title:"Tech I — Entry Level", content:`TECH I — ENTRY LEVEL\n\nTech I is where every pharmacy career begins. You are new to the environment, learning the pace, the people, and the processes.\n\nRESPONSIBILITIES:\n• Data entry and prescription intake\n• Filling and labeling prescriptions\n• Stocking shelves and supplies\n• Cashier duties (retail)\n• Printing and organizing labels\n• Working under direct pharmacist supervision\n\nCERTIFICATION STATUS:\n• May or may not be certified yet, depending on state requirements\n• Some states allow technicians to work while pursuing certification\n\nINPATIENT SETTING:\nIn a hospital or inpatient environment, Tech I is typically assigned to one pool or area of the pharmacy. You are learning the workflow of that specific area before any cross-training begins.\n\nFOCUS AT THIS LEVEL:\n• Accuracy before speed\n• Learning the environment\n• Asking questions before assuming\n• Building documentation habits early\n\nRemember: Everyone starts here. Your job is to observe, absorb, and build your foundation.` },
         { id:"a5l2", title:"Tech II — Intermediate", content:`TECH II — INTERMEDIATE\n\nYou have your footing. You are certified, experienced, and trusted to work more independently.\n\nEXPERIENCE:\n• CPhT certified\n• Typically 1–3 years of pharmacy experience\n\nRESPONSIBILITIES:\n• Insurance billing and prior authorization support\n• Basic compounding\n• Inventory management\n• Training and orienting new technicians\n• Serving as a go-to resource on the floor\n\nINPATIENT SETTING:\nThis is where cross-training begins. A Tech II would be trained in a second pool or area of the pharmacy.\n\nExamples of cross-training combinations:\n• Pyxis restocking + IV room\n• Mainside dispensing + running narcotics\n• Cart fill + controlled substance reconciliation\n\nThis cross-training builds your versatility and makes you a stronger, more valuable team member.\n\nFOCUS AT THIS LEVEL:\n• Efficiency and reliability\n• Problem-solving before escalating\n• Taking ownership of your area\n• Beginning to mentor others informally` },
         { id:"a5l3", title:"Tech III — Senior / Lead", content:`TECH III — SENIOR / LEAD\n\nThis is advanced pharmacy technician territory. You are experienced, credentialed, and trusted with responsibilities that extend beyond daily tasks.\n\nEXPERIENCE:\n• 3+ years of pharmacy experience\n• Often holds specialty certificates or advanced credentials\n\nROLES AT THIS LEVEL:\n• Lead Technician\n• Supervisor\n• Senior Technician\n\nRESPONSIBILITIES:\n• Scheduling and shift coordination\n• Mentoring and training newer technicians\n• Quality control and process compliance\n• Policy enforcement and documentation oversight\n• Working alongside pharmacists on operational and clinical initiatives\n\nFOCUS AT THIS LEVEL:\n• Leadership without needing a title\n• Protecting workflow culture\n• Accountability and consistency\n• Career positioning through certifications\n\nADVANCED CERTIFICATIONS AT THIS LEVEL:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nThe gold standard for experienced techs. Requires active CPhT + specialty certificates + 2 years experience. No separate exam — application-based. Renews every 2 years (25 ACPE CE hours).\nOffered by: BPTS (bpts.org) and PTCB (ptcb.org)\n\nCSPT — Certified Compounded Sterile Preparation Technician\nDemonstrates expertise in sterile compounding practice.\nOffered by: PTCB (ptcb.org)\n\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nBoard-level credential in sterile compounding.\nOffered by: BPTS (bpts.org)\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nSpecialized credential in hazardous drug compounding.\nOffered by: BPTS (bpts.org)\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nBoard-level credential in nonsterile compounding.\nOffered by: BPTS (bpts.org)\n\nCPTEd — Certified Pharmacy Technician Educator\nFor technicians who train, teach, or mentor other techs.\nOffered by: PTCB (ptcb.org)\n\n────────────────────────────────────\n📌 Reference Links:\n• BPTS: https://bpts.org\n• PTCB: https://ptcb.org/credentials` },
       ]},
-      { id:"a6", title:"Module 5 — Advanced Certifications", lessons:[
+      { id:"a6", title:"Advanced Certifications and What They Actually Open", lessons:[
         { id:"a6l1", title:"CPhT-Adv — Advanced Certified Pharmacy Technician", content:`CPhT-Adv — ADVANCED CERTIFIED PHARMACY TECHNICIAN\n\nThe CPhT-Adv is the most recognized advanced credential for pharmacy technicians. It signals that you have moved beyond entry-level practice and demonstrated specialized knowledge across multiple areas.\n\nOFFERED BY:\n• BPTS — Board of Pharmacy Technician Specialties (bpts.org)\n• PTCB — Pharmacy Technician Certification Board (ptcb.org)\n\nELIGIBILITY REQUIREMENTS:\n1. Active CPhT (through NHA or PTCB)\n2. One of the following:\n   Option A: Any four BPTS assessment-based specialty certificates\n   Option B: Any three specialty certificates + one board cert (BCSCPT, BCNCPT, or CSPT)\n   Note: At least one certificate must be from BPTS\n3. Minimum 2 years of supervised pharmacy experience\n\nEXAM:\nThere is no separate exam. The CPhT-Adv is earned through an application process once all requirements are met.\n\nAFTER APPROVAL:\nYou receive a digital badge and certificate through Credly — display it on LinkedIn, your resume, and email signature.\n\nRENEWAL:\nEvery 2 years | 25 hours of ACPE-accredited CE required\n\n📌 Apply through BPTS:\nhttps://bpts.org/credentials/advanced-certified-pharmacy-technician-cpht-adv/\n\n📌 Learn more at PTCB:\nhttps://ptcb.org/credentials/certification/advanced-certified-pharmacy-technician-cpht-adv/` },
         { id:"a6l2", title:"BPTS Specialty Certifications", content:`BPTS — BOARD OF PHARMACY TECHNICIAN SPECIALTIES\nbpts.org\n\nBPTS offers board-level credentials for technicians who want to specialize. These go beyond general certification and demonstrate mastery in a specific area of pharmacy practice.\n\nBOARD CERTIFICATIONS:\n────────────────────────────────────\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nFor technicians specializing in sterile compounding. Covers cleanroom standards, IV preparation, and USP 797 compliance.\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nFor technicians working with hazardous drugs. Covers safe handling, PPE protocols, and USP 800 compliance.\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nFor technicians who compound non-sterile preparations. Covers formulation, documentation, and quality assurance.\n\nASSESSMENT-BASED CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing & Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Safety\n• Medication Therapy Management\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain Management\n• Technician Product Verification\n• Veterinary Pharmacy\n\n📌 Explore all credentials: https://bpts.org` },
         { id:"a6l3", title:"PTCB Advanced Credentials", content:`PTCB — PHARMACY TECHNICIAN CERTIFICATION BOARD\nptcb.org/credentials\n\nPTCB is the nation's first and most widely recognized pharmacy technician credentialing organization. Beyond the foundational CPhT, PTCB offers several advanced pathways.\n\nADVANCED CERTIFICATIONS:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nRecognizes experienced, multi-certified technicians.\nRequires: Active CPhT + specialty certificates + 2 years experience\n\nCSPT — Certified Compounded Sterile Preparation Technician\nFor technicians with expertise in sterile compounding practice.\nDemonstrates advanced knowledge of IV prep, cleanroom standards, and patient safety.\n\nCPTEd — Certified Pharmacy Technician Educator\nDesigned for technicians who train, teach, or instruct other pharmacy technicians.\nIdeal for Lead Techs, supervisors, or those moving into training roles.\n\nSPECIALTY CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing and Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Therapy Management\n• Nonsterile Compounding\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain and Inventory Management\n• Technician Product Verification\n\nPTCB certificates do not expire and do not require CE to maintain.\n\n📌 Full credential catalog: https://ptcb.org/credentials` },
@@ -207,9 +207,9 @@ const CAREER_MILESTONES = [
   { id:"m_cert",   label:"Certification Path", icon:"🎓", desc:"Structured study & exam strategy",      lessonIds:["c1l1","c2l1","c3l1","c4l1","c5l1"] },
   { id:"m_retail", label:"Retail Foundations", icon:"🏪", desc:"Advanced retail skills (Pro)",          lessonIds:["r1l1","r1l2","r1l3","r2l1","r2l2","r3l1","r4l1"], pro:true },
   { id:"m_inpat",  label:"Inpatient Ready",    icon:"🏥", desc:"Hospital pharmacy skills (Pro)",        lessonIds:["i1l1","i2l1","i3l1","i4l1","i5l1"], pro:true },
-  { id:"m_adv",    label:"Advanced Growth",    icon:"🚀", desc:"Leadership & career strategy (Pro)",    lessonIds:["a1l1","a2l1","a3l1","a4l1"], pro:true },
+  { id:"m_adv",    label:"Beyond the Counter", icon:"🚀", desc:"Leadership & career strategy (Pro)",    lessonIds:["a1l1","a2l1","a3l1","a4l1"], pro:true },
   { id:"m_ladder", label:"The Tech Ladder",    icon:"🪜", desc:"Tech I, II & III career levels (Pro)",  lessonIds:["a5l1","a5l2","a5l3"], pro:true },
-  { id:"m_advcert",label:"Advanced Certifications", icon:"🏅", desc:"CPhT-Adv, BPTS & PTCB credentials (Pro)", lessonIds:["a6l1","a6l2","a6l3"], pro:true },
+  { id:"m_advcert",label:"Advanced Certifications and What They Actually Open", icon:"🏅", desc:"CPhT-Adv, BPTS & PTCB credentials (Pro)", lessonIds:["a6l1","a6l2","a6l3"], pro:true },
 ];
 
 const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flatMap(m=>m.lessons));
@@ -478,7 +478,6 @@ export default function App(){
 
   const pop=useCallback(m=>{setToast(m);setTimeout(()=>setToast(null),2600);},[]);
 
-  // Listen for profile tab switch events fired from AICareerAssistant nudge button
   useEffect(()=>{
     const handler=(e)=>setCareerTab(e.detail);
     document.addEventListener("pharmtech-tab",handler);
@@ -951,7 +950,7 @@ export default function App(){
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
         {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","16 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
-        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Advanced Growth & Leadership","The Tech Ladder (Tech I, II & III)","Advanced Certifications (CPhT-Adv, BPTS & PTCB)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
+        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Beyond the Counter","The Tech Ladder (Tech I, II & III)","Advanced Certifications and What They Actually Open","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
           <div style={{fontSize:24,marginBottom:6}}>{p.icon}</div>
@@ -1189,7 +1188,7 @@ Your role:
 - Never give clinical or medical advice — stay in the lane of career development and professional growth`;
   };
 
-    const sendMessage = async (text) => {
+  const sendMessage = async (text) => {
     const userMsg = text || input.trim();
     if (!userMsg || loading) return;
     setInput("");
@@ -1199,9 +1198,7 @@ Your role:
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           system: buildSystemPrompt(),
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
@@ -1302,14 +1299,14 @@ Your role:
             </div>
             <div style={{ maxWidth: "78%", background: m.role === "user" ? `linear-gradient(135deg,rgba(0,201,167,.15),rgba(0,148,255,.12))` : "rgba(255,255,255,.05)", border: m.role === "user" ? "1px solid rgba(0,201,167,.25)" : `1px solid ${br}`, borderRadius: m.role === "user" ? "14px 4px 14px 14px" : "4px 14px 14px 14px", padding: "10px 13px", fontSize: 13, color: tx, lineHeight: 1.7}}>
               {m.content.split('\n').map((line, i) => {
-  const formatted = line
-    .replace(/^### (.+)/, '<strong style="font-size:13px;color:#fff">$1</strong>')
-    .replace(/^## (.+)/, '<strong style="font-size:14px;color:#fff">$1</strong>')
-    .replace(/^# (.+)/, '<strong style="font-size:15px;color:#fff">$1</strong>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^- (.+)/, '• $1');
-  return <span key={i} dangerouslySetInnerHTML={{__html: formatted}} style={{display:'block', marginBottom: line.startsWith('#') ? 8 : 2}}/>;
-})}
+                const formatted = line
+                  .replace(/^### (.+)/, '<strong style="font-size:13px;color:#fff">$1</strong>')
+                  .replace(/^## (.+)/, '<strong style="font-size:14px;color:#fff">$1</strong>')
+                  .replace(/^# (.+)/, '<strong style="font-size:15px;color:#fff">$1</strong>')
+                  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                  .replace(/^- (.+)/, '• $1');
+                return <span key={i} dangerouslySetInnerHTML={{__html: formatted}} style={{display:'block', marginBottom: line.startsWith('#') ? 8 : 2}}/>;
+              })}
             </div>
           </div>
         ))}
