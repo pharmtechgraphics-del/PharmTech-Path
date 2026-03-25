@@ -1051,9 +1051,10 @@ export default function App(){
       <FeedbackButton user={user} pop={pop}/>
 
       <div style={{textAlign:"center",padding:"56px 16px 32px",background:"radial-gradient(ellipse at 50% 0%,rgba(0,201,167,.08) 0%,transparent 66%)"}}>
-        <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>Built by a tech. For techs.</span>
+        <span style={{display:"inline-block",background:"rgba(0,201,167,.1)",color:ac,border:"1px solid rgba(0,201,167,.25)",borderRadius:20,padding:"3px 13px",fontSize:10,fontWeight:700,letterSpacing:2,textTransform:"uppercase",fontFamily:"monospace"}}>BUILT BY A TECH. FOR TECHS.</span>
         <h1 style={{fontSize:"clamp(28px,6vw,50px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"12px 0 11px"}}><span style={{color:ac}}>PharmTech</span> Path</h1>
-        <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>PharmTech Path is the structured career system pharmacy technicians actually deserve.</p>
+        <p style={{fontSize:"clamp(18px,3vw,28px)",fontWeight:600,color:"#fff",lineHeight:1.2,margin:"0 0 10px"}}>Your career does not stop at the counter.</p>
+        <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>PharmTech Path is the career advancement resource built for techs who want to go further. We show you what comes next and how to get there.</p>
         <div style={{display:"flex",gap:9,justifyContent:"center",flexWrap:"wrap"}}>
           <Bp ch="Start Learning →" on={()=>go("learn")}/>
           {!user&&<Bs ch="Sign In / Sign Up" on={()=>go("auth")}/>}
