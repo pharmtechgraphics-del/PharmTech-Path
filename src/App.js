@@ -128,24 +128,461 @@ const PRO_SECTIONS = [
     ]
   },
   { id:"advanced", title:"Beyond the Counter", icon:"🚀", desc:"Leadership, career pathways & long-term positioning",
-    modules:[
-      { id:"a1", title:"Thinking Beyond Task Completion", lessons:[{ id:"a1l1", title:"Process Awareness & Being Proactive", content:`• Process awareness\n• Identifying inefficiencies\n• Documentation clarity\n• Being proactive\n\nYou notice things before they become problems.` }]},
-      { id:"a2", title:"Quality and Safety Mindset", lessons:[{ id:"a2l1", title:"What Audits Look For", content:`• What audits look for\n• Why documentation matters\n• Risk mindset\n• Professional accountability` }]},
-      { id:"a3", title:"Leadership Without Title", lessons:[{ id:"a3l1", title:"Influence, Mentoring & Professional Boundaries", content:`You don't need a title to:\n• Mentor new techs\n• Model professionalism\n• Encourage documentation accuracy\n• Protect workflow culture\n\nReputation compounds over time.` }]},
-      { id:"a4", title:"Career Pathways & Long-Term Positioning", lessons:[{ id:"a4l1", title:"Your Career Map", content:`PATHWAYS:\n• Retail → Hospital\n• Hospital → Specialist\n• Certification stacking\n• Resume framing\n• Interview confidence\n\nCertification stacking accelerates your trajectory. Each credential opens a new tier.` }]},
-      { id:"a5", title:"The Tech Ladder", lessons:[
-        { id:"a5l1", title:"Tech I — Entry Level", content:`TECH I — ENTRY LEVEL\n\nTech I is where every pharmacy career begins. You are new to the environment, learning the pace, the people, and the processes.\n\nRESPONSIBILITIES:\n• Data entry and prescription intake\n• Filling and labeling prescriptions\n• Stocking shelves and supplies\n• Cashier duties (retail)\n• Printing and organizing labels\n• Working under direct pharmacist supervision\n\nCERTIFICATION STATUS:\n• May or may not be certified yet, depending on state requirements\n• Some states allow technicians to work while pursuing certification\n\nINPATIENT SETTING:\nIn a hospital or inpatient environment, Tech I is typically assigned to one pool or area of the pharmacy. You are learning the workflow of that specific area before any cross-training begins.\n\nFOCUS AT THIS LEVEL:\n• Accuracy before speed\n• Learning the environment\n• Asking questions before assuming\n• Building documentation habits early\n\nRemember: Everyone starts here. Your job is to observe, absorb, and build your foundation.` },
-        { id:"a5l2", title:"Tech II — Intermediate", content:`TECH II — INTERMEDIATE\n\nYou have your footing. You are certified, experienced, and trusted to work more independently.\n\nEXPERIENCE:\n• CPhT certified\n• Typically 1–3 years of pharmacy experience\n\nRESPONSIBILITIES:\n• Insurance billing and prior authorization support\n• Basic compounding\n• Inventory management\n• Training and orienting new technicians\n• Serving as a go-to resource on the floor\n\nINPATIENT SETTING:\nThis is where cross-training begins. A Tech II would be trained in a second pool or area of the pharmacy.\n\nExamples of cross-training combinations:\n• Pyxis restocking + IV room\n• Mainside dispensing + running narcotics\n• Cart fill + controlled substance reconciliation\n\nThis cross-training builds your versatility and makes you a stronger, more valuable team member.\n\nFOCUS AT THIS LEVEL:\n• Efficiency and reliability\n• Problem-solving before escalating\n• Taking ownership of your area\n• Beginning to mentor others informally` },
-        { id:"a5l3", title:"Tech III — Senior / Lead", content:`TECH III — SENIOR / LEAD\n\nThis is advanced pharmacy technician territory. You are experienced, credentialed, and trusted with responsibilities that extend beyond daily tasks.\n\nEXPERIENCE:\n• 3+ years of pharmacy experience\n• Often holds specialty certificates or advanced credentials\n\nROLES AT THIS LEVEL:\n• Lead Technician\n• Supervisor\n• Senior Technician\n\nRESPONSIBILITIES:\n• Scheduling and shift coordination\n• Mentoring and training newer technicians\n• Quality control and process compliance\n• Policy enforcement and documentation oversight\n• Working alongside pharmacists on operational and clinical initiatives\n\nFOCUS AT THIS LEVEL:\n• Leadership without needing a title\n• Protecting workflow culture\n• Accountability and consistency\n• Career positioning through certifications\n\nADVANCED CERTIFICATIONS AT THIS LEVEL:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nThe gold standard for experienced techs. Requires active CPhT + specialty certificates + 2 years experience. No separate exam — application-based. Renews every 2 years (25 ACPE CE hours).\nOffered by: BPTS (bpts.org) and PTCB (ptcb.org)\n\nCSPT — Certified Compounded Sterile Preparation Technician\nDemonstrates expertise in sterile compounding practice.\nOffered by: PTCB (ptcb.org)\n\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nBoard-level credential in sterile compounding.\nOffered by: BPTS (bpts.org)\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nSpecialized credential in hazardous drug compounding.\nOffered by: BPTS (bpts.org)\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nBoard-level credential in nonsterile compounding.\nOffered by: BPTS (bpts.org)\n\nCPTEd — Certified Pharmacy Technician Educator\nFor technicians who train, teach, or mentor other techs.\nOffered by: PTCB (ptcb.org)\n\n────────────────────────────────────\n📌 Reference Links:\n• BPTS: https://bpts.org\n• PTCB: https://ptcb.org/credentials` },
-      ]},
-      { id:"a6", title:"Advanced Certifications and What They Actually Open", lessons:[
-        { id:"a6l1", title:"CPhT-Adv — Advanced Certified Pharmacy Technician", content:`CPhT-Adv — ADVANCED CERTIFIED PHARMACY TECHNICIAN\n\nThe CPhT-Adv is the most recognized advanced credential for pharmacy technicians. It signals that you have moved beyond entry-level practice and demonstrated specialized knowledge across multiple areas.\n\nOFFERED BY:\n• BPTS — Board of Pharmacy Technician Specialties (bpts.org)\n• PTCB — Pharmacy Technician Certification Board (ptcb.org)\n\nELIGIBILITY REQUIREMENTS:\n1. Active CPhT (through NHA or PTCB)\n2. One of the following:\n   Option A: Any four BPTS assessment-based specialty certificates\n   Option B: Any three specialty certificates + one board cert (BCSCPT, BCNCPT, or CSPT)\n   Note: At least one certificate must be from BPTS\n3. Minimum 2 years of supervised pharmacy experience\n\nEXAM:\nThere is no separate exam. The CPhT-Adv is earned through an application process once all requirements are met.\n\nAFTER APPROVAL:\nYou receive a digital badge and certificate through Credly — display it on LinkedIn, your resume, and email signature.\n\nRENEWAL:\nEvery 2 years | 25 hours of ACPE-accredited CE required\n\n📌 Apply through BPTS:\nhttps://bpts.org/credentials/advanced-certified-pharmacy-technician-cpht-adv/\n\n📌 Learn more at PTCB:\nhttps://ptcb.org/credentials/certification/advanced-certified-pharmacy-technician-cpht-adv/` },
-        { id:"a6l2", title:"BPTS Specialty Certifications", content:`BPTS — BOARD OF PHARMACY TECHNICIAN SPECIALTIES\nbpts.org\n\nBPTS offers board-level credentials for technicians who want to specialize. These go beyond general certification and demonstrate mastery in a specific area of pharmacy practice.\n\nBOARD CERTIFICATIONS:\n────────────────────────────────────\nBCSCPT — Board Certified Sterile Compounding Pharmacy Technician\nFor technicians specializing in sterile compounding. Covers cleanroom standards, IV preparation, and USP 797 compliance.\n\nBCHCPT — Board Certified Hazardous Compounding Pharmacy Technician\nFor technicians working with hazardous drugs. Covers safe handling, PPE protocols, and USP 800 compliance.\n\nBCNCPT — Board Certified Nonsterile Compounding Pharmacy Technician\nFor technicians who compound non-sterile preparations. Covers formulation, documentation, and quality assurance.\n\nASSESSMENT-BASED CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing & Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Safety\n• Medication Therapy Management\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain Management\n• Technician Product Verification\n• Veterinary Pharmacy\n\n📌 Explore all credentials: https://bpts.org` },
-        { id:"a6l3", title:"PTCB Advanced Credentials", content:`PTCB — PHARMACY TECHNICIAN CERTIFICATION BOARD\nptcb.org/credentials\n\nPTCB is the nation's first and most widely recognized pharmacy technician credentialing organization. Beyond the foundational CPhT, PTCB offers several advanced pathways.\n\nADVANCED CERTIFICATIONS:\n────────────────────────────────────\nCPhT-Adv — Advanced Certified Pharmacy Technician\nRecognizes experienced, multi-certified technicians.\nRequires: Active CPhT + specialty certificates + 2 years experience\n\nCSPT — Certified Compounded Sterile Preparation Technician\nFor technicians with expertise in sterile compounding practice.\nDemonstrates advanced knowledge of IV prep, cleanroom standards, and patient safety.\n\nCPTEd — Certified Pharmacy Technician Educator\nDesigned for technicians who train, teach, or instruct other pharmacy technicians.\nIdeal for Lead Techs, supervisors, or those moving into training roles.\n\nSPECIALTY CERTIFICATES (count toward CPhT-Adv):\n────────────────────────────────────\n• Billing and Reimbursement\n• Controlled Substances Diversion Prevention\n• Hazardous Drug Management\n• Immunization Administration\n• Medication History\n• Medication Therapy Management\n• Nonsterile Compounding\n• Point-of-Care Testing\n• Regulatory Compliance\n• Supply Chain and Inventory Management\n• Technician Product Verification\n\nPTCB certificates do not expire and do not require CE to maintain.\n\n📌 Full credential catalog: https://ptcb.org/credentials` },
-      ]},
-    ]
+    modules:[], // Beyond the Counter now uses its own dedicated view — see BeyondTheCounter component below
+    isBeyond: true
   },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BEYOND THE COUNTER — MODULE DATA
+// 8 modules. Module 1 Lesson 1 fully populated.
+// Modules 2–8 ready for content.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BEYOND_MODULES = [
+  {
+    id: "btc1",
+    title: "Thinking Beyond Task Completion",
+    icon: "🧠",
+    desc: "Shift from doing your job to owning your impact.",
+    lessons: [
+      {
+        id: "btc1l1",
+        title: "What Your Job Description Does Not Tell You",
+        sections: [
+          {
+            header: "The Gap Nobody Talks About",
+            body: "Every pharmacy technician job description says roughly the same thing. Count, dispense, verify, repeat. And if you do those things accurately and efficiently, you are doing your job.\n\nBut here is what nobody writes in the job description. The techs who advance are not the ones who just complete tasks. They are the ones who understand why the tasks exist, what breaks when they are done wrong and how the work connects to patient outcomes, team performance and organizational risk.\n\nThat shift in thinking is not something you learn in a training module. It is something you choose to do."
+          },
+          {
+            header: "From Execution to Awareness",
+            body: "Task completion is doing the work. Strategic awareness is watching the work.\n\nWhen you are counting a controlled substance, a task-completion mindset checks the count and moves on. A strategic awareness mindset notices that this medication has been short three times this month, flags it and asks whether there is a workflow problem, a diversion risk or an ordering issue.\n\nSame action. Completely different value to the organization.\n\nThis is not about working harder. It is about paying attention differently. You are already in the room where the work happens. That gives you information that a manager sitting in an office does not have access to. The question is whether you are using it."
+          }
+        ],
+        keyPoints: [
+          "Task completion gets you hired. Strategic awareness gets you promoted.",
+          "You have access to frontline information that leaders do not see directly.",
+          "Noticing patterns is a skill you build on purpose, not by accident.",
+          "The same action done with awareness creates more value than the same action done on autopilot."
+        ],
+        takeaway: "Every task you complete exists inside a larger system. The more you understand that system, the more valuable you become to it.",
+        selfCheck: {
+          prompt: "Read each situation below. Tap the one that sounds most like how you currently show up at work.",
+          options: [
+            {
+              label: "I complete my tasks accurately and efficiently. I do what is asked of me and I do it well.",
+              response: "You have a strong foundation. The next step is intentionally widening your lens. Start with one shift per week where you ask yourself why each task exists, not just how to do it."
+            },
+            {
+              label: "I complete my tasks and I also pay attention to patterns, flag things that seem off and think about how my work connects to the bigger picture.",
+              response: "You are already thinking like a leader. The next step is making sure the people around you know it. Document what you notice. Bring patterns to your pharmacist. Let your awareness become visible."
+            },
+            {
+              label: "I am somewhere in between. I notice things but I am not always sure it is my place to say something.",
+              response: "This is the most common place experienced techs get stuck. You have the instincts. What you need is the confidence to act on them. This section of PharmTech Path was built specifically for you."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are working a busy retail shift and notice that the same insurance rejection code has come up four times in the last two hours for different patients on different medications. Your pharmacist is on the phone and the line is backing up.",
+          prompt: "What do you do and why does it matter beyond just fixing each rejection one at a time?"
+        },
+        answer: {
+          recommended: "Handle each rejection efficiently in the moment so patients are not waiting. But also write down the rejection code, the medications affected and the approximate times. When your pharmacist is free, bring it up as a pattern rather than four separate problems.",
+          why: "A single rejection is a task. Four rejections with the same code in two hours is a system signal. It could mean a formulary change, a PBM update or a billing error that will affect dozens of patients if nobody catches it. The tech who notices the pattern and reports it is operating at a completely different level than the tech who just clears each queue item and moves on. That is the difference between being replaceable and being relied upon."
+        },
+        connection: {
+          tag: "Lead Tech · Pharmacy Supervisor · CQI Coordinator · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson 'What Your Job Description Does Not Tell You' in the Thinking Beyond Task Completion module. I want to understand how to start building strategic awareness in my current role. Based on my background, where should I focus first?"
+        }
+      }
+    ]
+  },
+  {
+    id: "btc2",
+    title: "Owning Your Professional Reputation",
+    icon: "⭐",
+    desc: "How you show up every day builds the career you want.",
+    lessons: []
+  },
+  {
+    id: "btc3",
+    title: "Leadership Without Title",
+    icon: "🤝",
+    desc: "Lead from any seat. Title is not a prerequisite.",
+    lessons: []
+  },
+  {
+    id: "btc4",
+    title: "Translating Your Skills to Leadership Roles",
+    icon: "🔄",
+    desc: "Turn your daily work into a leadership resume.",
+    lessons: []
+  },
+  {
+    id: "btc5",
+    title: "Advanced Certifications and What They Actually Open",
+    icon: "🎓",
+    desc: "Know what credentials unlock and when to pursue them.",
+    lessons: []
+  },
+  {
+    id: "btc6",
+    title: "Career Pathways and Long-Term Positioning",
+    icon: "🗺️",
+    desc: "See the full path. Plan further ahead than your next role.",
+    lessons: []
+  },
+  {
+    id: "btc7",
+    title: "Quality and Safety Mindset",
+    icon: "🛡️",
+    desc: "Build the habits that protect patients and advance careers.",
+    lessons: []
+  },
+  {
+    id: "btc8",
+    title: "Building Your Personal Brand as a Tech",
+    icon: "💼",
+    desc: "Get known for the right things in and out of your workplace.",
+    lessons: []
+  }
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BEYOND THE COUNTER — LESSON RENDERER
+// Handles all 5 parts of every lesson automatically.
+// ─────────────────────────────────────────────────────────────────────────────
+
+function BeyondTheCounterLesson({ lesson, go }) {
+  const [selfCheckPick, setSelfCheckPick] = useState(null);
+  const [answerOpen, setAnswerOpen] = useState(false);
+
+  const surface  = "#1a1d27";
+  const surface2 = "#22263a";
+  const teal     = "#00c9a7";
+  const tealDim  = "rgba(0,201,167,0.12)";
+  const tealBorder = "rgba(0,201,167,0.25)";
+  const blue     = "#0094ff";
+  const mu       = "#8b92a9";
+  const white    = "#ffffff";
+
+  const card = {
+    background: surface,
+    borderRadius: 14,
+    padding: "20px 22px",
+    marginBottom: 18,
+    border: "1px solid rgba(255,255,255,0.06)"
+  };
+
+  const sectionHeader = {
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: teal,
+    marginBottom: 8,
+    marginTop: 0
+  };
+
+  const bodyText = {
+    fontSize: 14,
+    lineHeight: 1.7,
+    color: "#c8cdd8",
+    margin: 0,
+    whiteSpace: "pre-line"
+  };
+
+  const pill = (color, bg) => ({
+    display: "inline-block",
+    fontSize: 11,
+    fontWeight: 700,
+    color,
+    background: bg,
+    borderRadius: 20,
+    padding: "3px 10px",
+    letterSpacing: "0.05em"
+  });
+
+  if (!lesson) return null;
+
+  return (
+    <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 4px 40px" }}>
+
+      {/* TITLE */}
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 10 }}>
+          Beyond the Counter
+        </div>
+        <h1 style={{ fontSize: 22, fontWeight: 800, color: white, margin: 0, lineHeight: 1.3 }}>
+          {lesson.title}
+        </h1>
+      </div>
+
+      {/* PART 1 — LESSON CONTENT */}
+      <div style={card}>
+        <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 16 }}>
+          Lesson Content
+        </div>
+        {(lesson.sections || []).map((sec, i) => (
+          <div key={i} style={{ marginBottom: i < lesson.sections.length - 1 ? 20 : 0 }}>
+            <p style={sectionHeader}>{sec.header}</p>
+            <p style={bodyText}>{sec.body}</p>
+          </div>
+        ))}
+        {lesson.keyPoints && lesson.keyPoints.length > 0 && (
+          <div style={{ background: "rgba(0,148,255,0.06)", border: "1px solid rgba(0,148,255,0.15)", borderRadius: 10, padding: "14px 16px", marginTop: 20 }}>
+            <p style={{ ...sectionHeader, color: blue, marginBottom: 10 }}>Key Points</p>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              {lesson.keyPoints.map((pt, i) => (
+                <li key={i} style={{ ...bodyText, marginBottom: i < lesson.keyPoints.length - 1 ? 6 : 0 }}>{pt}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {lesson.takeaway && (
+          <div style={{ borderLeft: `3px solid ${teal}`, paddingLeft: 14, marginTop: 18 }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#e0e4f0", margin: 0, fontStyle: "italic" }}>
+              {lesson.takeaway}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* PART 2 — SELF-CHECK */}
+      {lesson.selfCheck && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(0,201,167,0.07), rgba(0,148,255,0.05))", border: `1px solid ${tealBorder}` }}>
+          <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 14 }}>Self-Check</div>
+          <p style={{ fontSize: 15, fontWeight: 700, color: white, margin: "0 0 16px" }}>{lesson.selfCheck.prompt}</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {(lesson.selfCheck.options || []).map((opt, i) => {
+              const picked = selfCheckPick === i;
+              return (
+                <div key={i}>
+                  <button
+                    onClick={() => setSelfCheckPick(i)}
+                    style={{
+                      width: "100%", textAlign: "left",
+                      background: picked ? "linear-gradient(135deg,rgba(0,201,167,0.18),rgba(0,148,255,0.12))" : surface2,
+                      border: picked ? `1.5px solid ${teal}` : "1.5px solid rgba(255,255,255,0.08)",
+                      borderRadius: picked && opt.response ? "10px 10px 0 0" : 10,
+                      padding: "12px 14px", color: picked ? white : "#c8cdd8",
+                      fontSize: 13, fontWeight: picked ? 600 : 400, cursor: "pointer",
+                      transition: "all 0.2s ease", display: "flex", alignItems: "center", gap: 10
+                    }}
+                  >
+                    <span style={{
+                      width: 22, height: 22, borderRadius: "50%",
+                      border: picked ? `2px solid ${teal}` : "2px solid rgba(255,255,255,0.2)",
+                      background: picked ? teal : "transparent", flexShrink: 0,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 11, color: picked ? "#000" : "transparent", fontWeight: 800
+                    }}>
+                      {picked ? "✓" : ""}
+                    </span>
+                    {opt.label}
+                  </button>
+                  {picked && opt.response && (
+                    <div style={{ background: "rgba(0,201,167,0.06)", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 10px 10px", padding: "12px 14px" }}>
+                      <p style={{ fontSize: 13, color: "#b8f5eb", margin: 0, lineHeight: 1.6 }}>{opt.response}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* PART 3 — SCENARIO */}
+      {lesson.scenario && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,100,50,0.04))", border: "1px solid rgba(255,170,0,0.18)" }}>
+          <div style={{ ...pill("#ffaa00", "rgba(255,170,0,0.1)"), border: "1px solid rgba(255,170,0,0.2)", marginBottom: 14 }}>
+            Real-World Scenario
+          </div>
+          <p style={{ ...bodyText, marginBottom: 16 }}>{lesson.scenario.setup}</p>
+          <div style={{ background: "rgba(255,170,0,0.07)", border: "1px solid rgba(255,170,0,0.15)", borderRadius: 10, padding: "12px 14px" }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#ffd080", margin: 0 }}>{lesson.scenario.prompt}</p>
+          </div>
+          <p style={{ fontSize: 12, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            Take a moment to think it through. Then check the answer below.
+          </p>
+        </div>
+      )}
+
+      {/* PART 4 — COLLAPSIBLE ANSWER */}
+      {lesson.answer && (
+        <div style={{ marginBottom: 18 }}>
+          <button
+            onClick={() => setAnswerOpen(!answerOpen)}
+            style={{
+              width: "100%",
+              background: answerOpen ? "linear-gradient(135deg,rgba(0,201,167,0.12),rgba(0,148,255,0.08))" : surface,
+              border: answerOpen ? `1px solid ${tealBorder}` : "1px solid rgba(255,255,255,0.06)",
+              borderRadius: answerOpen ? "14px 14px 0 0" : 14,
+              padding: "16px 20px", display: "flex", alignItems: "center",
+              justifyContent: "space-between", cursor: "pointer", transition: "all 0.2s ease"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 16 }}>💡</span>
+              <span style={{ fontSize: 14, fontWeight: 700, color: answerOpen ? teal : white }}>See Recommended Response</span>
+            </div>
+            <span style={{ color: answerOpen ? teal : mu, fontSize: 18, fontWeight: 300, display: "inline-block", transform: answerOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>▾</span>
+          </button>
+          {answerOpen && (
+            <div style={{ background: "linear-gradient(135deg,rgba(0,201,167,0.06),rgba(0,148,255,0.04))", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 14px 14px", padding: "20px 22px" }}>
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ ...sectionHeader, color: teal }}>What to Do</p>
+                <p style={bodyText}>{lesson.answer.recommended}</p>
+              </div>
+              <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 16 }}>
+                <p style={{ ...sectionHeader, color: blue }}>Why It Works</p>
+                <p style={bodyText}>{lesson.answer.why}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* PART 5 — CONNECTION TAG + ASK THE AI */}
+      {lesson.connection && (
+        <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <span style={{ fontSize: 11, color: mu, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>Supports</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: teal, background: tealDim, border: `1px solid ${tealBorder}`, borderRadius: 20, padding: "4px 12px", letterSpacing: "0.03em" }}>
+              {lesson.connection.tag}
+            </span>
+          </div>
+          <button
+            onClick={() => { if (go) go("career-ai", { preload: lesson.connection.aiPrompt }); }}
+            style={{ background: "linear-gradient(135deg,#00c9a7,#0094ff)", border: "none", borderRadius: 10, padding: "10px 18px", color: "#000", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", gap: 7, whiteSpace: "nowrap" }}
+          >
+            <span>✨</span>Ask the AI
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BEYOND THE COUNTER — PAGE WRAPPER
+// Three views: module grid, lesson list, lesson reader
+// ─────────────────────────────────────────────────────────────────────────────
+
+function BeyondTheCounter({ go, isPro, user }) {
+  const [btcView, setBtcView] = useState("modules");
+  const [activeModule, setActiveModule] = useState(null);
+  const [activeLesson, setActiveLesson] = useState(null);
+
+  const bgColor  = "#0a1628";
+  const surface  = "#1a1d27";
+  const teal     = "#00c9a7";
+  const tealDim  = "rgba(0,201,167,0.12)";
+  const tealBorder = "rgba(0,201,167,0.25)";
+  const mu       = "#8b92a9";
+  const white    = "#ffffff";
+
+  const openModule = (mod) => { setActiveModule(mod); setBtcView("module"); };
+  const openLesson = (lesson) => { setActiveLesson(lesson); setBtcView("lesson"); };
+  const back = () => {
+    if (btcView === "lesson") { setBtcView("module"); setActiveLesson(null); }
+    else if (btcView === "module") { setBtcView("modules"); setActiveModule(null); }
+  };
+
+  const BackBtn = ({ label }) => (
+    <button onClick={back} style={{ background: "none", border: "none", color: teal, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, padding: "0 0 20px", marginBottom: 4 }}>
+      ← {label}
+    </button>
+  );
+
+  if (btcView === "modules") {
+    return (
+      <div>
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: "inline-block", fontSize: 11, fontWeight: 700, color: teal, background: tealDim, border: `1px solid ${tealBorder}`, borderRadius: 20, padding: "3px 10px", letterSpacing: "0.05em", marginBottom: 10 }}>
+            Pro Feature
+          </div>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: white, margin: "0 0 8px", lineHeight: 1.3 }}>Beyond the Counter</h1>
+          <p style={{ fontSize: 14, color: mu, margin: 0, lineHeight: 1.6 }}>
+            8 modules built for techs who want to go further than their job description.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {BEYOND_MODULES.map((mod, i) => {
+            const hasLessons = mod.lessons && mod.lessons.length > 0;
+            return (
+              <div
+                key={mod.id}
+                onClick={() => hasLessons && openModule(mod)}
+                style={{ background: surface, border: "1px solid rgba(255,255,255,0.06)", borderRadius: 14, padding: "18px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, cursor: hasLessons ? "pointer" : "default", opacity: hasLessons ? 1 : 0.5 }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: 10, background: tealDim, border: `1px solid ${tealBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>
+                    {mod.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 10, color: mu, fontWeight: 600, marginBottom: 3, textTransform: "uppercase", letterSpacing: "0.08em" }}>Module {i + 1}</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: white, marginBottom: 4 }}>{mod.title}</div>
+                    <div style={{ fontSize: 12, color: mu }}>{mod.desc}</div>
+                  </div>
+                </div>
+                <div style={{ flexShrink: 0 }}>
+                  {hasLessons
+                    ? <span style={{ color: teal, fontSize: 18 }}>›</span>
+                    : <span style={{ fontSize: 10, fontWeight: 700, color: mu, background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "3px 8px" }}>Coming Soon</span>
+                  }
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  if (btcView === "module" && activeModule) {
+    return (
+      <div>
+        <BackBtn label="All Modules" />
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 24, marginBottom: 8 }}>{activeModule.icon}</div>
+          <h1 style={{ fontSize: 20, fontWeight: 800, color: white, margin: "0 0 6px" }}>{activeModule.title}</h1>
+          <p style={{ fontSize: 13, color: mu, margin: 0 }}>{activeModule.desc}</p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {activeModule.lessons.map((lesson, i) => (
+            <div
+              key={lesson.id}
+              onClick={() => openLesson(lesson)}
+              style={{ background: surface, border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "16px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, cursor: "pointer" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ width: 28, height: 28, borderRadius: "50%", background: tealDim, border: `1px solid ${tealBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 800, color: teal, flexShrink: 0 }}>
+                  {i + 1}
+                </div>
+                <span style={{ fontSize: 14, fontWeight: 600, color: white }}>{lesson.title}</span>
+              </div>
+              <span style={{ color: teal, fontSize: 18 }}>›</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (btcView === "lesson" && activeLesson) {
+    return (
+      <div>
+        <BackBtn label={activeModule ? activeModule.title : "Back"} />
+        <BeyondTheCounterLesson lesson={activeLesson} go={go} />
+      </div>
+    );
+  }
+
+  return null;
+}
 
 const CONVERSIONS = [
   {f:"1 g",t:"1,000 mg"},{f:"1 kg",t:"2.2 lb"},{f:"1 mg",t:"1,000 mcg"},
@@ -207,12 +644,10 @@ const CAREER_MILESTONES = [
   { id:"m_cert",   label:"Certification Path", icon:"🎓", desc:"Structured study & exam strategy",      lessonIds:["c1l1","c2l1","c3l1","c4l1","c5l1"] },
   { id:"m_retail", label:"Retail Foundations", icon:"🏪", desc:"Advanced retail skills (Pro)",          lessonIds:["r1l1","r1l2","r1l3","r2l1","r2l2","r3l1","r4l1"], pro:true },
   { id:"m_inpat",  label:"Inpatient Ready",    icon:"🏥", desc:"Hospital pharmacy skills (Pro)",        lessonIds:["i1l1","i2l1","i3l1","i4l1","i5l1"], pro:true },
-  { id:"m_adv",    label:"Beyond the Counter", icon:"🚀", desc:"Leadership & career strategy (Pro)",    lessonIds:["a1l1","a2l1","a3l1","a4l1"], pro:true },
-  { id:"m_ladder", label:"The Tech Ladder",    icon:"🪜", desc:"Tech I, II & III career levels (Pro)",  lessonIds:["a5l1","a5l2","a5l3"], pro:true },
-  { id:"m_advcert",label:"Advanced Certifications and What They Actually Open", icon:"🏅", desc:"CPhT-Adv, BPTS & PTCB credentials (Pro)", lessonIds:["a6l1","a6l2","a6l3"], pro:true },
+  { id:"m_btc",    label:"Beyond the Counter", icon:"🚀", desc:"Leadership & career strategy (Pro)",    lessonIds:["btc1l1"], pro:true },
 ];
 
-const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS].flatMap(s=>s.modules.flatMap(m=>m.lessons));
+const ALL_LESSONS = [...FREE_SECTIONS,...PRO_SECTIONS.filter(s=>!s.isBeyond)].flatMap(s=>s.modules.flatMap(m=>m.lessons));
 const LESSON_MAP = Object.fromEntries(ALL_LESSONS.map(l=>[l.id,l]));
 
 const MERCH_URL = "https://pharmtechgraphics.printify.me/";
@@ -512,11 +947,14 @@ export default function App(){
   },[done,notes,tracker,planData,isPro,legalAccepted,freeNotes,profile]);
 
   const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
-  const allL=sections.flatMap(s=>s.modules.flatMap(m=>m.lessons));
+  const allL=sections.filter(s=>!s.isBeyond).flatMap(s=>s.modules.flatMap(m=>m.lessons));
   const doneN=allL.filter(l=>done[l.id]).length;
   const pct=allL.length?Math.round((doneN/allL.length)*100):0;
 
-  const go=v=>{setSec(null);setMod(null);setLesson(null);setView(v);};
+  const go=v=>{
+    if(v==="career-ai"){setSec(null);setMod(null);setLesson(null);setView("career");setCareerTab("ai");return;}
+    setSec(null);setMod(null);setLesson(null);setView(v);
+  };
   const back=()=>{
     if(lesson){setLesson(null);setNoteIn("");}
     else if(mod)setMod(null);
@@ -671,7 +1109,7 @@ export default function App(){
     ):(
       <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
         <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes & track progress</div>
-        <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
+        <div style={{fontSize:12,color:mu,marginBottom:11}}>Create a free account to keep your progress.</div>
         <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")}/>
       </div>
     )}
@@ -699,19 +1137,25 @@ export default function App(){
     <Bk/>
     <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:3}}><span style={{fontSize:26}}>{sec.icon}</span><div style={{fontSize:20,fontWeight:800,color:"#fff"}}>{sec.title}</div></div>
     <div style={{fontSize:13,color:mu,marginBottom:20}}>{sec.desc}</div>
-    <div style={{display:"flex",flexDirection:"column",gap:11}}>
-      {sec.modules.map((m,i)=>{
-        const tot=m.lessons.length,dn=m.lessons.filter(l=>done[l.id]).length;
-        return <div key={m.id} onClick={()=>setMod(m)} style={{background:sf,border:`1px solid ${br}`,borderRadius:12,padding:"17px 19px",cursor:"pointer"}}>
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-            <div><div style={{fontSize:10,color:mu,fontWeight:600,letterSpacing:1,textTransform:"uppercase",marginBottom:3}}>Module {i+1}</div><div style={{fontSize:14,fontWeight:700,color:"#fff"}}>{m.title}</div></div>
-            <div style={{display:"flex",alignItems:"center",gap:7}}><Ring p={tot?Math.round((dn/tot)*100):0}/><span style={{color:mu,fontSize:17}}>›</span></div>
-          </div>
-          <Bar p={tot?(dn/tot)*100:0}/>
-          <div style={{fontSize:11,color:mu,marginTop:6}}>{dn}/{tot} lessons</div>
-        </div>;
-      })}
-    </div>
+
+    {/* If this is the Beyond the Counter section, render its own component */}
+    {sec.isBeyond ? (
+      <BeyondTheCounter go={go} isPro={isPro} user={user} />
+    ) : (
+      <div style={{display:"flex",flexDirection:"column",gap:11}}>
+        {sec.modules.map((m,i)=>{
+          const tot=m.lessons.length,dn=m.lessons.filter(l=>done[l.id]).length;
+          return <div key={m.id} onClick={()=>setMod(m)} style={{background:sf,border:`1px solid ${br}`,borderRadius:12,padding:"17px 19px",cursor:"pointer"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div><div style={{fontSize:10,color:mu,fontWeight:600,letterSpacing:1,textTransform:"uppercase",marginBottom:3}}>Module {i+1}</div><div style={{fontSize:14,fontWeight:700,color:"#fff"}}>{m.title}</div></div>
+              <div style={{display:"flex",alignItems:"center",gap:7}}><Ring p={tot?Math.round((dn/tot)*100):0}/><span style={{color:mu,fontSize:17}}>›</span></div>
+            </div>
+            <Bar p={tot?(dn/tot)*100:0}/>
+            <div style={{fontSize:11,color:mu,marginTop:6}}>{dn}/{tot} lessons</div>
+          </div>;
+        })}
+      </div>
+    )}
   </>);
 
   if(view==="learn") return wrap(<>
@@ -727,7 +1171,8 @@ export default function App(){
     <Bar p={pct}/>
     <div style={{marginTop:22,display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:11}}>
       {sections.map(s=>{
-        const sl=s.modules.flatMap(m=>m.lessons),sd=sl.filter(l=>done[l.id]).length;
+        const sl=s.isBeyond?BEYOND_MODULES.flatMap(m=>m.lessons):s.modules.flatMap(m=>m.lessons);
+        const sd=sl.filter(l=>done[l.id]).length;
         return <div key={s.id} onClick={()=>setSec(s)} style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:18,cursor:"pointer"}}>
           <div style={{fontSize:24,marginBottom:8}}>{s.icon}</div>
           <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:3}}>{s.title}</div>
@@ -739,7 +1184,7 @@ export default function App(){
       {(!user||!isPro)&&<div onClick={()=>go(user?"upgrade":"auth")} style={{background:"rgba(0,148,255,.06)",border:"1px dashed rgba(0,148,255,.3)",borderRadius:13,padding:18,cursor:"pointer",textAlign:"center"}}>
         <div style={{fontSize:24,marginBottom:8}}>🔒</div>
         <div style={{fontSize:14,fontWeight:700,color:bl,marginBottom:3}}>Unlock Pro</div>
-        <div style={{fontSize:12,color:mu}}>Retail, Inpatient, Advanced Growth + Bonus Tools</div>
+        <div style={{fontSize:12,color:mu}}>Retail, Inpatient, Beyond the Counter + Bonus Tools</div>
       </div>}
     </div>
   </>);
@@ -950,7 +1395,7 @@ export default function App(){
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
         {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","16 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
-        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Beyond the Counter","The Tech Ladder (Tech I, II & III)","Advanced Certifications and What They Actually Open","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
+        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Beyond the Counter (8 modules)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
           <div style={{fontSize:24,marginBottom:6}}>{p.icon}</div>
@@ -1089,11 +1534,7 @@ export default function App(){
             onMouseLeave={e=>e.currentTarget.style.borderColor="rgba(168,85,247,.3)"}
           >
             <div style={{display:"flex",alignItems:"center",gap:14}}>
-              <img
-                src="/PharmTechGraphics_logo.png"
-                alt="PharmTech Graphics"
-                style={{width:64,height:64,borderRadius:"50%",objectFit:"cover",flexShrink:0,border:"2px solid rgba(168,85,247,.4)"}}
-              />
+              <img src="/PharmTechGraphics_logo.png" alt="PharmTech Graphics" style={{width:64,height:64,borderRadius:"50%",objectFit:"cover",flexShrink:0,border:"2px solid rgba(168,85,247,.4)"}}/>
               <div>
                 <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>PharmTechGraphics — Merch Store</div>
                 <div style={{fontSize:12,color:mu,maxWidth:360}}>Pharmacy-themed apparel, accessories & designs made for techs, by a tech. Shop the collection.</div>
@@ -1114,7 +1555,7 @@ export default function App(){
           <Bp ch="Sign Up Free →" on={()=>go("auth")}/>
         </div>}
         {user&&!isPro&&<div style={{background:`linear-gradient(135deg,rgba(0,201,167,.08),rgba(0,148,255,.08))`,border:"1px solid rgba(0,201,167,.2)",borderRadius:16,padding:22,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:14}}>
-          <div><div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>Ready to go deeper?</div><div style={{fontSize:12,color:mu,maxWidth:340}}>Unlock Retail, Inpatient, Advanced Growth, Bonus Tools & full career roadmap.</div></div>
+          <div><div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:4}}>Ready to go deeper?</div><div style={{fontSize:12,color:mu,maxWidth:340}}>Unlock Retail, Inpatient, Beyond the Counter & Bonus Tools.</div></div>
           <Bp ch="Upgrade to Pro →" on={()=>go("upgrade")}/>
         </div>}
 
