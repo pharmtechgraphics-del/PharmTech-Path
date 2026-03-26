@@ -2173,7 +2173,7 @@ function CertRoadmapTeaser({ go, isPro, user }) {
   );
 }
 
-
+function AICareerAssistant({ profile, isPro, go, setProfile, pop, onFirstMessage }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
