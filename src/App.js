@@ -1473,13 +1473,14 @@ export default function App(){
         ))}
       </div>
 
-      <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`}}>
-        {[["roadmap","🗺️ Roadmap"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
-          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:1,background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 4px",fontSize:10,fontWeight:700,cursor:"pointer",transition:"all .2s"}}>{lb}</button>
+      <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`,overflowX:"auto"}}>
+        {[["roadmap","🗺️ Roadmap"],["certmap","🌿 Cert Path"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
+          <button key={id} onClick={()=>setCareerTab(id)} style={{flex:"0 0 auto",background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 10px",fontSize:10,fontWeight:700,cursor:"pointer",transition:"all .2s",whiteSpace:"nowrap"}}>{lb}</button>
         ))}
       </div>
 
       {careerTab==="roadmap"&&<CareerRoadmap done={done} isPro={isPro}/>}
+      {careerTab==="certmap"&&<CertRoadmap isPro={isPro} go={go}/>}
 
       {careerTab==="notes"&&(
         <div>
@@ -1712,6 +1713,9 @@ export default function App(){
           </div>
         )}
 
+        {/* ─── CERT ROADMAP TEASER ─── */}
+        <CertRoadmapTeaser go={go} isPro={isPro} user={user}/>
+
         <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:13}}>Where do you want to go?</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:11,marginBottom:28}}>
           {[
@@ -1757,6 +1761,413 @@ export default function App(){
         </div>}
 
         <Footer go={go}/>
+      </div>
+    </div>
+  );
+}
+
+// ─── CERTIFICATION ROADMAP DATA ───────────────────────────────────────────────
+
+const CERT_TREE = {
+  layers: [
+    {
+      id: "L1",
+      label: "Foundation",
+      pro: false,
+      color: "#4ecdc4",
+      bgAlpha: "rgba(78,205,196,0.13)",
+      borderColor: "rgba(78,205,196,0.4)",
+      nodes: [
+        {
+          id:"n1_1", icon:"📋", title:"State Registration or Licensure",
+          desc:"Every state requires pharmacy technicians to register or obtain a license before working. Requirements vary by state — check your State Board of Pharmacy for exact steps and fees.",
+          requirement:"Must meet your state's minimum age and background check requirements.",
+          url:"https://nabp.pharmacy", urlLabel:"Check NABP for state requirements",
+        },
+        {
+          id:"n1_2", icon:"🏥", title:"First Pharmacy Job",
+          desc:"Landing your first role — whether retail, hospital, or long-term care — is where your real training begins. Hands-on experience builds the skills no classroom fully covers.",
+          requirement:"State registration or licensure in hand before starting.",
+          url:"https://www.pharmacytechnician.org", urlLabel:"NPTA job resources",
+        },
+        {
+          id:"n1_3", icon:"📅", title:"1 Year Experience Milestone",
+          desc:"One year on the job gives you enough workflow exposure to sit for national certification with confidence. Use this time to document responsibilities and build your resume.",
+          requirement:"Varies by certifying body — PTCB requires no minimum prior to testing.",
+          url:"https://www.ptcb.org", urlLabel:"PTCB eligibility details",
+        },
+      ],
+    },
+    {
+      id: "L2",
+      label: "Certification",
+      pro: false,
+      color: "#26b5a8",
+      bgAlpha: "rgba(38,181,168,0.13)",
+      borderColor: "rgba(38,181,168,0.4)",
+      nodes: [
+        {
+          id:"n2_1", icon:"🎓", title:"CPhT via PTCB",
+          desc:"The Pharmacy Technician Certification Exam (PTCE) through PTCB is the most widely recognized national credential. Passing earns you the CPhT designation accepted across all pharmacy settings.",
+          requirement:"High school diploma or equivalent. No prior work experience required to test.",
+          url:"https://www.ptcb.org", urlLabel:"Apply at PTCB.org",
+        },
+        {
+          id:"n2_2", icon:"🎓", title:"CPhT via NHA (ExCPT)",
+          desc:"The ExCPT exam through the National Healthcareer Association is a nationally accepted alternative to the PTCE. It is recognized by most state boards and many major employers.",
+          requirement:"High school diploma or equivalent. Preferred experience of 1 year recommended.",
+          url:"https://www.nhanow.com", urlLabel:"Apply at NHAnow.com",
+        },
+        {
+          id:"n2_3", icon:"📅", title:"3 Year Experience Milestone",
+          desc:"Three years of active pharmacy practice positions you for specialty certifications and leadership responsibilities. Start identifying which specialty aligns with your setting.",
+          requirement:"Active CPhT credential maintained with CE requirements.",
+          url:"https://www.ptcb.org", urlLabel:"Explore next steps at PTCB",
+        },
+      ],
+    },
+    {
+      id: "L3",
+      label: "Specialty & Advanced",
+      pro: true,
+      color: "#1a9990",
+      bgAlpha: "rgba(26,153,144,0.13)",
+      borderColor: "rgba(26,153,144,0.4)",
+      nodes: [
+        {
+          id:"n3_1", icon:"💉", title:"CSPT — Sterile Compounding",
+          desc:"The Certified Compounded Sterile Preparation Technician credential from PTCB demonstrates advanced competency in IV preparation, cleanroom standards and USP 797 compliance.",
+          requirement:"Active CPhT required. Recommended 1 year of sterile compounding experience.",
+          url:"https://www.ptcb.org/credentials", urlLabel:"CSPT at PTCB.org",
+        },
+        {
+          id:"n3_2", icon:"⚠️", title:"BCHCPT — Hazardous Compounding",
+          desc:"The Board Certified Hazardous Compounding Pharmacy Technician credential from BPTS covers safe handling protocols, PPE standards and USP 800 compliance for hazardous drugs.",
+          requirement:"Active CPhT and relevant compounding experience required.",
+          url:"https://bpts.org", urlLabel:"BCHCPT at BPTS.org",
+        },
+        {
+          id:"n3_3", icon:"🎓", title:"Associate or Bachelor Degree Programs",
+          desc:"Formal pharmacy technology or healthcare administration degree programs strengthen your clinical knowledge base and open doors to supervisory, educator and management roles.",
+          requirement:"Varies by program. Most accept active technicians with 1+ year of experience.",
+          url:"https://www.acpe-accredit.org", urlLabel:"Accredited programs via ACPE",
+        },
+        {
+          id:"n3_4", icon:"📅", title:"5 Year Experience Milestone",
+          desc:"Five years of active practice with a mix of certifications and settings positions you as a strong candidate for lead technician, educator and senior specialist roles.",
+          requirement:"Continued CE and active credential maintenance throughout.",
+          url:"https://bpts.org", urlLabel:"Advanced credentials at BPTS",
+        },
+        {
+          id:"n3_5", icon:"🏅", title:"CPhT-Adv — Advanced CPhT",
+          desc:"The Advanced Certified Pharmacy Technician is the gold standard credential for experienced techs. Application-based — no separate exam — once eligibility requirements are met.",
+          requirement:"Active CPhT + four specialty certificates (at least one from BPTS) + 2 years experience.",
+          url:"https://bpts.org/credentials/advanced-certified-pharmacy-technician-cpht-adv/", urlLabel:"Apply for CPhT-Adv at BPTS",
+        },
+      ],
+    },
+    {
+      id: "L4",
+      label: "Leadership & Administrative Pathways",
+      pro: true,
+      color: "#0d7a74",
+      bgAlpha: "rgba(13,122,116,0.13)",
+      borderColor: "rgba(13,122,116,0.45)",
+      nodes: [
+        {
+          id:"n4_1", icon:"👑", title:"Lead Pharmacy Technician",
+          desc:"Lead techs oversee daily workflow, mentor newer staff and serve as the first escalation point for operational issues. This is the most common first step into pharmacy leadership.",
+          requirement:"Typically 3+ years experience and active CPhT. Often an internal promotion.",
+          url:"https://www.ashp.org", urlLabel:"ASHP workforce resources",
+        },
+        {
+          id:"n4_2", icon:"📊", title:"Pharmacy Supervisor or Manager",
+          desc:"Supervisors and managers handle scheduling, compliance oversight, staff training and performance. They bridge operations and pharmacist-level clinical decisions.",
+          requirement:"3–5+ years experience. CPhT-Adv or advanced degree strongly preferred.",
+          url:"https://www.ashp.org", urlLabel:"ASHP leadership resources",
+        },
+        {
+          id:"n4_3", icon:"🏫", title:"Pharmacy Technician Educator",
+          desc:"Educators teach and train future pharmacy technicians in academic or employer-based programs. The CPTEd credential from PTCB formalizes this pathway.",
+          requirement:"Active CPhT. CPTEd credential from PTCB recommended.",
+          url:"https://www.ptcb.org/credentials", urlLabel:"CPTEd at PTCB.org",
+        },
+        {
+          id:"n4_4", icon:"🔬", title:"Specialty Lab or Compounding Supervisor",
+          desc:"Techs with board-level compounding credentials (BCSCPT, BCHCPT) can move into cleanroom supervision, quality assurance and USP compliance management roles.",
+          requirement:"BCSCPT or BCHCPT credential plus relevant supervisory experience.",
+          url:"https://bpts.org", urlLabel:"Board credentials at BPTS",
+        },
+        {
+          id:"n4_5", icon:"💼", title:"Pharmacy Operations or Director Role",
+          desc:"Director-level roles focus on budget management, regulatory compliance, staffing strategy and institutional policy. These positions require both clinical background and leadership experience.",
+          requirement:"Typically 7–10+ years experience. Advanced degree or CPhT-Adv strongly preferred.",
+          url:"https://www.ashp.org", urlLabel:"ASHP director resources",
+        },
+        {
+          id:"n4_6", icon:"📋", title:"Compliance and Regulatory Specialist",
+          desc:"Compliance specialists ensure pharmacy operations meet state board, DEA, Joint Commission and USP standards. The BPTS Regulatory Compliance certificate directly supports this role.",
+          requirement:"Active CPhT. BPTS Regulatory Compliance certificate recommended.",
+          url:"https://bpts.org", urlLabel:"Regulatory cert at BPTS",
+        },
+      ],
+    },
+  ],
+};
+
+// ─── CERT ROADMAP COMPONENT ───────────────────────────────────────────────────
+
+function CertRoadmap({ isPro, go }) {
+  const [activeNode, setActiveNode] = useState(null);
+  const [showUpgrade, setShowUpgrade] = useState(false);
+
+  const handleNode = (node, layerPro) => {
+    if (layerPro && !isPro) { setShowUpgrade(true); return; }
+    setActiveNode(node);
+    setShowUpgrade(false);
+  };
+
+  const closeAll = () => { setActiveNode(null); setShowUpgrade(false); };
+
+  return (
+    <div>
+      <div style={{fontSize:13,color:mu,marginBottom:6,lineHeight:1.7}}>
+        Your certification journey from day one to leadership. Tap any node to learn more.
+      </div>
+      <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:22}}>
+        {CERT_TREE.layers.map(l=>(
+          <div key={l.id} style={{display:"flex",alignItems:"center",gap:6,fontSize:11,color:mu}}>
+            <div style={{width:10,height:10,borderRadius:3,background:l.color,flexShrink:0}}/>
+            {l.label}
+            {l.pro&&<span style={{fontSize:9,color:bl,fontWeight:700,background:"rgba(0,148,255,.12)",border:"1px solid rgba(0,148,255,.25)",borderRadius:99,padding:"1px 6px",letterSpacing:0.5}}>PRO</span>}
+          </div>
+        ))}
+      </div>
+
+      {/* Tree */}
+      <div style={{display:"flex",flexDirection:"column",gap:0,position:"relative"}}>
+        {CERT_TREE.layers.map((layer, li) => {
+          const locked = layer.pro && !isPro;
+          return (
+            <div key={layer.id}>
+              {/* Connector line between layers */}
+              {li > 0 && (
+                <div style={{display:"flex",justifyContent:"center",height:28,alignItems:"center"}}>
+                  <div style={{width:2,height:"100%",background:`linear-gradient(to bottom,${CERT_TREE.layers[li-1].color}88,${layer.color}88)`}}/>
+                </div>
+              )}
+
+              {/* Layer card */}
+              <div style={{
+                background: locked ? "rgba(255,255,255,.02)" : layer.bgAlpha,
+                border: `1.5px solid ${locked ? br : layer.borderColor}`,
+                borderRadius: 16,
+                padding: "18px 16px 20px",
+                position: "relative",
+                opacity: locked ? 0.85 : 1,
+                transition: "opacity .2s",
+              }}>
+                {/* Layer header */}
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16,flexWrap:"wrap",gap:8}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    <div style={{
+                      width:28,height:28,borderRadius:8,
+                      background:`${layer.color}22`,border:`1px solid ${layer.color}44`,
+                      display:"flex",alignItems:"center",justifyContent:"center",
+                      fontSize:11,fontWeight:900,color:layer.color,fontFamily:"monospace",
+                      flexShrink:0,
+                    }}>{layer.id}</div>
+                    <div style={{fontSize:14,fontWeight:800,color:locked?"rgba(255,255,255,.4)":"#fff"}}>{layer.label}</div>
+                  </div>
+                  {locked && (
+                    <span style={{background:"rgba(0,148,255,.12)",color:bl,border:"1px solid rgba(0,148,255,.25)",borderRadius:20,fontSize:9,fontWeight:700,padding:"2px 9px",letterSpacing:1,textTransform:"uppercase",fontFamily:"monospace"}}>
+                      🔒 Pro Only
+                    </span>
+                  )}
+                </div>
+
+                {/* Nodes grid */}
+                <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(150px,1fr))",gap:10}}>
+                  {layer.nodes.map(node => (
+                    <button
+                      key={node.id}
+                      onClick={() => handleNode(node, layer.pro)}
+                      style={{
+                        background: locked
+                          ? "rgba(255,255,255,.03)"
+                          : activeNode?.id === node.id
+                          ? `linear-gradient(135deg,${layer.color}30,${layer.color}18)`
+                          : `rgba(255,255,255,.04)`,
+                        border: activeNode?.id === node.id
+                          ? `1.5px solid ${layer.color}`
+                          : locked
+                          ? `1px solid rgba(255,255,255,.08)`
+                          : `1px solid ${layer.color}33`,
+                        borderRadius: 12,
+                        padding: "12px 13px",
+                        textAlign: "left",
+                        cursor: "pointer",
+                        transition: "all .18s",
+                        position: "relative",
+                        filter: locked ? "blur(0px)" : "none",
+                      }}
+                      onMouseEnter={e => { if (!locked) e.currentTarget.style.borderColor = layer.color; }}
+                      onMouseLeave={e => { if (!locked && activeNode?.id !== node.id) e.currentTarget.style.borderColor = `${layer.color}33`; }}
+                    >
+                      {locked && (
+                        <div style={{position:"absolute",inset:0,borderRadius:12,backdropFilter:"blur(3px)",background:"rgba(10,22,40,.35)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:2}}>
+                          <span style={{fontSize:16}}>🔒</span>
+                        </div>
+                      )}
+                      <div style={{fontSize:18,marginBottom:6,lineHeight:1}}>{node.icon}</div>
+                      <div style={{fontSize:11,fontWeight:700,color:locked?"rgba(255,255,255,.3)":activeNode?.id===node.id?layer.color:"#fff",lineHeight:1.4}}>{node.title}</div>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Unlock prompt inside locked layer */}
+                {locked && showUpgrade && (
+                  <div style={{marginTop:14,background:"rgba(0,148,255,.08)",border:"1px solid rgba(0,148,255,.25)",borderRadius:11,padding:"12px 14px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
+                    <div style={{fontSize:12,color:tx}}>Unlock Layers 3 and 4 with Pro to see the full advancement path.</div>
+                    <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:8,padding:"7px 14px",fontSize:12,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>Upgrade to Pro →</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Node detail popup */}
+      {activeNode && (
+        <div
+          style={{position:"fixed",inset:0,background:"rgba(5,10,22,.82)",zIndex:800,display:"flex",alignItems:"center",justifyContent:"center",padding:16,backdropFilter:"blur(4px)"}}
+          onClick={e=>{ if(e.target===e.currentTarget) closeAll(); }}
+        >
+          <div style={{
+            background:"#0d1e36",border:`1.5px solid ${ac}44`,borderRadius:20,
+            width:"100%",maxWidth:460,padding:"26px 26px 22px",
+            boxShadow:"0 24px 60px rgba(0,0,0,.7)",
+            animation:"certFadeIn .2s ease",
+          }}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:14,gap:10}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:26,lineHeight:1}}>{activeNode.icon}</span>
+                <div style={{fontSize:15,fontWeight:800,color:"#fff",lineHeight:1.3}}>{activeNode.title}</div>
+              </div>
+              <button onClick={closeAll} style={{background:"none",border:"none",color:mu,fontSize:22,cursor:"pointer",lineHeight:1,flexShrink:0,marginTop:2}}>×</button>
+            </div>
+
+            <div style={{fontSize:13,color:"#c8d8f0",lineHeight:1.8,marginBottom:14}}>{activeNode.desc}</div>
+
+            <div style={{background:"rgba(0,201,167,.07)",border:"1px solid rgba(0,201,167,.2)",borderRadius:10,padding:"10px 13px",marginBottom:18}}>
+              <div style={{fontSize:10,fontWeight:700,color:ac,letterSpacing:1,textTransform:"uppercase",fontFamily:"monospace",marginBottom:4}}>Requirement</div>
+              <div style={{fontSize:12,color:"#c8d8f0",lineHeight:1.7}}>{activeNode.requirement}</div>
+            </div>
+
+            <a href={activeNode.url} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
+              <button style={{width:"100%",background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:11,padding:"11px 0",fontSize:13,fontWeight:700,cursor:"pointer",letterSpacing:0.2}}>
+                {activeNode.urlLabel} →
+              </button>
+            </a>
+            <div style={{textAlign:"center",marginTop:10,fontSize:10,color:mu}}>Opens in a new tab</div>
+          </div>
+          <style>{`@keyframes certFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}`}</style>
+        </div>
+      )}
+
+      {/* Standalone upgrade prompt (when user taps Pro node and popup isn't inside a layer) */}
+      {showUpgrade && !activeNode && (
+        <div style={{marginTop:18,background:"rgba(0,148,255,.07)",border:"1px solid rgba(0,148,255,.25)",borderRadius:14,padding:"16px 18px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
+          <div>
+            <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:3}}>This section is Pro only</div>
+            <div style={{fontSize:12,color:mu}}>Upgrade to unlock Layers 3 and 4 — specialty certifications and leadership pathways.</div>
+          </div>
+          <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:9,padding:"9px 18px",fontSize:13,fontWeight:700,cursor:"pointer"}}>Upgrade →</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── CERT ROADMAP HOMEPAGE TEASER ─────────────────────────────────────────────
+
+function CertRoadmapTeaser({ go, isPro, user }) {
+  // Mini static preview nodes — purely visual, no interaction
+  const previewLayers = [
+    { color:"#4ecdc4", nodes:["📋 State Reg","🏥 First Job","📅 1 Yr"] },
+    { color:"#26b5a8", nodes:["🎓 CPhT","📅 3 Yr"] },
+    { color:"#1a9990", nodes:["💉 CSPT","🏅 CPhT-Adv","📅 5 Yr"] },
+    { color:"#0d7a74", nodes:["👑 Lead Tech","📊 Manager","🏫 Educator"] },
+  ];
+
+  return (
+    <div style={{
+      background:"rgba(78,205,196,.06)",
+      border:"1.5px solid rgba(78,205,196,.28)",
+      borderRadius:18,
+      padding:"20px 22px",
+      marginBottom:22,
+      position:"relative",
+      overflow:"hidden",
+    }}>
+      {/* Background glow */}
+      <div style={{position:"absolute",bottom:-30,right:-30,width:160,height:160,borderRadius:"50%",background:"rgba(78,205,196,.05)",pointerEvents:"none"}}/>
+
+      <div style={{display:"flex",alignItems:"center",gap:14,flexWrap:"wrap"}}>
+        {/* Mini tree preview */}
+        <div style={{
+          flex:"0 0 auto",
+          filter: isPro ? "none" : "blur(2.5px)",
+          pointerEvents:"none",
+          display:"flex",flexDirection:"column",gap:4,
+          transition:"filter .3s",
+        }} aria-hidden="true">
+          {previewLayers.map((l,li)=>(
+            <div key={li} style={{display:"flex",gap:4,alignItems:"center"}}>
+              {li>0&&<div style={{display:"none"}}/>}
+              {l.nodes.map((n,ni)=>(
+                <div key={ni} style={{
+                  background:`${l.color}18`,
+                  border:`1px solid ${l.color}44`,
+                  borderRadius:7,padding:"4px 7px",
+                  fontSize:9,color:l.color,fontWeight:600,
+                  whiteSpace:"nowrap",
+                }}>{n}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Text and CTA */}
+        <div style={{flex:1,minWidth:180}}>
+          <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:5,flexWrap:"wrap"}}>
+            <span style={{fontSize:16}}>🌿</span>
+            <div style={{fontSize:14,fontWeight:800,color:"#fff"}}>Certification Roadmap</div>
+            {!isPro&&<span style={{background:"rgba(0,148,255,.12)",color:bl,border:"1px solid rgba(0,148,255,.25)",borderRadius:99,fontSize:9,fontWeight:700,padding:"1px 7px",letterSpacing:0.5,fontFamily:"monospace"}}>PRO</span>}
+          </div>
+          <div style={{fontSize:12,color:mu,lineHeight:1.6,marginBottom:12}}>
+            {isPro
+              ? "See every step from state registration to leadership. Tap any node for details and direct links."
+              : "See your full career path from registration to leadership. Layers 3 and 4 unlock with Pro."
+            }
+          </div>
+          <button
+            onClick={()=>{
+              if(!user){ go("auth"); return; }
+              go("career");
+              setTimeout(()=>document.dispatchEvent(new CustomEvent("pharmtech-tab",{detail:"certmap"})),80);
+            }}
+            style={{
+              background:`linear-gradient(135deg,#4ecdc4,${ac})`,
+              color:"#fff",border:"none",borderRadius:10,
+              padding:"8px 18px",fontSize:12,fontWeight:700,
+              cursor:"pointer",
+            }}
+          >
+            {user ? "See your full certification path →" : "Sign in to explore →"}
+          </button>
+        </div>
       </div>
     </div>
   );
