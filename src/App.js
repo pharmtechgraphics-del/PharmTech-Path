@@ -1256,7 +1256,158 @@ const BEYOND_MODULES = [
     title: "Career Pathways and Long-Term Positioning",
     icon: "🗺️",
     desc: "See the full path. Plan further ahead than your next role.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc6l1",
+        title: "The Pathways Available to You",
+        sections: [
+          {
+            header: "More Doors Than Most Techs Realize",
+            body: "Most pharmacy technicians see two career options. Stay where they are or become a pharmacist. The reality is significantly broader than that. The pharmacy technician field has developed a range of specialized and leadership roles that were not widely available ten years ago and are expanding as the scope of technician practice grows.\n\nUnderstanding what is available is the first step to positioning yourself for it. You cannot aim at a target you do not know exists."
+          },
+          {
+            header: "The Major Pathways",
+            body: "The retail to inpatient transition is one of the most common moves and one of the most valuable for career growth. Inpatient environments generally offer more structured advancement, stronger exposure to clinical processes and clearer pathways to leadership roles.\n\nSpecialty pharmacy is a growing area covering oncology, infusion, rare disease and more. These roles require specific training but offer higher compensation and deeper clinical engagement than standard dispensing.\n\nThe educator and trainer pathway is underutilized. Techs who hold CPTEd or who have significant training experience are positioned for roles in workforce development, pharmacy school programs and healthcare system education departments.\n\nQuality and compliance roles including CQI Coordinator, Medication Safety Officer support and Performance Improvement Specialist are increasingly available to credentialed techs with strong documentation and process skills. And leadership tracks including Lead Tech, Supervisor and Pharmacy Operations Manager are the most visible advancement pathway in most health systems."
+          }
+        ],
+        keyPoints: [
+          "The pharmacy technician career landscape is broader than most techs are aware of.",
+          "Retail to inpatient transition is one of the highest-value moves for long-term career growth.",
+          "Specialty pharmacy, education, quality and leadership represent four distinct advancement tracks.",
+          "Knowing what is available is the prerequisite to positioning yourself for it."
+        ],
+        takeaway: "Your career path is not a single hallway. It is a building with more doors than you have tried to open.",
+        selfCheck: {
+          prompt: "Which pathway feels most aligned with where you want to go?",
+          options: [
+            {
+              label: "I want to move into a leadership role at my current or a similar workplace.",
+              response: "The leadership track is the most clearly defined pathway. Lead Tech and Supervisor roles are available in most pharmacy environments. The next step is identifying what your target organization looks for in those roles and building toward it deliberately."
+            },
+            {
+              label: "I am interested in moving from retail to inpatient or into a specialty area.",
+              response: "That transition is very achievable with the right preparation. The next lesson covers how to position yourself for a transition before you are ready to make it. That timing is critical."
+            },
+            {
+              label: "I am not sure yet. I know I want more but I have not settled on a direction.",
+              response: "That is a completely valid place to be. The goal of this module is to give you enough visibility into each pathway that a direction becomes clearer. You do not need to decide today. You need enough information to start leaning."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been in retail pharmacy for four years and are starting to feel like you have reached the ceiling of what is available to you in that environment. You are interested in inpatient but have no hospital experience.",
+          prompt: "What are the realistic first steps toward making that transition and what would make you a competitive candidate?"
+        },
+        answer: {
+          recommended: "Start by researching entry-level inpatient tech positions at local health systems. Many post roles specifically for techs transitioning from retail and value the customer service and insurance processing experience that retail builds. Pursue a certification that bridges the gap. Medication Safety or Controlled Substances Diversion Prevention are directly relevant to inpatient environments and signal readiness to hiring managers. Connect with a tech who works in an inpatient setting and ask about their experience. Informational conversations open more doors than applications in most cases. Update your resume to frame your retail experience in terms of skills that transfer.",
+          why: "The biggest barrier to the retail to inpatient transition is not experience. It is framing. Retail techs have more transferable skills than they realize. The ones who make the transition successfully are the ones who can articulate those skills in the language of the environment they are moving into."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Inpatient Pharmacy Technician · CPhT-Adv · Specialty Pharmacy Technician",
+          aiPrompt: "I just completed the lesson The Pathways Available to You. Based on my background and current role, help me understand which career pathway makes the most sense for me and what I should do next."
+        }
+      },
+      {
+        id: "btc6l2",
+        title: "Positioning Yourself for a Transition Before You Are Ready",
+        sections: [
+          {
+            header: "The Timing Problem Most Techs Get Wrong",
+            body: "Most pharmacy technicians start preparing for a career transition about three months before they want to make it. They update their resume, apply for jobs and wonder why they are not competitive. The techs who transition successfully into new environments or higher roles typically started preparing twelve to eighteen months before the move. Not because they are more talented but because they understood that positioning is a long game.\n\nBy the time you are ready to move, the groundwork should already be laid. The credentials should already be visible. The relationships should already exist. The resume should already tell the right story."
+          },
+          {
+            header: "What Early Positioning Actually Looks Like",
+            body: "It starts with research. Understand the environment or role you want to move into well enough to speak its language. If you want to move into inpatient, know what USP 797 means, know what an ADC is, know what cart fill involves. You do not need to have done it. You need to be able to demonstrate that you understand it.\n\nIt continues with credential building. Identify what certificates or credentials appear in job postings for your target role and start earning them now, not when you are applying. It includes relationship building. Attend a professional organization event. Connect with a tech or pharmacist in your target environment on LinkedIn. Ask for a fifteen minute conversation. These relationships are how most good opportunities actually happen."
+          }
+        ],
+        keyPoints: [
+          "Successful transitions are built twelve to eighteen months before the move, not three months before.",
+          "Research, credential building, relationship building and current-role framing are the four elements of early positioning.",
+          "Speaking the language of your target environment signals readiness before you have the experience.",
+          "The relationships you build now are how most real opportunities surface."
+        ],
+        takeaway: "The best time to prepare for your next role was a year ago. The second best time is today.",
+        selfCheck: {
+          prompt: "How far out are you currently thinking about your next career move?",
+          options: [
+            {
+              label: "I am focused on my current role. I will think about next steps when something comes up.",
+              response: "That reactive approach works occasionally but it leaves opportunity to chance. Starting to think twelve months out does not mean you have to act now. It means you are ready when something comes up rather than scrambling to prepare after it does."
+            },
+            {
+              label: "I have a general sense of where I want to go but I have not started preparing actively.",
+              response: "That clarity of direction is valuable. The next step is turning that direction into a specific list of actions. Credentials to earn, relationships to build, language to develop. Start with one item from that list this week."
+            },
+            {
+              label: "I am actively preparing for a move I want to make in the next year or two.",
+              response: "That intentionality is exactly right. The refinement is making sure your preparation includes relationship building, not just credential building. Most opportunities come through people, not applications."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You want to move into a CQI Coordinator or Medication Safety support role within the next two years. You currently work as a staff pharmacy technician in a retail setting with no formal quality experience.",
+          prompt: "Build a rough twelve month preparation plan for that transition."
+        },
+        answer: {
+          recommended: "Months one through three: Research the role. Read job postings. Understand what organizations look for. Identify two or three credentials that appear consistently. Month three through six: Pursue your first target credential. Medication Safety is the most direct entry point. While studying, document any quality or safety related observations you make at work. Month six through nine: Pursue your second credential. Begin building a LinkedIn presence that reflects your direction. Connect with people in quality and safety roles in pharmacy. Month nine through twelve: Seek out any quality adjacent responsibilities in your current role. Begin applying selectively to roles that represent the step toward your target.",
+          why: "This plan builds on itself. Each step makes the next step more credible. By month twelve you have two relevant credentials, a developing professional network, documented quality observations from your current work and a resume that tells a coherent story toward your target role. That is a competitive candidate."
+        },
+        connection: {
+          tag: "CQI Coordinator · Performance Improvement Specialist · Medication Safety Officer · CPhT-Adv",
+          aiPrompt: "I just completed the lesson Positioning Yourself for a Transition Before You Are Ready. Help me build a specific preparation plan for the career transition I want to make based on my background."
+        }
+      },
+      {
+        id: "btc6l3",
+        title: "Thinking Three to Five Years Out",
+        sections: [
+          {
+            header: "Why Most Techs Only Think One Step Ahead",
+            body: "The majority of pharmacy technician career planning happens in single steps. Get certified. Get a raise. Get the lead role. Each goal is reasonable but disconnected from a larger direction. The result is a career that advances incrementally without a clear destination.\n\nThe techs who build careers they are genuinely proud of are almost always the ones who had a picture of what they were building toward, even if that picture changed along the way. Three to five year thinking is not about predicting the future. It is about having a direction clear enough to make decisions that compound in the right direction."
+          },
+          {
+            header: "Building a Three to Five Year Career Picture",
+            body: "Start with the question: what do you want your professional life to look like in five years? Not just the title but the environment, the type of work, the level of responsibility, the way you spend your days. Get specific. I want to be a Lead Tech in a hospital inpatient setting overseeing a team of four to six technicians with my CPhT-Adv and a specialty certification in sterile compounding is a target you can build toward.\n\nOnce you have the picture, work backward. What needs to be true in three years to make five years possible? What needs to be true in one year to make three years possible? What needs to be true in six months to make one year possible? That backward mapping turns a distant goal into a series of near-term actions that are completely within your control."
+          }
+        ],
+        keyPoints: [
+          "Single step career planning produces incremental results without a clear destination.",
+          "Three to five year thinking provides direction for decisions that compound over time.",
+          "Specificity in your five year picture is what makes backward planning possible.",
+          "Working backward from a clear goal produces a near-term action plan that is immediately executable."
+        ],
+        takeaway: "You do not need to know exactly where you will end up. You need to know enough about the direction to make decisions today that point that way.",
+        selfCheck: {
+          prompt: "How clearly can you describe what you want your professional life to look like in five years?",
+          options: [
+            {
+              label: "I have a clear picture. I know the role, the environment and roughly what it looks like.",
+              response: "That clarity is a genuine advantage. The next step is the backward mapping exercise from this lesson. Turn that picture into a twelve month action list and review it quarterly."
+            },
+            {
+              label: "I have a general sense of direction but the details are fuzzy.",
+              response: "Spend fifteen minutes this week writing down what a good five years looks like in as much detail as you can. Do not edit yourself. Just write. The details will sharpen with time and the act of writing them down changes how you make daily decisions."
+            },
+            {
+              label: "I honestly do not know. I take things as they come.",
+              response: "That approach has gotten you this far and there is nothing wrong with it. The invitation is just to try adding a longer lens. Not because you have to plan perfectly but because even a rough direction helps you recognize the right opportunities when they appear."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are three years into your pharmacy career, you have your CPhT and you are working in retail. You enjoy the work but you know you want more. You have never sat down and thought more than six months ahead.",
+          prompt: "Walk through the five year visioning and backward mapping exercise for your own situation."
+        },
+        answer: {
+          recommended: "Five year picture: Lead Technician in an inpatient hospital pharmacy, holding CPhT-Adv and a sterile compounding credential, managing a team and involved in quality improvement processes. Three year milestone: Employed in an inpatient setting, holding at least two specialty certificates, actively working toward CPhT-Adv requirements. One year milestone: Transitioned to inpatient or actively positioned for that transition with one specialty certificate earned, resume and LinkedIn updated to reflect the direction. Six month milestone: First specialty certificate identified and in progress, inpatient environment researched, one professional connection made in that setting, LinkedIn profile complete. This week: Identify the first certificate. Pull three inpatient job postings. Update LinkedIn.",
+          why: "The five year goal feels distant and possibly overwhelming. This week's action is completely manageable. The backward mapping connects them. Every action this week is in service of something five years from now and that connection makes the daily work feel purposeful rather than routine."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CPhT-Adv · Pharmacy Supervisor · Specialty Pharmacy Technician",
+          aiPrompt: "I just completed the lesson Thinking Three to Five Years Out. Help me build a five year career vision and map it backward to specific actions I can take this week."
+        }
+      }
+    ]
   },
   {
     id: "btc7",
