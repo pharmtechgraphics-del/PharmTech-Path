@@ -670,7 +670,7 @@ const FREE_SECTIONS = [
 ];
 
 const PRO_SECTIONS = [
-  { id:"retail", title:"Retail Foundations", icon:"🏪", desc:"From competent to competitive in a retail pharmacy",
+  { id:"retail", title:"Retail Excellence", icon:"🏪", desc:"Advanced skills for techs who want to be the one everyone counts on.",
     modules:[
       { id:"r1", title:"Advanced Intake & Data Entry Precision", lessons:[
         { id:"r1l1", title:"Data Entry Is a Safety Gate", content:`Data entry is not clerical. It is:\n• The first safety checkpoint\n• The foundation of insurance processing\n• The source of downstream accuracy\n\nSmall entry errors create:\n• Rejections\n• Delays\n• Incorrect labels\n• Patient frustration` },
@@ -689,7 +689,7 @@ const PRO_SECTIONS = [
       ]},
     ]
   },
-  { id:"inpatient", title:"Inpatient Foundations", icon:"🏥", desc:"Automation, accountability & hospital pharmacy culture",
+  { id:"inpatient", title:"Hospital Pharmacy Essentials", icon:"🏥", desc:"How hospital pharmacy works and what it takes to thrive in it.",
     modules:[
       { id:"i1", title:"Understanding Distribution Systems", lessons:[{ id:"i1l1", title:"Centralized vs Decentralized Systems", content:`• Centralized vs decentralized pharmacy\n• Automated dispensing system logic\n• Restock patterns\n• Risk points at each stage\n\nEven highly automated environments require human accountability at every step.` }]},
       { id:"i2", title:"Automation Awareness", lessons:[{ id:"i2l1", title:"Why Counts & Documentation Matter", content:`• Why counts matter\n• Documentation chain\n• Common discrepancy causes\n• Pattern recognition mindset\n\nUnderstand why each step exists. That mindset separates average techs from strong ones.` }]},
