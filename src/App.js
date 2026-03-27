@@ -774,7 +774,108 @@ const BEYOND_MODULES = [
     title: "Owning Your Professional Reputation",
     icon: "⭐",
     desc: "How you show up every day builds the career you want.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc2l1",
+        title: "You Are Already Doing Leadership Work",
+        sections: [
+          {
+            header: "The Work You Are Not Counting",
+            body: "Most pharmacy technicians who have been in the field for more than a year are already doing leadership work. They are training new staff. They are catching errors before they reach the pharmacist. They are managing the workflow when things get backed up. They are the person other techs come to when something is unclear.\n\nNone of that is in the job description. And most of the time, none of it is on the resume.\n\nThe gap between what experienced techs actually do and what they say they do is one of the most consistent patterns in pharmacy career development. It is not a gap in competence. It is a gap in recognition, both how others see you and how you see yourself."
+          },
+          {
+            header: "Why This Gap Exists",
+            body: "The most common reason experienced techs underrepresent their work is that they have normalized it. When you have been training new hires for two years, it stops feeling like a skill and starts feeling like just something you do. When you catch a controlled substance discrepancy, you document it and move on. The significance of that action fades into routine.\n\nBut routine for you is not routine to a hiring manager reading your resume. Routine for you is not ordinary to a new tech trying to figure out how things work. What feels automatic to you is built on years of practice, judgment and accountability that most people in the room do not have.\n\nRecognizing your own work through"
+          }
+        ],
+        keyPoints: [
+          "Most experienced techs are already doing leadership work without calling it that.",
+          "Normalizing your work is what creates the gap between what you do and what you say you do.",
+          "Training, error prevention and workflow management are leadership functions regardless of your title.",
+          "Seeing your work through a leadership lens is the first step to communicating it effectively."
+        ],
+        takeaway: "The leadership experience you are looking for on your resume is already there. You just have not written it down yet.",
+        selfCheck: {
+          prompt: "When you think about your current role, which of these feels most true?",
+          options: [
+            {
+              label: "I do not think of what I do as leadership. I am just doing my job.",
+              response: "That humility is common among the most competent techs. The reframe is not about inflating what you do. It is about accurately describing it. Training a new tech is leadership. Catching an error is risk management. These are not exaggerations. They are accurate descriptions of real work."
+            },
+            {
+              label: "I know I am doing leadership work but I do not know how to put it into words.",
+              response: "That is exactly what this module addresses. The next lesson gives you the specific language and frameworks to translate your daily work into leadership language that resonates in interviews and on resumes."
+            },
+            {
+              label: "I have tried to describe my work as leadership before but it did not land the way I expected.",
+              response: "The issue is usually specificity. Saying I help train new techs lands differently than I developed and delivered onboarding support for three new technicians resulting in faster workflow integration. Same work. Very different impression. We will work on that in the next lesson."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are applying for a Lead Technician position at your current workplace. The manager asks you in the interview: What leadership experience do you have? You have never held a formal leadership title.",
+          prompt: "How do you answer that question and what specific examples would you draw from your current role?"
+        },
+        answer: {
+          recommended: "Start by reframing the question in your own mind before you answer it. Leadership experience is not the same as leadership titles. Then answer with three specific examples, each one naming what you did, what the outcome was and why it mattered. For example: In my current role I have been the primary point of contact for onboarding three new technicians over the past year. I identified a recurring data entry error pattern on our shift and brought it to the pharmacist as a workflow recommendation rather than an individual correction. And during our two most understaffed periods this year I coordinated task distribution to keep fill times within standard without pharmacist intervention.",
+          why: "Hiring managers for lead roles are not looking for someone who has held the title before. They are looking for evidence that the person already thinks and operates like a leader. Specific examples with outcomes provide that evidence far more effectively than general statements about being a team player."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · Training Coordinator · CPhT-Adv",
+          aiPrompt: "I just completed the lesson You Are Already Doing Leadership Work. Help me identify and describe the leadership work I have been doing in my current role so I can communicate it in my next interview or on my resume."
+        }
+      },
+      {
+        id: "btc2l2",
+        title: "Communicating Your Value Without Underselling",
+        sections: [
+          {
+            header: "Why Competent People Undersell Themselves",
+            body: "There is a pattern that shows up consistently among experienced pharmacy technicians, especially those from underrepresented communities who were taught that humility means minimizing. They do exceptional work, they know their environment inside and out, they carry responsibilities that far exceed their job description and then they sit in an interview or write a resume and describe themselves as someone who helps out and works well with others. The work is real. The description does not match it. This is not a character flaw. It is a skill gap and it is completely fixable."
+          },
+          {
+            header: "The Framework for Communicating What You Actually Do",
+            body: "Every professional accomplishment can be described using three elements. What you did, the scope of it and the outcome or impact. I processed prescriptions becomes I managed high-volume prescription processing averaging 200 fills per shift while maintaining a zero dispensing error rate over six months. I trained new staff becomes I developed an informal onboarding process for new technicians that reduced time-to-independence by approximately two weeks based on pharmacist feedback. You do not need to have metrics for everything. Qualitative outcomes matter too. The pharmacist specifically requested I work the controlled substance reconciliation shifts tells a story about trust and reliability that a resume line cannot fully capture but an interview answer absolutely can."
+          }
+        ],
+        keyPoints: [
+          "Underselling is a skill gap, not a character trait. It is fixable with practice.",
+          "Every accomplishment has three elements: what you did, the scope and the outcome.",
+          "Qualitative outcomes are as valuable as quantitative ones when described specifically.",
+          "The goal is accuracy, not inflation. Your actual work is more impressive than your current description of it."
+        ],
+        takeaway: "Describing your work accurately is not arrogance. It is a professional skill that gets you into rooms where your work can speak for itself.",
+        selfCheck: {
+          prompt: "How do you typically describe your work when someone asks what you do?",
+          options: [
+            {
+              label: "I keep it simple. I say I am a pharmacy technician and leave it at that.",
+              response: "That simplicity is costing you opportunities. The next time someone asks, try adding one specific thing you are known for or responsible for. Just one. See how the conversation changes."
+            },
+            {
+              label: "I try to describe it but I always feel like I am either bragging or underselling.",
+              response: "That tension usually means you have not found the right frame yet. Accurate description with specific outcomes never reads as bragging. It reads as professional confidence. That is what we are building here."
+            },
+            {
+              label: "I am pretty good at talking about my work. I know how to frame it for different audiences.",
+              response: "That skill is genuinely rare. The next level is helping the people around you develop it too. That is mentorship and it is one of the clearest markers of leadership readiness."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are updating your resume for the first time in three years. Your current job title is Pharmacy Technician. You have been responsible for controlled substance reconciliation, training new hires and covering lead responsibilities during your supervisor's days off for the past 18 months.",
+          prompt: "Write three resume bullet points that accurately reflect what you have been doing."
+        },
+        answer: {
+          recommended: "Here are three examples. First: Served as acting Lead Technician during supervisor absences, coordinating workflow and staff task distribution across a team of four technicians. Second: Responsible for daily controlled substance reconciliation and discrepancy reporting in compliance with DEA documentation standards. Third: Provided informal onboarding and peer training for new pharmacy technicians, supporting faster workflow integration and reducing pharmacist intervention during the onboarding period.",
+          why: "These bullet points do not exaggerate anything. They describe real work using language that communicates responsibility and impact. A hiring manager reading these sees a tech who is already operating at a lead level. That is the point."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · CPhT-Adv · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson Communicating Your Value Without Underselling. Help me write strong resume bullet points and interview answers for my current role based on my background and experience."
+        }
+      }
+    ]
   },
   {
     id: "btc3",
