@@ -2673,7 +2673,6 @@ export default function App(){
         <p style={{fontSize:14,color:mu,maxWidth:480,margin:"0 auto 26px",lineHeight:1.7}}>PharmTech Path is the career advancement resource built for techs who want to go further. We show you what comes next and how to get there.</p>
         <div style={{display:"flex",gap:9,justifyContent:"center",flexWrap:"wrap"}}>
           <Bp ch="Start Learning →" on={()=>go("learn")}/>
-          {!user&&<Bs ch="Sign In / Sign Up" on={()=>go("auth")}/>}
         </div>
       </div>
 
@@ -2692,16 +2691,7 @@ export default function App(){
           />
         )}
 
-        {/* Legacy welcome banner shown only when no snapshot card visible */}
-        {!user && (
-          <div style={{background:"rgba(0,201,167,.08)",border:"1px solid rgba(0,201,167,.2)",borderRadius:12,padding:"13px 18px",marginBottom:16,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:9}}>
-            <div>
-              <div style={{fontSize:13,fontWeight:700,color:ac}}>Welcome to PharmTech Path</div>
-              <div style={{fontSize:11,color:mu,marginTop:2}}>Sign in to track your progress and access your career roadmap.</div>
-            </div>
-            <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")} sx={{fontSize:12,padding:"7px 14px"}}/>
-          </div>
-        )}
+       
 
         {/* ─── CERT ROADMAP TEASER ─── */}
         <CertRoadmapTeaser go={go} isPro={isPro} user={user}/>
@@ -3142,21 +3132,22 @@ function CertRoadmapTeaser({ go, isPro, user }) {
               : "See your full career path from registration to leadership. Layers 3 and 4 unlock with Pro."
             }
           </div>
-          <button
-            onClick={()=>{
-              if(!user){ go("auth"); return; }
-              go("career");
-              setTimeout(()=>document.dispatchEvent(new CustomEvent("pharmtech-tab",{detail:"certmap"})),80);
-            }}
-            style={{
-              background:`linear-gradient(135deg,#4ecdc4,${ac})`,
-              color:"#fff",border:"none",borderRadius:10,
-              padding:"8px 18px",fontSize:12,fontWeight:700,
-              cursor:"pointer",
-            }}
-          >
-            {user ? "See your full certification path →" : "Sign in to explore →"}
-          </button>
+          {user && (
+            <button
+              onClick={()=>{
+                go("career");
+                setTimeout(()=>document.dispatchEvent(new CustomEvent("pharmtech-tab",{detail:"certmap"})),80);
+              }}
+              style={{
+                background:`linear-gradient(135deg,#4ecdc4,${ac})`,
+                color:"#fff",border:"none",borderRadius:10,
+                padding:"8px 18px",fontSize:12,fontWeight:700,
+                cursor:"pointer",
+              }}
+            >
+              See your full certification path →
+            </button>
+          )}
         </div>
       </div>
     </div>
