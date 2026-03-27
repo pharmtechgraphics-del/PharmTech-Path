@@ -882,42 +882,748 @@ const BEYOND_MODULES = [
     title: "Leadership Without Title",
     icon: "🤝",
     desc: "Lead from any seat. Title is not a prerequisite.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc3l1",
+        title: "You Are Already Doing Leadership Work",
+        sections: [
+          {
+            header: "The Work You Are Not Counting",
+            body: "Most pharmacy technicians who have been in the field for more than a year are already doing leadership work. They are training new staff. They are catching errors before they reach the pharmacist. They are managing the workflow when things get backed up. They are the person other techs come to when something is unclear.\n\nNone of that is in the job description. And most of the time, none of it is on the resume.\n\nThe gap between what experienced techs actually do and what they say they do is one of the most consistent patterns in pharmacy career development. It is not a gap in competence. It is a gap in recognition, both how others see you and how you see yourself."
+          },
+          {
+            header: "Why This Gap Exists",
+            body: "The most common reason experienced techs underrepresent their work is that they have normalized it. When you have been training new hires for two years, it stops feeling like a skill and starts feeling like just something you do. When you catch a controlled substance discrepancy, you document it and move on. The significance of that action fades into routine.\n\nBut routine for you is not routine to a hiring manager reading your resume. Routine for you is not ordinary to a new tech trying to figure out how things work. What feels automatic to you is built on years of practice, judgment and accountability that most people in the room do not have.\n\nSeeing your work through a leadership lens is the first step to communicating it effectively."
+          }
+        ],
+        keyPoints: [
+          "Leadership is demonstrated through behavior, not assigned through titles.",
+          "The tech others come to with questions is already leading, regardless of what their badge says.",
+          "Composure under pressure, accuracy under stress and mentoring newer staff are all leadership in action.",
+          "Organizations promote the people who are already behaving like the role they want."
+        ],
+        takeaway: "The title comes after the behavior. Start leading where you are.",
+        selfCheck: {
+          prompt: "Think about how you show up on a typical shift. Which feels most accurate?",
+          options: [
+            {
+              label: "I do my job well but I stay in my lane. Leadership is someone else's responsibility.",
+              response: "Staying in your lane is not a problem. The invitation here is to notice where you are already influencing the people and environment around you, even without intending to. That influence is leadership and it is worth being intentional about."
+            },
+            {
+              label: "I naturally step up when things get difficult but I do not think of it as leadership.",
+              response: "That instinct to step up is exactly what leadership looks like before the title. The next step is recognizing it as a pattern, not just a reaction, and starting to build on it deliberately."
+            },
+            {
+              label: "I am conscious of how I show up and I try to set a positive tone for the people around me.",
+              response: "That awareness is the foundation of intentional leadership. The next level is making sure the right people can see it. Visibility matters as much as behavior when it comes to advancement."
+            }
+          ]
+        },
+        scenario: {
+          setup: "It is a short-staffed shift. The pharmacist is managing three consultations at once. Two newer techs are unsure what to prioritize and the queue is backing up. No one has been designated as lead for the shift.",
+          prompt: "What do you do and how does your response either demonstrate or miss a leadership opportunity?"
+        },
+        answer: {
+          recommended: "Assess the queue quickly and make a brief prioritization call out loud. Something like: I am going to take the verification queue, can you handle new drop-offs and flag anything that needs the pharmacist. You are not overstepping. You are filling a vacuum. Then follow through calmly and debrief with the pharmacist when the rush settles.",
+          why: "Leadership without a title is most visible in exactly these moments. The tech who steps in calmly, communicates clearly and keeps the team moving without drama is demonstrating exactly the behavior that gets noticed and remembered when lead roles open up. The tech who waits for direction in a vacuum is not doing anything wrong, but they are missing an opportunity to show what they are capable of."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · Training Coordinator · CPhT-Adv",
+          aiPrompt: "I just completed the lesson Leadership Without a Title. Based on my current role, help me identify specific ways I can demonstrate leadership without a formal title and how to make that visible to the right people."
+        }
+      },
+      {
+        id: "btc3l2",
+        title: "Communicating Your Value Without Underselling",
+        sections: [
+          {
+            header: "Why Competent People Undersell Themselves",
+            body: "There is a pattern that shows up consistently among experienced pharmacy technicians, especially those from underrepresented communities who were taught that humility means minimizing. They do exceptional work, they know their environment inside and out, they carry responsibilities that far exceed their job description and then they sit in an interview or write a resume and describe themselves as someone who helps out and works well with others. The work is real. The description does not match it. This is not a character flaw. It is a skill gap and it is completely fixable."
+          },
+          {
+            header: "The Framework for Communicating What You Actually Do",
+            body: "Every professional accomplishment can be described using three elements. What you did, the scope of it and the outcome or impact. I processed prescriptions becomes I managed high-volume prescription processing averaging 200 fills per shift while maintaining a zero dispensing error rate over six months. I trained new staff becomes I developed an informal onboarding process for new technicians that reduced time-to-independence by approximately two weeks based on pharmacist feedback. You do not need to have metrics for everything. Qualitative outcomes matter too. The pharmacist specifically requested I work the controlled substance reconciliation shifts tells a story about trust and reliability that a resume line cannot fully capture but an interview answer absolutely can."
+          }
+        ],
+        keyPoints: [
+          "Underselling is a skill gap, not a character trait. It is fixable with practice.",
+          "Every accomplishment has three elements: what you did, the scope and the outcome.",
+          "Qualitative outcomes are as valuable as quantitative ones when described specifically.",
+          "The goal is accuracy, not inflation. Your actual work is more impressive than your current description of it."
+        ],
+        takeaway: "Describing your work accurately is not arrogance. It is a professional skill that gets you into rooms where your work can speak for itself.",
+        selfCheck: {
+          prompt: "How do you typically describe your work when someone asks what you do?",
+          options: [
+            {
+              label: "I keep it simple. I say I am a pharmacy technician and leave it at that.",
+              response: "That simplicity is costing you opportunities. The next time someone asks, try adding one specific thing you are known for or responsible for. Just one. See how the conversation changes."
+            },
+            {
+              label: "I try to describe it but I always feel like I am either bragging or underselling.",
+              response: "That tension usually means you have not found the right frame yet. Accurate description with specific outcomes never reads as bragging. It reads as professional confidence. That is what we are building here."
+            },
+            {
+              label: "I am pretty good at talking about my work. I know how to frame it for different audiences.",
+              response: "That skill is genuinely rare. The next level is helping the people around you develop it too. That is mentorship and it is one of the clearest markers of leadership readiness."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are updating your resume for the first time in three years. Your current job title is Pharmacy Technician. You have been responsible for controlled substance reconciliation, training new hires and covering lead responsibilities during your supervisor's days off for the past 18 months.",
+          prompt: "Write three resume bullet points that accurately reflect what you have been doing."
+        },
+        answer: {
+          recommended: "Here are three examples. First: Served as acting Lead Technician during supervisor absences, coordinating workflow and staff task distribution across a team of four technicians. Second: Responsible for daily controlled substance reconciliation and discrepancy reporting in compliance with DEA documentation standards. Third: Provided informal onboarding and peer training for new pharmacy technicians, supporting faster workflow integration and reducing pharmacist intervention during the onboarding period.",
+          why: "These bullet points do not exaggerate anything. They describe real work using language that communicates responsibility and impact. A hiring manager reading these sees a tech who is already operating at a lead level. That is the point."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · CPhT-Adv · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson Communicating Your Value Without Underselling. Help me write strong resume bullet points and interview answers for my current role based on my background and experience."
+        }
+      }
+    ]
   },
   {
-    id: "btc4",
+   id: "btc4",
     title: "Translating Your Skills to Leadership Roles",
     icon: "🔄",
     desc: "Turn your daily work into a leadership resume.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc4l1",
+        title: "You Are Already Doing Leadership Work",
+        sections: [
+          {
+            header: "The Work You Are Not Counting",
+            body: "Most pharmacy technicians who have been in the field for more than a year are already doing leadership work. They are training new staff. They are catching errors before they reach the pharmacist. They are managing the workflow when things get backed up. They are the person other techs come to when something is unclear.\n\nNone of that is in the job description. And most of the time, none of it is on the resume.\n\nThe gap between what experienced techs actually do and what they say they do is one of the most consistent patterns in pharmacy career development. It is not a gap in competence. It is a gap in recognition, both how others see you and how you see yourself."
+          },
+          {
+            header: "Translating Daily Work Into Leadership Language",
+            body: "The shift from technician language to leadership language is not about exaggerating what you do. It is about describing it at the right level of abstraction.\n\nCounting and dispensing medications becomes managing high-volume prescription workflow with accuracy and compliance. Training a new tech becomes developing and delivering onboarding support that accelerated new hire integration. Catching a controlled substance discrepancy becomes identifying and escalating a regulatory compliance risk before it became a reportable incident.\n\nSame work. Different frame. The frame is what gets you into leadership conversations."
+          }
+        ],
+        keyPoints: [
+          "Leadership language describes the impact and purpose of your work, not just the task itself.",
+          "Every tech role contains transferable leadership skills that most techs never put into words.",
+          "The translation from task language to leadership language is a learnable skill.",
+          "Resumes and interviews reward people who can articulate the value of their work, not just its content."
+        ],
+        takeaway: "The leadership experience you are looking for on your resume is already there. You just have not written it down yet.",
+        selfCheck: {
+          prompt: "When you think about your current role, which of these feels most true?",
+          options: [
+            {
+              label: "I do not think of what I do as leadership. I am just doing my job.",
+              response: "That humility is common among the most competent techs. The reframe is not about inflating what you do. It is about accurately describing it. Training a new tech is leadership. Catching an error is risk management. These are not exaggerations. They are accurate descriptions of real work."
+            },
+            {
+              label: "I know I am doing leadership work but I do not know how to put it into words.",
+              response: "That is exactly what this module addresses. The next lesson gives you the specific language and frameworks to translate your daily work into leadership language that resonates in interviews and on resumes."
+            },
+            {
+              label: "I have tried to describe my work as leadership before but it did not land the way I expected.",
+              response: "The issue is usually specificity. Saying I help train new techs lands differently than I developed and delivered onboarding support for three new technicians resulting in faster workflow integration. Same work. Very different impression. We will work on that in the next lesson."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are applying for a Lead Technician position at your current workplace. The manager asks you in the interview: What leadership experience do you have? You have never held a formal leadership title.",
+          prompt: "How do you answer that question and what specific examples would you draw from your current role?"
+        },
+        answer: {
+          recommended: "Start by reframing the question in your own mind before you answer it. Leadership experience is not the same as leadership titles. Then answer with three specific examples, each one naming what you did, what the outcome was and why it mattered. For example: In my current role I have been the primary point of contact for onboarding three new technicians over the past year. I identified a recurring data entry error pattern on our shift and brought it to the pharmacist as a workflow recommendation rather than an individual correction. And during our two most understaffed periods this year I coordinated task distribution to keep fill times within standard without pharmacist intervention.",
+          why: "Hiring managers for lead roles are not looking for someone who has held the title before. They are looking for evidence that the person already thinks and operates like a leader. Specific examples with outcomes provide that evidence far more effectively than general statements about being a team player."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · Training Coordinator · CPhT-Adv",
+          aiPrompt: "I just completed the lesson Translating Your Skills to Leadership Roles. Help me rewrite my current job responsibilities using leadership language I can use on my resume and in interviews."
+        }
+      },
+      {
+        id: "btc4l2",
+        title: "Communicating Your Value Without Underselling",
+        sections: [
+          {
+            header: "Why Competent People Undersell Themselves",
+            body: "There is a pattern that shows up consistently among experienced pharmacy technicians, especially those from underrepresented communities who were taught that humility means minimizing. They do exceptional work, they know their environment inside and out, they carry responsibilities that far exceed their job description and then they sit in an interview or write a resume and describe themselves as someone who helps out and works well with others. The work is real. The description does not match it. This is not a character flaw. It is a skill gap and it is completely fixable."
+          },
+          {
+            header: "The Framework for Communicating What You Actually Do",
+            body: "Every professional accomplishment can be described using three elements. What you did, the scope of it and the outcome or impact. I processed prescriptions becomes I managed high-volume prescription processing averaging 200 fills per shift while maintaining a zero dispensing error rate over six months. I trained new staff becomes I developed an informal onboarding process for new technicians that reduced time-to-independence by approximately two weeks based on pharmacist feedback. You do not need to have metrics for everything. Qualitative outcomes matter too. The pharmacist specifically requested I work the controlled substance reconciliation shifts tells a story about trust and reliability that a resume line cannot fully capture but an interview answer absolutely can."
+          }
+        ],
+        keyPoints: [
+          "Underselling is a skill gap, not a character trait. It is fixable with practice.",
+          "Every accomplishment has three elements: what you did, the scope and the outcome.",
+          "Qualitative outcomes are as valuable as quantitative ones when described specifically.",
+          "The goal is accuracy, not inflation. Your actual work is more impressive than your current description of it."
+        ],
+        takeaway: "Describing your work accurately is not arrogance. It is a professional skill that gets you into rooms where your work can speak for itself.",
+        selfCheck: {
+          prompt: "How do you typically describe your work when someone asks what you do?",
+          options: [
+            {
+              label: "I keep it simple. I say I am a pharmacy technician and leave it at that.",
+              response: "That simplicity is costing you opportunities. The next time someone asks, try adding one specific thing you are known for or responsible for. Just one. See how the conversation changes."
+            },
+            {
+              label: "I try to describe it but I always feel like I am either bragging or underselling.",
+              response: "That tension usually means you have not found the right frame yet. Accurate description with specific outcomes never reads as bragging. It reads as professional confidence. That is what we are building here."
+            },
+            {
+              label: "I am pretty good at talking about my work. I know how to frame it for different audiences.",
+              response: "That skill is genuinely rare. The next level is helping the people around you develop it too. That is mentorship and it is one of the clearest markers of leadership readiness."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are updating your resume for the first time in three years. Your current job title is Pharmacy Technician. You have been responsible for controlled substance reconciliation, training new hires and covering lead responsibilities during your supervisor's days off for the past 18 months.",
+          prompt: "Write three resume bullet points that accurately reflect what you have been doing."
+        },
+        answer: {
+          recommended: "Here are three examples. First: Served as acting Lead Technician during supervisor absences, coordinating workflow and staff task distribution across a team of four technicians. Second: Responsible for daily controlled substance reconciliation and discrepancy reporting in compliance with DEA documentation standards. Third: Provided informal onboarding and peer training for new pharmacy technicians, supporting faster workflow integration and reducing pharmacist intervention during the onboarding period.",
+          why: "These bullet points do not exaggerate anything. They describe real work using language that communicates responsibility and impact. A hiring manager reading these sees a tech who is already operating at a lead level. That is the point."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · CPhT-Adv · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson Communicating Your Value Without Underselling. Help me write strong resume bullet points and interview answers for my current role based on my background and experience."
+        }
+      }
+    ]
   },
   {
     id: "btc5",
     title: "Advanced Certifications and What They Actually Open",
     icon: "🎓",
     desc: "Know what credentials unlock and when to pursue them.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc5l1",
+        title: "CPhT-Adv — What It Is and What It Actually Changes",
+        sections: [
+          {
+            header: "Beyond the Credential",
+            body: "The CPhT-Adv is the most recognized advanced credential for pharmacy technicians in the United States. But the credential itself is not the point. The point is what earning it signals to every employer, pharmacist and hiring manager who sees it. It signals that you did not stop at the minimum. That you sought out specialized knowledge across multiple areas of practice. That you meet a standard that most pharmacy technicians never pursue.\n\nIn a field where the baseline certification is the same whether you have six months or six years of experience, the CPhT-Adv is one of the clearest ways to make your depth of experience visible on paper."
+          },
+          {
+            header: "How It Works and What It Requires",
+            body: "The CPhT-Adv is offered through both BPTS and PTCB. There is no separate exam. It is an application-based credential earned once you meet specific requirements. You need an active CPhT, at least two years of supervised pharmacy experience and a combination of specialty certificates. Through BPTS the path requires four assessment-based specialty certificates with at least one from BPTS. Through PTCB the requirements are similar with specific certificate combinations accepted.\n\nOnce approved you receive a digital badge through Credly that you display on LinkedIn, your resume and your email signature. It renews every two years and requires 25 hours of ACPE-accredited continuing education."
+          }
+        ],
+        keyPoints: [
+          "CPhT-Adv signals advanced practice to employers in a way that years of experience alone cannot.",
+          "It is application-based with no separate exam required.",
+          "Requirements include active CPhT, two years of experience and specialty certificates.",
+          "The digital badge through Credly makes the credential visible on LinkedIn and professional profiles."
+        ],
+        takeaway: "The CPhT-Adv does not make you more competent overnight. It makes your existing competence visible to people who have never worked with you.",
+        selfCheck: {
+          prompt: "Where are you in your certification journey right now?",
+          options: [
+            {
+              label: "I have my CPhT but have not looked into what comes next.",
+              response: "You are closer than you think. The next step is identifying which specialty certificates align with your current work. You do not need to pursue all of them at once. Start with one that reflects what you already do every day."
+            },
+            {
+              label: "I am actively working toward specialty certificates or the CPhT-Adv.",
+              response: "Stay the course. The compounding effect of credentials is real. Each certificate makes the next one easier to pursue and the overall picture more compelling to anyone evaluating your background."
+            },
+            {
+              label: "I already hold the CPhT-Adv or other advanced credentials.",
+              response: "The credential is the floor, not the ceiling. The question now is how visible it is. Is it on your LinkedIn? Your email signature? Are you using it to position yourself for the next opportunity?"
+            }
+          ]
+        },
+        scenario: {
+          setup: "A pharmacist you respect asks you why you are pursuing the CPhT-Adv since your pay will not change immediately and your current role does not require it.",
+          prompt: "How do you respond and what does your answer reveal about how you think about your career?"
+        },
+        answer: {
+          recommended: "I am not pursuing it for my current role. I am pursuing it for the role I want to be in two years. The credential makes my experience readable to people who have never worked with me. And the specialty certificates I need to earn it are pushing me to formalize knowledge I already use every day but have never documented.",
+          why: "The pharmacist asked a legitimate question. A defensive answer suggests you have not thought it through. A clear forward-looking answer signals that you are operating with intention. That conversation often becomes a reference point for how a pharmacist thinks about you when a leadership opportunity comes up."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CQI Coordinator · Pharmacy Supervisor · Training Coordinator",
+          aiPrompt: "I just completed the lesson CPhT-Adv — What It Is and What It Actually Changes. Based on my current certifications and background, help me understand whether I should pursue CPhT-Adv now or focus on specialty certificates first."
+        }
+      },
+      {
+        id: "btc5l2",
+        title: "Choosing Your Next Certification Based on Where You Want to Go",
+        sections: [
+          {
+            header: "Not All Credentials Open the Same Doors",
+            body: "The most common mistake pharmacy technicians make with certifications is pursuing whatever is available rather than whatever is strategic. Both PTCB and BPTS offer a range of specialty certificates and board certifications. Each one positions you differently depending on the environment you work in and the role you are moving toward.\n\nA tech in retail pursuing a sterile compounding credential is building knowledge but not necessarily building toward their next opportunity. A tech in a hospital IV room pursuing BCSCPT is doing both. The difference is alignment. Your certifications should tell a coherent story about where you are going, not just what you have done."
+          },
+          {
+            header: "A Framework for Choosing What to Pursue Next",
+            body: "Start with your target role. What is the next position you want to hold? Look at job postings for that role and identify what credentials appear most frequently. That is market signal. Then look at what you already do every day and ask which certificate would formalize and validate that existing knowledge. That is your lowest friction path to a credential with real relevance.\n\nFinally consider the CPhT-Adv pathway. If you are within reach of the certificate requirements, it may be more strategic to pursue the certificates that count toward CPhT-Adv rather than pursuing certificates randomly. A planned pathway gets you further faster."
+          }
+        ],
+        keyPoints: [
+          "Credential selection should align with your target role, not just what is available.",
+          "Job postings for your target role are the clearest signal of what credentials matter to employers.",
+          "The CPhT-Adv pathway provides a framework for choosing certificates strategically.",
+          "Formalizing knowledge you already use every day is the lowest friction path to a relevant credential."
+        ],
+        takeaway: "A planned certification pathway tells a story. A random collection of credentials just fills space on a resume.",
+        selfCheck: {
+          prompt: "How have you made certification decisions in the past?",
+          options: [
+            {
+              label: "I pursued what was available or what my employer offered.",
+              response: "That is how most techs start. The shift is moving from reactive to intentional. Now that you have a clearer picture of where you want to go, you can evaluate future opportunities against that direction."
+            },
+            {
+              label: "I have thought about it but I am not sure which path makes sense for my goals.",
+              response: "Start with the job posting exercise in this lesson. Pull three postings for the role you want and look at what credentials appear. That data will tell you more than any general advice can."
+            },
+            {
+              label: "I have a clear plan and I am working it.",
+              response: "That intentionality is exactly what separates techs who advance consistently from those who wait for the right opportunity. Make sure your plan is visible to the people around you who can support or accelerate it."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You work in an inpatient hospital pharmacy and your goal is to move into a Lead Tech role within 18 months. You currently hold your CPhT and have no specialty certificates.",
+          prompt: "Using what you know about your environment and your goal, what would your certification plan look like for the next 18 months?"
+        },
+        answer: {
+          recommended: "Start with the Medication Safety certificate from either PTCB or BPTS since safety mindset is central to any lead role in an inpatient setting and it formalizes work you are already doing. Add Controlled Substances Diversion Prevention next since inpatient lead roles almost universally involve controlled substance oversight. Those two certificates plus your existing CPhT put you on the CPhT-Adv pathway. Research whether your target job postings mention CPhT-Adv and if so make that the 18-month goal by identifying the remaining certificate requirements and mapping them to a timeline.",
+          why: "This plan is not random. Every certificate directly supports the target role, builds relevant knowledge and contributes to a larger credential that will make your application stand out. Eighteen months is realistic. The plan is specific enough to execute and flexible enough to adjust."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CPhT-Adv · Pharmacy Supervisor · CQI Coordinator",
+          aiPrompt: "I just completed the lesson Choosing Your Next Certification Based on Where You Want to Go. Based on my current role and where I want to go, help me build a specific certification plan."
+        }
+      },
+      {
+        id: "btc5l3",
+        title: "Making Your Credentials Visible and Working For You",
+        sections: [
+          {
+            header: "A Credential Nobody Knows About Does Not Help You",
+            body: "You earned the certificate. You passed the assessment. You have the digital badge sitting in a Credly email you have not opened since you received it. This is more common than it should be. Credentials only create opportunity when they are visible to the people who make decisions about your career.\n\nThat means your LinkedIn profile needs to be updated. Your resume needs to reflect the credential with the issuing body and the date. Your email signature at work, if professional signatures are used, should include your full credential string. Your manager should know you earned it. The pharmacist you work with most closely should know you earned it. Visibility is not bragging. It is basic career management."
+          },
+          {
+            header: "How Credentials Change Conversations",
+            body: "When your credentials are visible something specific happens. People start conversations with you differently. A hiring manager who sees CPhT-Adv on your resume before the interview begins already has a different baseline assumption about your experience than they would otherwise. A pharmacist who sees your Medication Safety certificate on your badge or profile is more likely to include you in safety-related conversations.\n\nCredentials change how people perceive your expertise before you have said a word. That perception opens doors that your daily work alone cannot."
+          }
+        ],
+        keyPoints: [
+          "Credentials must be visible to create opportunity. Earning them is only half the work.",
+          "LinkedIn, your resume and your email signature are the three primary visibility channels.",
+          "Visible credentials change how people engage with you before you have said anything.",
+          "Informing your manager and pharmacist directly about credentials you earn is professional, not boastful."
+        ],
+        takeaway: "Earning a credential without making it visible is like doing exceptional work on a shift nobody witnessed. The work happened. The opportunity did not.",
+        selfCheck: {
+          prompt: "How visible are your current credentials right now?",
+          options: [
+            {
+              label: "I have credentials but I have not updated my LinkedIn or resume recently.",
+              response: "Today is a good day to change that. Start with LinkedIn. Add each credential with the issuing body and the date earned. It takes fifteen minutes and it is one of the highest return-on-time activities in your career."
+            },
+            {
+              label: "My credentials are visible on my resume and LinkedIn but I have not mentioned them at work.",
+              response: "That next step feels uncomfortable for a lot of people but it is simpler than it sounds. The next time you are asked about your background or goals, mention it naturally. You do not need to announce it. Just include it."
+            },
+            {
+              label: "My credentials are fully visible and I actively reference them in professional conversations.",
+              response: "That visibility is working for you. The next layer is helping peers understand how to do the same. That is leadership."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You earned your Medication Safety certificate two months ago. You have not updated your LinkedIn, your resume still shows only CPhT and you have not mentioned it to your manager or pharmacist.",
+          prompt: "Walk through the specific steps you would take in the next week to make this credential visible and working for you."
+        },
+        answer: {
+          recommended: "Day one, open the Credly email and accept the digital badge. Add it to your LinkedIn profile under licenses and certifications with the issuing body and date. Day two, update your resume to include the certificate under a certifications section. Day three, mention it to your pharmacist or manager in a natural context. Something like I finished my Medication Safety certificate last month. I wanted you to know in case it is relevant to anything coming up.",
+          why: "Most techs let credentials sit quietly on a piece of paper. The ones who advance treat each credential as a professional communication. They earned it. They announce it appropriately. They let it work for them. That habit compounds significantly over a career."
+        },
+        connection: {
+          tag: "CPhT-Adv · Lead Pharmacy Technician · Pharmacy Supervisor · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson Making Your Credentials Visible and Working For You. Help me create a plan to make my current credentials more visible and put them to work for my career."
+        }
+      }
+    ]
   },
   {
     id: "btc6",
     title: "Career Pathways and Long-Term Positioning",
     icon: "🗺️",
     desc: "See the full path. Plan further ahead than your next role.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc6l1",
+        title: "The Pathways Available to You",
+        sections: [
+          {
+            header: "More Doors Than Most Techs Realize",
+            body: "Most pharmacy technicians see two career options. Stay where they are or become a pharmacist. The reality is significantly broader than that. The pharmacy technician field has developed a range of specialized and leadership roles that were not widely available ten years ago and are expanding as the scope of technician practice grows.\n\nUnderstanding what is available is the first step to positioning yourself for it. You cannot aim at a target you do not know exists."
+          },
+          {
+            header: "The Major Pathways",
+            body: "The retail to inpatient transition is one of the most common moves and one of the most valuable for career growth. Inpatient environments generally offer more structured advancement, stronger exposure to clinical processes and clearer pathways to leadership roles.\n\nSpecialty pharmacy is a growing area covering oncology, infusion, rare disease and more. These roles require specific training but offer higher compensation and deeper clinical engagement than standard dispensing.\n\nThe educator and trainer pathway is underutilized. Techs who hold CPTEd or who have significant training experience are positioned for roles in workforce development, pharmacy school programs and healthcare system education departments.\n\nQuality and compliance roles including CQI Coordinator, Medication Safety Officer support and Performance Improvement Specialist are increasingly available to credentialed techs with strong documentation and process skills. And leadership tracks including Lead Tech, Supervisor and Pharmacy Operations Manager are the most visible advancement pathway in most health systems."
+          }
+        ],
+        keyPoints: [
+          "The pharmacy technician career landscape is broader than most techs are aware of.",
+          "Retail to inpatient transition is one of the highest-value moves for long-term career growth.",
+          "Specialty pharmacy, education, quality and leadership represent four distinct advancement tracks.",
+          "Knowing what is available is the prerequisite to positioning yourself for it."
+        ],
+        takeaway: "Your career path is not a single hallway. It is a building with more doors than you have tried to open.",
+        selfCheck: {
+          prompt: "Which pathway feels most aligned with where you want to go?",
+          options: [
+            {
+              label: "I want to move into a leadership role at my current or a similar workplace.",
+              response: "The leadership track is the most clearly defined pathway. Lead Tech and Supervisor roles are available in most pharmacy environments. The next step is identifying what your target organization looks for in those roles and building toward it deliberately."
+            },
+            {
+              label: "I am interested in moving from retail to inpatient or into a specialty area.",
+              response: "That transition is very achievable with the right preparation. The next lesson covers how to position yourself for a transition before you are ready to make it. That timing is critical."
+            },
+            {
+              label: "I am not sure yet. I know I want more but I have not settled on a direction.",
+              response: "That is a completely valid place to be. The goal of this module is to give you enough visibility into each pathway that a direction becomes clearer. You do not need to decide today. You need enough information to start leaning."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been in retail pharmacy for four years and are starting to feel like you have reached the ceiling of what is available to you in that environment. You are interested in inpatient but have no hospital experience.",
+          prompt: "What are the realistic first steps toward making that transition and what would make you a competitive candidate?"
+        },
+        answer: {
+          recommended: "Start by researching entry-level inpatient tech positions at local health systems. Many post roles specifically for techs transitioning from retail and value the customer service and insurance processing experience that retail builds. Pursue a certification that bridges the gap. Medication Safety or Controlled Substances Diversion Prevention are directly relevant to inpatient environments and signal readiness to hiring managers. Connect with a tech who works in an inpatient setting and ask about their experience. Informational conversations open more doors than applications in most cases. Update your resume to frame your retail experience in terms of skills that transfer.",
+          why: "The biggest barrier to the retail to inpatient transition is not experience. It is framing. Retail techs have more transferable skills than they realize. The ones who make the transition successfully are the ones who can articulate those skills in the language of the environment they are moving into."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Inpatient Pharmacy Technician · CPhT-Adv · Specialty Pharmacy Technician",
+          aiPrompt: "I just completed the lesson The Pathways Available to You. Based on my background and current role, help me understand which career pathway makes the most sense for me and what I should do next."
+        }
+      },
+      {
+        id: "btc6l2",
+        title: "Positioning Yourself for a Transition Before You Are Ready",
+        sections: [
+          {
+            header: "The Timing Problem Most Techs Get Wrong",
+            body: "Most pharmacy technicians start preparing for a career transition about three months before they want to make it. They update their resume, apply for jobs and wonder why they are not competitive. The techs who transition successfully into new environments or higher roles typically started preparing twelve to eighteen months before the move. Not because they are more talented but because they understood that positioning is a long game.\n\nBy the time you are ready to move, the groundwork should already be laid. The credentials should already be visible. The relationships should already exist. The resume should already tell the right story."
+          },
+          {
+            header: "What Early Positioning Actually Looks Like",
+            body: "It starts with research. Understand the environment or role you want to move into well enough to speak its language. If you want to move into inpatient, know what USP 797 means, know what an ADC is, know what cart fill involves. You do not need to have done it. You need to be able to demonstrate that you understand it.\n\nIt continues with credential building. Identify what certificates or credentials appear in job postings for your target role and start earning them now, not when you are applying. It includes relationship building. Attend a professional organization event. Connect with a tech or pharmacist in your target environment on LinkedIn. Ask for a fifteen minute conversation. These relationships are how most good opportunities actually happen."
+          }
+        ],
+        keyPoints: [
+          "Successful transitions are built twelve to eighteen months before the move, not three months before.",
+          "Research, credential building, relationship building and current-role framing are the four elements of early positioning.",
+          "Speaking the language of your target environment signals readiness before you have the experience.",
+          "The relationships you build now are how most real opportunities surface."
+        ],
+        takeaway: "The best time to prepare for your next role was a year ago. The second best time is today.",
+        selfCheck: {
+          prompt: "How far out are you currently thinking about your next career move?",
+          options: [
+            {
+              label: "I am focused on my current role. I will think about next steps when something comes up.",
+              response: "That reactive approach works occasionally but it leaves opportunity to chance. Starting to think twelve months out does not mean you have to act now. It means you are ready when something comes up rather than scrambling to prepare after it does."
+            },
+            {
+              label: "I have a general sense of where I want to go but I have not started preparing actively.",
+              response: "That clarity of direction is valuable. The next step is turning that direction into a specific list of actions. Credentials to earn, relationships to build, language to develop. Start with one item from that list this week."
+            },
+            {
+              label: "I am actively preparing for a move I want to make in the next year or two.",
+              response: "That intentionality is exactly right. The refinement is making sure your preparation includes relationship building, not just credential building. Most opportunities come through people, not applications."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You want to move into a CQI Coordinator or Medication Safety support role within the next two years. You currently work as a staff pharmacy technician in a retail setting with no formal quality experience.",
+          prompt: "Build a rough twelve month preparation plan for that transition."
+        },
+        answer: {
+          recommended: "Months one through three: Research the role. Read job postings. Understand what organizations look for. Identify two or three credentials that appear consistently. Month three through six: Pursue your first target credential. Medication Safety is the most direct entry point. While studying, document any quality or safety related observations you make at work. Month six through nine: Pursue your second credential. Begin building a LinkedIn presence that reflects your direction. Connect with people in quality and safety roles in pharmacy. Month nine through twelve: Seek out any quality adjacent responsibilities in your current role. Begin applying selectively to roles that represent the step toward your target.",
+          why: "This plan builds on itself. Each step makes the next step more credible. By month twelve you have two relevant credentials, a developing professional network, documented quality observations from your current work and a resume that tells a coherent story toward your target role. That is a competitive candidate."
+        },
+        connection: {
+          tag: "CQI Coordinator · Performance Improvement Specialist · Medication Safety Officer · CPhT-Adv",
+          aiPrompt: "I just completed the lesson Positioning Yourself for a Transition Before You Are Ready. Help me build a specific preparation plan for the career transition I want to make based on my background."
+        }
+      },
+      {
+        id: "btc6l3",
+        title: "Thinking Three to Five Years Out",
+        sections: [
+          {
+            header: "Why Most Techs Only Think One Step Ahead",
+            body: "The majority of pharmacy technician career planning happens in single steps. Get certified. Get a raise. Get the lead role. Each goal is reasonable but disconnected from a larger direction. The result is a career that advances incrementally without a clear destination.\n\nThe techs who build careers they are genuinely proud of are almost always the ones who had a picture of what they were building toward, even if that picture changed along the way. Three to five year thinking is not about predicting the future. It is about having a direction clear enough to make decisions that compound in the right direction."
+          },
+          {
+            header: "Building a Three to Five Year Career Picture",
+            body: "Start with the question: what do you want your professional life to look like in five years? Not just the title but the environment, the type of work, the level of responsibility, the way you spend your days. Get specific. I want to be a Lead Tech in a hospital inpatient setting overseeing a team of four to six technicians with my CPhT-Adv and a specialty certification in sterile compounding is a target you can build toward.\n\nOnce you have the picture, work backward. What needs to be true in three years to make five years possible? What needs to be true in one year to make three years possible? What needs to be true in six months to make one year possible? That backward mapping turns a distant goal into a series of near-term actions that are completely within your control."
+          }
+        ],
+        keyPoints: [
+          "Single step career planning produces incremental results without a clear destination.",
+          "Three to five year thinking provides direction for decisions that compound over time.",
+          "Specificity in your five year picture is what makes backward planning possible.",
+          "Working backward from a clear goal produces a near-term action plan that is immediately executable."
+        ],
+        takeaway: "You do not need to know exactly where you will end up. You need to know enough about the direction to make decisions today that point that way.",
+        selfCheck: {
+          prompt: "How clearly can you describe what you want your professional life to look like in five years?",
+          options: [
+            {
+              label: "I have a clear picture. I know the role, the environment and roughly what it looks like.",
+              response: "That clarity is a genuine advantage. The next step is the backward mapping exercise from this lesson. Turn that picture into a twelve month action list and review it quarterly."
+            },
+            {
+              label: "I have a general sense of direction but the details are fuzzy.",
+              response: "Spend fifteen minutes this week writing down what a good five years looks like in as much detail as you can. Do not edit yourself. Just write. The details will sharpen with time and the act of writing them down changes how you make daily decisions."
+            },
+            {
+              label: "I honestly do not know. I take things as they come.",
+              response: "That approach has gotten you this far and there is nothing wrong with it. The invitation is just to try adding a longer lens. Not because you have to plan perfectly but because even a rough direction helps you recognize the right opportunities when they appear."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are three years into your pharmacy career, you have your CPhT and you are working in retail. You enjoy the work but you know you want more. You have never sat down and thought more than six months ahead.",
+          prompt: "Walk through the five year visioning and backward mapping exercise for your own situation."
+        },
+        answer: {
+          recommended: "Five year picture: Lead Technician in an inpatient hospital pharmacy, holding CPhT-Adv and a sterile compounding credential, managing a team and involved in quality improvement processes. Three year milestone: Employed in an inpatient setting, holding at least two specialty certificates, actively working toward CPhT-Adv requirements. One year milestone: Transitioned to inpatient or actively positioned for that transition with one specialty certificate earned, resume and LinkedIn updated to reflect the direction. Six month milestone: First specialty certificate identified and in progress, inpatient environment researched, one professional connection made in that setting, LinkedIn profile complete. This week: Identify the first certificate. Pull three inpatient job postings. Update LinkedIn.",
+          why: "The five year goal feels distant and possibly overwhelming. This week's action is completely manageable. The backward mapping connects them. Every action this week is in service of something five years from now and that connection makes the daily work feel purposeful rather than routine."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CPhT-Adv · Pharmacy Supervisor · Specialty Pharmacy Technician",
+          aiPrompt: "I just completed the lesson Thinking Three to Five Years Out. Help me build a five year career vision and map it backward to specific actions I can take this week."
+        }
+      }
+    ]
   },
   {
     id: "btc7",
     title: "Quality and Safety Mindset",
     icon: "🛡️",
     desc: "Build the habits that protect patients and advance careers.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc7l1",
+        title: "What a Quality Mindset Looks Like in Daily Practice",
+        sections: [
+          {
+            header: "Quality Is Not a Department. It Is a Habit.",
+            body: "Most pharmacy technicians hear the word quality and think about audits, inspections and compliance reviews. Those are the formal expressions of quality. But the actual work of quality happens every single day in decisions that never show up in a report.\n\nIt happens when you pause before finalizing a data entry instead of rushing because the line is long. It happens when you flag an ambiguous order instead of making your best guess. It happens when you document a discrepancy accurately even though it means more paperwork and a difficult conversation. Quality is not what you do when someone is watching. It is what you do when no one is."
+          },
+          {
+            header: "The Daily Habits of Quality-Minded Techs",
+            body: "Quality-minded techs slow down at the right moments. Not on everything but specifically on high-risk steps. Controlled substance counts. High-alert medication fills. Verbal order readbacks. They treat documentation as communication, not paperwork. Every entry they make is written for the next person who needs to understand what happened and why.\n\nThey escalate early. A quality mindset means recognizing that a small uncertainty now is always cheaper to address than a large problem later. And they close the loop. When they flag something, they follow up to make sure it was addressed. Not because they are checking up on anyone but because they understand that their responsibility does not end with the flag."
+          }
+        ],
+        keyPoints: [
+          "Quality is a daily practice, not an event that happens during audits.",
+          "Slowing down at high-risk moments is a skill that quality-minded techs develop deliberately.",
+          "Documentation is communication with the next person in the chain, not a compliance task.",
+          "Early escalation and loop closure are the two habits that prevent small problems from becoming large ones."
+        ],
+        takeaway: "Quality is not about being perfect. It is about building habits that make errors less likely and more catchable when they do occur.",
+        selfCheck: {
+          prompt: "Which of these best describes how you currently approach accuracy and documentation?",
+          options: [
+            {
+              label: "I work quickly and accurately. I trust my instincts and rarely slow down unless something feels off.",
+              response: "Speed and instinct are valuable. The refinement is identifying the specific steps where your instincts are most likely to miss something and building deliberate pauses there. Not everywhere. Just at the high-risk points."
+            },
+            {
+              label: "I am very careful but I sometimes feel like I am the only one who cares about doing things correctly.",
+              response: "That frustration is common among quality-minded techs in environments that have not fully built a quality culture. Your consistency still matters even when it is not mirrored around you. And it is being noticed by someone, even if that feedback has not reached you yet."
+            },
+            {
+              label: "Honestly I know I rush sometimes and my documentation is not always as thorough as it should be.",
+              response: "That honesty is the first step. Pick one specific habit to improve this week. Not everything at once. Just one. Deliberate pause before controlled substance count finalization is a high-impact, low-effort starting point."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are working a busy shift and you notice that a colleague has been consistently skipping the readback step on verbal orders because it is slowing things down. No errors have occurred yet but you know the risk.",
+          prompt: "What do you do and how do you frame it in a way that is constructive rather than confrontational?"
+        },
+        answer: {
+          recommended: "First, continue modeling the correct behavior yourself without comment. Then in a quiet moment approach your colleague peer to peer. Something like: Hey, I noticed we have both been skipping the readback on verbal orders when it gets busy. I know it feels like it slows things down but I got nervous about it and wanted to flag it. Can we make a point to do it even on the rushed shifts? You are including yourself, keeping it low-key and focusing on the behavior rather than the person. If it continues after that conversation, bring it to your pharmacist as a workflow observation rather than a complaint about the individual.",
+          why: "Confrontational correction triggers defensiveness. Peer-level, we-framing invites collaboration. You addressed a real safety risk, preserved the relationship and modeled the kind of quality advocacy that gets noticed by leadership over time."
+        },
+        connection: {
+          tag: "CQI Coordinator · Medication Safety Officer · Lead Pharmacy Technician · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson What a Quality Mindset Looks Like in Daily Practice. Help me identify specific habits I can build in my current role to strengthen my quality and safety mindset."
+        }
+      },
+      {
+        id: "btc7l2",
+        title: "Engaging with Safety Processes Instead of Just Complying",
+        sections: [
+          {
+            header: "The Difference Between Compliance and Engagement",
+            body: "Compliance means you do what the policy says. Engagement means you understand why the policy exists, you follow it even when it is inconvenient, you notice when it is not working the way it was designed to and you bring that observation forward.\n\nMost pharmacy technicians operate at compliance. The techs who advance into quality, safety and leadership roles operate at engagement. The difference is not intelligence or effort. It is perspective. Compliant techs see safety processes as requirements. Engaged techs see them as systems that are trying to solve a problem, and like all systems they can be improved."
+          },
+          {
+            header: "How to Engage With Safety Processes Actively",
+            body: "Start by understanding the why behind every process you follow. Why does the controlled substance count require two witnesses? Why does the high-alert medication require a second check? Why is the readback required on verbal orders? When you know the why you follow the process differently and you notice more quickly when the process is breaking down.\n\nThen start observing patterns. If a safety step is being skipped consistently, that is a system design problem as much as a behavior problem. Bring it forward as a process observation rather than a complaint. Organizations that have strong safety cultures are built on techs and pharmacists who report near misses and process gaps without fear of blame. And when error reporting systems exist, use them. A near miss reported is a future error prevented."
+          }
+        ],
+        keyPoints: [
+          "Compliance follows policy. Engagement understands why the policy exists.",
+          "Knowing the why behind a process changes how you follow it and what you notice.",
+          "Pattern observation and process gap reporting are the highest-value safety contributions a tech can make.",
+          "Near miss reporting prevents future errors. It is one of the most impactful safety behaviors available to frontline staff."
+        ],
+        takeaway: "The safest pharmacies are not the ones with the strictest rules. They are the ones where every person on the team feels responsible for the outcome.",
+        selfCheck: {
+          prompt: "How do you currently relate to safety processes and policies at work?",
+          options: [
+            {
+              label: "I follow the policies because I am required to. I do not think about them much beyond that.",
+              response: "That compliance is a baseline. The invitation in this lesson is to pick one policy this week and spend five minutes understanding why it exists. That shift in perspective changes how you follow it and what you notice when it is not working."
+            },
+            {
+              label: "I follow the policies and I notice when they are not being followed but I do not usually say anything.",
+              response: "You are halfway there. The observation without the communication is where the value gets lost. The next step is finding a low-stakes way to raise one observation. The framing in this lesson is designed to make that feel manageable."
+            },
+            {
+              label: "I actively engage with safety processes, report near misses and bring process gaps to my pharmacist.",
+              response: "That engagement is rare and genuinely valuable. If your organization has a formal quality improvement structure, find a way to be part of it. Your frontline perspective is exactly what those processes need."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You notice that the barcode scanning step before dispensing has been turned off on one of the workstations because the scanner is malfunctioning. Staff have been manually verifying without the scan for three days. No one has reported it or submitted a work order.",
+          prompt: "What do you do and why does it matter beyond just the inconvenience of a broken scanner?"
+        },
+        answer: {
+          recommended: "Submit the work order for the scanner immediately if you have the ability to do so. If not, inform your pharmacist that the scanner has been down for three days and that the barcode verification step is not happening at that station. Frame it as a safety gap, not a complaint. The scanner at station two has been down for three days and we have been manually verifying. I wanted to flag it as a risk since barcode scanning is part of our error prevention process. Then document that you raised it. If your organization has a near miss or safety reporting system, this qualifies.",
+          why: "A malfunctioning barcode scanner is not just an inconvenience. It is a removed safety layer. The longer it goes unreported the longer the team operates without a protection that was specifically designed to catch errors. The tech who raises it is not being difficult. They are doing exactly what a quality and safety mindset looks like in practice."
+        },
+        connection: {
+          tag: "CQI Coordinator · Medication Safety Officer · Performance Improvement Specialist · Lead Pharmacy Technician",
+          aiPrompt: "I just completed the lesson Engaging with Safety Processes Instead of Just Complying. Help me understand how to move from compliance to genuine engagement with safety processes in my current workplace."
+        }
+      }
+    ]
   },
   {
     id: "btc8",
     title: "Building Your Personal Brand as a Tech",
     icon: "💼",
     desc: "Get known for the right things in and out of your workplace.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc8l1",
+        title: "Your Internal Brand — How You Are Known at Work",
+        sections: [
+          {
+            header: "Your Brand at Work Is Already Established",
+            body: "Every person who has worked with you has formed an impression. That impression, the thing they would say about you if someone asked, is your internal brand. You did not choose whether to have one. You only choose whether to manage it.\n\nIn a pharmacy setting your internal brand is built on a small number of highly visible dimensions. How you handle pressure. Whether you can be counted on. How you treat people with less experience or authority than you. Whether you bring problems or solutions. Whether your presence on a shift makes the environment better or harder. Most techs have never thought about their brand in these terms. The ones who manage their careers most effectively have."
+          },
+          {
+            header: "Shaping How You Are Known Intentionally",
+            body: "The first step is asking yourself what you want to be known for. Not generically but specifically. Do you want to be known as the tech who is unshakeable under pressure? The one who makes new staff feel supported? The one who catches things before they become problems? The one who knows controlled substances better than anyone on the team?\n\nPick one or two things and build toward them intentionally. Then look for opportunities to demonstrate those qualities visibly. Not performatively but genuinely. When your moment comes to show what you are about, be ready to show it. Over time the reputation compounds and the internal brand becomes the reason you get called for the hard shifts, the lead opportunities and the professional recommendations."
+          }
+        ],
+        keyPoints: [
+          "Your internal brand is already established. The question is whether it reflects what you want people to say.",
+          "Brand is built on a small number of highly visible dimensions including composure, reliability and how you treat others.",
+          "Identifying what you want to be known for is the prerequisite to building toward it intentionally.",
+          "Internal brand compounds over time. Early investment pays long-term returns."
+        ],
+        takeaway: "You are always branding. The only question is whether you are doing it on purpose.",
+        selfCheck: {
+          prompt: "If your pharmacist or manager were describing you to someone who had never met you, what do you think they would say?",
+          options: [
+            {
+              label: "Honestly I am not sure. I have never thought about it from their perspective.",
+              response: "That is a useful realization. The exercise of imagining how others describe you reveals gaps between how you see yourself and how you are perceived. Pick one dimension you want to strengthen and focus on it for the next thirty days."
+            },
+            {
+              label: "I have a pretty good sense of my reputation at work and I am mostly happy with it.",
+              response: "That self-awareness is valuable. The next level is getting explicit feedback rather than inferring. A simple question asking what you do best and where they see room for development is one of the most powerful career conversations you can have."
+            },
+            {
+              label: "I know exactly how I am perceived and I have been intentionally building my reputation for a while.",
+              response: "That intentionality is the foundation of this entire module. The next lesson takes that internal brand and extends it beyond your current workplace. That is where the real career leverage lives."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been at your current pharmacy for two years. A new pharmacist joins the team and within the first week asks a veteran tech: Who are the people on this team I should really pay attention to? You are not in the room.",
+          prompt: "Based on how you currently show up at work, what would that veteran tech say about you and is it what you want them to say?"
+        },
+        answer: {
+          recommended: "This is a reflective exercise more than a prescriptive one. The honest answer requires you to evaluate your current internal brand against your intended one. Think about the last thirty days. What moments stand out? How did you handle the hardest shift? How did you respond to the last mistake you or someone near you made? How do you treat the newest person on the team? The veteran tech's answer is built from moments exactly like those. If the answer you imagine does not match what you want, you now have a specific starting point for what to change.",
+          why: "Most people wait for feedback to understand their reputation. This exercise lets you audit your own brand proactively. The gap between what you imagine they would say and what you want them to say is your development roadmap."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · CPhT-Adv · Training Coordinator",
+          aiPrompt: "I just completed the lesson Your Internal Brand — How You Are Known at Work. Help me assess my current internal brand and identify the one or two things I should focus on to strengthen how I am known at work."
+        }
+      },
+      {
+        id: "btc8l2",
+        title: "Your External Brand — Professional Presence Beyond Your Employer",
+        sections: [
+          {
+            header: "Why Your Professional Presence Needs to Exist Outside Your Workplace",
+            body: "Your employer knows what you can do. The rest of the pharmacy world does not. If your entire professional identity lives inside one building, your career is limited to the opportunities that building offers.\n\nThe techs who build the most dynamic careers are the ones who are known in their field, not just their workplace. That does not mean you need to be famous or have a large following. It means that a hiring manager at another health system, a credentialing committee, a colleague at a professional conference can find you, understand your background and form a positive impression before you have said a word. That is what external professional presence accomplishes."
+          },
+          {
+            header: "Building External Presence Without Starting From Scratch",
+            body: "LinkedIn is the foundation. A complete LinkedIn profile with your credentials, employment history, a professional photo and a summary that describes what you do and where you are going is the minimum. It is findable, professional and permanent.\n\nBeyond LinkedIn, professional organizations like NPTA, ASHP and the Pharmacy Technician Society offer membership, networking events and sometimes volunteer or committee opportunities. These are where relationships get built outside your employer. If you have knowledge worth sharing, consider whether any local or regional pharmacy events accept speakers or panelists. The bar is lower than most people think and one presentation at a regional conference can open more doors than years of applying to job postings."
+          }
+        ],
+        keyPoints: [
+          "Professional presence outside your employer expands the opportunities available to you beyond what your current organization can offer.",
+          "LinkedIn is the non-negotiable foundation of external professional presence.",
+          "Professional organizations are where relationships get built across employers and environments.",
+          "Speaking and volunteering opportunities exist at lower barriers than most techs assume."
+        ],
+        takeaway: "Your career should not be limited to what one organization decides to offer you. External presence creates options.",
+        selfCheck: {
+          prompt: "How visible are you professionally outside of your current workplace?",
+          options: [
+            {
+              label: "I am not on LinkedIn and I am not involved in any professional organizations.",
+              response: "LinkedIn first. Today if possible. A complete profile with your credentials and employment history is the single highest-leverage professional action available to you right now. Everything else builds from there."
+            },
+            {
+              label: "I have a LinkedIn profile but it is not very complete and I have not been active on it.",
+              response: "A dormant LinkedIn profile is better than none but a complete one works for you passively every day. Spend one hour this week updating it. Credentials, current role with specific responsibilities, a one paragraph summary of your background and direction. That investment pays returns for years."
+            },
+            {
+              label: "I am active on LinkedIn, involved in a professional organization and building presence outside my employer.",
+              response: "That visibility is compounding in ways you may not be able to see yet. Stay consistent. The relationships and opportunities that come from sustained external presence often arrive unexpectedly and from directions you did not anticipate."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been a pharmacy technician for five years, you hold your CPhT and one specialty certificate, and you have never been on LinkedIn or attended a professional pharmacy event outside of required employer training.",
+          prompt: "Build a simple three month plan to establish external professional presence from scratch."
+        },
+        answer: {
+          recommended: "Month one: Create or complete your LinkedIn profile. Professional photo, complete employment history, credentials listed with issuing bodies and dates, a two to three sentence summary that describes your background and where you are heading. Connect with colleagues, former supervisors and any pharmacists you have worked with. Month two: Join one professional organization. NPTA is a practical starting point for technicians. Explore their events, resources and any volunteer or committee opportunities. Set a goal to attend one virtual or in-person event before the end of the month. Month three: Engage on LinkedIn at least once per week. Comment thoughtfully on posts in your field, share resources that are relevant to pharmacy technicians and connect with one new person per week.",
+          why: "External presence feels overwhelming when you look at people who have been building it for years. Built from scratch in ninety days with specific weekly actions it is completely manageable. The goal is not to arrive. The goal is to exist professionally outside your workplace and then keep building from there."
+        },
+        connection: {
+          tag: "CPhT-Adv · Lead Pharmacy Technician · Pharmacy Supervisor · Pharmacy Technician Educator",
+          aiPrompt: "I just completed the lesson Your External Brand — Professional Presence Beyond Your Employer. Help me build a plan to establish my professional presence outside my current workplace based on where I am starting from."
+        }
+      }
+    ]
   }
 ];
 
