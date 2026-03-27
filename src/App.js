@@ -1823,6 +1823,23 @@ function BeyondTheCounterLesson({ lesson, go }) {
         </div>
       )}
 
+     {/* MARK COMPLETE BUTTON */}
+      <div style={{ marginBottom: 18, display: "flex", justifyContent: "center" }}>
+        <button
+          onClick={() => {
+            if (go) go("btc-complete", { lessonId: lesson.id });
+          }}
+          style={{
+            background: `linear-gradient(135deg,#00c9a7,#0094ff)`,
+            color: "#fff", border: "none", borderRadius: 12,
+            padding: "12px 28px", fontSize: 14, fontWeight: 800,
+            cursor: "pointer", letterSpacing: 0.2,
+          }}
+        >
+          ✓ Mark Lesson Complete
+        </button>
+      </div>
+
       {/* PART 5 — CONNECTION TAG + ASK THE AI */}
       {lesson.connection && (
         <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
@@ -2833,8 +2850,13 @@ export default function App(){
   const doneN=allL.filter(l=>done[l.id]).length;
   const pct=allL.length?Math.round((doneN/allL.length)*100):0;
 
-  const go=v=>{
+ const go=(v, payload)=>{
     if(v==="career-ai"){setSec(null);setMod(null);setLesson(null);setView("career");setCareerTab("ai");return;}
+    if(v==="btc-complete" && payload?.lessonId){
+      setDone(p=>({...p,[payload.lessonId]:true}));
+      pop("✓ Lesson complete!");
+      return;
+    }
     setSec(null);setMod(null);setLesson(null);setView(v);
   };
   const back=()=>{
