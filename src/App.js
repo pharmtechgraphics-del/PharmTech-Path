@@ -796,12 +796,12 @@ const CAREER_PREFERENCE_CATEGORIES = [
 // ─── CAREER PREFERENCES COMPONENT ──────────────────────────────────────────
 
 function CareerPreferencesSelector({ user, isPro, db }) {
-  const [selections, setSelections] = React.useState({});
-  const [saved, setSaved] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
+  const [selections, setSelections] = useState({});
+const [saved, setSaved] = useState(false);
+const [loading, setLoading] = useState(true);
 
   // Load existing selections from Firestore on mount
-  React.useEffect(() => {
+  useEffect(() => {
     if (!user) return;
     const load = async () => {
       try {
