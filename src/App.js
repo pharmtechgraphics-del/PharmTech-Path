@@ -1098,7 +1098,158 @@ const BEYOND_MODULES = [
     title: "Advanced Certifications and What They Actually Open",
     icon: "🎓",
     desc: "Know what credentials unlock and when to pursue them.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc5l1",
+        title: "CPhT-Adv — What It Is and What It Actually Changes",
+        sections: [
+          {
+            header: "Beyond the Credential",
+            body: "The CPhT-Adv is the most recognized advanced credential for pharmacy technicians in the United States. But the credential itself is not the point. The point is what earning it signals to every employer, pharmacist and hiring manager who sees it. It signals that you did not stop at the minimum. That you sought out specialized knowledge across multiple areas of practice. That you meet a standard that most pharmacy technicians never pursue.\n\nIn a field where the baseline certification is the same whether you have six months or six years of experience, the CPhT-Adv is one of the clearest ways to make your depth of experience visible on paper."
+          },
+          {
+            header: "How It Works and What It Requires",
+            body: "The CPhT-Adv is offered through both BPTS and PTCB. There is no separate exam. It is an application-based credential earned once you meet specific requirements. You need an active CPhT, at least two years of supervised pharmacy experience and a combination of specialty certificates. Through BPTS the path requires four assessment-based specialty certificates with at least one from BPTS. Through PTCB the requirements are similar with specific certificate combinations accepted.\n\nOnce approved you receive a digital badge through Credly that you display on LinkedIn, your resume and your email signature. It renews every two years and requires 25 hours of ACPE-accredited continuing education."
+          }
+        ],
+        keyPoints: [
+          "CPhT-Adv signals advanced practice to employers in a way that years of experience alone cannot.",
+          "It is application-based with no separate exam required.",
+          "Requirements include active CPhT, two years of experience and specialty certificates.",
+          "The digital badge through Credly makes the credential visible on LinkedIn and professional profiles."
+        ],
+        takeaway: "The CPhT-Adv does not make you more competent overnight. It makes your existing competence visible to people who have never worked with you.",
+        selfCheck: {
+          prompt: "Where are you in your certification journey right now?",
+          options: [
+            {
+              label: "I have my CPhT but have not looked into what comes next.",
+              response: "You are closer than you think. The next step is identifying which specialty certificates align with your current work. You do not need to pursue all of them at once. Start with one that reflects what you already do every day."
+            },
+            {
+              label: "I am actively working toward specialty certificates or the CPhT-Adv.",
+              response: "Stay the course. The compounding effect of credentials is real. Each certificate makes the next one easier to pursue and the overall picture more compelling to anyone evaluating your background."
+            },
+            {
+              label: "I already hold the CPhT-Adv or other advanced credentials.",
+              response: "The credential is the floor, not the ceiling. The question now is how visible it is. Is it on your LinkedIn? Your email signature? Are you using it to position yourself for the next opportunity?"
+            }
+          ]
+        },
+        scenario: {
+          setup: "A pharmacist you respect asks you why you are pursuing the CPhT-Adv since your pay will not change immediately and your current role does not require it.",
+          prompt: "How do you respond and what does your answer reveal about how you think about your career?"
+        },
+        answer: {
+          recommended: "I am not pursuing it for my current role. I am pursuing it for the role I want to be in two years. The credential makes my experience readable to people who have never worked with me. And the specialty certificates I need to earn it are pushing me to formalize knowledge I already use every day but have never documented.",
+          why: "The pharmacist asked a legitimate question. A defensive answer suggests you have not thought it through. A clear forward-looking answer signals that you are operating with intention. That conversation often becomes a reference point for how a pharmacist thinks about you when a leadership opportunity comes up."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CQI Coordinator · Pharmacy Supervisor · Training Coordinator",
+          aiPrompt: "I just completed the lesson CPhT-Adv — What It Is and What It Actually Changes. Based on my current certifications and background, help me understand whether I should pursue CPhT-Adv now or focus on specialty certificates first."
+        }
+      },
+      {
+        id: "btc5l2",
+        title: "Choosing Your Next Certification Based on Where You Want to Go",
+        sections: [
+          {
+            header: "Not All Credentials Open the Same Doors",
+            body: "The most common mistake pharmacy technicians make with certifications is pursuing whatever is available rather than whatever is strategic. Both PTCB and BPTS offer a range of specialty certificates and board certifications. Each one positions you differently depending on the environment you work in and the role you are moving toward.\n\nA tech in retail pursuing a sterile compounding credential is building knowledge but not necessarily building toward their next opportunity. A tech in a hospital IV room pursuing BCSCPT is doing both. The difference is alignment. Your certifications should tell a coherent story about where you are going, not just what you have done."
+          },
+          {
+            header: "A Framework for Choosing What to Pursue Next",
+            body: "Start with your target role. What is the next position you want to hold? Look at job postings for that role and identify what credentials appear most frequently. That is market signal. Then look at what you already do every day and ask which certificate would formalize and validate that existing knowledge. That is your lowest friction path to a credential with real relevance.\n\nFinally consider the CPhT-Adv pathway. If you are within reach of the certificate requirements, it may be more strategic to pursue the certificates that count toward CPhT-Adv rather than pursuing certificates randomly. A planned pathway gets you further faster."
+          }
+        ],
+        keyPoints: [
+          "Credential selection should align with your target role, not just what is available.",
+          "Job postings for your target role are the clearest signal of what credentials matter to employers.",
+          "The CPhT-Adv pathway provides a framework for choosing certificates strategically.",
+          "Formalizing knowledge you already use every day is the lowest friction path to a relevant credential."
+        ],
+        takeaway: "A planned certification pathway tells a story. A random collection of credentials just fills space on a resume.",
+        selfCheck: {
+          prompt: "How have you made certification decisions in the past?",
+          options: [
+            {
+              label: "I pursued what was available or what my employer offered.",
+              response: "That is how most techs start. The shift is moving from reactive to intentional. Now that you have a clearer picture of where you want to go, you can evaluate future opportunities against that direction."
+            },
+            {
+              label: "I have thought about it but I am not sure which path makes sense for my goals.",
+              response: "Start with the job posting exercise in this lesson. Pull three postings for the role you want and look at what credentials appear. That data will tell you more than any general advice can."
+            },
+            {
+              label: "I have a clear plan and I am working it.",
+              response: "That intentionality is exactly what separates techs who advance consistently from those who wait for the right opportunity. Make sure your plan is visible to the people around you who can support or accelerate it."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You work in an inpatient hospital pharmacy and your goal is to move into a Lead Tech role within 18 months. You currently hold your CPhT and have no specialty certificates.",
+          prompt: "Using what you know about your environment and your goal, what would your certification plan look like for the next 18 months?"
+        },
+        answer: {
+          recommended: "Start with the Medication Safety certificate from either PTCB or BPTS since safety mindset is central to any lead role in an inpatient setting and it formalizes work you are already doing. Add Controlled Substances Diversion Prevention next since inpatient lead roles almost universally involve controlled substance oversight. Those two certificates plus your existing CPhT put you on the CPhT-Adv pathway. Research whether your target job postings mention CPhT-Adv and if so make that the 18-month goal by identifying the remaining certificate requirements and mapping them to a timeline.",
+          why: "This plan is not random. Every certificate directly supports the target role, builds relevant knowledge and contributes to a larger credential that will make your application stand out. Eighteen months is realistic. The plan is specific enough to execute and flexible enough to adjust."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · CPhT-Adv · Pharmacy Supervisor · CQI Coordinator",
+          aiPrompt: "I just completed the lesson Choosing Your Next Certification Based on Where You Want to Go. Based on my current role and where I want to go, help me build a specific certification plan."
+        }
+      },
+      {
+        id: "btc5l3",
+        title: "Making Your Credentials Visible and Working For You",
+        sections: [
+          {
+            header: "A Credential Nobody Knows About Does Not Help You",
+            body: "You earned the certificate. You passed the assessment. You have the digital badge sitting in a Credly email you have not opened since you received it. This is more common than it should be. Credentials only create opportunity when they are visible to the people who make decisions about your career.\n\nThat means your LinkedIn profile needs to be updated. Your resume needs to reflect the credential with the issuing body and the date. Your email signature at work, if professional signatures are used, should include your full credential string. Your manager should know you earned it. The pharmacist you work with most closely should know you earned it. Visibility is not bragging. It is basic career management."
+          },
+          {
+            header: "How Credentials Change Conversations",
+            body: "When your credentials are visible something specific happens. People start conversations with you differently. A hiring manager who sees CPhT-Adv on your resume before the interview begins already has a different baseline assumption about your experience than they would otherwise. A pharmacist who sees your Medication Safety certificate on your badge or profile is more likely to include you in safety-related conversations.\n\nCredentials change how people perceive your expertise before you have said a word. That perception opens doors that your daily work alone cannot."
+          }
+        ],
+        keyPoints: [
+          "Credentials must be visible to create opportunity. Earning them is only half the work.",
+          "LinkedIn, your resume and your email signature are the three primary visibility channels.",
+          "Visible credentials change how people engage with you before you have said anything.",
+          "Informing your manager and pharmacist directly about credentials you earn is professional, not boastful."
+        ],
+        takeaway: "Earning a credential without making it visible is like doing exceptional work on a shift nobody witnessed. The work happened. The opportunity did not.",
+        selfCheck: {
+          prompt: "How visible are your current credentials right now?",
+          options: [
+            {
+              label: "I have credentials but I have not updated my LinkedIn or resume recently.",
+              response: "Today is a good day to change that. Start with LinkedIn. Add each credential with the issuing body and the date earned. It takes fifteen minutes and it is one of the highest return-on-time activities in your career."
+            },
+            {
+              label: "My credentials are visible on my resume and LinkedIn but I have not mentioned them at work.",
+              response: "That next step feels uncomfortable for a lot of people but it is simpler than it sounds. The next time you are asked about your background or goals, mention it naturally. You do not need to announce it. Just include it."
+            },
+            {
+              label: "My credentials are fully visible and I actively reference them in professional conversations.",
+              response: "That visibility is working for you. The next layer is helping peers understand how to do the same. That is leadership."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You earned your Medication Safety certificate two months ago. You have not updated your LinkedIn, your resume still shows only CPhT and you have not mentioned it to your manager or pharmacist.",
+          prompt: "Walk through the specific steps you would take in the next week to make this credential visible and working for you."
+        },
+        answer: {
+          recommended: "Day one, open the Credly email and accept the digital badge. Add it to your LinkedIn profile under licenses and certifications with the issuing body and date. Day two, update your resume to include the certificate under a certifications section. Day three, mention it to your pharmacist or manager in a natural context. Something like I finished my Medication Safety certificate last month. I wanted you to know in case it is relevant to anything coming up.",
+          why: "Most techs let credentials sit quietly on a piece of paper. The ones who advance treat each credential as a professional communication. They earned it. They announce it appropriately. They let it work for them. That habit compounds significantly over a career."
+        },
+        connection: {
+          tag: "CPhT-Adv · Lead Pharmacy Technician · Pharmacy Supervisor · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson Making Your Credentials Visible and Working For You. Help me create a plan to make my current credentials more visible and put them to work for my career."
+        }
+      }
+    ]
   },
   {
     id: "btc6",
