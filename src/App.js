@@ -1522,7 +1522,108 @@ const BEYOND_MODULES = [
     title: "Building Your Personal Brand as a Tech",
     icon: "💼",
     desc: "Get known for the right things in and out of your workplace.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc8l1",
+        title: "Your Internal Brand — How You Are Known at Work",
+        sections: [
+          {
+            header: "Your Brand at Work Is Already Established",
+            body: "Every person who has worked with you has formed an impression. That impression, the thing they would say about you if someone asked, is your internal brand. You did not choose whether to have one. You only choose whether to manage it.\n\nIn a pharmacy setting your internal brand is built on a small number of highly visible dimensions. How you handle pressure. Whether you can be counted on. How you treat people with less experience or authority than you. Whether you bring problems or solutions. Whether your presence on a shift makes the environment better or harder. Most techs have never thought about their brand in these terms. The ones who manage their careers most effectively have."
+          },
+          {
+            header: "Shaping How You Are Known Intentionally",
+            body: "The first step is asking yourself what you want to be known for. Not generically but specifically. Do you want to be known as the tech who is unshakeable under pressure? The one who makes new staff feel supported? The one who catches things before they become problems? The one who knows controlled substances better than anyone on the team?\n\nPick one or two things and build toward them intentionally. Then look for opportunities to demonstrate those qualities visibly. Not performatively but genuinely. When your moment comes to show what you are about, be ready to show it. Over time the reputation compounds and the internal brand becomes the reason you get called for the hard shifts, the lead opportunities and the professional recommendations."
+          }
+        ],
+        keyPoints: [
+          "Your internal brand is already established. The question is whether it reflects what you want people to say.",
+          "Brand is built on a small number of highly visible dimensions including composure, reliability and how you treat others.",
+          "Identifying what you want to be known for is the prerequisite to building toward it intentionally.",
+          "Internal brand compounds over time. Early investment pays long-term returns."
+        ],
+        takeaway: "You are always branding. The only question is whether you are doing it on purpose.",
+        selfCheck: {
+          prompt: "If your pharmacist or manager were describing you to someone who had never met you, what do you think they would say?",
+          options: [
+            {
+              label: "Honestly I am not sure. I have never thought about it from their perspective.",
+              response: "That is a useful realization. The exercise of imagining how others describe you reveals gaps between how you see yourself and how you are perceived. Pick one dimension you want to strengthen and focus on it for the next thirty days."
+            },
+            {
+              label: "I have a pretty good sense of my reputation at work and I am mostly happy with it.",
+              response: "That self-awareness is valuable. The next level is getting explicit feedback rather than inferring. A simple question asking what you do best and where they see room for development is one of the most powerful career conversations you can have."
+            },
+            {
+              label: "I know exactly how I am perceived and I have been intentionally building my reputation for a while.",
+              response: "That intentionality is the foundation of this entire module. The next lesson takes that internal brand and extends it beyond your current workplace. That is where the real career leverage lives."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been at your current pharmacy for two years. A new pharmacist joins the team and within the first week asks a veteran tech: Who are the people on this team I should really pay attention to? You are not in the room.",
+          prompt: "Based on how you currently show up at work, what would that veteran tech say about you and is it what you want them to say?"
+        },
+        answer: {
+          recommended: "This is a reflective exercise more than a prescriptive one. The honest answer requires you to evaluate your current internal brand against your intended one. Think about the last thirty days. What moments stand out? How did you handle the hardest shift? How did you respond to the last mistake you or someone near you made? How do you treat the newest person on the team? The veteran tech's answer is built from moments exactly like those. If the answer you imagine does not match what you want, you now have a specific starting point for what to change.",
+          why: "Most people wait for feedback to understand their reputation. This exercise lets you audit your own brand proactively. The gap between what you imagine they would say and what you want them to say is your development roadmap."
+        },
+        connection: {
+          tag: "Lead Pharmacy Technician · Pharmacy Supervisor · CPhT-Adv · Training Coordinator",
+          aiPrompt: "I just completed the lesson Your Internal Brand — How You Are Known at Work. Help me assess my current internal brand and identify the one or two things I should focus on to strengthen how I am known at work."
+        }
+      },
+      {
+        id: "btc8l2",
+        title: "Your External Brand — Professional Presence Beyond Your Employer",
+        sections: [
+          {
+            header: "Why Your Professional Presence Needs to Exist Outside Your Workplace",
+            body: "Your employer knows what you can do. The rest of the pharmacy world does not. If your entire professional identity lives inside one building, your career is limited to the opportunities that building offers.\n\nThe techs who build the most dynamic careers are the ones who are known in their field, not just their workplace. That does not mean you need to be famous or have a large following. It means that a hiring manager at another health system, a credentialing committee, a colleague at a professional conference can find you, understand your background and form a positive impression before you have said a word. That is what external professional presence accomplishes."
+          },
+          {
+            header: "Building External Presence Without Starting From Scratch",
+            body: "LinkedIn is the foundation. A complete LinkedIn profile with your credentials, employment history, a professional photo and a summary that describes what you do and where you are going is the minimum. It is findable, professional and permanent.\n\nBeyond LinkedIn, professional organizations like NPTA, ASHP and the Pharmacy Technician Society offer membership, networking events and sometimes volunteer or committee opportunities. These are where relationships get built outside your employer. If you have knowledge worth sharing, consider whether any local or regional pharmacy events accept speakers or panelists. The bar is lower than most people think and one presentation at a regional conference can open more doors than years of applying to job postings."
+          }
+        ],
+        keyPoints: [
+          "Professional presence outside your employer expands the opportunities available to you beyond what your current organization can offer.",
+          "LinkedIn is the non-negotiable foundation of external professional presence.",
+          "Professional organizations are where relationships get built across employers and environments.",
+          "Speaking and volunteering opportunities exist at lower barriers than most techs assume."
+        ],
+        takeaway: "Your career should not be limited to what one organization decides to offer you. External presence creates options.",
+        selfCheck: {
+          prompt: "How visible are you professionally outside of your current workplace?",
+          options: [
+            {
+              label: "I am not on LinkedIn and I am not involved in any professional organizations.",
+              response: "LinkedIn first. Today if possible. A complete profile with your credentials and employment history is the single highest-leverage professional action available to you right now. Everything else builds from there."
+            },
+            {
+              label: "I have a LinkedIn profile but it is not very complete and I have not been active on it.",
+              response: "A dormant LinkedIn profile is better than none but a complete one works for you passively every day. Spend one hour this week updating it. Credentials, current role with specific responsibilities, a one paragraph summary of your background and direction. That investment pays returns for years."
+            },
+            {
+              label: "I am active on LinkedIn, involved in a professional organization and building presence outside my employer.",
+              response: "That visibility is compounding in ways you may not be able to see yet. Stay consistent. The relationships and opportunities that come from sustained external presence often arrive unexpectedly and from directions you did not anticipate."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You have been a pharmacy technician for five years, you hold your CPhT and one specialty certificate, and you have never been on LinkedIn or attended a professional pharmacy event outside of required employer training.",
+          prompt: "Build a simple three month plan to establish external professional presence from scratch."
+        },
+        answer: {
+          recommended: "Month one: Create or complete your LinkedIn profile. Professional photo, complete employment history, credentials listed with issuing bodies and dates, a two to three sentence summary that describes your background and where you are heading. Connect with colleagues, former supervisors and any pharmacists you have worked with. Month two: Join one professional organization. NPTA is a practical starting point for technicians. Explore their events, resources and any volunteer or committee opportunities. Set a goal to attend one virtual or in-person event before the end of the month. Month three: Engage on LinkedIn at least once per week. Comment thoughtfully on posts in your field, share resources that are relevant to pharmacy technicians and connect with one new person per week.",
+          why: "External presence feels overwhelming when you look at people who have been building it for years. Built from scratch in ninety days with specific weekly actions it is completely manageable. The goal is not to arrive. The goal is to exist professionally outside your workplace and then keep building from there."
+        },
+        connection: {
+          tag: "CPhT-Adv · Lead Pharmacy Technician · Pharmacy Supervisor · Pharmacy Technician Educator",
+          aiPrompt: "I just completed the lesson Your External Brand — Professional Presence Beyond Your Employer. Help me build a plan to establish my professional presence outside my current workplace based on where I am starting from."
+        }
+      }
+    ]
   }
 ];
 
