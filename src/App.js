@@ -57,6 +57,551 @@ async function recordAISession(uid) {
   } catch {}
 }
 
+
+const JOB_TITLES = [
+  // ── RETAIL PHARMACY ────────────────────────────────────────────────────────
+  {
+    id: "jt1",
+    title: "Staff Pharmacy Technician",
+    setting: "Retail Pharmacy",
+    settingTag: "Retail",
+    experienceLevel: "Entry Level",
+    description: "Fill and dispense prescriptions, process insurance claims, manage inventory and support patients at the counter. This is where most techs begin and where core skills are built.",
+    requirement: "State registration or licensure. No prior experience required in most states.",
+    unique: "Direct daily patient interaction across a wide range of medications and conditions.",
+  },
+  {
+    id: "jt2",
+    title: "Lead Pharmacy Technician",
+    setting: "Retail Pharmacy",
+    settingTag: "Retail",
+    experienceLevel: "Mid Level",
+    description: "Oversee daily workflow, support and train newer techs and act as the point person when the pharmacist needs backup on operations.",
+    requirement: "Requires CPhT.",
+    unique: "Your leadership directly impacts how smoothly the entire pharmacy runs.",
+  },
+  {
+    id: "jt3",
+    title: "Pharmacy Supervisor",
+    setting: "Retail Pharmacy",
+    settingTag: "Retail",
+    experienceLevel: "Advanced",
+    description: "Manage a team of technicians, handle scheduling, performance reviews and ensure the pharmacy meets compliance standards.",
+    requirement: "Often requires CPhT plus 3 to 5 years of experience.",
+    unique: "This is where pharmacy transitions from clinical to operational leadership.",
+  },
+  {
+    id: "jt4",
+    title: "Controlled Substance Lead Technician",
+    setting: "Retail Pharmacy",
+    settingTag: "Retail",
+    experienceLevel: "Mid to Advanced",
+    description: "Manage DEA compliance, oversee controlled substance counts, investigate discrepancies and maintain audit-ready records.",
+    requirement: "Requires CPhT and strong attention to regulatory detail.",
+    unique: "One of the most critical compliance roles in any pharmacy setting.",
+  },
+  // ── HOSPITAL AND INPATIENT ─────────────────────────────────────────────────
+  {
+    id: "jt5",
+    title: "Inpatient Pharmacy Technician",
+    setting: "Hospital and Inpatient",
+    settingTag: "Hospital",
+    experienceLevel: "Entry Level",
+    description: "Prepare and distribute medications across hospital units, restock automated dispensing cabinets and support pharmacists with order verification.",
+    requirement: "State registration or licensure. Prior experience helpful but not always required.",
+    unique: "Fast-paced environment with direct impact on patient care outcomes.",
+  },
+  {
+    id: "jt6",
+    title: "IV Sterile Compounding Technician",
+    setting: "Hospital and Inpatient",
+    settingTag: "Hospital",
+    experienceLevel: "Mid Level",
+    description: "Prepare sterile intravenous medications in a cleanroom environment following strict USP 797 and 800 guidelines. Requires additional training and certification.",
+    requirement: "CPhT with USP 797/800 training. CSPT credential strongly preferred.",
+    unique: "High precision, regulated work that directly touches critically ill patients.",
+  },
+  {
+    id: "jt7",
+    title: "Medication History Technician",
+    setting: "Hospital and Inpatient",
+    settingTag: "Hospital",
+    experienceLevel: "Mid Level",
+    description: "Obtain and document accurate medication histories for patients during hospital admission, reducing errors at transitions of care. Requires strong clinical communication skills.",
+    requirement: "CPhT with inpatient experience and strong documentation skills.",
+    unique: "You are often the first line of defense against harmful drug interactions.",
+  },
+  {
+    id: "jt8",
+    title: "Pharmacy Informatics Technician",
+    setting: "Hospital and Inpatient",
+    settingTag: "Hospital",
+    experienceLevel: "Advanced",
+    description: "Work at the intersection of pharmacy and health information technology, managing data systems, supporting EHR implementation and optimizing medication workflows.",
+    requirement: "Requires CPhT-Adv or equivalent experience.",
+    unique: "One of the few tech roles that sits at the leadership and technology table.",
+  },
+  // ── SPECIALTY PHARMACY ─────────────────────────────────────────────────────
+  {
+    id: "jt9",
+    title: "Specialty Pharmacy Technician",
+    setting: "Specialty Pharmacy",
+    settingTag: "Specialty",
+    experienceLevel: "Mid Level",
+    description: "Manage complex, high-cost medications for patients with chronic or rare conditions. Handle prior authorizations, patient follow-ups and specialty drug logistics.",
+    requirement: "Requires CPhT.",
+    unique: "Deep relationships with patients on life-changing therapies.",
+  },
+  {
+    id: "jt10",
+    title: "Prior Authorization Technician",
+    setting: "Specialty Pharmacy",
+    settingTag: "Specialty",
+    experienceLevel: "Mid Level",
+    description: "Coordinate and process prior authorization requests, work directly with payers and providers and ensure patients get timely access to their medications.",
+    requirement: "Requires CPhT and insurance knowledge.",
+    unique: "You are the tech fighting for the patient when insurance says no.",
+  },
+  {
+    id: "jt11",
+    title: "Patient Care Coordinator Technician",
+    setting: "Specialty Pharmacy",
+    settingTag: "Specialty",
+    experienceLevel: "Mid to Advanced",
+    description: "Act as the bridge between patients, providers and the pharmacy, managing adherence, benefit verification and access programs for complex medication therapies.",
+    requirement: "CPhT with specialty or clinical pharmacy experience.",
+    unique: "One of the most patient-facing non-dispensing roles available to a tech.",
+  },
+  // ── PBM AND INSURANCE ──────────────────────────────────────────────────────
+  {
+    id: "jt12",
+    title: "PBM Claims Technician",
+    setting: "PBM and Insurance",
+    settingTag: "PBM",
+    experienceLevel: "Entry to Mid Level",
+    description: "Process and audit prescription drug benefit claims, ensure accurate billing and support plan members with coverage questions.",
+    requirement: "Requires CPhT.",
+    unique: "Fully office or remote-based. No dispensing counter required.",
+  },
+  {
+    id: "jt13",
+    title: "Prior Authorization Analyst",
+    setting: "PBM and Insurance",
+    settingTag: "PBM",
+    experienceLevel: "Mid to Advanced",
+    description: "Review PA requests using clinical criteria, work within PBM platforms and support pharmacists in approving or escalating cases.",
+    requirement: "Requires CPhT and familiarity with formulary management.",
+    unique: "Analytical role with real influence over which medications patients access.",
+  },
+  {
+    id: "jt14",
+    title: "Pharmacy Audit Analyst",
+    setting: "PBM and Insurance",
+    settingTag: "PBM",
+    experienceLevel: "Advanced",
+    description: "Review claims data for billing accuracy, identify compliance issues and support internal or external audits.",
+    requirement: "Requires CPhT plus experience in billing and regulatory standards.",
+    unique: "One of the highest-paying non-clinical paths available to an experienced tech.",
+  },
+  // ── COMPOUNDING PHARMACY ───────────────────────────────────────────────────
+  {
+    id: "jt15",
+    title: "Compounding Pharmacy Technician",
+    setting: "Compounding Pharmacy",
+    settingTag: "Compounding",
+    experienceLevel: "Mid Level",
+    description: "Prepare customized medications tailored to individual patient needs, including topical creams, oral suspensions and suppositories.",
+    requirement: "Requires training in USP 795 non-sterile compounding.",
+    unique: "Hands-on, science-forward work where every prescription is one of a kind.",
+  },
+  {
+    id: "jt16",
+    title: "Sterile Compounding Specialist",
+    setting: "Compounding Pharmacy",
+    settingTag: "Compounding",
+    experienceLevel: "Advanced",
+    description: "Prepare sterile compounded products including injections and ophthalmic preparations in a certified cleanroom.",
+    requirement: "Requires USP 797 compliance training. CSPT or BCSCPT preferred.",
+    unique: "Highly specialized, regulated and in growing demand across hospital and outsourcing facilities.",
+  },
+  // ── MAIL ORDER PHARMACY ────────────────────────────────────────────────────
+  {
+    id: "jt17",
+    title: "Mail Order Pharmacy Technician",
+    setting: "Mail Order Pharmacy",
+    settingTag: "Mail Order",
+    experienceLevel: "Entry to Mid Level",
+    description: "Process and verify high volumes of prescription orders for home delivery, support automated dispensing systems and manage refill coordination.",
+    requirement: "State registration or licensure. CPhT preferred.",
+    unique: "Structured workflow, often remote-friendly and consistent volume.",
+  },
+  {
+    id: "jt18",
+    title: "Pharmacy Operations Technician",
+    setting: "Mail Order Pharmacy",
+    settingTag: "Mail Order",
+    experienceLevel: "Mid Level",
+    description: "Support the backend of a mail order or central fill operation, managing workflow queues, quality checks and fulfillment accuracy at scale.",
+    requirement: "CPhT with operations or high-volume dispensing experience.",
+    unique: "Process-driven role that suits techs who thrive in systems-level thinking.",
+  },
+  // ── LONG TERM CARE ─────────────────────────────────────────────────────────
+  {
+    id: "jt19",
+    title: "Long Term Care Pharmacy Technician",
+    setting: "Long Term Care",
+    settingTag: "LTC",
+    experienceLevel: "Mid Level",
+    description: "Prepare and package medications for nursing homes and assisted living facilities, manage complex blister pack or unit-dose systems and coordinate with consulting pharmacists and care teams.",
+    requirement: "CPhT with LTC or institutional pharmacy experience preferred.",
+    unique: "Every patient is on multiple medications and accuracy is non-negotiable.",
+  },
+  {
+    id: "jt20",
+    title: "Medication Packaging Technician",
+    setting: "Long Term Care",
+    settingTag: "LTC",
+    experienceLevel: "Entry to Mid Level",
+    description: "Specialize in unit-dose and multi-dose packaging for LTC patients, maintaining detailed records and ensuring timely delivery to facilities.",
+    requirement: "State registration or licensure. CPhT preferred.",
+    unique: "Detail-oriented, documentation-heavy and a strong entry point into LTC pharmacy operations.",
+  },
+  // ── AMBULATORY AND CLINIC ──────────────────────────────────────────────────
+  {
+    id: "jt21",
+    title: "Ambulatory Care Pharmacy Technician",
+    setting: "Ambulatory and Clinic",
+    settingTag: "Ambulatory",
+    experienceLevel: "Mid Level",
+    description: "Support pharmacists in an outpatient clinic setting, assisting with medication therapy management, refill authorizations and patient education support.",
+    requirement: "CPhT with outpatient or clinical pharmacy experience.",
+    unique: "Collaborative clinical environment working alongside physicians and nurses daily.",
+  },
+  {
+    id: "jt22",
+    title: "Medication Access Coordinator",
+    setting: "Ambulatory and Clinic",
+    settingTag: "Ambulatory",
+    experienceLevel: "Mid to Advanced",
+    description: "Help patients in clinic settings navigate prior authorizations, patient assistance programs and insurance appeals to reduce barriers to medication access.",
+    requirement: "CPhT with experience in PA processing and insurance navigation.",
+    unique: "Advocacy-focused role that directly reduces health disparities for underserved patients.",
+  },
+  {
+    id: "jt23",
+    title: "Medication Reconciliation Technician",
+    setting: "Ambulatory and Clinic",
+    settingTag: "Ambulatory",
+    experienceLevel: "Mid Level",
+    description: "Review and reconcile patient medication lists across care transitions, supporting accuracy in clinical documentation and reducing the risk of adverse events.",
+    requirement: "CPhT with clinical documentation experience.",
+    unique: "A growing hospital-adjacent role with direct patient safety impact.",
+  },
+  // ── LEADERSHIP AND ADMINISTRATIVE PATHWAYS ─────────────────────────────────
+  {
+    id: "jt24",
+    title: "Medication Safety Technician",
+    setting: "Hospital and Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Identify, track and analyze medication errors and near-misses, lead root cause analyses and help build systems that prevent future harm.",
+    requirement: "Requires CPhT-Adv.",
+    unique: "Your floor experience becomes the foundation for protecting every patient in the building.",
+    isLeadership: true,
+  },
+  {
+    id: "jt25",
+    title: "Pharmacy Quality Assurance Technician",
+    setting: "Hospital and Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Monitor and audit pharmacy operations for compliance with USP standards, regulatory requirements and internal quality benchmarks. Lead continuous quality improvement projects.",
+    requirement: "Requires CPhT and quality improvement training.",
+    unique: "A tech role that sits at the intersection of compliance, data and operational leadership.",
+    isLeadership: true,
+  },
+  {
+    id: "jt26",
+    title: "CQI Coordinator",
+    setting: "Retail, Health Systems, Specialty",
+    settingTag: "Leadership",
+    experienceLevel: "Mid to Advanced",
+    description: "Manage the pharmacy's continuous quality improvement program, track error trends, coordinate reporting and support the team in building a culture of safety.",
+    requirement: "Requires CPhT and strong analytical skills.",
+    unique: "One of the few tech roles where your direct influence reaches the entire pharmacy team.",
+    isLeadership: true,
+  },
+  {
+    id: "jt27",
+    title: "Pharmacy Compliance and Regulatory Technician",
+    setting: "Hospital and Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Ensure the pharmacy meets DEA, state board, USP and accreditation requirements. Support internal audits, maintain documentation and help prepare for inspections.",
+    requirement: "Requires CPhT-Adv.",
+    unique: "High-stakes, detail-driven work that protects the pharmacy's license to operate.",
+    isLeadership: true,
+  },
+  {
+    id: "jt28",
+    title: "Performance Improvement Specialist",
+    setting: "Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Analyze pharmacy workflow data, identify inefficiencies and design process improvements.",
+    requirement: "Requires CPhT-Adv and experience with quality methodologies like Lean or Six Sigma.",
+    unique: "One of the highest-visibility roles a tech can hold without leaving pharmacy practice.",
+    isLeadership: true,
+  },
+  {
+    id: "jt29",
+    title: "Pharmacy Informatics and Data Analyst Technician",
+    setting: "Hospital and Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Manage medication data systems, support EHR optimization and use analytics to improve clinical and operational outcomes. Works closely with IT, pharmacists and hospital leadership.",
+    requirement: "Requires CPhT-Adv.",
+    unique: "The only tech role where your daily work directly shapes how the entire organization uses medication data.",
+    isLeadership: true,
+  },
+  {
+    id: "jt30",
+    title: "Pharmacy Technician Educator",
+    setting: "Academic and Health Systems",
+    settingTag: "Leadership",
+    experienceLevel: "Advanced",
+    description: "Train and mentor pharmacy technician students or new hires in academic programs or employer-based settings. Develop curriculum, assess competency and model professional standards.",
+    requirement: "Requires CPhT with 3+ years of experience. CPTEd credential from PTCB recommended.",
+    unique: "You shape the next generation of pharmacy technicians — your knowledge multiplies.",
+    isLeadership: true,
+  },
+];
+
+const JOB_SETTINGS = [
+  "All Settings",
+  "Retail Pharmacy",
+  "Hospital and Inpatient",
+  "Specialty Pharmacy",
+  "PBM and Insurance",
+  "Compounding Pharmacy",
+  "Mail Order Pharmacy",
+  "Long Term Care",
+  "Ambulatory and Clinic",
+  "Leadership and Admin",
+];
+
+const JOB_LEVELS = [
+  "All Levels",
+  "Entry Level",
+  "Entry to Mid Level",
+  "Mid Level",
+  "Mid to Advanced",
+  "Advanced",
+];
+
+function PharmacyJobTitles({ isPro, go }) {
+  const [settingFilter, setSettingFilter] = useState("All Settings");
+  const [levelFilter, setLevelFilter] = useState("All Levels");
+
+  const teal = "#00c9a7";
+  const tealDim = "rgba(0,201,167,0.12)";
+  const tealBorder = "rgba(0,201,167,0.25)";
+  const blue = "#0094ff";
+  const mu = "#8b92a9";
+  const sf = "rgba(255,255,255,0.04)";
+  const br = "rgba(255,255,255,0.09)";
+  const white = "#ffffff";
+  const gold = "#f59e0b";
+
+  if (!isPro) {
+    return (
+      <div style={{ textAlign: "center", padding: "48px 0" }}>
+        <div style={{ fontSize: 42, marginBottom: 12 }}>🔒</div>
+        <div style={{ fontSize: 18, fontWeight: 800, color: white, marginBottom: 8 }}>
+          Pharmacy Tech Job Titles
+        </div>
+        <div style={{ fontSize: 13, color: mu, marginBottom: 20, maxWidth: 380, margin: "0 auto 20px", lineHeight: 1.7 }}>
+          Explore 30 pharmacy technician job titles across 8 practice settings plus leadership and administrative pathways. Pro only.
+        </div>
+        <button
+          onClick={() => go("upgrade")}
+          style={{ background: `linear-gradient(135deg,${teal},${blue})`, color: "#fff", border: "none", borderRadius: 10, padding: "11px 24px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+        >
+          Upgrade to Pro →
+        </button>
+      </div>
+    );
+  }
+
+  const filteredTitles = JOB_TITLES.filter(t => {
+    const matchesSetting =
+      settingFilter === "All Settings" ||
+      (settingFilter === "Leadership and Admin" && t.isLeadership) ||
+      (settingFilter !== "Leadership and Admin" && t.setting === settingFilter && !t.isLeadership);
+    const matchesLevel = levelFilter === "All Levels" || t.experienceLevel === levelFilter;
+    return matchesSetting && matchesLevel;
+  });
+
+  const standardTitles = filteredTitles.filter(t => !t.isLeadership);
+  const leadershipTitles = filteredTitles.filter(t => t.isLeadership);
+
+  const settingColors = {
+    "Retail": teal,
+    "Hospital": blue,
+    "Specialty": "#a855f7",
+    "PBM": "#f59e0b",
+    "Compounding": "#ec4899",
+    "Mail Order": "#22d3ee",
+    "LTC": "#10b981",
+    "Ambulatory": "#6366f1",
+    "Leadership": gold,
+  };
+
+  const levelColors = {
+    "Entry Level": "#4ade80",
+    "Entry to Mid Level": "#22d3ee",
+    "Mid Level": teal,
+    "Mid to Advanced": blue,
+    "Advanced": "#a855f7",
+  };
+
+  const TagChip = ({ label, color }) => (
+    <span
+      onClick={() => {
+        const shortMap = {
+          "Retail": "Retail Pharmacy",
+          "Hospital": "Hospital and Inpatient",
+          "Specialty": "Specialty Pharmacy",
+          "PBM": "PBM and Insurance",
+          "Compounding": "Compounding Pharmacy",
+          "Mail Order": "Mail Order Pharmacy",
+          "LTC": "Long Term Care",
+          "Ambulatory": "Ambulatory and Clinic",
+          "Leadership": "Leadership and Admin",
+        };
+        if (shortMap[label]) setSettingFilter(shortMap[label]);
+      }}
+      style={{ display: "inline-block", fontSize: 10, fontWeight: 700, color, background: color + "18", border: `1px solid ${color}44`, borderRadius: 20, padding: "2px 9px", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "monospace", cursor: "pointer" }}
+      title="Click to filter by this setting"
+    >
+      {label}
+    </span>
+  );
+
+  const LevelChip = ({ label }) => {
+    const color = levelColors[label] || mu;
+    return (
+      <span onClick={() => setLevelFilter(label)} style={{ display: "inline-block", fontSize: 10, fontWeight: 600, color, background: color + "12", border: `1px solid ${color}30`, borderRadius: 20, padding: "2px 9px", letterSpacing: "0.05em", cursor: "pointer", fontFamily: "monospace" }} title="Click to filter by this level">
+        {label}
+      </span>
+    );
+  };
+
+  const JobCard = ({ job }) => (
+    <div style={{ background: job.isLeadership ? "linear-gradient(135deg, rgba(245,158,11,0.06), rgba(168,85,247,0.04))" : sf, border: job.isLeadership ? "1px solid rgba(245,158,11,0.2)" : `1px solid ${br}`, borderRadius: 14, padding: "18px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+        <TagChip label={job.settingTag} color={settingColors[job.settingTag] || teal} />
+        <LevelChip label={job.experienceLevel} />
+      </div>
+      <div style={{ fontSize: 15, fontWeight: 800, color: white, lineHeight: 1.3 }}>{job.title}</div>
+      <div style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.7 }}>{job.description}</div>
+      <div style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${br}`, borderRadius: 9, padding: "9px 12px" }}>
+        <div style={{ fontSize: 10, fontWeight: 700, color: teal, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "monospace", marginBottom: 4 }}>Certification / Experience</div>
+        <div style={{ fontSize: 12, color: "#c8cdd8", lineHeight: 1.6 }}>{job.requirement}</div>
+      </div>
+      <div style={{ borderLeft: `3px solid ${job.isLeadership ? gold : teal}`, paddingLeft: 12 }}>
+        <div style={{ fontSize: 10, fontWeight: 700, color: job.isLeadership ? gold : teal, textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "monospace", marginBottom: 3 }}>What Makes It Unique</div>
+        <div style={{ fontSize: 12, color: "#d8dce8", lineHeight: 1.6, fontStyle: "italic" }}>{job.unique}</div>
+      </div>
+      <div style={{ fontSize: 10, color: "rgba(139,146,169,0.7)", lineHeight: 1.5, marginTop: 2 }}>Titles and requirements vary by employer and state.</div>
+    </div>
+  );
+
+  const activeFilters = settingFilter !== "All Settings" || levelFilter !== "All Levels";
+
+  return (
+    <div>
+      <div style={{ marginBottom: 20 }}>
+        <div style={{ display: "inline-block", fontSize: 10, fontWeight: 700, color: teal, background: tealDim, border: `1px solid ${tealBorder}`, borderRadius: 20, padding: "2px 10px", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "monospace", marginBottom: 10 }}>Pro Feature</div>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: white, margin: "0 0 6px", lineHeight: 1.3 }}>Pharmacy Tech Job Titles</h2>
+        <p style={{ fontSize: 13, color: mu, margin: 0, lineHeight: 1.6 }}>30 titles across 8 practice settings plus leadership and administrative pathways.</p>
+      </div>
+
+      {/* Page-level disclaimer — soft yellow info banner */}
+      <div style={{ background: "rgba(245,197,66,0.1)", border: "1px solid rgba(245,197,66,0.35)", borderRadius: 12, padding: "14px 18px", marginBottom: 24, display: "flex", gap: 12, alignItems: "flex-start" }}>
+        <span style={{ fontSize: 16, flexShrink: 0, marginTop: 1 }}>ℹ️</span>
+        <p style={{ fontSize: 12, color: "rgba(245,220,130,0.9)", lineHeight: 1.75, margin: 0 }}>
+          Job titles, descriptions and requirements listed here are for general informational purposes only. Actual titles, responsibilities, compensation and qualifications vary by employer, organization, state and setting. PharmTech Path does not guarantee accuracy for any specific position or employer.
+        </p>
+      </div>
+
+      {/* Setting filter */}
+      <div style={{ marginBottom: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div>
+          <div style={{ fontSize: 11, color: mu, fontWeight: 600, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.08em" }}>Practice Setting</div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {JOB_SETTINGS.map(s => (
+              <button key={s} onClick={() => setSettingFilter(s)} style={{ background: settingFilter === s ? "rgba(0,201,167,0.15)" : sf, color: settingFilter === s ? teal : mu, border: settingFilter === s ? `1px solid rgba(0,201,167,0.4)` : `1px solid ${br}`, borderRadius: 20, padding: "4px 12px", fontSize: 11, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>{s}</button>
+            ))}
+          </div>
+        </div>
+        {/* Level filter */}
+        <div>
+          <div style={{ fontSize: 11, color: mu, fontWeight: 600, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.08em" }}>Experience Level</div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {JOB_LEVELS.map(l => (
+              <button key={l} onClick={() => setLevelFilter(l)} style={{ background: levelFilter === l ? "rgba(0,201,167,0.15)" : sf, color: levelFilter === l ? teal : mu, border: levelFilter === l ? `1px solid rgba(0,201,167,0.4)` : `1px solid ${br}`, borderRadius: 20, padding: "4px 12px", fontSize: 11, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" }}>{l}</button>
+            ))}
+          </div>
+        </div>
+        {activeFilters && (
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 12, color: mu }}>Showing {filteredTitles.length} of {JOB_TITLES.length} titles</span>
+            <button onClick={() => { setSettingFilter("All Settings"); setLevelFilter("All Levels"); }} style={{ background: "none", border: "none", color: teal, fontSize: 11, fontWeight: 700, cursor: "pointer", textDecoration: "underline", padding: 0 }}>Clear filters</button>
+          </div>
+        )}
+      </div>
+
+      {filteredTitles.length === 0 && (
+        <div style={{ textAlign: "center", padding: "40px 0", color: mu }}>
+          <div style={{ fontSize: 32, marginBottom: 10 }}>🔍</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: white, marginBottom: 6 }}>No titles match those filters</div>
+          <button onClick={() => { setSettingFilter("All Settings"); setLevelFilter("All Levels"); }} style={{ background: tealDim, border: `1px solid ${tealBorder}`, color: teal, borderRadius: 9, padding: "7px 16px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>Clear filters</button>
+        </div>
+      )}
+
+      {standardTitles.length > 0 && (
+        <div style={{ marginBottom: 32 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 14 }}>
+            {standardTitles.map(job => <JobCard key={job.id} job={job} />)}
+          </div>
+        </div>
+      )}
+
+      {leadershipTitles.length > 0 && (
+        <div style={{ marginBottom: 16 }}>
+          {/* Leadership section header — styled differently from practice settings */}
+          <div style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.1), rgba(168,85,247,0.07))", border: "1px solid rgba(245,158,11,0.3)", borderRadius: 14, padding: "18px 20px", marginBottom: 18 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+              <div style={{ width: 42, height: 42, borderRadius: 10, background: "rgba(245,158,11,0.15)", border: "1px solid rgba(245,158,11,0.35)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>👑</div>
+              <div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: white, marginBottom: 4 }}>Leadership and Administrative Pathways</div>
+                <div style={{ fontSize: 12, color: "rgba(245,220,130,0.8)", lineHeight: 1.6, maxWidth: 600 }}>
+                  These roles go beyond the dispensing counter. They are where experienced techs with strong credentials move into healthcare leadership, operations and systems-level work.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 14 }}>
+            {leadershipTitles.map(job => <JobCard key={job.id} job={job} />)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 const RESOURCES = [
   { name:"PTCB", full:"Pharmacy Technician Certification Board", url:"https://www.ptcb.org", desc:"Primary national CPhT certification & advanced credentials", color:"#1a8fa8", cat:"Certification" },
   { name:"NHA",  full:"National Healthcareer Association", url:"https://www.nhanow.com", desc:"ExCPT certification — widely accepted nationally", color:"#2e9d68", cat:"Certification" },
@@ -1919,14 +2464,14 @@ export default function App(){
       </div>
 
       <div style={{display:"flex",gap:6,marginBottom:20,background:"rgba(255,255,255,.03)",borderRadius:12,padding:4,border:`1px solid ${br}`,overflowX:"auto"}}>
-        {[["roadmap","🗺️ Roadmap"],["certmap","🌿 Cert Path"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
+        {[["roadmap","🗺️ Roadmap"],["certmap","🌿 Cert Path"],["jobtitles","💼 Job Titles"],["notes","📝 Notes"],["profile","👤 Profile"],["ai","🤖 AI Assistant"],["settings","⚙️ Account"]].map(([id,lb])=>(
           <button key={id} onClick={()=>setCareerTab(id)} style={{flex:"0 0 auto",background:careerTab===id?`linear-gradient(135deg,${ac},${bl})`:"transparent",color:careerTab===id?"#fff":mu,border:"none",borderRadius:9,padding:"9px 10px",fontSize:10,fontWeight:700,cursor:"pointer",transition:"all .2s",whiteSpace:"nowrap"}}>{lb}</button>
         ))}
       </div>
 
       {careerTab==="roadmap"&&<CareerRoadmap done={done} isPro={isPro}/>}
       {careerTab==="certmap"&&<CertRoadmap isPro={isPro} go={go}/>}
-
+{careerTab==="jobtitles"&&<PharmacyJobTitles isPro={isPro} go={go}/>}
       {careerTab==="notes"&&(
         <div>
           {allNoted.length===0
