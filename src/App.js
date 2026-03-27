@@ -1414,7 +1414,108 @@ const BEYOND_MODULES = [
     title: "Quality and Safety Mindset",
     icon: "🛡️",
     desc: "Build the habits that protect patients and advance careers.",
-    lessons: []
+    lessons: [
+      {
+        id: "btc7l1",
+        title: "What a Quality Mindset Looks Like in Daily Practice",
+        sections: [
+          {
+            header: "Quality Is Not a Department. It Is a Habit.",
+            body: "Most pharmacy technicians hear the word quality and think about audits, inspections and compliance reviews. Those are the formal expressions of quality. But the actual work of quality happens every single day in decisions that never show up in a report.\n\nIt happens when you pause before finalizing a data entry instead of rushing because the line is long. It happens when you flag an ambiguous order instead of making your best guess. It happens when you document a discrepancy accurately even though it means more paperwork and a difficult conversation. Quality is not what you do when someone is watching. It is what you do when no one is."
+          },
+          {
+            header: "The Daily Habits of Quality-Minded Techs",
+            body: "Quality-minded techs slow down at the right moments. Not on everything but specifically on high-risk steps. Controlled substance counts. High-alert medication fills. Verbal order readbacks. They treat documentation as communication, not paperwork. Every entry they make is written for the next person who needs to understand what happened and why.\n\nThey escalate early. A quality mindset means recognizing that a small uncertainty now is always cheaper to address than a large problem later. And they close the loop. When they flag something, they follow up to make sure it was addressed. Not because they are checking up on anyone but because they understand that their responsibility does not end with the flag."
+          }
+        ],
+        keyPoints: [
+          "Quality is a daily practice, not an event that happens during audits.",
+          "Slowing down at high-risk moments is a skill that quality-minded techs develop deliberately.",
+          "Documentation is communication with the next person in the chain, not a compliance task.",
+          "Early escalation and loop closure are the two habits that prevent small problems from becoming large ones."
+        ],
+        takeaway: "Quality is not about being perfect. It is about building habits that make errors less likely and more catchable when they do occur.",
+        selfCheck: {
+          prompt: "Which of these best describes how you currently approach accuracy and documentation?",
+          options: [
+            {
+              label: "I work quickly and accurately. I trust my instincts and rarely slow down unless something feels off.",
+              response: "Speed and instinct are valuable. The refinement is identifying the specific steps where your instincts are most likely to miss something and building deliberate pauses there. Not everywhere. Just at the high-risk points."
+            },
+            {
+              label: "I am very careful but I sometimes feel like I am the only one who cares about doing things correctly.",
+              response: "That frustration is common among quality-minded techs in environments that have not fully built a quality culture. Your consistency still matters even when it is not mirrored around you. And it is being noticed by someone, even if that feedback has not reached you yet."
+            },
+            {
+              label: "Honestly I know I rush sometimes and my documentation is not always as thorough as it should be.",
+              response: "That honesty is the first step. Pick one specific habit to improve this week. Not everything at once. Just one. Deliberate pause before controlled substance count finalization is a high-impact, low-effort starting point."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You are working a busy shift and you notice that a colleague has been consistently skipping the readback step on verbal orders because it is slowing things down. No errors have occurred yet but you know the risk.",
+          prompt: "What do you do and how do you frame it in a way that is constructive rather than confrontational?"
+        },
+        answer: {
+          recommended: "First, continue modeling the correct behavior yourself without comment. Then in a quiet moment approach your colleague peer to peer. Something like: Hey, I noticed we have both been skipping the readback on verbal orders when it gets busy. I know it feels like it slows things down but I got nervous about it and wanted to flag it. Can we make a point to do it even on the rushed shifts? You are including yourself, keeping it low-key and focusing on the behavior rather than the person. If it continues after that conversation, bring it to your pharmacist as a workflow observation rather than a complaint about the individual.",
+          why: "Confrontational correction triggers defensiveness. Peer-level, we-framing invites collaboration. You addressed a real safety risk, preserved the relationship and modeled the kind of quality advocacy that gets noticed by leadership over time."
+        },
+        connection: {
+          tag: "CQI Coordinator · Medication Safety Officer · Lead Pharmacy Technician · Performance Improvement Specialist",
+          aiPrompt: "I just completed the lesson What a Quality Mindset Looks Like in Daily Practice. Help me identify specific habits I can build in my current role to strengthen my quality and safety mindset."
+        }
+      },
+      {
+        id: "btc7l2",
+        title: "Engaging with Safety Processes Instead of Just Complying",
+        sections: [
+          {
+            header: "The Difference Between Compliance and Engagement",
+            body: "Compliance means you do what the policy says. Engagement means you understand why the policy exists, you follow it even when it is inconvenient, you notice when it is not working the way it was designed to and you bring that observation forward.\n\nMost pharmacy technicians operate at compliance. The techs who advance into quality, safety and leadership roles operate at engagement. The difference is not intelligence or effort. It is perspective. Compliant techs see safety processes as requirements. Engaged techs see them as systems that are trying to solve a problem, and like all systems they can be improved."
+          },
+          {
+            header: "How to Engage With Safety Processes Actively",
+            body: "Start by understanding the why behind every process you follow. Why does the controlled substance count require two witnesses? Why does the high-alert medication require a second check? Why is the readback required on verbal orders? When you know the why you follow the process differently and you notice more quickly when the process is breaking down.\n\nThen start observing patterns. If a safety step is being skipped consistently, that is a system design problem as much as a behavior problem. Bring it forward as a process observation rather than a complaint. Organizations that have strong safety cultures are built on techs and pharmacists who report near misses and process gaps without fear of blame. And when error reporting systems exist, use them. A near miss reported is a future error prevented."
+          }
+        ],
+        keyPoints: [
+          "Compliance follows policy. Engagement understands why the policy exists.",
+          "Knowing the why behind a process changes how you follow it and what you notice.",
+          "Pattern observation and process gap reporting are the highest-value safety contributions a tech can make.",
+          "Near miss reporting prevents future errors. It is one of the most impactful safety behaviors available to frontline staff."
+        ],
+        takeaway: "The safest pharmacies are not the ones with the strictest rules. They are the ones where every person on the team feels responsible for the outcome.",
+        selfCheck: {
+          prompt: "How do you currently relate to safety processes and policies at work?",
+          options: [
+            {
+              label: "I follow the policies because I am required to. I do not think about them much beyond that.",
+              response: "That compliance is a baseline. The invitation in this lesson is to pick one policy this week and spend five minutes understanding why it exists. That shift in perspective changes how you follow it and what you notice when it is not working."
+            },
+            {
+              label: "I follow the policies and I notice when they are not being followed but I do not usually say anything.",
+              response: "You are halfway there. The observation without the communication is where the value gets lost. The next step is finding a low-stakes way to raise one observation. The framing in this lesson is designed to make that feel manageable."
+            },
+            {
+              label: "I actively engage with safety processes, report near misses and bring process gaps to my pharmacist.",
+              response: "That engagement is rare and genuinely valuable. If your organization has a formal quality improvement structure, find a way to be part of it. Your frontline perspective is exactly what those processes need."
+            }
+          ]
+        },
+        scenario: {
+          setup: "You notice that the barcode scanning step before dispensing has been turned off on one of the workstations because the scanner is malfunctioning. Staff have been manually verifying without the scan for three days. No one has reported it or submitted a work order.",
+          prompt: "What do you do and why does it matter beyond just the inconvenience of a broken scanner?"
+        },
+        answer: {
+          recommended: "Submit the work order for the scanner immediately if you have the ability to do so. If not, inform your pharmacist that the scanner has been down for three days and that the barcode verification step is not happening at that station. Frame it as a safety gap, not a complaint. The scanner at station two has been down for three days and we have been manually verifying. I wanted to flag it as a risk since barcode scanning is part of our error prevention process. Then document that you raised it. If your organization has a near miss or safety reporting system, this qualifies.",
+          why: "A malfunctioning barcode scanner is not just an inconvenience. It is a removed safety layer. The longer it goes unreported the longer the team operates without a protection that was specifically designed to catch errors. The tech who raises it is not being difficult. They are doing exactly what a quality and safety mindset looks like in practice."
+        },
+        connection: {
+          tag: "CQI Coordinator · Medication Safety Officer · Performance Improvement Specialist · Lead Pharmacy Technician",
+          aiPrompt: "I just completed the lesson Engaging with Safety Processes Instead of Just Complying. Help me understand how to move from compliance to genuine engagement with safety processes in my current workplace."
+        }
+      }
+    ]
   },
   {
     id: "btc8",
