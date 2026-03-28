@@ -704,6 +704,331 @@ const PRO_SECTIONS = [
   },
 ];
 
+// ─── CAREER PREFERENCES DATA ───────────────────────────────────────────────
+
+const CAREER_PREFERENCE_CATEGORIES = [
+  {
+    id: "enjoy",
+    label: "What I Enjoy Doing",
+    emoji: "✅",
+    proRequired: false,
+    chips: [
+      "Hands-on tasks",
+      "Teaching others",
+      "Problem solving",
+      "Organizing & systems",
+      "Data & documentation",
+      "Patient interaction",
+    ],
+  },
+  {
+    id: "avoid",
+    label: "What I Want to Avoid",
+    emoji: "🚫",
+    proRequired: false,
+    chips: [
+      "High stress environments",
+      "Repetitive tasks",
+      "Heavy lifting",
+      "Overnight shifts",
+      "Direct patient contact",
+      "Fast pace",
+    ],
+  },
+  {
+    id: "setting",
+    label: "Work Setting Preference",
+    emoji: "🏥",
+    proRequired: true,
+    chips: [
+      "Hospital / Inpatient",
+      "Retail / Community",
+      "Specialty Pharmacy",
+      "Home Infusion",
+      "Remote / Admin",
+      "Long-Term Care",
+    ],
+  },
+  {
+    id: "patientContact",
+    label: "Patient Interaction Level",
+    emoji: "🤝",
+    proRequired: true,
+    chips: [
+      "Love it",
+      "Okay with some",
+      "Prefer minimal",
+      "Prefer none",
+      "Open to anything",
+      "Depends on the role",
+    ],
+  },
+  {
+    id: "motivators",
+    label: "Career Motivators",
+    emoji: "🎯",
+    proRequired: true,
+    chips: [
+      "Higher pay",
+      "Leadership opportunities",
+      "Work-life balance",
+      "Continuous learning",
+      "Helping patients",
+      "Job stability",
+    ],
+  },
+  {
+    id: "skills",
+    label: "Skills I Want to Use More",
+    emoji: "🛠",
+    proRequired: true,
+    chips: [
+      "Clinical knowledge",
+      "Technology & software",
+      "Training others",
+      "Writing & documentation",
+      "Sterile compounding",
+      "Inventory management",
+    ],
+  },
+];
+
+// ─── CAREER PREFERENCES COMPONENT ──────────────────────────────────────────
+
+function CareerPreferencesSelector({ user, isPro, db }) {
+  const [selections, setSelections] = useState({});
+const [saved, setSaved] = useState(false);
+const [loading, setLoading] = useState(true);
+
+  // Load existing selections from Firestore on mount
+  useEffect(() => {
+    if (!user) return;
+    const load = async () => {
+      try {
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+        if (snap.exists() && snap.data().careerPreferences) {
+          setSelections(snap.data().careerPreferences);
+        }
+      } catch (e) {
+        console.error("Error loading career preferences:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [user]);
+
+  // Toggle a chip and auto-save to Firestore
+  const toggleChip = async (categoryId, chip, proRequired) => {
+    if (proRequired && !isPro) return; // blocked for free users
+
+    const current = selections[categoryId] || [];
+    const updated = current.includes(chip)
+      ? current.filter((c) => c !== chip)
+      : [...current, chip];
+
+    const newSelections = { ...selections, [categoryId]: updated };
+    setSelections(newSelections);
+
+    try {
+      await setDoc(doc(db, "users", user.uid),
+
+        { careerPreferences: newSelections },
+        { merge: true }
+      );
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (e) {
+      console.error("Error saving career preferences:", e);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{ color: "#a0aec0", fontSize: "0.9rem", padding: "1rem 0" }}>
+        Loading your preferences...
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ marginTop: "2rem" }}>
+      {/* Section Header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+        <h3 style={{ color: "#fff", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+          Career Preferences
+        </h3>
+        {saved && (
+          <span style={{ color: "#00c9a7", fontSize: "0.8rem", fontWeight: 600 }}>
+            ✓ Saved
+          </span>
+        )}
+      </div>
+      <p style={{ color: "#a0aec0", fontSize: "0.85rem", marginBottom: "1.5rem" }}>
+        Select what fits you. Your AI Career Assistant uses these to personalize suggestions.
+      </p>
+
+      {CAREER_PREFERENCE_CATEGORIES.map((cat) => {
+        const isLocked = cat.proRequired && !isPro;
+        const catSelections = selections[cat.id] || [];
+
+        return (
+          <div
+            key={cat.id}
+            style={{
+              marginBottom: "1.5rem",
+              position: "relative",
+              opacity: isLocked ? 0.6 : 1,
+            }}
+          >
+            {/* Category Label */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.6rem" }}>
+              <span style={{ fontSize: "1rem" }}>{cat.emoji}</span>
+              <span style={{ color: "#e2e8f0", fontSize: "0.9rem", fontWeight: 600 }}>
+                {cat.label}
+              </span>
+              {isLocked && (
+                <span
+                  style={{
+                    background: "linear-gradient(135deg, #0094ff, #00c9a7)",
+                    color: "#fff",
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    padding: "2px 8px",
+                    borderRadius: "20px",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  PRO
+                </span>
+              )}
+            </div>
+
+            {/* Chips */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+              {cat.chips.map((chip) => {
+                const selected = catSelections.includes(chip);
+                return (
+                  <button
+                    key={chip}
+                    onClick={() => toggleChip(cat.id, chip, cat.proRequired)}
+                    style={{
+                      padding: "6px 14px",
+                      borderRadius: "20px",
+                      border: selected
+                        ? "1.5px solid #00c9a7"
+                        : "1.5px solid #2d3748",
+                      background: selected
+                        ? "rgba(0, 201, 167, 0.15)"
+                        : "rgba(255,255,255,0.04)",
+                      color: selected ? "#00c9a7" : "#a0aec0",
+                      fontSize: "0.8rem",
+                      fontWeight: selected ? 700 : 400,
+                      cursor: isLocked ? "not-allowed" : "pointer",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    {chip}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Locked overlay prompt */}
+            {isLocked && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "8px",
+                  background: "rgba(10, 15, 30, 0.55)",
+                  backdropFilter: "blur(2px)",
+                }}
+              >
+                <span style={{ color: "#00c9a7", fontSize: "0.8rem", fontWeight: 600 }}>
+                  🔒 Upgrade to Pro to unlock
+                </span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Upgrade CTA for free users */}
+      {!isPro && (
+        <div
+          style={{
+            marginTop: "1rem",
+            padding: "0.9rem 1.2rem",
+            borderRadius: "10px",
+            background: "rgba(0, 148, 255, 0.08)",
+            border: "1px solid rgba(0, 148, 255, 0.2)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "0.5rem",
+          }}
+        >
+          <span style={{ color: "#a0aec0", fontSize: "0.85rem" }}>
+            Unlock all 6 categories and get fully personalized AI career suggestions.
+          </span>
+          <button
+            onClick={() => {
+              // Trigger your existing Stripe upgrade flow here
+              // Replace this with whatever opens your Stripe modal
+              alert("Upgrade flow here");
+            }}
+            style={{
+              background: "linear-gradient(135deg, #0094ff, #00c9a7)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "20px",
+              padding: "6px 18px",
+              fontSize: "0.8rem",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Upgrade to Pro
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+// ─── AI ASSISTANT SYSTEM PROMPT HELPER ─────────────────────────────────────
+// Call this function when building the system prompt for your AI Career Assistant.
+// Pass in the careerPreferences object from Firestore and it returns a formatted string
+// you can append to your existing system prompt.
+
+function buildPreferencesPrompt(careerPreferences) {
+  if (!careerPreferences) return "";
+
+  const labelMap = {
+    enjoy: "Things they enjoy doing",
+    avoid: "Things they want to avoid",
+    setting: "Preferred work settings",
+    patientContact: "Patient interaction preference",
+    motivators: "Career motivators",
+    skills: "Skills they want to use more",
+  };
+
+  const lines = Object.entries(careerPreferences)
+    .filter(([, values]) => values && values.length > 0)
+    .map(([key, values]) => `${labelMap[key] || key}: ${values.join(", ")}`);
+
+  if (lines.length === 0) return "";
+
+  return `\n\nThe user has shared the following career preferences:\n${lines.join("\n")}\nUse these preferences to personalize your suggestions. Prioritize roles and paths that align with what they enjoy and their motivators. Avoid recommending paths that conflict with what they want to avoid.`;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // BEYOND THE COUNTER — MODULE DATA
 // 8 modules. Module 1 Lesson 1 fully populated.
@@ -3333,6 +3658,7 @@ export default function App(){
       )}
 
       {careerTab==="profile"&&<CareerProfile profile={profile} setProfile={setProfile} isPro={isPro} go={go} pop={pop}/>}
+{careerTab==="profile"&&<CareerPreferencesSelector user={user} isPro={isPro} db={db}/>}
       {careerTab==="ai"&&<AICareerAssistant profile={profile} isPro={isPro} go={go} setProfile={setProfile} pop={pop} onFirstMessage={handleAISession}/>}
 
       {careerTab==="settings"&&(
@@ -4053,6 +4379,7 @@ function AICareerAssistant({ profile, isPro, go, setProfile, pop, onFirstMessage
         body: JSON.stringify({
           system: buildSystemPrompt(),
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+          careerPreferences: profile?.careerPreferences || {},
         }),
       });
       const data = await response.json();
