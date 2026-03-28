@@ -805,8 +805,8 @@ const [loading, setLoading] = useState(true);
     if (!user) return;
     const load = async () => {
       try {
-        const ref = db.collection("users").doc(user.uid);
-        const snap = await ref.get();
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
         if (snap.exists() && snap.data().careerPreferences) {
           setSelections(snap.data().careerPreferences);
         }
@@ -832,7 +832,8 @@ const [loading, setLoading] = useState(true);
     setSelections(newSelections);
 
     try {
-      await db.collection("users").doc(user.uid).set(
+      await setDoc(doc(db, "users", user.uid),
+
         { careerPreferences: newSelections },
         { merge: true }
       );
