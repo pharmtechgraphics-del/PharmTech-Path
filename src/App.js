@@ -4378,6 +4378,7 @@ function AICareerAssistant({ profile, isPro, go, setProfile, pop, onFirstMessage
         body: JSON.stringify({
           system: buildSystemPrompt(),
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
+          careerPreferences: profile?.careerPreferences || {},
         }),
       });
       const data = await response.json();
