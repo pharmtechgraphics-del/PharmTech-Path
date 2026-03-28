@@ -807,7 +807,7 @@ const [loading, setLoading] = useState(true);
       try {
         const ref = db.collection("users").doc(user.uid);
         const snap = await ref.get();
-        if (snap.exists && snap.data().careerPreferences) {
+        if (snap.exists() && snap.data().careerPreferences) {
           setSelections(snap.data().careerPreferences);
         }
       } catch (e) {
