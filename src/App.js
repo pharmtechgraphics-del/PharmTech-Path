@@ -3235,7 +3235,28 @@ const [promoMessage, setPromoMessage] = useState("");
     await signOut(auth);
     setUser(null);setIsPro(false);setDone({});setNotes({});go("home");
   };
-
+const redeemPromoCode = async () => {
+  if (!promoCode.trim()) return;
+  if (!user) { setPromoStatus("error"); setPromoMessage("Please sign in first."); return; }
+  setPromoStatus("loading");
+  setPromoMessage("");
+  try {
+    const snap = await getDoc(doc(db, "promoCodes", promoCode.trim().toUpperCase()));
+    if (!snap.exists()) { setPromoStatus("error"); setPromoMessage("That code is not valid. Please check and try again."); return; }
+    const data = snap.data();
+    if (!data.active) { setPromoStatus("error"); setPromoMessage("That code is no longer active."); return; }
+    if (data.grantsPro) {
+      setIsPro(true);
+      await saveUserData(user.uid, { isPro: true });
+      setPromoStatus("success");
+      setPromoMessage("Pro unlocked! Welcome to PharmTech Path Pro. 🎉");
+      pop("Pro unlocked! 🎉");
+    }
+  } catch(e) {
+    setPromoStatus("error");
+    setPromoMessage("Something went wrong. Please try again.");
+  }
+};
   const doDeleteAccount = async () => {
     try {
       const fbUser = auth.currentUser;
