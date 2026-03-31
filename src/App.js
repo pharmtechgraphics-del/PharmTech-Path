@@ -3095,6 +3095,9 @@ export default function App(){
   const [sent,setSent]=useState(false);
   const [careerTab,setCareerTab]=useState("roadmap");
   const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
+  const [promoCode, setPromoCode] = useState("");
+const [promoStatus, setPromoStatus] = useState(null);
+const [promoMessage, setPromoMessage] = useState("");
   const [freeNotes,setFreeNotes]=useState([]);
   const [freeNoteForm,setFreeNoteForm]=useState(null);
   const [createdAt, setCreatedAt] = useState(null);
@@ -3157,10 +3160,8 @@ export default function App(){
 
   const handleOnboardingPro = useCallback(() => {
     setShowOnboarding(false);
-    setIsPro(true);
-    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true, isPro: true });
-    go("career");
-    pop("Pro unlocked! 🎉");
+    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true });
+    go("upgrade");
   }, [user]);
 
   // Callback passed to AICareerAssistant to record AI session
@@ -3232,7 +3233,28 @@ export default function App(){
     await signOut(auth);
     setUser(null);setIsPro(false);setDone({});setNotes({});go("home");
   };
-
+const redeemPromoCode = async () => {
+  if (!promoCode.trim()) return;
+  if (!user) { setPromoStatus("error"); setPromoMessage("Please sign in first."); return; }
+  setPromoStatus("loading");
+  setPromoMessage("");
+  try {
+    const snap = await getDoc(doc(db, "promoCodes", promoCode.trim().toUpperCase()));
+    if (!snap.exists()) { setPromoStatus("error"); setPromoMessage("That code is not valid. Please check and try again."); return; }
+    const data = snap.data();
+    if (!data.active) { setPromoStatus("error"); setPromoMessage("That code is no longer active."); return; }
+    if (data.grantsPro) {
+      setIsPro(true);
+      await saveUserData(user.uid, { isPro: true });
+      setPromoStatus("success");
+      setPromoMessage("Pro unlocked! Welcome to PharmTech Path Pro. 🎉");
+      pop("Pro unlocked! 🎉");
+    }
+  } catch(e) {
+    setPromoStatus("error");
+    setPromoMessage("Something went wrong. Please try again.");
+  }
+};
   const doDeleteAccount = async () => {
     try {
       const fbUser = auth.currentUser;
@@ -3702,7 +3724,7 @@ export default function App(){
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:13,marginBottom:32}}>
       {[
         {label:"Free",price:"$0",icon:"🆓",features:["Explore Pharmacy (5 modules)","Getting Certified roadmap","16 resource links & cert guide","Basic progress tracking","Career roadmap overview"],cta:user&&!isPro?"Current Plan":"Sign Up Free",act:()=>!user&&go("auth")},
-        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Beyond the Counter (8 modules)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Activate Pro (Demo)",act:()=>{if(!isPro){setIsPro(true);go("career");pop("Pro unlocked! 🎉");}}},
+        {label:"Pro",price:"$9.99/mo",icon:"⭐",hi:true,features:["Everything in Free","Retail Foundations","Inpatient Foundations","Beyond the Counter (8 modules)","Drug class & conversion tables","Controlled substance schedules","Rx abbreviation reference","Top 200 Drugs flashcard set","4-Week Study Tracker","First Month at Work Planner","Notes on every lesson","Full career roadmap & milestones","Progress synced across devices"],cta:isPro?"✓ Active":"Subscribe with Stripe →",act:()=>{ window.open(STRIPE_PAYMENT_LINK,"_blank"); }},
       ].map(p=>(
         <div key={p.label} style={{background:p.hi?"rgba(0,201,167,.07)":sf,border:p.hi?"2px solid rgba(0,201,167,.4)":`1px solid ${br}`,borderRadius:16,padding:24}}>
           <div style={{fontSize:24,marginBottom:6}}>{p.icon}</div>
@@ -3712,15 +3734,30 @@ export default function App(){
           {p.hi?<>
             <Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>
             {!isPro&&<>
-              <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
-                <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or pay now</span><div style={{flex:1,height:1,background:br}}/>
-              </div>
-              <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
-                <button style={{width:"100%",padding:"11px 0",background:"transparent",border:`1px solid rgba(0,201,167,.4)`,borderRadius:10,color:ac,fontSize:14,fontWeight:700,cursor:"pointer"}}>
-                  💳 Subscribe with Stripe →
-                </button>
-              </a>
-              <div style={{textAlign:"center",marginTop:8,fontSize:10,color:mu}}>Secure checkout via Stripe</div>
+             
+            <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
+  <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or use a promo code</span><div style={{flex:1,height:1,background:br}}/>
+</div>
+<div style={{display:"flex",gap:8}}>
+  <input
+    placeholder="Enter promo code"
+    value={promoCode}
+    onChange={e=>{setPromoCode(e.target.value.toUpperCase());setPromoStatus(null);setPromoMessage("");}}
+    style={{flex:1,background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:13,padding:"10px 13px",outline:"none",fontFamily:"inherit"}}
+  />
+  <button
+    onClick={redeemPromoCode}
+    disabled={!promoCode.trim()||promoStatus==="loading"||promoStatus==="success"}
+    style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:"pointer",opacity:promoCode.trim()&&promoStatus!=="success"?1:0.4,whiteSpace:"nowrap"}}
+  >
+    {promoStatus==="loading"?"Checking…":"Apply Code"}
+  </button>
+</div>
+{promoMessage&&(
+  <div style={{marginTop:8,fontSize:12,color:promoStatus==="success"?ac:"#ff6b6b",background:promoStatus==="success"?"rgba(0,201,167,.08)":"rgba(255,107,107,.08)",border:`1px solid ${promoStatus==="success"?"rgba(0,201,167,.3)":"rgba(255,107,107,.3)"}`,borderRadius:8,padding:"8px 12px"}}>
+    {promoMessage}
+  </div>
+)}
             </>}
           </>:<Bs ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>}
         </div>
