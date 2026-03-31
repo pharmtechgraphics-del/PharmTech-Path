@@ -3095,6 +3095,9 @@ export default function App(){
   const [sent,setSent]=useState(false);
   const [careerTab,setCareerTab]=useState("roadmap");
   const [showDeleteConfirm,setShowDeleteConfirm]=useState(false);
+  const [promoCode, setPromoCode] = useState("");
+const [promoStatus, setPromoStatus] = useState(null);
+const [promoMessage, setPromoMessage] = useState("");
   const [freeNotes,setFreeNotes]=useState([]);
   const [freeNoteForm,setFreeNoteForm]=useState(null);
   const [createdAt, setCreatedAt] = useState(null);
