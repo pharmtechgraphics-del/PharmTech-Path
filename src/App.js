@@ -3745,6 +3745,29 @@ const redeemPromoCode = async () => {
                 </button>
               </a>
               <div style={{textAlign:"center",marginTop:8,fontSize:10,color:mu}}>Secure checkout via Stripe</div>
+            <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
+  <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or use a promo code</span><div style={{flex:1,height:1,background:br}}/>
+</div>
+<div style={{display:"flex",gap:8}}>
+  <input
+    placeholder="Enter promo code"
+    value={promoCode}
+    onChange={e=>{setPromoCode(e.target.value.toUpperCase());setPromoStatus(null);setPromoMessage("");}}
+    style={{flex:1,background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,color:tx,fontSize:13,padding:"10px 13px",outline:"none",fontFamily:"inherit"}}
+  />
+  <button
+    onClick={redeemPromoCode}
+    disabled={!promoCode.trim()||promoStatus==="loading"||promoStatus==="success"}
+    style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:"pointer",opacity:promoCode.trim()&&promoStatus!=="success"?1:0.4,whiteSpace:"nowrap"}}
+  >
+    {promoStatus==="loading"?"Checking…":"Apply Code"}
+  </button>
+</div>
+{promoMessage&&(
+  <div style={{marginTop:8,fontSize:12,color:promoStatus==="success"?ac:"#ff6b6b",background:promoStatus==="success"?"rgba(0,201,167,.08)":"rgba(255,107,107,.08)",border:`1px solid ${promoStatus==="success"?"rgba(0,201,167,.3)":"rgba(255,107,107,.3)"}`,borderRadius:8,padding:"8px 12px"}}>
+    {promoMessage}
+  </div>
+)}
             </>}
           </>:<Bs ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>}
         </div>
