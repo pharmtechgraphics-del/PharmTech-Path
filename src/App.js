@@ -3160,10 +3160,8 @@ const [promoMessage, setPromoMessage] = useState("");
 
   const handleOnboardingPro = useCallback(() => {
     setShowOnboarding(false);
-    setIsPro(true);
-    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true, isPro: true });
-    go("career");
-    pop("Pro unlocked! 🎉");
+    if (user?.uid) saveUserData(user.uid, { hasSeenOnboarding: true });
+    go("upgrade");
   }, [user]);
 
   // Callback passed to AICareerAssistant to record AI session
