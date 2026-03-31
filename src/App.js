@@ -3734,15 +3734,7 @@ const redeemPromoCode = async () => {
           {p.hi?<>
             <Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>
             {!isPro&&<>
-              <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
-                <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or pay now</span><div style={{flex:1,height:1,background:br}}/>
-              </div>
-              <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
-                <button style={{width:"100%",padding:"11px 0",background:"transparent",border:`1px solid rgba(0,201,167,.4)`,borderRadius:10,color:ac,fontSize:14,fontWeight:700,cursor:"pointer"}}>
-                  💳 Subscribe with Stripe →
-                </button>
-              </a>
-              <div style={{textAlign:"center",marginTop:8,fontSize:10,color:mu}}>Secure checkout via Stripe</div>
+             
             <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
   <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or use a promo code</span><div style={{flex:1,height:1,background:br}}/>
 </div>
