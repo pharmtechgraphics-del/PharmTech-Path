@@ -3734,7 +3734,7 @@ const redeemPromoCode = async () => {
           {p.hi?<>
             <Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>
             {!isPro&&<>
-  </>            
+             
   <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or use a promo code</span><div style={{flex:1,height:1,background:br}}/>
 </div>
 <div style={{display:"flex",gap:8}}>
