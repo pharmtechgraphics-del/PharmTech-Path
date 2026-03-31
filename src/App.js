@@ -3733,7 +3733,17 @@ const redeemPromoCode = async () => {
           <div style={{marginBottom:20}}>{p.features.map((f,i)=><div key={i} style={{display:"flex",gap:6,marginBottom:8}}><span style={{color:ac,flexShrink:0}}>✓</span><span style={{fontSize:12,color:"#c8d8f0"}}>{f}</span></div>)}</div>
           {p.hi?<>
             <Bp ch={p.cta} on={p.act} sx={{width:"100%",padding:"11px 0"}}/>
-            {!isPro&&<>          
+            {!isPro&&<>
+              <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
+                <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or pay now</span><div style={{flex:1,height:1,background:br}}/>
+              </div>
+              <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
+                <button style={{width:"100%",padding:"11px 0",background:"transparent",border:`1px solid rgba(0,201,167,.4)`,borderRadius:10,color:ac,fontSize:14,fontWeight:700,cursor:"pointer"}}>
+                  💳 Subscribe with Stripe →
+                </button>
+              </a>
+              <div style={{textAlign:"center",marginTop:8,fontSize:10,color:mu}}>Secure checkout via Stripe</div>
+            <div style={{display:"flex",alignItems:"center",gap:10,margin:"10px 0"}}>
   <div style={{flex:1,height:1,background:br}}/><span style={{fontSize:10,color:mu}}>or use a promo code</span><div style={{flex:1,height:1,background:br}}/>
 </div>
 <div style={{display:"flex",gap:8}}>
