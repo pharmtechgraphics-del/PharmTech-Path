@@ -1442,8 +1442,84 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"c3", title:"Drug Class Recognition", lessons:[
-        { id:"c3l1", title:"Group by Suffix", content:`-pril     → ACE Inhibitor\n-sartan   → ARB\n-olol     → Beta Blocker\n-statin   → Lipid Lowering\n-cillin   → Penicillin Antibiotic\n\nBuild class clusters.\n\nSTUDY TIP:\n• Create 25 drug mini-lists\n• Review daily\n• Rotate weekly\n\nRepetition builds recall speed.` },
+{ id:"c3", title:"Drug Class Recognition", lessons:[
+        {
+          id:"c3l1",
+          title:"Group by Suffix",
+          sections:[
+            {
+              header:"THE SHORTCUT THAT CHANGES EVERYTHING",
+              body:"The candidates who do well have a strategy: they learn the pattern, not the list. Drug suffixes are the most powerful study tool available. When you know that every drug ending in olol is a beta blocker, you do not need to memorize metoprolol and propranolol and atenolol separately. That recognition works even for drugs you have never seen before."
+            },
+            {
+              header:"THE MOST COMMONLY CONFUSED CLASSES",
+              body:"ACE inhibitors end in pril. They block an enzyme that raises blood pressure. Examples: lisinopril, enalapril. ARBs end in sartan. They block a receptor that raises blood pressure. Same goal, different mechanism. Examples: losartan, valsartan. The exam will test whether you can tell them apart. The suffix is your anchor."
+            },
+            {
+              header:"SUFFIX MASTERY TABLE",
+              body:"pril = ACE Inhibitor. lisinopril. Treats high blood pressure and heart failure.\nsartan = ARB. losartan. Treats high blood pressure. Often used when patients cannot tolerate ACE inhibitors.\nolol = Beta Blocker. metoprolol. Slows heart rate, treats hypertension and arrhythmias.\nstatin = Lipid Lowering Agent. atorvastatin. Lowers cholesterol.\ncillin = Penicillin Antibiotic. amoxicillin. Treats bacterial infections.\npam or lam = Benzodiazepine. diazepam, alprazolam. Treats anxiety and sleep disorders.\nmycin or micin = Antibiotic. azithromycin, gentamicin. Treats bacterial infections.\ntidine = H2 Blocker. famotidine. Reduces stomach acid.\nprazole = Proton Pump Inhibitor. omeprazole. Reduces stomach acid, stronger than H2 blockers.\ndipine = Calcium Channel Blocker. amlodipine. Treats hypertension and angina."
+            },
+            {
+              header:"DRUG INTERACTIONS TO KNOW BY CLASS",
+              body:"Warfarin interacts with NSAIDs, antibiotics, and Vitamin K-rich foods. Appears on nearly every exam version.\n\nStatins and grapefruit juice: grapefruit juice increases statin blood levels, raising risk of muscle damage.\n\nACE inhibitors and potassium-sparing diuretics together can raise potassium to dangerous levels.\n\nBisphosphonates and antacids: antacids block absorption. Wait at least two hours between them.\n\nSSRIs and MAOIs: risk of serotonin syndrome. Never combine."
+            }
+          ],
+          keyPoints:[
+            "Drug suffixes are the most efficient study tool for the medications section",
+            "ACE inhibitors end in pril and ARBs end in sartan, the most commonly confused pair on the exam",
+            "Brand to generic and generic to brand recognition both need to be practiced",
+            "Major drug interactions should be learned by class, not by individual drug pairs",
+            "Warfarin interactions appear on nearly every version of the exam"
+          ],
+          takeaway:"Learn the pattern once. Recognize every drug in the class forever.",
+          selfCheck:{
+            prompt:"Which of these sounds most like where you are with drug class recognition right now?",
+            options:[
+              {
+                label:"I know some drug names but I struggle to connect them to their class or recognize the suffix pattern.",
+                response:"Start with the ten suffixes in this lesson. Do not move to individual drug names until the suffixes are locked in."
+              },
+              {
+                label:"I know the suffix patterns and can identify the class and primary use of most drugs on practice questions.",
+                response:"Add one primary use and one red flag interaction to each class."
+              },
+              {
+                label:"I know the suffixes but I keep mixing up ACE inhibitors and ARBs or confusing brand and generic names.",
+                response:"Use this anchor: ACE inhibitors end in pril, ARBs end in sartan. Write it. Say it out loud. Make a flashcard with just those two."
+              }
+            ]
+          },
+          scenario:{
+            setup:"An exam question asks: A patient is prescribed losartan for hypertension. Which drug class does losartan belong to and why might it have been chosen over lisinopril?",
+            prompt:"What is the answer, and what does it tell you about how the exam tests drug class knowledge?"
+          },
+          answer:{
+            recommended:"Losartan is an ARB, indicated by the sartan suffix. It may have been chosen over lisinopril, an ACE inhibitor, because a common side effect of ACE inhibitors is a persistent dry cough. This question tests suffix recognition, drug class knowledge, and a clinical distinction all at once."
+          },
+          drugSuffixTable:[
+            { suffix:"pril", drugClass:"ACE Inhibitor", examples:"lisinopril, enalapril", use:"High blood pressure and heart failure" },
+            { suffix:"sartan", drugClass:"ARB", examples:"losartan, valsartan", use:"High blood pressure. Often used when ACE inhibitors cause a cough" },
+            { suffix:"olol", drugClass:"Beta Blocker", examples:"metoprolol, atenolol", use:"Heart rate, hypertension, arrhythmias" },
+            { suffix:"statin", drugClass:"Lipid Lowering Agent", examples:"atorvastatin, simvastatin", use:"Lowers cholesterol" },
+            { suffix:"cillin", drugClass:"Penicillin Antibiotic", examples:"amoxicillin, ampicillin", use:"Bacterial infections" },
+            { suffix:"pam / lam", drugClass:"Benzodiazepine", examples:"diazepam, alprazolam", use:"Anxiety and sleep disorders" },
+            { suffix:"mycin / micin", drugClass:"Antibiotic", examples:"azithromycin, gentamicin", use:"Bacterial infections" },
+            { suffix:"tidine", drugClass:"H2 Blocker", examples:"famotidine, ranitidine", use:"Reduces stomach acid" },
+            { suffix:"prazole", drugClass:"Proton Pump Inhibitor", examples:"omeprazole, pantoprazole", use:"Reduces stomach acid, stronger than H2 blockers" },
+            { suffix:"dipine", drugClass:"Calcium Channel Blocker", examples:"amlodipine, nifedipine", use:"Hypertension and angina" },
+          ],
+          drugInteractions:[
+            { drug:"Warfarin", interaction:"Interacts with NSAIDs, antibiotics, and Vitamin K-rich foods. Appears on nearly every exam version." },
+            { drug:"Statins + Grapefruit Juice", interaction:"Grapefruit juice increases statin blood levels, raising risk of muscle damage." },
+            { drug:"ACE Inhibitors + Potassium-Sparing Diuretics", interaction:"Can raise potassium to dangerous levels." },
+            { drug:"Bisphosphonates + Antacids", interaction:"Antacids block absorption. Wait at least two hours between them." },
+            { drug:"SSRIs + MAOIs", interaction:"Risk of serotonin syndrome. Never combine." },
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Specialty Pharmacy Tech · Pharmacy Informatics Tech",
+            aiPrompt:"I just completed the lesson Group by Suffix in the Getting Certified module. Help me quiz myself on drug suffixes and class recognition based on where I am in my studying."
+          }
+        },
       ]},
       { id:"c4", title:"Federal Law & Controlled Substances", lessons:[
         { id:"c4l1", title:"What to Know for the Exam", content:`KNOW:\n• Schedule II–V structure\n• High-level refill rules\n• Transfer limitations (general awareness)\n• HIPAA basics\n• Medication safety reporting\n\nFocus on principles over memorization.` },
