@@ -781,7 +781,8 @@ const FREE_SECTIONS = [
             tag:"Senior Tech · Lead Tech · Pharmacy Supervisor · Controlled Substance Tech · Medication Safety Tech",
             aiPrompt:"I just completed the lesson The Technician Mindset in the Explore Pharmacy module. Help me identify specific ways I can build stronger awareness and documentation habits in my current role."
           }
-        },
+        },   
+        ]},
       { id:"m2", title:"Workflow 101", lessons:[
         { id:"l4", title:"Retail Workflow Deep Dive", content:`Retail workflow is cyclical:\n1. Intake\n2. Data entry\n3. Insurance adjudication\n4. Filling\n5. Pharmacist verification\n6. Pickup\n\nBreakdowns often occur during:\n• Incorrect insurance entry\n• Missing prescriber details\n• Prior authorization delays\n\nNew tech mistake: Trying to fix everything alone.\nStrong tech move: Identify bottleneck → escalate appropriately.` },
         { id:"l5", title:"Inpatient Workflow Deep Dive", content:`Inpatient flow depends heavily on systems:\n1. Provider order entry\n2. Pharmacist verification\n3. Automated dispensing\n4. Restock / cart fill\n5. Documentation\n\nEven though automation is involved, accountability remains human.` },
