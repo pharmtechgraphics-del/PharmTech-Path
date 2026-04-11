@@ -3752,31 +3752,50 @@ const redeemPromoCode = async () => {
 
   if(view==="learn"&&lesson) return wrap(<>
     <Bk lb="Back to lessons"/>
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
-      <div><div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:3}}>{lesson.title}</div><div style={{fontSize:12,color:mu}}>{mod?.title}</div></div>
-      {done[lesson.id]&&<Tag label="Completed"/>}
-    </div>
-    <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:24,marginBottom:18}}>
-      <pre style={{fontSize:14,lineHeight:1.9,color:"#c8d8f0",whiteSpace:"pre-wrap",margin:0,fontFamily:"inherit"}}>{lesson.content}</pre>
-    </div>
-    <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:22}}>
-      {!done[lesson.id]&&<Bp ch="Mark Complete ✓" on={()=>{setDone(p=>({...p,[lesson.id]:true}));pop("✓ Lesson complete!");}}/>}
-      <Bs ch="← Back" on={back}/>
-    </div>
-    {user?(
-      <div>
-        <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:9}}>📝 My Notes</div>
-        {!(notes[lesson.id]||[]).length&&<div style={{fontSize:12,color:mu,marginBottom:9}}>No notes yet for this lesson.</div>}
-        {(notes[lesson.id]||[]).map((n,i)=>(
-          <div key={i} style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.15)",borderRadius:9,padding:"9px 12px",marginBottom:6,fontSize:13,color:"#c8d8f0",display:"flex",justifyContent:"space-between",gap:10}}>
-            <span>{n.text}</span>
-            <button onClick={()=>{const a=[...(notes[lesson.id]||[])];a.splice(i,1);setNotes(p=>({...p,[lesson.id]:a}));pop("Deleted");}} style={{background:"none",border:"none",color:mu,cursor:"pointer",fontSize:15,flexShrink:0}}>×</button>
+    {lesson.sections
+      ? <ExplorePharmacyLesson lesson={lesson} go={(action, payload) => {
+          if (action === "explore-complete") {
+            setDone(p=>({...p,[payload.lessonId]:true}));
+            pop("✓ Lesson complete!");
+          } else {
+            go(action, payload);
+          }
+        }}/>
+      : <>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
+          <div><div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:3}}>{lesson.title}</div><div style={{fontSize:12,color:mu}}>{mod?.title}</div></div>
+          {done[lesson.id]&&<Tag label="Completed"/>}
+        </div>
+        <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:24,marginBottom:18}}>
+          <pre style={{fontSize:14,lineHeight:1.9,color:"#c8d8f0",whiteSpace:"pre-wrap",margin:0,fontFamily:"inherit"}}>{lesson.content}</pre>
+        </div>
+        <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:22}}>
+          {!done[lesson.id]&&<Bp ch="Mark Complete ✓" on={()=>{setDone(p=>({...p,[lesson.id]:true}));pop("✓ Lesson complete!");}}/>}
+          <Bs ch="← Back" on={back}/>
+        </div>
+        {user?(
+          <div>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:9}}>📝 My Notes</div>
+            {!(notes[lesson.id]||[]).length&&<div style={{fontSize:12,color:mu,marginBottom:9}}>No notes yet for this lesson.</div>}
+            {(notes[lesson.id]||[]).map((n,i)=>(
+              <div key={i} style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.15)",borderRadius:9,padding:"9px 12px",marginBottom:6,fontSize:13,color:"#c8d8f0",display:"flex",justifyContent:"space-between",gap:10}}>
+                <span>{n.text}</span>
+                <button onClick={()=>{const a=[...(notes[lesson.id]||[])];a.splice(i,1);setNotes(p=>({...p,[lesson.id]:a}));pop("Deleted");}} style={{background:"none",border:"none",color:mu,cursor:"pointer",fontSize:15,flexShrink:0}}>×</button>
+              </div>
+            ))}
+            <Inp ta sx={{minHeight:72,marginTop:4}} placeholder="Add a note for this lesson…" value={noteIn} onChange={e=>setNoteIn(e.target.value)}/>
+            <Bs ch="Save Note" on={()=>{if(!noteIn.trim())return;setNotes(p=>({...p,[lesson.id]:[...(p[lesson.id]||[]),{text:noteIn.trim()}]}));setNoteIn("");pop("Note saved!");}} sx={{marginTop:8}}/>
           </div>
-        ))}
-        <Inp ta sx={{minHeight:72,marginTop:4}} placeholder="Add a note for this lesson…" value={noteIn} onChange={e=>setNoteIn(e.target.value)}/>
-        <Bs ch="Save Note" on={()=>{if(!noteIn.trim())return;setNotes(p=>({...p,[lesson.id]:[...(p[lesson.id]||[]),{text:noteIn.trim()}]}));setNoteIn("");pop("Note saved!");}} sx={{marginTop:8}}/>
-      </div>
-    ):(
+        ):(
+          <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
+            <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes and track progress</div>
+            <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
+            <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")}/>
+          </div>
+        )}
+      </>
+    }
+  </>);
       <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
         <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes and track progress</div>
         <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
