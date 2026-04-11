@@ -3797,12 +3797,7 @@ const redeemPromoCode = async () => {
       </>
     }
   </>);
-      <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
-        <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes and track progress</div>
-        <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
-        <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")}/>
-      </div>
-    )}
+     
   </>);
 
   if(view==="learn"&&mod) return wrap(<>
