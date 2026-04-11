@@ -1123,8 +1123,124 @@ const FREE_SECTIONS = [
         },
       ]},
       { id:"m4", title:"Communication Under Pressure", lessons:[
-        { id:"l10", title:"Retail Communication Framework", content:`Use this formula:\nAcknowledge → Clarify → Set expectation\n\nExample:\n"I understand this is frustrating. Let me check the claim and see what's causing the delay."\n\nAvoid:\n• Blame language\n• Defensive tone` },
-        { id:"l11", title:"Inpatient Communication Framework", content:`Focus on:\n• Clear time expectations\n• Direct but respectful tone\n• Documentation-backed responses\n\nExample:\n"I see the order was verified at 10:12. It is scheduled for restock at 11:00. Let me confirm status."` },
+        {
+          id:"l10",
+          title:"Retail Communication Framework",
+          sections:[
+            {
+              header:"THE REALITY OF RETAIL COMMUNICATION",
+              body:"Retail pharmacy is where patients are often at their most frustrated. And sometimes that frustration comes out as anger directed at you. The mistake many techs make is not recognizing frustration building inside themselves until it suddenly overflows. A tech who is naturally quiet can absorb a lot of verbal frustration. And then one interaction triggers a response that does not feel like them. That moment usually comes after a long accumulation of smaller moments."
+            },
+            {
+              header:"THE COMMUNICATION FRAMEWORK",
+              body:"When a patient is frustrated, there is a structure that works: acknowledge, clarify, set expectation.\n\nAcknowledge means you recognize the patient's frustration without over-apologizing. Clarify means you identify the actual problem. Set expectation means you tell the patient exactly what comes next and when with specific information, not vague promises."
+            }
+          ],
+          keyPoints:[
+            "Frustration in retail techs often builds silently before it suddenly shows",
+            "Verbal abuse from patients is real and it accumulates over time",
+            "The acknowledge, clarify, set expectation framework gives you structure when emotions are high",
+            "Acknowledgment without over-apologizing de-escalates most patient situations",
+            "Clarity and specific expectations remove the uncertainty that fuels frustration"
+          ],
+          takeaway:"Staying calm is not about being nice. It is about staying in control of the interaction instead of letting frustration control you.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle frustrated patients right now?",
+            options:[
+              {
+                label:"I stay quiet and absorb the frustration without showing how it affects me, but sometimes it builds up internally.",
+                response:"The risk is that frustration is accumulating silently. Start recognizing the early signs: tension, faster breathing, shorter responses."
+              },
+              {
+                label:"I use a framework to acknowledge and clarify before jumping to solutions, and I manage my own frustration in the moment.",
+                response:"That structure is what separates techs who last in retail from techs who burn out."
+              },
+              {
+                label:"I recognize I am getting frustrated but I struggle to keep my voice and tone steady when patients are being difficult.",
+                response:"Verbal abuse is real. If you are noticing your frustration showing, it might be time to talk to your lead or recognize that retail may not be the right fit long term. Neither is a failure."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A patient comes to the counter angry because their prescription was rejected. You have already had three similar interactions that shift and you can feel frustration rising.",
+            prompt:"What do you do in the first ten seconds that prevents frustration from showing in your response?"
+          },
+          answer:{
+            recommended:"You pause. Literally pause. Take a breath. Then you acknowledge: I can see you are frustrated. Let me find out exactly what happened with your prescription. That pause lets your nervous system reset instead of escalate."
+          },
+          communicationScript:{
+            title:"Retail Communication Framework",
+            lines:[
+              "Acknowledge: I can see this is frustrating.",
+              "Clarify: Your prescription was rejected for [specific reason]. Let me [specific action].",
+              "Set Expectation: You should expect [specific outcome] by [specific time].",
+              "Example: I can see you are frustrated. Your insurance rejected this because you filled it too recently. I am going to call your insurance right now to see if an override is possible. You should hear back from me within fifteen minutes."
+            ]
+          },
+          connection:{
+            tag:"Lead Tech · Pharmacy Supervisor · Customer Service Tech · Patient Experience Tech",
+            aiPrompt:"I just completed the lesson Retail Communication Framework in the Explore Pharmacy module. Help me practice the acknowledge, clarify, set expectation framework for difficult patient interactions in my current setting."
+          }
+        },
+        {
+          id:"l11",
+          title:"Inpatient Communication Framework",
+          sections:[
+            {
+              header:"THE ROOT OF INPATIENT MISCOMMUNICATION",
+              body:"Inpatient communication breaks down most often because of assumptions. A nurse calls expecting a certain process based on how her unit handles things. A tech responds based on how they have handled similar requests before. But that tech might be used to a different unit with different workflows. Nobody asks. Nobody verifies. Both people assume the other knows what they mean."
+            },
+            {
+              header:"HOW INPATIENT COMMUNICATION WORKS",
+              body:"The framework has four parts: listen fully, confirm what you heard, clarify any assumptions, and communicate your timeline. Listen fully means you do not interrupt. Confirm means you repeat back what they told you. Clarify means you ask the specific questions that prevent miscommunication. Communicate your timeline means you give them a specific answer about when they can expect resolution."
+            }
+          ],
+          keyPoints:[
+            "Inpatient miscommunication usually comes from assumptions, not unclear speaking",
+            "Two people can think they understand each other and be operating from completely different assumptions",
+            "Different units have different workflows and what works on one floor may not work on another",
+            "Confirming and clarifying takes thirty seconds and prevents delays and errors",
+            "Specific timelines remove uncertainty and build trust with clinical staff"
+          ],
+          takeaway:"The nurse who knows exactly when her medication will arrive is less frustrated than the nurse who is left wondering.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle clinical communication right now?",
+            options:[
+              {
+                label:"I handle requests based on my standard process and assume the caller understands how pharmacy works.",
+                response:"Start adding one clarifying question to each clinical call: Do you need this urgently or is standard timeline okay?"
+              },
+              {
+                label:"I listen to the full request, confirm what I heard, and clarify any details that might affect how I handle it.",
+                response:"Clinical staff learns to rely on you. You are the tech they call first because they know you will get it right."
+              },
+              {
+                label:"I answer questions but sometimes realize afterward that my understanding did not match what the caller expected.",
+                response:"Next time you finish a clinical call, ask yourself: do I know exactly what they need and when? If not, call back and clarify."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A nurse calls from a floor you do not usually cover. She asks about a medication and seems to assume you already know her unit's protocol for urgent requests.",
+            prompt:"What do you say, and how do you make sure you both leave the conversation with the same understanding?"
+          },
+          answer:{
+            recommended:"Say: I want to make sure I handle this correctly for your unit. Can you tell me if this is urgent or standard timeline? And what is your usual process when you need something escalated quickly? Then confirm back: So what I am hearing is you need this within thirty minutes and if there is a delay I should call the charge nurse directly. Is that right?"
+          },
+          communicationScript:{
+            title:"Inpatient Communication Framework",
+            lines:[
+              "Listen fully. Do not interrupt. Do not start solving before they finish.",
+              "Confirm: What I am hearing is [repeat back]. Is that correct?",
+              "Clarify: Is this urgent or standard timeline? What is your unit's process if there is a delay?",
+              "Set timeline: You can expect [specific outcome] by [specific time]. If anything changes I will call you directly."
+            ]
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Lead Tech · Pharmacy Supervisor",
+            aiPrompt:"I just completed the lesson Inpatient Communication Framework in the Explore Pharmacy module. Help me practice the listen, confirm, clarify, set timeline framework for clinical staff communication in my current setting."
+          }
+        },
       ]},
       { id:"m5", title:"First Week Survival Guide", lessons:[
         { id:"l12", title:"First Week Priorities & Common Mistakes", content:`PRIORITIES:\n☐ Learn layout\n☐ Observe workflow rhythm\n☐ Identify escalation path\n☐ Understand controlled substance handling (high-level)\n☐ Write down new terms\n\nCOMMON FIRST-WEEK MISTAKES:\n• Trying to impress with speed\n• Avoiding questions\n• Panicking when unsure\n\nStrong tech behavior:\nCalm. Curious. Observant.` },
