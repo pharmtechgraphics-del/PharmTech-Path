@@ -2163,7 +2163,53 @@ function ExplorePharmacyLesson({ lesson, go }) {
         </div>
       )}
 
-{/* DEA FORMS TABLE */}
+{/* EXAM WORKSHEET */}
+      {lesson.examWorksheet && lesson.examWorksheet.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(245,158,11,0.06), rgba(255,170,0,0.04))",
+          border: "1px solid rgba(245,158,11,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#f59e0b", "rgba(245,158,11,0.12)"), border: "1px solid rgba(245,158,11,0.25)", marginBottom: 6 }}>
+            Post-Exam Reflection Worksheet
+          </div>
+          <p style={{ fontSize: 13, color: mu, margin: "0 0 14px", fontStyle: "italic" }}>
+            Fill this out after every practice exam. The pattern you notice over time is more valuable than any single score.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {lesson.examWorksheet.map((item, i) => (
+              <div key={i} style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(245,158,11,0.12)",
+                borderRadius: 9, padding: "10px 13px",
+                display: "flex", flexDirection: "column", gap: 6
+              }}>
+                <span style={{
+                  fontSize: 10, fontWeight: 700, color: "#f59e0b",
+                  textTransform: "uppercase", letterSpacing: "0.08em",
+                  fontFamily: "monospace"
+                }}>{item.label}</span>
+                <input
+                  placeholder={item.placeholder}
+                  style={{
+                    background: "transparent", border: "none",
+                    borderBottom: "1px solid rgba(245,158,11,0.2)",
+                    color: "#c8cdd8", fontSize: 13, outline: "none",
+                    fontFamily: "inherit", padding: "4px 0", width: "100%"
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            Screenshot this or save it between study sessions.
+          </p>
+        </div>
+      )}
+
+      {/* DEA FORMS TABLE */}
       {lesson.deaFormsTable && lesson.deaFormsTable.length > 0 && (
         <div style={{
           background: "linear-gradient(135deg, rgba(168,85,247,0.06), rgba(0,148,255,0.04))",
