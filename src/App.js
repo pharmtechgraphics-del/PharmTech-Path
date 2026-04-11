@@ -958,10 +958,169 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"m3", title:"Safety & Law Basics", lessons:[
-        { id:"l7", title:"Why Regulation Exists", content:`Medications can:\n• Harm\n• Interact\n• Be misused\n• Be diverted\n\nRegulation protects:\n• Patients\n• Staff\n• Institutions\n• Licenses\n\nDocumentation is protection.` },
-        { id:"l8", title:"Controlled Substance Awareness", content:`Technician role includes:\n• Accurate documentation\n• Following storage protocols\n• Maintaining count awareness\n• Reporting discrepancies\n\nNot included:\n• Independent clinical judgment\n• Policy interpretation\n• Override authority\n\nIf something feels off — escalate.` },
-        { id:"l9", title:"Escalation as a Strength", content:`Escalating does not mean incompetence.\n\nEscalate when:\n• Counts don't match\n• Documentation conflicts\n• Orders seem unclear\n• A patient provides conflicting information\n\nEscalation prevents problems.` },
+     { id:"m3", title:"Safety & Law Basics", lessons:[
+        {
+          id:"l7",
+          title:"Why Regulation Exists",
+          sections:[
+            {
+              header:"RULES ARE NOT ARBITRARY",
+              body:"Every rule in pharmacy exists because something went wrong before it was written. Regulations are not bureaucratic inconvenience. They are the documented response to real harm that reached real patients."
+            },
+            {
+              header:"WHAT HAPPENS WHEN REGULATION GETS TREATED AS A CHECKLIST",
+              body:"The most common consequence is a medication error. Wrong drug. Wrong dose. Wrong quantity. Expired medication. A narcotic discrepancy with legal and regulatory consequences. There is also a second consequence: when a pharmacist over-trusts a tech, they may not scrutinize each check as carefully as they should. That means when the tech misses something, the last safety checkpoint in the entire system is also at risk."
+            },
+            {
+              header:"WHAT REGULATION ACTUALLY PROTECTS",
+              body:"Medications can harm, interact, be misused, and be diverted. Regulation protects patients, staff, institutions, and licenses. Documentation is not paperwork. Documentation is the evidence that the chain of safety held."
+            }
+          ],
+          keyPoints:[
+            "Every pharmacy regulation exists because real harm happened before it was written",
+            "Going through the motions creates medication errors and narcotic discrepancies",
+            "A pharmacist who over-trusts a tech may not catch what the tech missed",
+            "Regulation protects patients, staff, institutions and professional licenses",
+            "Documentation is evidence that the chain of safety held"
+          ],
+          takeaway:"Following the rules is not the minimum requirement. It is the foundation everything else is built on.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently relate to pharmacy regulations?",
+            options:[
+              {
+                label:"I follow the rules because I am required to. I do not always think about why they exist.",
+                response:"The next time you complete a regulatory task, ask yourself what would happen if this step did not exist."
+              },
+              {
+                label:"I understand why each requirement exists and that understanding changes how seriously I take it.",
+                response:"That level of understanding separates a tech who follows rules from a tech who upholds standards."
+              },
+              {
+                label:"I am still learning which rules are high stakes and which ones are more routine.",
+                response:"Any step involving a controlled substance, patient identity, expiration date, or documentation entry is high stakes."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are doing a routine narcotic count at the end of your shift and the numbers do not reconcile. You are tired, the count is only off by one, and the oncoming tech is waiting.",
+            prompt:"What do you do, and why does it matter beyond this one count?"
+          },
+          answer:{
+            recommended:"You report it and document it immediately. You do not assume it is a documentation error, you do not fix it quietly, and you do not pass it to the next shift without flagging it. The discomfort of holding up the shift handoff is not comparable to the risk of letting an unresolved discrepancy move forward undocumented."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Why Regulation Exists in the Explore Pharmacy module. Help me understand how to think about regulatory requirements in my current role as more than a checklist."
+          }
+        },
+        {
+          id:"l8",
+          title:"Controlled Substance Awareness",
+          sections:[
+            {
+              header:"BEFORE YOU EVER TOUCH ONE",
+              body:"Most mistakes can be fixed. The majority of controlled substance discrepancies that techs create are reconcilable if you come forward immediately. The techs who create the most serious problems are the ones who knew something was off and said nothing. If something feels wrong, say it out loud right away."
+            },
+            {
+              header:"WHAT YOUR ROLE ACTUALLY INCLUDES",
+              body:"Your role includes accurate documentation, following storage protocols, maintaining count awareness, and reporting discrepancies the moment you identify them. Your role does not include independent clinical judgment, interpreting policy on your own, or overriding established processes. If something feels off, escalate. Every time."
+            },
+            {
+              header:"WHEN IT CANNOT BE FIXED",
+              body:"Some discrepancies cannot be resolved. When a controlled substance discrepancy cannot be reconciled, the consequences are not administrative. They are legal. A DEA investigation. Loss of your certification. Criminal liability. These are real outcomes. The standard is simple: take your time, verify what you are doing, and know why you are doing it."
+            }
+          ],
+          keyPoints:[
+            "Most controlled substance mistakes can be fixed if you report them immediately",
+            "Silence after a discrepancy is almost always worse than the discrepancy itself",
+            "Your role includes documentation, storage, counts and reporting, not clinical judgment",
+            "Carelessness with controlled substances can result in legal consequences that cannot be undone",
+            "Taking your time and knowing why you are doing each step is your best protection"
+          ],
+          takeaway:"A mistake you report is a problem that can be solved. A mistake you hide is a problem that grows.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently approach controlled substances?",
+            options:[
+              {
+                label:"I am intimidated by them and tend to avoid asking questions because I do not want to seem incompetent.",
+                response:"Ask questions. Every question you ask now is a discrepancy you prevent later."
+              },
+              {
+                label:"I handle them carefully and know that if something goes wrong my first move is to report it immediately.",
+                response:"That combination of care and transparency is exactly right."
+              },
+              {
+                label:"I have gotten comfortable with the routine but sometimes move through the steps faster than I should.",
+                response:"The routine steps with controlled substances are the ones most worth slowing down for."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are completing a controlled substance count and the numbers are off by two units. Your controlled substance lead is still on site.",
+            prompt:"What do you do right now, and what is the cost of waiting until tomorrow?"
+          },
+          answer:{
+            recommended:"You go to your controlled substance lead right now. Tell them exactly what you found, what you think may have caused it, and what steps you already retraced. The cost of waiting is that the window for resolution narrows. Coming forward immediately keeps a fixable problem fixable."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Controlled Substance Awareness in the Explore Pharmacy module. Based on my background, help me understand what strong controlled substance habits look like in my current setting."
+          }
+        },
+        {
+          id:"l9",
+          title:"Escalation as a Strength",
+          sections:[
+            {
+              header:"THE REAL REASON TECHS DO NOT ESCALATE",
+              body:"The real reason is culture. In retail and inpatient settings alike, there are pharmacists and technicians who respond to questions with impatience or hostility. If you were met with an attitude early in your career when you asked questions, you learned that asking is unsafe. That lesson is wrong. But it is completely understandable."
+            },
+            {
+              header:"WHAT ESCALATION ACTUALLY IS",
+              body:"Escalation is the correct professional response to a situation that requires more authority, more information, or more expertise than your current role provides. The tech who escalates consistently understands exactly where their role ends and where the next level of accountability begins. That clarity is a professional skill."
+            },
+            {
+              header:"PROTECTING YOURSELF IN ANY CULTURE",
+              body:"If you escalate and the response is an attitude, that is a reflection of the person who responded. Document what you escalated and when. Ask your question anyway. The patient on the other end of your decision does not know what the culture in your pharmacy feels like. They just need the right medication."
+            }
+          ],
+          keyPoints:[
+            "Workplace culture is the most common real reason techs do not escalate",
+            "Being met with hostility when asking questions teaches the wrong lesson",
+            "Escalation is the correct professional response to situations outside your scope",
+            "Counts, documentation conflicts, unclear orders and conflicting patient information all require escalation",
+            "Escalating consistently, even in difficult cultures, builds a professional reputation that follows you"
+          ],
+          takeaway:"The tech who asks the uncomfortable question is the one who prevents the serious error.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently handle situations that might need escalation?",
+            options:[
+              {
+                label:"I avoid escalating when I can because I do not want to seem like I cannot handle things.",
+                response:"Identify one category of situation where you know you should escalate and commit to doing it every time."
+              },
+              {
+                label:"I escalate when something is outside my scope and I do not let the reaction change that.",
+                response:"That combination of clarity and consistency is exactly what strong pharmacy practice looks like."
+              },
+              {
+                label:"I want to escalate more but the culture in my pharmacy makes it feel risky.",
+                response:"Your obligation to the patient does not change because of the culture around you. Document your escalations. Ask anyway."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are working a shift with a pharmacist who has a reputation for being short with techs. You are filling an order and the dose seems higher than expected. You are not certain enough to feel comfortable moving forward.",
+            prompt:"What do you do, and what do you tell yourself if the response you get is not a kind one?"
+          },
+          answer:{
+            recommended:"You ask anyway. The pharmacist still has to answer the question because the question is clinically valid. The culture of a pharmacy does not change what the right action is. It only changes how uncomfortable the right action feels. Do it anyway."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Escalation as a Strength in the Explore Pharmacy module. Help me build confidence around escalating in my current work environment based on my background."
+          }
+        },
       ]},
       { id:"m4", title:"Communication Under Pressure", lessons:[
         { id:"l10", title:"Retail Communication Framework", content:`Use this formula:\nAcknowledge → Clarify → Set expectation\n\nExample:\n"I understand this is frustrating. Let me check the claim and see what's causing the delay."\n\nAvoid:\n• Blame language\n• Defensive tone` },
