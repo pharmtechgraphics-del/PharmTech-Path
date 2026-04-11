@@ -784,21 +784,531 @@ const FREE_SECTIONS = [
         },   
         ]},
       { id:"m2", title:"Workflow 101", lessons:[
-        { id:"l4", title:"Retail Workflow Deep Dive", content:`Retail workflow is cyclical:\n1. Intake\n2. Data entry\n3. Insurance adjudication\n4. Filling\n5. Pharmacist verification\n6. Pickup\n\nBreakdowns often occur during:\n• Incorrect insurance entry\n• Missing prescriber details\n• Prior authorization delays\n\nNew tech mistake: Trying to fix everything alone.\nStrong tech move: Identify bottleneck → escalate appropriately.` },
-        { id:"l5", title:"Inpatient Workflow Deep Dive", content:`Inpatient flow depends heavily on systems:\n1. Provider order entry\n2. Pharmacist verification\n3. Automated dispensing\n4. Restock / cart fill\n5. Documentation\n\nEven though automation is involved, accountability remains human.` },
-        { id:"l6", title:"Error Prevention", content:`Errors most commonly occur due to:\n• Distraction\n• Similar drug names\n• Similar packaging\n• Multitasking\n• Fatigue\n\nBuild habits:\n☐ Pause before finalizing entry\n☐ Read labels fully\n☐ Confirm quantities\n☐ Clarify unclear handwriting or order detail` },
+        {
+          id:"l4",
+          title:"Retail Workflow Deep Dive",
+          sections:[
+            {
+              header:"THE CYCLE THAT NEVER STOPS",
+              body:"Retail pharmacy runs on a continuous loop: intake, data entry, insurance adjudication, filling, pharmacist verification, and pickup. When a step gets rushed or skipped, the break almost never stays contained to the step where it happened."
+            },
+            {
+              header:"WHERE BREAKDOWNS ACTUALLY START",
+              body:"Two steps cause more downstream problems than any other: data entry and insurance adjudication. Data entry errors move forward silently and create pharmacist rework and patient safety risk. Insurance rejections require a resolved status before the patient is given a pickup time. Do not close an interaction until you know what the actual status is."
+            },
+            {
+              header:"BREAKDOWNS AND HOW TO HANDLE THEM",
+              body:"Incorrect insurance entry gets corrected at the source. Missing prescriber details require a call to the office. Prior authorization delays get escalated to the pharmacist. The strong move is to identify where the breakdown is, communicate it clearly, and escalate when the fix is outside your scope."
+            }
+          ],
+          keyPoints:[
+            "Retail workflow is a continuous six-step cycle where every step depends on the one before it",
+            "Data entry errors move forward silently and create pharmacist rework and patient safety risk",
+            "Insurance rejections require a resolved status before the patient is given a pickup time",
+            "Most entry mistakes happen during multitasking or when rushing under pressure",
+            "Identifying the breakdown point and escalating appropriately is a senior skill"
+          ],
+          takeaway:"A fast mistake costs more time than a slow correction.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle the retail workflow right now?",
+            options:[
+              {
+                label:"I move through the queue as efficiently as I can. Sometimes I circle back to fix things but I keep the line moving.",
+                response:"The data entry and insurance steps are the ones worth slowing down for. One mistake at either creates more time loss than the seconds you saved."
+              },
+              {
+                label:"I slow down at the high-risk steps because I know a mistake there costs more time than doing it right.",
+                response:"The techs who understand where the risk lives in a workflow are the ones who become the go-to person."
+              },
+              {
+                label:"I am still learning which steps are high risk and which ones are okay to move through quickly.",
+                response:"Watch data entry and insurance adjudication most closely first. Build your awareness there and expand outward."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A patient drops off a prescription and leaves to run errands. You enter it and hit a refill too soon rejection. The pharmacist is on the phone and the line is backing up.",
+            prompt:"What do you do, and what is the cost of getting this wrong?"
+          },
+          answer:{
+            recommended:"Do not assume the rejection will clear. Check the fill history to confirm when the last fill was dispensed. Note the date they will be eligible. The cost of getting this wrong is a patient who made plans around a pickup time you should not have confirmed."
+          },
+          connection:{
+            tag:"Lead Tech · Pharmacy Supervisor · Prior Authorization Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Retail Workflow Deep Dive in the Explore Pharmacy module. Help me understand how to identify breakdown points in my current retail workflow and escalate more effectively."
+          }
+        },
+        {
+          id:"l5",
+          title:"Inpatient Workflow Deep Dive",
+          sections:[
+            {
+              header:"FIRST THINGS FIRST",
+              body:"In inpatient pharmacy, you can sit down. Retail techs who make the switch consistently say the physical environment alone feels like a different profession. No counter. No line of patients. No phones ringing with insurance questions every four minutes."
+            },
+            {
+              header:"MORE THAN JUST FILLING",
+              body:"Inpatient techs inventory, restock, refill, and in many states perform tech check tech. They handle narcotics with a level of accountability and documentation rigor that goes beyond most retail settings. They work directly with nurses and providers and are treated as clinical support staff. The variety of medications in an inpatient setting compared to retail is significant."
+            },
+            {
+              header:"HOW INPATIENT FLOW WORKS",
+              body:"Provider order entry kicks off the process. The pharmacist verifies the order. ADS units on patient floors hold commonly used medications that techs restock and maintain. Cart fills ensure patient-specific medications are prepared and delivered on schedule. Your work is largely invisible to patients but directly felt by the clinical team."
+            }
+          ],
+          keyPoints:[
+            "Inpatient pharmacy involves a significantly broader scope of responsibilities than most retail roles",
+            "Tech check tech represents a higher level of peer accountability where available",
+            "The drug variety in inpatient settings is substantially greater than in retail",
+            "Your work directly supports nurses and providers who depend on accurate and timely medication access",
+            "Inpatient techs are treated as clinical support staff and the role carries that level of respect"
+          ],
+          takeaway:"In inpatient pharmacy you are not just filling medications. You are keeping the clinical team moving.",
+          selfCheck:{
+            prompt:"Which of these best describes where you are with inpatient pharmacy right now?",
+            options:[
+              {
+                label:"It sounds completely different from what I do now and I am not sure my skills would transfer.",
+                response:"Your skills transfer more directly than you think. What changes is the environment and the workflow structure. That is learnable."
+              },
+              {
+                label:"I work in inpatient already and I recognize everything described here from my own experience.",
+                response:"Document your experience and use it to build toward the next level. Your scope of work is a resume in itself."
+              },
+              {
+                label:"I have been curious about inpatient but I did not realize the scope was this broad.",
+                response:"Inpatient opens doors to tech check tech certification, informatics roles, medication safety positions, and controlled substance leadership."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking a Pyxis unit. A nurse says a medication she needed was not in the cabinet when she pulled for her patient an hour ago. The patient's dose was delayed.",
+            prompt:"What questions should you be asking yourself after this interaction?"
+          },
+          answer:{
+            recommended:"Was that medication on my restock list and did I miss it? Was it out of stock and did I communicate that? Is there a par level issue to flag? A delayed dose is a patient care event. Your role in that Pyxis restock is part of the care chain."
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Pharmacy Informatics Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Inpatient Workflow Deep Dive in the Explore Pharmacy module. Help me understand how my current experience translates into an inpatient setting and what I should focus on to prepare."
+          }
+        },
+        {
+          id:"l6",
+          title:"Error Prevention",
+          sections:[
+            {
+              header:"THE FAMILIARITY TRAP",
+              body:"Most medication errors happen because someone thought they knew exactly what they were doing. Similar drug names and similar packaging trip up experienced techs just as often as new ones. The reason is familiarity. When you have filled the same medications hundreds of times, your brain stops fully reading and starts pattern matching. That is how the wrong medication gets filled."
+            },
+            {
+              header:"WHY ERRORS HAPPEN",
+              body:"Errors most commonly occur because of five conditions: distraction, similar drug names, similar packaging, multitasking, and fatigue. Understanding why errors happen is not about assigning blame. It is about building habits that work even when conditions are not ideal."
+            },
+            {
+              header:"BUILDING HABITS THAT HOLD",
+              body:"The techs with the lowest error rates are the most habitual. Pause before finalizing any entry. Read labels fully. Confirm quantities. Clarify unclear handwriting or order detail before moving forward. These are not extra steps. They are the steps."
+            }
+          ],
+          keyPoints:[
+            "Similar drug names and similar packaging cause errors in experienced techs just as often as new ones",
+            "Familiarity breeds assumption and assumption is where errors live",
+            "Distraction, multitasking and fatigue are environmental realities that require habitual responses",
+            "Low error rates come from consistent habits, not talent",
+            "Clarifying before processing is always faster than correcting after a mistake"
+          ],
+          takeaway:"The tech who reads every label like it is the first time they have seen it is the tech who catches what everyone else misses.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you approach familiar medications?",
+            options:[
+              {
+                label:"I move through familiar medications quickly because I know what they look like. It saves time.",
+                response:"Familiarity is not accuracy. Read the full label even on medications you have filled a hundred times."
+              },
+              {
+                label:"I treat every fill the same way regardless of how familiar the medication is. I read the full label every time.",
+                response:"That consistency is rare. Keep that habit and teach it to everyone around you."
+              },
+              {
+                label:"I know I should slow down on familiar fills but the pace of the shift makes it hard to be consistent.",
+                response:"Start with one category of high-risk medications and build the full read habit there first."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking a Pyxis unit. You reach for what looks like the right vial based on label color and shape. As you are about to scan it you notice the concentration is different from what is normally stocked there.",
+            prompt:"Do you stop or do you assume it is fine because everything else looked right?"
+          },
+          answer:{
+            recommended:"You stop. Always. A different concentration is not a minor variation. Concentration errors are among the most serious medication errors in inpatient settings. It takes ten seconds to confirm the right concentration. It takes significantly longer to manage the consequences of stocking the wrong one."
+          },
+          errorPreventionHabits:[
+            "Pause before finalizing any entry",
+            "Read labels fully, not just the first word",
+            "Confirm quantities against the prescription or order before filling",
+            "Clarify any unclear handwriting or order detail before processing",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Pharmacy Supervisor · Medication Safety Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Error Prevention in the Explore Pharmacy module. Help me build specific error prevention habits for my current work environment based on my background."
+          }
+        },
       ]},
-      { id:"m3", title:"Safety & Law Basics", lessons:[
-        { id:"l7", title:"Why Regulation Exists", content:`Medications can:\n• Harm\n• Interact\n• Be misused\n• Be diverted\n\nRegulation protects:\n• Patients\n• Staff\n• Institutions\n• Licenses\n\nDocumentation is protection.` },
-        { id:"l8", title:"Controlled Substance Awareness", content:`Technician role includes:\n• Accurate documentation\n• Following storage protocols\n• Maintaining count awareness\n• Reporting discrepancies\n\nNot included:\n• Independent clinical judgment\n• Policy interpretation\n• Override authority\n\nIf something feels off — escalate.` },
-        { id:"l9", title:"Escalation as a Strength", content:`Escalating does not mean incompetence.\n\nEscalate when:\n• Counts don't match\n• Documentation conflicts\n• Orders seem unclear\n• A patient provides conflicting information\n\nEscalation prevents problems.` },
+     { id:"m3", title:"Safety & Law Basics", lessons:[
+        {
+          id:"l7",
+          title:"Why Regulation Exists",
+          sections:[
+            {
+              header:"RULES ARE NOT ARBITRARY",
+              body:"Every rule in pharmacy exists because something went wrong before it was written. Regulations are not bureaucratic inconvenience. They are the documented response to real harm that reached real patients."
+            },
+            {
+              header:"WHAT HAPPENS WHEN REGULATION GETS TREATED AS A CHECKLIST",
+              body:"The most common consequence is a medication error. Wrong drug. Wrong dose. Wrong quantity. Expired medication. A narcotic discrepancy with legal and regulatory consequences. There is also a second consequence: when a pharmacist over-trusts a tech, they may not scrutinize each check as carefully as they should. That means when the tech misses something, the last safety checkpoint in the entire system is also at risk."
+            },
+            {
+              header:"WHAT REGULATION ACTUALLY PROTECTS",
+              body:"Medications can harm, interact, be misused, and be diverted. Regulation protects patients, staff, institutions, and licenses. Documentation is not paperwork. Documentation is the evidence that the chain of safety held."
+            }
+          ],
+          keyPoints:[
+            "Every pharmacy regulation exists because real harm happened before it was written",
+            "Going through the motions creates medication errors and narcotic discrepancies",
+            "A pharmacist who over-trusts a tech may not catch what the tech missed",
+            "Regulation protects patients, staff, institutions and professional licenses",
+            "Documentation is evidence that the chain of safety held"
+          ],
+          takeaway:"Following the rules is not the minimum requirement. It is the foundation everything else is built on.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently relate to pharmacy regulations?",
+            options:[
+              {
+                label:"I follow the rules because I am required to. I do not always think about why they exist.",
+                response:"The next time you complete a regulatory task, ask yourself what would happen if this step did not exist."
+              },
+              {
+                label:"I understand why each requirement exists and that understanding changes how seriously I take it.",
+                response:"That level of understanding separates a tech who follows rules from a tech who upholds standards."
+              },
+              {
+                label:"I am still learning which rules are high stakes and which ones are more routine.",
+                response:"Any step involving a controlled substance, patient identity, expiration date, or documentation entry is high stakes."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are doing a routine narcotic count at the end of your shift and the numbers do not reconcile. You are tired, the count is only off by one, and the oncoming tech is waiting.",
+            prompt:"What do you do, and why does it matter beyond this one count?"
+          },
+          answer:{
+            recommended:"You report it and document it immediately. You do not assume it is a documentation error, you do not fix it quietly, and you do not pass it to the next shift without flagging it. The discomfort of holding up the shift handoff is not comparable to the risk of letting an unresolved discrepancy move forward undocumented."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Why Regulation Exists in the Explore Pharmacy module. Help me understand how to think about regulatory requirements in my current role as more than a checklist."
+          }
+        },
+        {
+          id:"l8",
+          title:"Controlled Substance Awareness",
+          sections:[
+            {
+              header:"BEFORE YOU EVER TOUCH ONE",
+              body:"Most mistakes can be fixed. The majority of controlled substance discrepancies that techs create are reconcilable if you come forward immediately. The techs who create the most serious problems are the ones who knew something was off and said nothing. If something feels wrong, say it out loud right away."
+            },
+            {
+              header:"WHAT YOUR ROLE ACTUALLY INCLUDES",
+              body:"Your role includes accurate documentation, following storage protocols, maintaining count awareness, and reporting discrepancies the moment you identify them. Your role does not include independent clinical judgment, interpreting policy on your own, or overriding established processes. If something feels off, escalate. Every time."
+            },
+            {
+              header:"WHEN IT CANNOT BE FIXED",
+              body:"Some discrepancies cannot be resolved. When a controlled substance discrepancy cannot be reconciled, the consequences are not administrative. They are legal. A DEA investigation. Loss of your certification. Criminal liability. These are real outcomes. The standard is simple: take your time, verify what you are doing, and know why you are doing it."
+            }
+          ],
+          keyPoints:[
+            "Most controlled substance mistakes can be fixed if you report them immediately",
+            "Silence after a discrepancy is almost always worse than the discrepancy itself",
+            "Your role includes documentation, storage, counts and reporting, not clinical judgment",
+            "Carelessness with controlled substances can result in legal consequences that cannot be undone",
+            "Taking your time and knowing why you are doing each step is your best protection"
+          ],
+          takeaway:"A mistake you report is a problem that can be solved. A mistake you hide is a problem that grows.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently approach controlled substances?",
+            options:[
+              {
+                label:"I am intimidated by them and tend to avoid asking questions because I do not want to seem incompetent.",
+                response:"Ask questions. Every question you ask now is a discrepancy you prevent later."
+              },
+              {
+                label:"I handle them carefully and know that if something goes wrong my first move is to report it immediately.",
+                response:"That combination of care and transparency is exactly right."
+              },
+              {
+                label:"I have gotten comfortable with the routine but sometimes move through the steps faster than I should.",
+                response:"The routine steps with controlled substances are the ones most worth slowing down for."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are completing a controlled substance count and the numbers are off by two units. Your controlled substance lead is still on site.",
+            prompt:"What do you do right now, and what is the cost of waiting until tomorrow?"
+          },
+          answer:{
+            recommended:"You go to your controlled substance lead right now. Tell them exactly what you found, what you think may have caused it, and what steps you already retraced. The cost of waiting is that the window for resolution narrows. Coming forward immediately keeps a fixable problem fixable."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Controlled Substance Awareness in the Explore Pharmacy module. Based on my background, help me understand what strong controlled substance habits look like in my current setting."
+          }
+        },
+        {
+          id:"l9",
+          title:"Escalation as a Strength",
+          sections:[
+            {
+              header:"THE REAL REASON TECHS DO NOT ESCALATE",
+              body:"The real reason is culture. In retail and inpatient settings alike, there are pharmacists and technicians who respond to questions with impatience or hostility. If you were met with an attitude early in your career when you asked questions, you learned that asking is unsafe. That lesson is wrong. But it is completely understandable."
+            },
+            {
+              header:"WHAT ESCALATION ACTUALLY IS",
+              body:"Escalation is the correct professional response to a situation that requires more authority, more information, or more expertise than your current role provides. The tech who escalates consistently understands exactly where their role ends and where the next level of accountability begins. That clarity is a professional skill."
+            },
+            {
+              header:"PROTECTING YOURSELF IN ANY CULTURE",
+              body:"If you escalate and the response is an attitude, that is a reflection of the person who responded. Document what you escalated and when. Ask your question anyway. The patient on the other end of your decision does not know what the culture in your pharmacy feels like. They just need the right medication."
+            }
+          ],
+          keyPoints:[
+            "Workplace culture is the most common real reason techs do not escalate",
+            "Being met with hostility when asking questions teaches the wrong lesson",
+            "Escalation is the correct professional response to situations outside your scope",
+            "Counts, documentation conflicts, unclear orders and conflicting patient information all require escalation",
+            "Escalating consistently, even in difficult cultures, builds a professional reputation that follows you"
+          ],
+          takeaway:"The tech who asks the uncomfortable question is the one who prevents the serious error.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently handle situations that might need escalation?",
+            options:[
+              {
+                label:"I avoid escalating when I can because I do not want to seem like I cannot handle things.",
+                response:"Identify one category of situation where you know you should escalate and commit to doing it every time."
+              },
+              {
+                label:"I escalate when something is outside my scope and I do not let the reaction change that.",
+                response:"That combination of clarity and consistency is exactly what strong pharmacy practice looks like."
+              },
+              {
+                label:"I want to escalate more but the culture in my pharmacy makes it feel risky.",
+                response:"Your obligation to the patient does not change because of the culture around you. Document your escalations. Ask anyway."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are working a shift with a pharmacist who has a reputation for being short with techs. You are filling an order and the dose seems higher than expected. You are not certain enough to feel comfortable moving forward.",
+            prompt:"What do you do, and what do you tell yourself if the response you get is not a kind one?"
+          },
+          answer:{
+            recommended:"You ask anyway. The pharmacist still has to answer the question because the question is clinically valid. The culture of a pharmacy does not change what the right action is. It only changes how uncomfortable the right action feels. Do it anyway."
+          },
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Medication Safety Tech · Pharmacy Quality Assurance Tech",
+            aiPrompt:"I just completed the lesson Escalation as a Strength in the Explore Pharmacy module. Help me build confidence around escalating in my current work environment based on my background."
+          }
+        },
       ]},
       { id:"m4", title:"Communication Under Pressure", lessons:[
-        { id:"l10", title:"Retail Communication Framework", content:`Use this formula:\nAcknowledge → Clarify → Set expectation\n\nExample:\n"I understand this is frustrating. Let me check the claim and see what's causing the delay."\n\nAvoid:\n• Blame language\n• Defensive tone` },
-        { id:"l11", title:"Inpatient Communication Framework", content:`Focus on:\n• Clear time expectations\n• Direct but respectful tone\n• Documentation-backed responses\n\nExample:\n"I see the order was verified at 10:12. It is scheduled for restock at 11:00. Let me confirm status."` },
+        {
+          id:"l10",
+          title:"Retail Communication Framework",
+          sections:[
+            {
+              header:"THE REALITY OF RETAIL COMMUNICATION",
+              body:"Retail pharmacy is where patients are often at their most frustrated. And sometimes that frustration comes out as anger directed at you. The mistake many techs make is not recognizing frustration building inside themselves until it suddenly overflows. A tech who is naturally quiet can absorb a lot of verbal frustration. And then one interaction triggers a response that does not feel like them. That moment usually comes after a long accumulation of smaller moments."
+            },
+            {
+              header:"THE COMMUNICATION FRAMEWORK",
+              body:"When a patient is frustrated, there is a structure that works: acknowledge, clarify, set expectation.\n\nAcknowledge means you recognize the patient's frustration without over-apologizing. Clarify means you identify the actual problem. Set expectation means you tell the patient exactly what comes next and when with specific information, not vague promises."
+            }
+          ],
+          keyPoints:[
+            "Frustration in retail techs often builds silently before it suddenly shows",
+            "Verbal abuse from patients is real and it accumulates over time",
+            "The acknowledge, clarify, set expectation framework gives you structure when emotions are high",
+            "Acknowledgment without over-apologizing de-escalates most patient situations",
+            "Clarity and specific expectations remove the uncertainty that fuels frustration"
+          ],
+          takeaway:"Staying calm is not about being nice. It is about staying in control of the interaction instead of letting frustration control you.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle frustrated patients right now?",
+            options:[
+              {
+                label:"I stay quiet and absorb the frustration without showing how it affects me, but sometimes it builds up internally.",
+                response:"The risk is that frustration is accumulating silently. Start recognizing the early signs: tension, faster breathing, shorter responses."
+              },
+              {
+                label:"I use a framework to acknowledge and clarify before jumping to solutions, and I manage my own frustration in the moment.",
+                response:"That structure is what separates techs who last in retail from techs who burn out."
+              },
+              {
+                label:"I recognize I am getting frustrated but I struggle to keep my voice and tone steady when patients are being difficult.",
+                response:"Verbal abuse is real. If you are noticing your frustration showing, it might be time to talk to your lead or recognize that retail may not be the right fit long term. Neither is a failure."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A patient comes to the counter angry because their prescription was rejected. You have already had three similar interactions that shift and you can feel frustration rising.",
+            prompt:"What do you do in the first ten seconds that prevents frustration from showing in your response?"
+          },
+          answer:{
+            recommended:"You pause. Literally pause. Take a breath. Then you acknowledge: I can see you are frustrated. Let me find out exactly what happened with your prescription. That pause lets your nervous system reset instead of escalate."
+          },
+          communicationScript:{
+            title:"Retail Communication Framework",
+            lines:[
+              "Acknowledge: I can see this is frustrating.",
+              "Clarify: Your prescription was rejected for [specific reason]. Let me [specific action].",
+              "Set Expectation: You should expect [specific outcome] by [specific time].",
+              "Example: I can see you are frustrated. Your insurance rejected this because you filled it too recently. I am going to call your insurance right now to see if an override is possible. You should hear back from me within fifteen minutes."
+            ]
+          },
+          connection:{
+            tag:"Lead Tech · Pharmacy Supervisor · Customer Service Tech · Patient Experience Tech",
+            aiPrompt:"I just completed the lesson Retail Communication Framework in the Explore Pharmacy module. Help me practice the acknowledge, clarify, set expectation framework for difficult patient interactions in my current setting."
+          }
+        },
+        {
+          id:"l11",
+          title:"Inpatient Communication Framework",
+          sections:[
+            {
+              header:"THE ROOT OF INPATIENT MISCOMMUNICATION",
+              body:"Inpatient communication breaks down most often because of assumptions. A nurse calls expecting a certain process based on how her unit handles things. A tech responds based on how they have handled similar requests before. But that tech might be used to a different unit with different workflows. Nobody asks. Nobody verifies. Both people assume the other knows what they mean."
+            },
+            {
+              header:"HOW INPATIENT COMMUNICATION WORKS",
+              body:"The framework has four parts: listen fully, confirm what you heard, clarify any assumptions, and communicate your timeline. Listen fully means you do not interrupt. Confirm means you repeat back what they told you. Clarify means you ask the specific questions that prevent miscommunication. Communicate your timeline means you give them a specific answer about when they can expect resolution."
+            }
+          ],
+          keyPoints:[
+            "Inpatient miscommunication usually comes from assumptions, not unclear speaking",
+            "Two people can think they understand each other and be operating from completely different assumptions",
+            "Different units have different workflows and what works on one floor may not work on another",
+            "Confirming and clarifying takes thirty seconds and prevents delays and errors",
+            "Specific timelines remove uncertainty and build trust with clinical staff"
+          ],
+          takeaway:"The nurse who knows exactly when her medication will arrive is less frustrated than the nurse who is left wondering.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle clinical communication right now?",
+            options:[
+              {
+                label:"I handle requests based on my standard process and assume the caller understands how pharmacy works.",
+                response:"Start adding one clarifying question to each clinical call: Do you need this urgently or is standard timeline okay?"
+              },
+              {
+                label:"I listen to the full request, confirm what I heard, and clarify any details that might affect how I handle it.",
+                response:"Clinical staff learns to rely on you. You are the tech they call first because they know you will get it right."
+              },
+              {
+                label:"I answer questions but sometimes realize afterward that my understanding did not match what the caller expected.",
+                response:"Next time you finish a clinical call, ask yourself: do I know exactly what they need and when? If not, call back and clarify."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A nurse calls from a floor you do not usually cover. She asks about a medication and seems to assume you already know her unit's protocol for urgent requests.",
+            prompt:"What do you say, and how do you make sure you both leave the conversation with the same understanding?"
+          },
+          answer:{
+            recommended:"Say: I want to make sure I handle this correctly for your unit. Can you tell me if this is urgent or standard timeline? And what is your usual process when you need something escalated quickly? Then confirm back: So what I am hearing is you need this within thirty minutes and if there is a delay I should call the charge nurse directly. Is that right?"
+          },
+          communicationScript:{
+            title:"Inpatient Communication Framework",
+            lines:[
+              "Listen fully. Do not interrupt. Do not start solving before they finish.",
+              "Confirm: What I am hearing is [repeat back]. Is that correct?",
+              "Clarify: Is this urgent or standard timeline? What is your unit's process if there is a delay?",
+              "Set timeline: You can expect [specific outcome] by [specific time]. If anything changes I will call you directly."
+            ]
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Lead Tech · Pharmacy Supervisor",
+            aiPrompt:"I just completed the lesson Inpatient Communication Framework in the Explore Pharmacy module. Help me practice the listen, confirm, clarify, set timeline framework for clinical staff communication in my current setting."
+          }
+        },
       ]},
-      { id:"m5", title:"First Week Survival Guide", lessons:[
-        { id:"l12", title:"First Week Priorities & Common Mistakes", content:`PRIORITIES:\n☐ Learn layout\n☐ Observe workflow rhythm\n☐ Identify escalation path\n☐ Understand controlled substance handling (high-level)\n☐ Write down new terms\n\nCOMMON FIRST-WEEK MISTAKES:\n• Trying to impress with speed\n• Avoiding questions\n• Panicking when unsure\n\nStrong tech behavior:\nCalm. Curious. Observant.` },
+     { id:"m5", title:"First Week Survival Guide", lessons:[
+        {
+          id:"l12",
+          title:"First Week Priorities and Common Mistakes",
+          sections:[
+            {
+              header:"NOBODY WARNS YOU ABOUT THIS PART",
+              body:"In retail pharmacy, you are patient-facing all day, every day. If you are someone who finds constant social interaction draining rather than energizing, retail will exhaust you in a way that has nothing to do with how skilled you are. That exhaustion is real and it is worth naming before you experience it, not after."
+            },
+            {
+              header:"WHAT TO PRIORITIZE IN YOUR FIRST WEEK",
+              body:"The techs who struggle most try to impress with speed, avoid asking questions, or panic when something does not go as expected. The techs who succeed are calm, curious, and observant. They watch before they jump in. They ask before they assume. They write things down."
+            },
+            {
+              header:"COMMON FIRST WEEK MISTAKES",
+              body:"Trying to impress with speed leads to errors when you have the least experience to catch them. Avoiding questions creates gaps that compound. Panicking when unsure skips the process. The process is: pause, identify who to escalate to, and ask."
+            }
+          ],
+          keyPoints:[
+            "Knowing your environment before you walk in protects you from being blindsided",
+            "Retail pharmacy is high volume patient interaction and that has an energy cost",
+            "Your first week goal is orientation and safety, not speed or performance",
+            "Calm, curious, and observant is what strong first week behavior looks like",
+            "Every question you ask in week one is a future error you prevent"
+          ],
+          takeaway:"Your first week is not a performance. It is a foundation. Build it carefully.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how your first week went or how you expect it to go?",
+            options:[
+              {
+                label:"I wanted to show I could keep up with everyone else so I pushed myself to work as fast as possible from day one.",
+                response:"Speed without knowledge is the fastest path to an error. The techs who are most trusted came in careful and got faster over time."
+              },
+              {
+                label:"I took my time, asked questions, and focused on understanding the environment before worrying about my speed.",
+                response:"The foundation you build in week one is what everything else stands on."
+              },
+              {
+                label:"I felt overwhelmed by the environment itself and did not expect how much the patient-facing side would drain me.",
+                response:"You are not alone and there is nothing wrong with you. That awareness is valuable and it is worth following."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are in your third day of a new retail position. You realize you have been filling prescriptions without fully understanding the insurance adjudication step because you did not want to slow down and ask.",
+            prompt:"What do you do today, and why does it matter that you do it now rather than later?"
+          },
+          answer:{
+            recommended:"Find a moment and ask someone to walk you through the insurance adjudication step specifically. Say: I have been following along but I want to make sure I actually understand this step rather than just copying it. Every shift you work without understanding that step, you are building habits on a gap."
+          },
+          firstWeekChecklist:[
+            "Learn the physical layout of your pharmacy and any connected areas",
+            "Observe workflow rhythm before jumping in at full speed",
+            "Identify your escalation path and how to reach the right person quickly",
+            "Understand the controlled substance handling process at your facility at a high level",
+            "Write down new terms, abbreviations, and system names as you encounter them",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Pharmacy Supervisor · Pharmacy Informatics Tech",
+            aiPrompt:"I just completed the lesson First Week Priorities and Common Mistakes in the Explore Pharmacy module. Help me build a specific plan for my first week based on my background and current experience level."
+          }
+        },
       ]},
     ]
   },
@@ -1328,6 +1838,42 @@ function ExplorePharmacyLesson({ lesson, go }) {
         </div>
       )}
 
+      {/* COMMUNICATION SCRIPT */}
+      {lesson.communicationScript && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(0,148,255,0.06), rgba(0,201,167,0.04))",
+          border: "1px solid rgba(0,148,255,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 14 }}>
+            {lesson.communicationScript.title}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.communicationScript.lines.map((line, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "flex-start", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(0,148,255,0.12)",
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5, flexShrink: 0, marginTop: 1,
+                  background: "rgba(0,148,255,0.15)",
+                  border: "1px solid rgba(0,148,255,0.3)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 10, fontWeight: 800, color: "#0094ff"
+                }}>
+                  {i + 1}
+                </div>
+                <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{line}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* REAL-WORLD SCENARIO */}
       {lesson.scenario && (
         <div style={{ ...card, background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,100,50,0.04))", border: "1px solid rgba(255,170,0,0.18)" }}>
@@ -1370,6 +1916,51 @@ function ExplorePharmacyLesson({ lesson, go }) {
               <p style={bodyText}>{lesson.answer.recommended}</p>
             </div>
           )}
+        </div>
+      )}
+
+     {/* ERROR PREVENTION HABITS — Lesson l6 only */}
+      {lesson.errorPreventionHabits && lesson.errorPreventionHabits.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(0,201,167,0.06), rgba(0,148,255,0.04))",
+          border: "1px solid rgba(0,201,167,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 14 }}>
+            Error Prevention Habits
+          </div>
+          <p style={{ fontSize: 13, color: mu, margin: "0 0 14px", fontStyle: "italic" }}>
+            The first four are your foundation. Add your facility-specific habits in the fields below.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.errorPreventionHabits.map((item, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "center", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: `1px solid ${i < 4 ? tealBorder : "rgba(255,255,255,0.06)"}`,
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5,
+                  border: `1.5px solid ${i < 4 ? "rgba(0,201,167,0.4)" : "rgba(255,255,255,0.15)"}`,
+                  background: "transparent", flexShrink: 0
+                }} />
+                {i < 4
+                  ? <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{item}</span>
+                  : <input
+                      placeholder="Add your facility-specific habit here..."
+                      style={{
+                        flex: 1, background: "transparent", border: "none",
+                        color: "#c8cdd8", fontSize: 13, outline: "none",
+                        fontFamily: "inherit"
+                      }}
+                    />
+                }
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
