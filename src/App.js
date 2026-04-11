@@ -784,9 +784,179 @@ const FREE_SECTIONS = [
         },   
         ]},
       { id:"m2", title:"Workflow 101", lessons:[
-        { id:"l4", title:"Retail Workflow Deep Dive", content:`Retail workflow is cyclical:\n1. Intake\n2. Data entry\n3. Insurance adjudication\n4. Filling\n5. Pharmacist verification\n6. Pickup\n\nBreakdowns often occur during:\n• Incorrect insurance entry\n• Missing prescriber details\n• Prior authorization delays\n\nNew tech mistake: Trying to fix everything alone.\nStrong tech move: Identify bottleneck → escalate appropriately.` },
-        { id:"l5", title:"Inpatient Workflow Deep Dive", content:`Inpatient flow depends heavily on systems:\n1. Provider order entry\n2. Pharmacist verification\n3. Automated dispensing\n4. Restock / cart fill\n5. Documentation\n\nEven though automation is involved, accountability remains human.` },
-        { id:"l6", title:"Error Prevention", content:`Errors most commonly occur due to:\n• Distraction\n• Similar drug names\n• Similar packaging\n• Multitasking\n• Fatigue\n\nBuild habits:\n☐ Pause before finalizing entry\n☐ Read labels fully\n☐ Confirm quantities\n☐ Clarify unclear handwriting or order detail` },
+        {
+          id:"l4",
+          title:"Retail Workflow Deep Dive",
+          sections:[
+            {
+              header:"THE CYCLE THAT NEVER STOPS",
+              body:"Retail pharmacy runs on a continuous loop: intake, data entry, insurance adjudication, filling, pharmacist verification, and pickup. When a step gets rushed or skipped, the break almost never stays contained to the step where it happened."
+            },
+            {
+              header:"WHERE BREAKDOWNS ACTUALLY START",
+              body:"Two steps cause more downstream problems than any other: data entry and insurance adjudication. Data entry errors move forward silently and create pharmacist rework and patient safety risk. Insurance rejections require a resolved status before the patient is given a pickup time. Do not close an interaction until you know what the actual status is."
+            },
+            {
+              header:"BREAKDOWNS AND HOW TO HANDLE THEM",
+              body:"Incorrect insurance entry gets corrected at the source. Missing prescriber details require a call to the office. Prior authorization delays get escalated to the pharmacist. The strong move is to identify where the breakdown is, communicate it clearly, and escalate when the fix is outside your scope."
+            }
+          ],
+          keyPoints:[
+            "Retail workflow is a continuous six-step cycle where every step depends on the one before it",
+            "Data entry errors move forward silently and create pharmacist rework and patient safety risk",
+            "Insurance rejections require a resolved status before the patient is given a pickup time",
+            "Most entry mistakes happen during multitasking or when rushing under pressure",
+            "Identifying the breakdown point and escalating appropriately is a senior skill"
+          ],
+          takeaway:"A fast mistake costs more time than a slow correction.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you handle the retail workflow right now?",
+            options:[
+              {
+                label:"I move through the queue as efficiently as I can. Sometimes I circle back to fix things but I keep the line moving.",
+                response:"The data entry and insurance steps are the ones worth slowing down for. One mistake at either creates more time loss than the seconds you saved."
+              },
+              {
+                label:"I slow down at the high-risk steps because I know a mistake there costs more time than doing it right.",
+                response:"The techs who understand where the risk lives in a workflow are the ones who become the go-to person."
+              },
+              {
+                label:"I am still learning which steps are high risk and which ones are okay to move through quickly.",
+                response:"Watch data entry and insurance adjudication most closely first. Build your awareness there and expand outward."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A patient drops off a prescription and leaves to run errands. You enter it and hit a refill too soon rejection. The pharmacist is on the phone and the line is backing up.",
+            prompt:"What do you do, and what is the cost of getting this wrong?"
+          },
+          answer:{
+            recommended:"Do not assume the rejection will clear. Check the fill history to confirm when the last fill was dispensed. Note the date they will be eligible. The cost of getting this wrong is a patient who made plans around a pickup time you should not have confirmed."
+          },
+          connection:{
+            tag:"Lead Tech · Pharmacy Supervisor · Prior Authorization Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Retail Workflow Deep Dive in the Explore Pharmacy module. Help me understand how to identify breakdown points in my current retail workflow and escalate more effectively."
+          }
+        },
+        {
+          id:"l5",
+          title:"Inpatient Workflow Deep Dive",
+          sections:[
+            {
+              header:"FIRST THINGS FIRST",
+              body:"In inpatient pharmacy, you can sit down. Retail techs who make the switch consistently say the physical environment alone feels like a different profession. No counter. No line of patients. No phones ringing with insurance questions every four minutes."
+            },
+            {
+              header:"MORE THAN JUST FILLING",
+              body:"Inpatient techs inventory, restock, refill, and in many states perform tech check tech. They handle narcotics with a level of accountability and documentation rigor that goes beyond most retail settings. They work directly with nurses and providers and are treated as clinical support staff. The variety of medications in an inpatient setting compared to retail is significant."
+            },
+            {
+              header:"HOW INPATIENT FLOW WORKS",
+              body:"Provider order entry kicks off the process. The pharmacist verifies the order. ADS units on patient floors hold commonly used medications that techs restock and maintain. Cart fills ensure patient-specific medications are prepared and delivered on schedule. Your work is largely invisible to patients but directly felt by the clinical team."
+            }
+          ],
+          keyPoints:[
+            "Inpatient pharmacy involves a significantly broader scope of responsibilities than most retail roles",
+            "Tech check tech represents a higher level of peer accountability where available",
+            "The drug variety in inpatient settings is substantially greater than in retail",
+            "Your work directly supports nurses and providers who depend on accurate and timely medication access",
+            "Inpatient techs are treated as clinical support staff and the role carries that level of respect"
+          ],
+          takeaway:"In inpatient pharmacy you are not just filling medications. You are keeping the clinical team moving.",
+          selfCheck:{
+            prompt:"Which of these best describes where you are with inpatient pharmacy right now?",
+            options:[
+              {
+                label:"It sounds completely different from what I do now and I am not sure my skills would transfer.",
+                response:"Your skills transfer more directly than you think. What changes is the environment and the workflow structure. That is learnable."
+              },
+              {
+                label:"I work in inpatient already and I recognize everything described here from my own experience.",
+                response:"Document your experience and use it to build toward the next level. Your scope of work is a resume in itself."
+              },
+              {
+                label:"I have been curious about inpatient but I did not realize the scope was this broad.",
+                response:"Inpatient opens doors to tech check tech certification, informatics roles, medication safety positions, and controlled substance leadership."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking a Pyxis unit. A nurse says a medication she needed was not in the cabinet when she pulled for her patient an hour ago. The patient's dose was delayed.",
+            prompt:"What questions should you be asking yourself after this interaction?"
+          },
+          answer:{
+            recommended:"Was that medication on my restock list and did I miss it? Was it out of stock and did I communicate that? Is there a par level issue to flag? A delayed dose is a patient care event. Your role in that Pyxis restock is part of the care chain."
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Pharmacy Informatics Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Inpatient Workflow Deep Dive in the Explore Pharmacy module. Help me understand how my current experience translates into an inpatient setting and what I should focus on to prepare."
+          }
+        },
+        {
+          id:"l6",
+          title:"Error Prevention",
+          sections:[
+            {
+              header:"THE FAMILIARITY TRAP",
+              body:"Most medication errors happen because someone thought they knew exactly what they were doing. Similar drug names and similar packaging trip up experienced techs just as often as new ones. The reason is familiarity. When you have filled the same medications hundreds of times, your brain stops fully reading and starts pattern matching. That is how the wrong medication gets filled."
+            },
+            {
+              header:"WHY ERRORS HAPPEN",
+              body:"Errors most commonly occur because of five conditions: distraction, similar drug names, similar packaging, multitasking, and fatigue. Understanding why errors happen is not about assigning blame. It is about building habits that work even when conditions are not ideal."
+            },
+            {
+              header:"BUILDING HABITS THAT HOLD",
+              body:"The techs with the lowest error rates are the most habitual. Pause before finalizing any entry. Read labels fully. Confirm quantities. Clarify unclear handwriting or order detail before moving forward. These are not extra steps. They are the steps."
+            }
+          ],
+          keyPoints:[
+            "Similar drug names and similar packaging cause errors in experienced techs just as often as new ones",
+            "Familiarity breeds assumption and assumption is where errors live",
+            "Distraction, multitasking and fatigue are environmental realities that require habitual responses",
+            "Low error rates come from consistent habits, not talent",
+            "Clarifying before processing is always faster than correcting after a mistake"
+          ],
+          takeaway:"The tech who reads every label like it is the first time they have seen it is the tech who catches what everyone else misses.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you approach familiar medications?",
+            options:[
+              {
+                label:"I move through familiar medications quickly because I know what they look like. It saves time.",
+                response:"Familiarity is not accuracy. Read the full label even on medications you have filled a hundred times."
+              },
+              {
+                label:"I treat every fill the same way regardless of how familiar the medication is. I read the full label every time.",
+                response:"That consistency is rare. Keep that habit and teach it to everyone around you."
+              },
+              {
+                label:"I know I should slow down on familiar fills but the pace of the shift makes it hard to be consistent.",
+                response:"Start with one category of high-risk medications and build the full read habit there first."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking a Pyxis unit. You reach for what looks like the right vial based on label color and shape. As you are about to scan it you notice the concentration is different from what is normally stocked there.",
+            prompt:"Do you stop or do you assume it is fine because everything else looked right?"
+          },
+          answer:{
+            recommended:"You stop. Always. A different concentration is not a minor variation. Concentration errors are among the most serious medication errors in inpatient settings. It takes ten seconds to confirm the right concentration. It takes significantly longer to manage the consequences of stocking the wrong one."
+          },
+          errorPreventionHabits:[
+            "Pause before finalizing any entry",
+            "Read labels fully, not just the first word",
+            "Confirm quantities against the prescription or order before filling",
+            "Clarify any unclear handwriting or order detail before processing",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Pharmacy Supervisor · Medication Safety Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Error Prevention in the Explore Pharmacy module. Help me build specific error prevention habits for my current work environment based on my background."
+          }
+        },
       ]},
       { id:"m3", title:"Safety & Law Basics", lessons:[
         { id:"l7", title:"Why Regulation Exists", content:`Medications can:\n• Harm\n• Interact\n• Be misused\n• Be diverted\n\nRegulation protects:\n• Patients\n• Staff\n• Institutions\n• Licenses\n\nDocumentation is protection.` },
@@ -1370,6 +1540,51 @@ function ExplorePharmacyLesson({ lesson, go }) {
               <p style={bodyText}>{lesson.answer.recommended}</p>
             </div>
           )}
+        </div>
+      )}
+
+     {/* ERROR PREVENTION HABITS — Lesson l6 only */}
+      {lesson.errorPreventionHabits && lesson.errorPreventionHabits.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(0,201,167,0.06), rgba(0,148,255,0.04))",
+          border: "1px solid rgba(0,201,167,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 14 }}>
+            Error Prevention Habits
+          </div>
+          <p style={{ fontSize: 13, color: mu, margin: "0 0 14px", fontStyle: "italic" }}>
+            The first four are your foundation. Add your facility-specific habits in the fields below.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.errorPreventionHabits.map((item, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "center", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: `1px solid ${i < 4 ? tealBorder : "rgba(255,255,255,0.06)"}`,
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5,
+                  border: `1.5px solid ${i < 4 ? "rgba(0,201,167,0.4)" : "rgba(255,255,255,0.15)"}`,
+                  background: "transparent", flexShrink: 0
+                }} />
+                {i < 4
+                  ? <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{item}</span>
+                  : <input
+                      placeholder="Add your facility-specific habit here..."
+                      style={{
+                        flex: 1, background: "transparent", border: "none",
+                        color: "#c8cdd8", fontSize: 13, outline: "none",
+                        fontFamily: "inherit"
+                      }}
+                    />
+                }
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
