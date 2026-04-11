@@ -1242,8 +1242,73 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"m5", title:"First Week Survival Guide", lessons:[
-        { id:"l12", title:"First Week Priorities & Common Mistakes", content:`PRIORITIES:\n☐ Learn layout\n☐ Observe workflow rhythm\n☐ Identify escalation path\n☐ Understand controlled substance handling (high-level)\n☐ Write down new terms\n\nCOMMON FIRST-WEEK MISTAKES:\n• Trying to impress with speed\n• Avoiding questions\n• Panicking when unsure\n\nStrong tech behavior:\nCalm. Curious. Observant.` },
+     { id:"m5", title:"First Week Survival Guide", lessons:[
+        {
+          id:"l12",
+          title:"First Week Priorities and Common Mistakes",
+          sections:[
+            {
+              header:"NOBODY WARNS YOU ABOUT THIS PART",
+              body:"In retail pharmacy, you are patient-facing all day, every day. If you are someone who finds constant social interaction draining rather than energizing, retail will exhaust you in a way that has nothing to do with how skilled you are. That exhaustion is real and it is worth naming before you experience it, not after."
+            },
+            {
+              header:"WHAT TO PRIORITIZE IN YOUR FIRST WEEK",
+              body:"The techs who struggle most try to impress with speed, avoid asking questions, or panic when something does not go as expected. The techs who succeed are calm, curious, and observant. They watch before they jump in. They ask before they assume. They write things down."
+            },
+            {
+              header:"COMMON FIRST WEEK MISTAKES",
+              body:"Trying to impress with speed leads to errors when you have the least experience to catch them. Avoiding questions creates gaps that compound. Panicking when unsure skips the process. The process is: pause, identify who to escalate to, and ask."
+            }
+          ],
+          keyPoints:[
+            "Knowing your environment before you walk in protects you from being blindsided",
+            "Retail pharmacy is high volume patient interaction and that has an energy cost",
+            "Your first week goal is orientation and safety, not speed or performance",
+            "Calm, curious, and observant is what strong first week behavior looks like",
+            "Every question you ask in week one is a future error you prevent"
+          ],
+          takeaway:"Your first week is not a performance. It is a foundation. Build it carefully.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how your first week went or how you expect it to go?",
+            options:[
+              {
+                label:"I wanted to show I could keep up with everyone else so I pushed myself to work as fast as possible from day one.",
+                response:"Speed without knowledge is the fastest path to an error. The techs who are most trusted came in careful and got faster over time."
+              },
+              {
+                label:"I took my time, asked questions, and focused on understanding the environment before worrying about my speed.",
+                response:"The foundation you build in week one is what everything else stands on."
+              },
+              {
+                label:"I felt overwhelmed by the environment itself and did not expect how much the patient-facing side would drain me.",
+                response:"You are not alone and there is nothing wrong with you. That awareness is valuable and it is worth following."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are in your third day of a new retail position. You realize you have been filling prescriptions without fully understanding the insurance adjudication step because you did not want to slow down and ask.",
+            prompt:"What do you do today, and why does it matter that you do it now rather than later?"
+          },
+          answer:{
+            recommended:"Find a moment and ask someone to walk you through the insurance adjudication step specifically. Say: I have been following along but I want to make sure I actually understand this step rather than just copying it. Every shift you work without understanding that step, you are building habits on a gap."
+          },
+          firstWeekChecklist:[
+            "Learn the physical layout of your pharmacy and any connected areas",
+            "Observe workflow rhythm before jumping in at full speed",
+            "Identify your escalation path and how to reach the right person quickly",
+            "Understand the controlled substance handling process at your facility at a high level",
+            "Write down new terms, abbreviations, and system names as you encounter them",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Pharmacy Supervisor · Pharmacy Informatics Tech",
+            aiPrompt:"I just completed the lesson First Week Priorities and Common Mistakes in the Explore Pharmacy module. Help me build a specific plan for my first week based on my background and current experience level."
+          }
+        },
       ]},
     ]
   },
