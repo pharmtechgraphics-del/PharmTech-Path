@@ -2096,7 +2096,48 @@ function ExplorePharmacyLesson({ lesson, go }) {
         </div>
       )}
 
-{/* DRUG SUFFIX TABLE */}
+{/* DEA FORMS TABLE */}
+      {lesson.deaFormsTable && lesson.deaFormsTable.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(168,85,247,0.06), rgba(0,148,255,0.04))",
+          border: "1px solid rgba(168,85,247,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#a855f7", "rgba(168,85,247,0.1)"), border: "1px solid rgba(168,85,247,0.2)", marginBottom: 14 }}>
+            DEA Forms Quick Reference
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.deaFormsTable.map((item, i) => (
+              <div key={i} style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(168,85,247,0.12)",
+                borderRadius: 9, padding: "12px 14px",
+                display: "flex", flexDirection: "column", gap: 6
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+                  <span style={{
+                    fontSize: 11, fontWeight: 800, color: "#a855f7",
+                    background: "rgba(168,85,247,0.12)",
+                    border: "1px solid rgba(168,85,247,0.25)",
+                    borderRadius: 20, padding: "2px 10px",
+                    fontFamily: "monospace", letterSpacing: "0.05em",
+                    flexShrink: 0
+                  }}>{item.form}</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>{item.purpose}</span>
+                </div>
+                <span style={{ fontSize: 12, color: "#c8cdd8", lineHeight: 1.7 }}>{item.details}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            Attach each form to a real scenario. Understanding the situation is how the number sticks.
+          </p>
+        </div>
+      )}
+
+      {/* DRUG SUFFIX TABLE */}
       {lesson.drugSuffixTable && lesson.drugSuffixTable.length > 0 && (
         <div style={{
           background: "linear-gradient(135deg, rgba(0,148,255,0.06), rgba(0,201,167,0.04))",
