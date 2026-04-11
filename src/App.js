@@ -3998,7 +3998,7 @@ const redeemPromoCode = async () => {
                   </div>
                 ))}
               </div>
-              <a href="https://quizlet.com/283859708/top-200-drugs-for-ptcb-flash-cards/" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+              <a href="https://quizlet.com/1166435496/top-200-drugs-for-ptcb-flash-cards/?new" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
                 <button style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:10,padding:"11px 28px",fontSize:14,fontWeight:700,cursor:"pointer"}}>
                   Open Flashcards on Quizlet →
                 </button>
