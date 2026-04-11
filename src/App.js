@@ -2036,6 +2036,73 @@ function ExplorePharmacyLesson({ lesson, go }) {
         </div>
       )}
 
+{/* DRUG SUFFIX TABLE */}
+      {lesson.drugSuffixTable && lesson.drugSuffixTable.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(0,148,255,0.06), rgba(0,201,167,0.04))",
+          border: "1px solid rgba(0,148,255,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 14 }}>
+            Drug Suffix Quick Reference
+          </div>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+              <thead>
+                <tr style={{ borderBottom: "2px solid rgba(0,201,167,0.3)" }}>
+                  {["Suffix","Drug Class","Examples","Primary Use"].map(h => (
+                    <th key={h} style={{ padding: "8px 11px", textAlign: "left", color: teal, fontWeight: 700, fontFamily: "monospace", fontSize: 10, letterSpacing: 1, textTransform: "uppercase" }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {lesson.drugSuffixTable.map((row, i) => (
+                  <tr key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent" }}>
+                    <td style={{ padding: "9px 11px", color: teal, fontFamily: "monospace", fontWeight: 700 }}>{row.suffix}</td>
+                    <td style={{ padding: "9px 11px", color: "#ffffff", fontWeight: 600 }}>{row.drugClass}</td>
+                    <td style={{ padding: "9px 11px", color: "#c8cdd8" }}>{row.examples}</td>
+                    <td style={{ padding: "9px 11px", color: "#8b92a9" }}>{row.use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* DRUG INTERACTIONS */}
+      {lesson.drugInteractions && lesson.drugInteractions.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(255,100,50,0.06), rgba(255,170,0,0.04))",
+          border: "1px solid rgba(255,100,50,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#ff6432", "rgba(255,100,50,0.1)"), border: "1px solid rgba(255,100,50,0.2)", marginBottom: 14 }}>
+            Key Drug Interactions
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.drugInteractions.map((item, i) => (
+              <div key={i} style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,100,50,0.12)",
+                borderRadius: 9, padding: "10px 13px",
+                display: "flex", flexDirection: "column", gap: 4
+              }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: "#ff9472", fontFamily: "monospace" }}>{item.drug}</span>
+                <span style={{ fontSize: 12, color: "#c8cdd8", lineHeight: 1.6 }}>{item.interaction}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            These interactions appear regularly on the certification exam. Learn them by class, not by individual drug pairs.
+          </p>
+        </div>
+      )}
+
       {/* COMMUNICATION SCRIPT */}
       {lesson.communicationScript && (
         <div style={{
