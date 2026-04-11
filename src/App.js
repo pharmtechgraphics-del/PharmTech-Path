@@ -3797,8 +3797,6 @@ const redeemPromoCode = async () => {
       </>
     }
   </>);
-     
-  </>);
 
   if(view==="learn"&&mod) return wrap(<>
     <Bk/>
