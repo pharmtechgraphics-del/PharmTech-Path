@@ -1838,6 +1838,42 @@ function ExplorePharmacyLesson({ lesson, go }) {
         </div>
       )}
 
+      {/* COMMUNICATION SCRIPT */}
+      {lesson.communicationScript && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(0,148,255,0.06), rgba(0,201,167,0.04))",
+          border: "1px solid rgba(0,148,255,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 14 }}>
+            {lesson.communicationScript.title}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.communicationScript.lines.map((line, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "flex-start", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(0,148,255,0.12)",
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5, flexShrink: 0, marginTop: 1,
+                  background: "rgba(0,148,255,0.15)",
+                  border: "1px solid rgba(0,148,255,0.3)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 10, fontWeight: 800, color: "#0094ff"
+                }}>
+                  {i + 1}
+                </div>
+                <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{line}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* REAL-WORLD SCENARIO */}
       {lesson.scenario && (
         <div style={{ ...card, background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,100,50,0.04))", border: "1px solid rgba(255,170,0,0.18)" }}>
