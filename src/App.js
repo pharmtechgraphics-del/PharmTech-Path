@@ -625,10 +625,164 @@ const FREE_SECTIONS = [
   { id:"explore", title:"Explore Pharmacy", icon:"🔬", desc:"Discover what pharmacy technicians actually do every day",
     modules:[
       { id:"m1", title:"What Pharmacy Technicians Actually Do", lessons:[
-        { id:"l1", title:"The Role Is Bigger Than It Looks", content:`Most outsiders see pill counting, ringing up prescriptions, and printing labels. That's surface-level.\n\nBehind the counter, technicians are:\n• Workflow stabilizers\n• Documentation protectors\n• Process enforcers\n• Inventory managers\n• Safety checkpoints\n\nIf you rush, the system breaks. If you document poorly, risk increases. If you ignore inconsistencies, errors multiply.\n\nYou are part of a regulated chain of safety.` },
-        { id:"l2", title:"Retail vs Inpatient – Same Foundation, Different Pace", content:`RETAIL ENVIRONMENT\nRetail is visible and fast. You will manage:\n• Intake questions\n• Insurance processing\n• Patient expectations\n• Phone calls\n• Inventory gaps\n• Controlled substance documentation\n\nRetail requires: Speed with composure.\n\n────────────────────\n\nINPATIENT ENVIRONMENT\nInpatient is quieter but more system-driven. You may manage:\n• Automated dispensing systems\n• Cart fills\n• Medication restocking\n• Delivery coordination\n• Controlled substance accountability\n\nInpatient requires: Precision with documentation awareness.` },
-        { id:"l3", title:"The Technician Mindset", content:`Three pillars define strong technicians:\n1. Accuracy before speed\n2. Ask before assuming\n3. Document clearly\n\nYou are not expected to know everything on day one.\nYou are expected to:\n• Learn\n• Escalate appropriately\n• Protect workflow\n\nFIRST DAY CHECKLIST\n────────────────────\n☐ Learn physical layout\n☐ Identify workflow\n☐ Observe before rushing\n☐ Ask about escalation process\n☐ Write down common abbreviations` },
-      ]},
+        {
+          id:"l1",
+          title:"The Role Is Bigger Than It Looks",
+          sections:[
+            {
+              header:"WHAT NOBODY TELLS YOU AT ORIENTATION",
+              body:"Most people walk into their first pharmacy job thinking the role is about filling prescriptions and ringing up customers. That is what the job looks like from the outside. It is not what the job actually is.\n\nPharmacy is complex, structured, and regulated. It operates inside a chain of safety where every person, including you, holds a specific and critical position. What you do every shift either protects that chain or creates a gap in it.\n\nAnd here is the part nobody says out loud: you do not need a doctorate or a master's degree to do meaningful, high-impact work in this profession. Techs influence patient safety, workflow stability, regulatory compliance, and operational outcomes every single day. That starts on day one, whether you know it or not."
+            },
+            {
+              header:"WHAT YOU ACTUALLY ARE",
+              body:"Behind the counter, pharmacy technicians function as five things simultaneously: workflow stabilizers, documentation protectors, process enforcers, inventory managers, and safety checkpoints.\n\nWhen you stabilize workflow, the pharmacy runs. When you protect documentation, the pharmacy is defensible. When you enforce process, errors get caught. When you manage inventory, patients get what they need. When you function as a safety checkpoint, harm gets prevented before it reaches anyone.\n\nThat is not a support role. That is infrastructure."
+            }
+          ],
+          keyPoints:[
+            "Pharmacy is a regulated system, not just a service counter",
+            "Your role functions across five critical areas simultaneously",
+            "You do not need an advanced degree to make a meaningful impact",
+            "Every action you take either protects or weakens the chain of safety",
+            "Understanding your role is the first step toward advancing beyond it"
+          ],
+          takeaway:"The counter is where you start. It is not where your career ends.",
+          selfCheck:{
+            prompt:"When you think about your role in the pharmacy, which of these sounds most like you right now?",
+            options:[
+              {
+                label:"I focus on doing my tasks correctly and efficiently. I know my job and I do it well.",
+                response:"You have built a solid foundation. Start asking yourself why each task exists, not just how to do it. That shift separates good techs from indispensable ones."
+              },
+              {
+                label:"I think about how my work connects to everything else, patient safety, workflow, compliance.",
+                response:"You are already operating at a higher level. Make sure that awareness is visible. Document what you notice. Speak up when you see patterns."
+              },
+              {
+                label:"I am starting to see the bigger picture but I am not sure how to act on it yet.",
+                response:"This is exactly where PharmTech Path is designed to meet you. You have the instincts. Keep going."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are three weeks into a new retail position. A patient comes in frustrated because their prescription has been rejected twice this week. You process it, fix the insurance issue, and the patient leaves satisfied. Your pharmacist moves on. The line keeps moving.",
+            prompt:"What is the difference between a tech who closes that interaction and moves on, and a tech who does something more with it?"
+          },
+          answer:{
+            recommended:"The tech who closes and moves on did the job. The tech who does something more writes it down, the rejection type, the medication, the date, and later mentions to the pharmacist that this is the second time this week. That second tech is functioning as a safety checkpoint and a workflow stabilizer at the same time. Same interaction. Completely different value to the pharmacy."
+          },
+          connection:{
+            tag:"Senior Tech · Lead Tech · Pharmacy Supervisor · Medication Safety Tech",
+            aiPrompt:"I just completed the lesson The Role Is Bigger Than It Looks in the Explore Pharmacy module. Help me understand how to start seeing my current role through a bigger lens based on my background."
+          }
+        },
+        {
+          id:"l2",
+          title:"Retail vs Inpatient — Same Foundation, Different Pace",
+          sections:[
+            {
+              header:"SAME KNOWLEDGE, DIFFERENT WORLD",
+              body:"If you have ever looked at a hospital pharmacy job posting and thought you would not even know where to start, you are not alone. But here is what does not change: the knowledge you built in retail comes with you.\n\nIn retail, patients call with questions about their medications. In inpatient, replace the patients with nurses and providers. Same communication skill, different audience. In retail, you fill and sell a prescription. In inpatient, you deliver that medication to a floor or restock a Pyxis. Same accuracy requirement, different delivery point. The foundation is identical. The application shifts."
+            },
+            {
+              header:"UNDERSTANDING THE TWO ENVIRONMENTS",
+              body:"Retail is visible and fast. You manage intake, insurance processing, patient expectations, phone calls, inventory gaps, and controlled substance documentation, often all at the same time.\n\nInpatient is quieter but more system driven. You work within automated dispensing systems, manage cart fills, coordinate restocking, handle delivery, and maintain controlled substance accountability. Your patients are the nurses and providers relying on you to have the right medication in the right place at the right time."
+            }
+          ],
+          keyPoints:[
+            "Retail and inpatient require the same foundational knowledge applied differently",
+            "Your audience shifts from patients to nurses and providers in inpatient settings",
+            "Filling and selling becomes delivering and restocking",
+            "Both environments demand accuracy, documentation and composure",
+            "Understanding both settings makes you a more versatile and valuable tech"
+          ],
+          takeaway:"You are not starting over. You are transferring what you already know into a new environment.",
+          selfCheck:{
+            prompt:"Which of these best describes where you are right now?",
+            options:[
+              {
+                label:"I work in retail and inpatient feels completely foreign to me. I would not know where to start.",
+                response:"The transition is less of a leap than it looks. Your insurance knowledge, your controlled substance awareness, your communication skills, all of it transfers."
+              },
+              {
+                label:"I work in inpatient and I feel like I left a lot of retail knowledge behind when I made the switch.",
+                response:"Nothing you learned in retail disappeared. Those skills are still active in a hospital environment."
+              },
+              {
+                label:"I have experience in both and I can see how the skills carry over.",
+                response:"That cross-setting experience is genuinely valuable for leadership, training, and systems-level roles."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A retail tech with three years of experience applies for an inpatient position. During the interview she is asked how her retail background prepared her for hospital pharmacy. She freezes because she assumed the two settings had nothing in common.",
+            prompt:"What should she have said, and what does that tell you about how you should be thinking about your own experience?"
+          },
+          answer:{
+            recommended:"She should have said that retail pharmacy built her foundation in accuracy under pressure, insurance and documentation processes, controlled substance handling, and patient communication. Every year of retail experience is transferable. The tech who understands that walks into any setting with confidence."
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Pharmacy Informatics Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Retail vs Inpatient in the Explore Pharmacy module. Help me understand how my current experience translates to a different pharmacy setting."
+          }
+        },
+        {
+          id:"l3",
+          title:"The Technician Mindset",
+          sections:[
+            {
+              header:"THE MOMENT IT CLICKS",
+              body:"There is a moment most strong techs can point to. It is the day they realized that what they do actually matters beyond the task itself. For some it happens when they catch an expired medication in an ADS restock. For others it happens when they notice a flaw in a workflow and instead of accepting it, they start thinking about how to fix it. The technician mindset is not about working harder. It is about seeing more clearly."
+            },
+            {
+              header:"THREE PILLARS OF A STRONG TECH",
+              body:"The first is accuracy before speed. A fast mistake is worse than a slow correction. The second is ask before assuming. Pharmacy has no room for guesswork. The third is document clearly. If it is not documented, it did not happen."
+            }
+          ],
+          keyPoints:[
+            "The technician mindset is about seeing your work inside a larger system",
+            "Accuracy before speed protects patients and builds long term efficiency",
+            "Asking before assuming is professional judgment, not a weakness",
+            "Clear documentation protects everyone including you",
+            "Noticing problems and thinking toward solutions is how techs advance"
+          ],
+          takeaway:"The tech who pays attention to the small things is the one the whole team relies on.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently approach your work?",
+            options:[
+              {
+                label:"I focus on getting through my tasks accurately and on time. I do what is expected and I do it well.",
+                response:"Start with one shift where you ask yourself why each task exists. That single question changes how you see everything."
+              },
+              {
+                label:"I pay attention to patterns, ask questions when something feels off, and document everything thoroughly.",
+                response:"Make it visible. Document what you notice. Let your awareness translate into action that other people can see."
+              },
+              {
+                label:"I know I should be more aware but the pace of the shift makes it hard to slow down and notice things.",
+                response:"Awareness is not about slowing down. It is about what you notice while you keep moving."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking an ADS on a busy afternoon. You notice two vials are close to their expiration date but still technically within range.",
+            prompt:"Do you pull them or leave them? And why does your answer matter beyond this one moment?"
+          },
+          answer:{
+            recommended:"Pull them and replace them with newer stock. The nurse waiting behind you is not a reason to skip a safety step. The tech who makes that call consistently is the tech the team learns to trust."
+          },
+          firstWeekChecklist:[
+            "Learn the physical layout of your pharmacy and any connected units",
+            "Identify who to escalate to and how to reach them quickly",
+            "Observe workflow before jumping in, understand the rhythm first",
+            "Ask about controlled substance processes specific to your facility",
+            "Write down abbreviations, system names, and terms you do not recognize yet"
+          ],
+          connection:{
+            tag:"Senior Tech · Lead Tech · Pharmacy Supervisor · Controlled Substance Tech · Medication Safety Tech",
+            aiPrompt:"I just completed the lesson The Technician Mindset in the Explore Pharmacy module. Help me identify specific ways I can build stronger awareness and documentation habits in my current role."
+          }
+        },   
+        ]},
       { id:"m2", title:"Workflow 101", lessons:[
         { id:"l4", title:"Retail Workflow Deep Dive", content:`Retail workflow is cyclical:\n1. Intake\n2. Data entry\n3. Insurance adjudication\n4. Filling\n5. Pharmacist verification\n6. Pickup\n\nBreakdowns often occur during:\n• Incorrect insurance entry\n• Missing prescriber details\n• Prior authorization delays\n\nNew tech mistake: Trying to fix everything alone.\nStrong tech move: Identify bottleneck → escalate appropriately.` },
         { id:"l5", title:"Inpatient Workflow Deep Dive", content:`Inpatient flow depends heavily on systems:\n1. Provider order entry\n2. Pharmacist verification\n3. Automated dispensing\n4. Restock / cart fill\n5. Documentation\n\nEven though automation is involved, accountability remains human.` },
@@ -1029,6 +1183,269 @@ function buildPreferencesPrompt(careerPreferences) {
   return `\n\nThe user has shared the following career preferences:\n${lines.join("\n")}\nUse these preferences to personalize your suggestions. Prioritize roles and paths that align with what they enjoy and their motivators. Avoid recommending paths that conflict with what they want to avoid.`;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// EXPLORE PHARMACY — LESSON RENDERER
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ExplorePharmacyLesson({ lesson, go }) {
+  const [selfCheckPick, setSelfCheckPick] = useState(null);
+  const [answerOpen, setAnswerOpen] = useState(false);
+
+  const surface  = "#1a1d27";
+  const surface2 = "#22263a";
+  const teal     = "#00c9a7";
+  const tealDim  = "rgba(0,201,167,0.12)";
+  const tealBorder = "rgba(0,201,167,0.25)";
+  const blue     = "#0094ff";
+  const gold     = "#f59e0b";
+  const mu       = "#8b92a9";
+  const white    = "#ffffff";
+
+  const card = {
+    background: surface,
+    borderRadius: 14,
+    padding: "20px 22px",
+    marginBottom: 18,
+    border: "1px solid rgba(255,255,255,0.06)"
+  };
+
+  const sectionHeader = {
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: teal,
+    marginBottom: 8,
+    marginTop: 0
+  };
+
+  const bodyText = {
+    fontSize: 14,
+    lineHeight: 1.7,
+    color: "#c8cdd8",
+    margin: 0,
+    whiteSpace: "pre-line"
+  };
+
+  const pill = (color, bg) => ({
+    display: "inline-block",
+    fontSize: 11,
+    fontWeight: 700,
+    color,
+    background: bg,
+    borderRadius: 20,
+    padding: "3px 10px",
+    letterSpacing: "0.05em"
+  });
+
+  if (!lesson) return null;
+
+  return (
+    <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 4px 40px" }}>
+
+      {/* TITLE */}
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 10 }}>
+          Explore Pharmacy
+        </div>
+        <h1 style={{ fontSize: 22, fontWeight: 800, color: white, margin: 0, lineHeight: 1.3 }}>
+          {lesson.title}
+        </h1>
+      </div>
+
+      {/* LESSON CONTENT */}
+      <div style={card}>
+        <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 16 }}>
+          Lesson Content
+        </div>
+        {(lesson.sections || []).map((sec, i) => (
+          <div key={i} style={{ marginBottom: i < lesson.sections.length - 1 ? 20 : 0 }}>
+            <p style={sectionHeader}>{sec.header}</p>
+            <p style={bodyText}>{sec.body}</p>
+          </div>
+        ))}
+        {lesson.keyPoints && lesson.keyPoints.length > 0 && (
+          <div style={{ background: "rgba(0,148,255,0.06)", border: "1px solid rgba(0,148,255,0.15)", borderRadius: 10, padding: "14px 16px", marginTop: 20 }}>
+            <p style={{ ...sectionHeader, color: blue, marginBottom: 10 }}>Key Points</p>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              {lesson.keyPoints.map((pt, i) => (
+                <li key={i} style={{ ...bodyText, marginBottom: i < lesson.keyPoints.length - 1 ? 6 : 0 }}>{pt}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {lesson.takeaway && (
+          <div style={{ borderLeft: `3px solid ${teal}`, paddingLeft: 14, marginTop: 18 }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#e0e4f0", margin: 0, fontStyle: "italic" }}>
+              {lesson.takeaway}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* SELF-CHECK */}
+      {lesson.selfCheck && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(0,201,167,0.07), rgba(0,148,255,0.05))", border: `1px solid ${tealBorder}` }}>
+          <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 14 }}>Self-Check</div>
+          <p style={{ fontSize: 15, fontWeight: 700, color: white, margin: "0 0 16px" }}>{lesson.selfCheck.prompt}</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {(lesson.selfCheck.options || []).map((opt, i) => {
+              const picked = selfCheckPick === i;
+              return (
+                <div key={i}>
+                  <button
+                    onClick={() => setSelfCheckPick(i)}
+                    style={{
+                      width: "100%", textAlign: "left",
+                      background: picked ? "linear-gradient(135deg,rgba(0,201,167,0.18),rgba(0,148,255,0.12))" : surface2,
+                      border: picked ? `1.5px solid ${teal}` : "1.5px solid rgba(255,255,255,0.08)",
+                      borderRadius: picked && opt.response ? "10px 10px 0 0" : 10,
+                      padding: "12px 14px", color: picked ? white : "#c8cdd8",
+                      fontSize: 13, fontWeight: picked ? 600 : 400, cursor: "pointer",
+                      transition: "all 0.2s ease", display: "flex", alignItems: "center", gap: 10
+                    }}
+                  >
+                    <span style={{
+                      width: 22, height: 22, borderRadius: "50%",
+                      border: picked ? `2px solid ${teal}` : "2px solid rgba(255,255,255,0.2)",
+                      background: picked ? teal : "transparent", flexShrink: 0,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 11, color: picked ? "#000" : "transparent", fontWeight: 800
+                    }}>
+                      {picked ? "✓" : ""}
+                    </span>
+                    {opt.label}
+                  </button>
+                  {picked && opt.response && (
+                    <div style={{ background: "rgba(0,201,167,0.06)", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 10px 10px", padding: "12px 14px" }}>
+                      <p style={{ fontSize: 13, color: "#b8f5eb", margin: 0, lineHeight: 1.6 }}>{opt.response}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* REAL-WORLD SCENARIO */}
+      {lesson.scenario && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,100,50,0.04))", border: "1px solid rgba(255,170,0,0.18)" }}>
+          <div style={{ ...pill("#ffaa00", "rgba(255,170,0,0.1)"), border: "1px solid rgba(255,170,0,0.2)", marginBottom: 14 }}>
+            Real-World Scenario
+          </div>
+          <p style={{ ...bodyText, marginBottom: 16 }}>{lesson.scenario.setup}</p>
+          <div style={{ background: "rgba(255,170,0,0.07)", border: "1px solid rgba(255,170,0,0.15)", borderRadius: 10, padding: "12px 14px" }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#ffd080", margin: 0 }}>{lesson.scenario.prompt}</p>
+          </div>
+          <p style={{ fontSize: 12, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            Take a moment to think it through. Then check the answer below.
+          </p>
+        </div>
+      )}
+
+      {/* SEE RECOMMENDED RESPONSE */}
+      {lesson.answer && (
+        <div style={{ marginBottom: 18 }}>
+          <button
+            onClick={() => setAnswerOpen(!answerOpen)}
+            style={{
+              width: "100%",
+              background: answerOpen ? "linear-gradient(135deg,rgba(0,201,167,0.12),rgba(0,148,255,0.08))" : surface,
+              border: answerOpen ? `1px solid ${tealBorder}` : "1px solid rgba(255,255,255,0.06)",
+              borderRadius: answerOpen ? "14px 14px 0 0" : 14,
+              padding: "16px 20px", display: "flex", alignItems: "center",
+              justifyContent: "space-between", cursor: "pointer", transition: "all 0.2s ease"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 16 }}>💡</span>
+              <span style={{ fontSize: 14, fontWeight: 700, color: answerOpen ? teal : white }}>See Recommended Response</span>
+            </div>
+            <span style={{ color: answerOpen ? teal : mu, fontSize: 18, fontWeight: 300, display: "inline-block", transform: answerOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>▾</span>
+          </button>
+          {answerOpen && (
+            <div style={{ background: "linear-gradient(135deg,rgba(0,201,167,0.06),rgba(0,148,255,0.04))", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 14px 14px", padding: "20px 22px" }}>
+              <p style={{ ...sectionHeader, color: teal }}>Recommended Response</p>
+              <p style={bodyText}>{lesson.answer.recommended}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* FIRST WEEK CHECKLIST — Lesson 3 only */}
+      {lesson.firstWeekChecklist && lesson.firstWeekChecklist.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(245,158,11,0.04))",
+          border: "1px solid rgba(255,170,0,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill(gold, "rgba(245,158,11,0.12)"), border: "1px solid rgba(245,158,11,0.25)", marginBottom: 14 }}>
+            First Week Reference List
+          </div>
+          <p style={{ fontSize: 13, color: mu, margin: "0 0 14px", fontStyle: "italic" }}>
+            Screenshot this or save it before your first shift.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.firstWeekChecklist.map((item, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "flex-start", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,170,0,0.12)",
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5,
+                  border: "1.5px solid rgba(245,158,11,0.4)",
+                  background: "transparent", flexShrink: 0, marginTop: 1
+                }} />
+                <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: mu, margin: "14px 0 0" }}>
+            Interactive checklist coming in a future update.
+          </p>
+        </div>
+      )}
+
+      {/* MARK LESSON COMPLETE */}
+      <div style={{ marginBottom: 18, display: "flex", justifyContent: "center" }}>
+        <button
+          onClick={() => { if (go) go("explore-complete", { lessonId: lesson.id }); }}
+          style={{
+            background: `linear-gradient(135deg,#00c9a7,#0094ff)`,
+            color: "#fff", border: "none", borderRadius: 12,
+            padding: "12px 28px", fontSize: 14, fontWeight: 800,
+            cursor: "pointer", letterSpacing: 0.2,
+          }}
+        >
+          ✓ Mark Lesson Complete
+        </button>
+      </div>
+
+      {/* SUPPORTS + ASK THE AI */}
+      {lesson.connection && (
+        <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <span style={{ fontSize: 11, color: mu, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>Supports</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: teal, background: tealDim, border: `1px solid ${tealBorder}`, borderRadius: 20, padding: "4px 12px", letterSpacing: "0.03em" }}>
+              {lesson.connection.tag}
+            </span>
+          </div>
+          <button
+            onClick={() => { if (go) go("career-ai", { preload: lesson.connection.aiPrompt }); }}
+            style={{ background: "linear-gradient(135deg,#00c9a7,#0094ff)", border: "none", borderRadius: 10, padding: "10px 18px", color: "#000", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", gap: 7, whiteSpace: "nowrap" }}
+          >
+            <span>✨</span>Ask the AI
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 // ─────────────────────────────────────────────────────────────────────────────
 // BEYOND THE COUNTER — MODULE DATA
 // 8 modules. Module 1 Lesson 1 fully populated.
@@ -3336,37 +3753,49 @@ const redeemPromoCode = async () => {
 
   if(view==="learn"&&lesson) return wrap(<>
     <Bk lb="Back to lessons"/>
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
-      <div><div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:3}}>{lesson.title}</div><div style={{fontSize:12,color:mu}}>{mod?.title}</div></div>
-      {done[lesson.id]&&<Tag label="Completed"/>}
-    </div>
-    <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:24,marginBottom:18}}>
-      <pre style={{fontSize:14,lineHeight:1.9,color:"#c8d8f0",whiteSpace:"pre-wrap",margin:0,fontFamily:"inherit"}}>{lesson.content}</pre>
-    </div>
-    <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:22}}>
-      {!done[lesson.id]&&<Bp ch="Mark Complete ✓" on={()=>{setDone(p=>({...p,[lesson.id]:true}));pop("✓ Lesson complete!");}}/>}
-      <Bs ch="← Back" on={back}/>
-    </div>
-    {user?(
-      <div>
-        <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:9}}>📝 My Notes</div>
-        {!(notes[lesson.id]||[]).length&&<div style={{fontSize:12,color:mu,marginBottom:9}}>No notes yet for this lesson.</div>}
-        {(notes[lesson.id]||[]).map((n,i)=>(
-          <div key={i} style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.15)",borderRadius:9,padding:"9px 12px",marginBottom:6,fontSize:13,color:"#c8d8f0",display:"flex",justifyContent:"space-between",gap:10}}>
-            <span>{n.text}</span>
-            <button onClick={()=>{const a=[...(notes[lesson.id]||[])];a.splice(i,1);setNotes(p=>({...p,[lesson.id]:a}));pop("Deleted");}} style={{background:"none",border:"none",color:mu,cursor:"pointer",fontSize:15,flexShrink:0}}>×</button>
+    {lesson.sections
+      ? <ExplorePharmacyLesson lesson={lesson} go={(action, payload) => {
+          if (action === "explore-complete") {
+            setDone(p=>({...p,[payload.lessonId]:true}));
+            pop("✓ Lesson complete!");
+          } else {
+            go(action, payload);
+          }
+        }}/>
+      : <>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16,flexWrap:"wrap",gap:8}}>
+          <div><div style={{fontSize:19,fontWeight:800,color:"#fff",marginBottom:3}}>{lesson.title}</div><div style={{fontSize:12,color:mu}}>{mod?.title}</div></div>
+          {done[lesson.id]&&<Tag label="Completed"/>}
+        </div>
+        <div style={{background:sf,border:`1px solid ${br}`,borderRadius:13,padding:24,marginBottom:18}}>
+          <pre style={{fontSize:14,lineHeight:1.9,color:"#c8d8f0",whiteSpace:"pre-wrap",margin:0,fontFamily:"inherit"}}>{lesson.content}</pre>
+        </div>
+        <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:22}}>
+          {!done[lesson.id]&&<Bp ch="Mark Complete ✓" on={()=>{setDone(p=>({...p,[lesson.id]:true}));pop("✓ Lesson complete!");}}/>}
+          <Bs ch="← Back" on={back}/>
+        </div>
+        {user?(
+          <div>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:9}}>📝 My Notes</div>
+            {!(notes[lesson.id]||[]).length&&<div style={{fontSize:12,color:mu,marginBottom:9}}>No notes yet for this lesson.</div>}
+            {(notes[lesson.id]||[]).map((n,i)=>(
+              <div key={i} style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.15)",borderRadius:9,padding:"9px 12px",marginBottom:6,fontSize:13,color:"#c8d8f0",display:"flex",justifyContent:"space-between",gap:10}}>
+                <span>{n.text}</span>
+                <button onClick={()=>{const a=[...(notes[lesson.id]||[])];a.splice(i,1);setNotes(p=>({...p,[lesson.id]:a}));pop("Deleted");}} style={{background:"none",border:"none",color:mu,cursor:"pointer",fontSize:15,flexShrink:0}}>×</button>
+              </div>
+            ))}
+            <Inp ta sx={{minHeight:72,marginTop:4}} placeholder="Add a note for this lesson…" value={noteIn} onChange={e=>setNoteIn(e.target.value)}/>
+            <Bs ch="Save Note" on={()=>{if(!noteIn.trim())return;setNotes(p=>({...p,[lesson.id]:[...(p[lesson.id]||[]),{text:noteIn.trim()}]}));setNoteIn("");pop("Note saved!");}} sx={{marginTop:8}}/>
           </div>
-        ))}
-        <Inp ta sx={{minHeight:72,marginTop:4}} placeholder="Add a note for this lesson…" value={noteIn} onChange={e=>setNoteIn(e.target.value)}/>
-        <Bs ch="Save Note" on={()=>{if(!noteIn.trim())return;setNotes(p=>({...p,[lesson.id]:[...(p[lesson.id]||[]),{text:noteIn.trim()}]}));setNoteIn("");pop("Note saved!");}} sx={{marginTop:8}}/>
-      </div>
-    ):(
-      <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
-        <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes and track progress</div>
-        <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
-        <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")}/>
-      </div>
-    )}
+        ):(
+          <div style={{background:"rgba(0,148,255,.06)",border:"1px solid rgba(0,148,255,.2)",borderRadius:11,padding:16,textAlign:"center"}}>
+            <div style={{color:bl,fontWeight:700,marginBottom:4}}>Sign in to save notes and track progress</div>
+            <div style={{color:mu,fontSize:12,marginBottom:11}}>Create a free account to keep your progress.</div>
+            <Bp ch="Sign In / Sign Up Free" on={()=>go("auth")}/>
+          </div>
+        )}
+      </>
+    }
   </>);
 
   if(view==="learn"&&mod) return wrap(<>
