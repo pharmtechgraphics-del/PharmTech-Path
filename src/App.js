@@ -1370,8 +1370,77 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"c2", title:"Pharmacy Math Essentials", lessons:[
-        { id:"c2l1", title:"Key Math Concepts & Sample Problems", content:`KEY CONCEPTS:\n• Ratio and proportion\n• Conversions\n• Alligation\n• IV rate basics\n• Percent strength\n\nSAMPLE PROBLEM:\n────────────────────\nOrder: 250 mg\nAvailable: 125 mg tablets\nHow many tablets?\n\n250 ÷ 125 = 2 tablets\n\nDECIMAL SAFETY RULE:\nIf you see .5 → rewrite as 0.5\nNever use trailing zeros in calculations.` },
+    { id:"c2", title:"Pharmacy Math Essentials", lessons:[
+        {
+          id:"c2l1",
+          title:"Key Math Concepts and Sample Problems",
+          sections:[
+            {
+              header:"MATH IS THE ONE SECTION WITH ONLY ONE RIGHT ANSWER",
+              body:"The most challenging calculation type candidates face is alligation. After that come IV rate calculations and conversions. Before any calculation, identify three things: what you are given, what unit the answer needs to be in, and what formula connects the two."
+            },
+            {
+              header:"MATH TYPE 1: RATIO AND PROPORTION",
+              body:"Formula: Desired dose divided by dose on hand, multiplied by quantity on hand equals quantity to give.\n\nExample: Order 250mg. Available 125mg per tablet. 250 divided by 125 equals 2 tablets. Check: 2 x 125mg = 250mg.\n\nExample 2: Order 500mg. Available 250mg per 5mL. 500 divided by 250 = 2. 2 x 5mL = 10mL."
+            },
+            {
+              header:"MATH TYPE 2: CONVERSIONS",
+              body:"Memorize: 1kg = 2.2 lbs. 1g = 1000mg. 1L = 1000mL. 1 tablespoon = 15mL. 1 teaspoon = 5mL. 1 fl oz = 30mL.\n\nExample: Patient weighs 154 lbs. 154 divided by 2.2 = 70kg.\n\nExample 2: 2 tablespoons = 2 x 15 = 30mL."
+            },
+            {
+              header:"MATH TYPE 3: IV RATE CALCULATIONS",
+              body:"Formula for mL per hour: Total volume divided by total time in hours.\n\nExample: 1000mL over 8 hours = 125 mL per hour.\n\nFormula for drops per minute: Total volume x drip factor, divided by total time in minutes.\n\nExample: 500mL over 4 hours. Drip factor 15. Step 1: 4 hours = 240 minutes. Step 2: 500 x 15 = 7500. Step 3: 7500 divided by 240 = 31 drops per minute.\n\nWatch for unit traps. Always check that your units match what the question asks."
+            },
+            {
+              header:"MATH TYPE 4: PERCENT STRENGTH",
+              body:"A 5% solution contains 5 grams per 100mL.\n\nExample: Grams of dextrose in 500mL of 5% dextrose? 5g per 100mL x 500mL = 25 grams.\n\nExample 2: 2g of drug in 40mL. Percent strength = 2 divided by 40 x 100 = 5%."
+            },
+            {
+              header:"MATH TYPE 5: ALLIGATION (MOST CHALLENGING)",
+              body:"Used when mixing two solutions of different concentrations to get a target concentration.\n\nGrid setup: Higher concentration top left. Lower concentration bottom left. Desired concentration center. Subtract diagonally: center minus bottom left goes top right. Top left minus center goes bottom right.\n\nExample: Prepare 200mL of 15% solution using 25% and 5% solutions. Top left: 25. Bottom left: 5. Center: 15. Top right: 15-5=10. Bottom right: 25-15=10. Total parts: 20. 25% solution: 10/20 x 200mL = 100mL. 5% solution: 10/20 x 200mL = 100mL. Check: (100 x 0.25) + (100 x 0.05) = 30g in 200mL = 15%. Correct."
+            },
+            {
+              header:"DECIMAL SAFETY RULE",
+              body:"Write 0.5, not .5. Write 0.5, not 0.50. Misread decimals cause ten-fold dosing errors."
+            }
+          ],
+          keyPoints:[
+            "Identify what you are given, what unit you need, and what formula connects them before you calculate",
+            "Ratio and proportion is the foundation that supports every other calculation type",
+            "Alligation requires a specific grid method and appears regularly on the exam",
+            "IV rate questions often use unit traps, always check your units",
+            "The decimal safety rule is a patient safety rule, not just an exam rule"
+          ],
+          takeaway:"The tech who understands the process never has to memorize the answer.",
+          selfCheck:{
+            prompt:"Which of these sounds most like where you are with pharmacy math right now?",
+            options:[
+              {
+                label:"Math is the part of the exam I am most afraid of and I have been avoiding it in my studying.",
+                response:"Start with ratio and proportion today. Practice ten problems. Then move to conversions. Build one type at a time."
+              },
+              {
+                label:"I have practiced each calculation type and I understand the process behind each one.",
+                response:"Make sure your practice is timed. Understanding in a relaxed session is different from executing under a two hour exam clock."
+              },
+              {
+                label:"I can do some types confidently but alligation and IV rates still feel unclear.",
+                response:"Work through the alligation grid method five times with different numbers until the steps feel automatic."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are taking a timed practice exam and encounter an alligation question. You get an answer but are not confident it is right and are running out of time.",
+            prompt:"What is your best strategy for checking your work quickly without starting over?"
+          },
+          answer:{
+            recommended:"Use the check step. Take your two calculated volumes, multiply each by its concentration, add the results, and divide by the total volume. If the answer matches your target concentration, your alligation is correct. This verification takes about thirty seconds."
+          },
+          connection:{
+            tag:"Lead Tech · Senior Tech · Specialty Pharmacy Tech · IV Sterile Compounding Tech · Pharmacy Informatics Tech",
+            aiPrompt:"I just completed the lesson Key Math Concepts and Sample Problems in the Getting Certified module. Help me practice the calculation types I am weakest on based on my background."
+          }
+        },
       ]},
       { id:"c3", title:"Drug Class Recognition", lessons:[
         { id:"c3l1", title:"Group by Suffix", content:`-pril     → ACE Inhibitor\n-sartan   → ARB\n-olol     → Beta Blocker\n-statin   → Lipid Lowering\n-cillin   → Penicillin Antibiotic\n\nBuild class clusters.\n\nSTUDY TIP:\n• Create 25 drug mini-lists\n• Review daily\n• Rotate weekly\n\nRepetition builds recall speed.` },
