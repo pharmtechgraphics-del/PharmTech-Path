@@ -625,10 +625,163 @@ const FREE_SECTIONS = [
   { id:"explore", title:"Explore Pharmacy", icon:"🔬", desc:"Discover what pharmacy technicians actually do every day",
     modules:[
       { id:"m1", title:"What Pharmacy Technicians Actually Do", lessons:[
-        { id:"l1", title:"The Role Is Bigger Than It Looks", content:`Most outsiders see pill counting, ringing up prescriptions, and printing labels. That's surface-level.\n\nBehind the counter, technicians are:\n• Workflow stabilizers\n• Documentation protectors\n• Process enforcers\n• Inventory managers\n• Safety checkpoints\n\nIf you rush, the system breaks. If you document poorly, risk increases. If you ignore inconsistencies, errors multiply.\n\nYou are part of a regulated chain of safety.` },
-        { id:"l2", title:"Retail vs Inpatient – Same Foundation, Different Pace", content:`RETAIL ENVIRONMENT\nRetail is visible and fast. You will manage:\n• Intake questions\n• Insurance processing\n• Patient expectations\n• Phone calls\n• Inventory gaps\n• Controlled substance documentation\n\nRetail requires: Speed with composure.\n\n────────────────────\n\nINPATIENT ENVIRONMENT\nInpatient is quieter but more system-driven. You may manage:\n• Automated dispensing systems\n• Cart fills\n• Medication restocking\n• Delivery coordination\n• Controlled substance accountability\n\nInpatient requires: Precision with documentation awareness.` },
-        { id:"l3", title:"The Technician Mindset", content:`Three pillars define strong technicians:\n1. Accuracy before speed\n2. Ask before assuming\n3. Document clearly\n\nYou are not expected to know everything on day one.\nYou are expected to:\n• Learn\n• Escalate appropriately\n• Protect workflow\n\nFIRST DAY CHECKLIST\n────────────────────\n☐ Learn physical layout\n☐ Identify workflow\n☐ Observe before rushing\n☐ Ask about escalation process\n☐ Write down common abbreviations` },
-      ]},
+        {
+          id:"l1",
+          title:"The Role Is Bigger Than It Looks",
+          sections:[
+            {
+              header:"WHAT NOBODY TELLS YOU AT ORIENTATION",
+              body:"Most people walk into their first pharmacy job thinking the role is about filling prescriptions and ringing up customers. That is what the job looks like from the outside. It is not what the job actually is.\n\nPharmacy is complex, structured, and regulated. It operates inside a chain of safety where every person, including you, holds a specific and critical position. What you do every shift either protects that chain or creates a gap in it.\n\nAnd here is the part nobody says out loud: you do not need a doctorate or a master's degree to do meaningful, high-impact work in this profession. Techs influence patient safety, workflow stability, regulatory compliance, and operational outcomes every single day. That starts on day one, whether you know it or not."
+            },
+            {
+              header:"WHAT YOU ACTUALLY ARE",
+              body:"Behind the counter, pharmacy technicians function as five things simultaneously: workflow stabilizers, documentation protectors, process enforcers, inventory managers, and safety checkpoints.\n\nWhen you stabilize workflow, the pharmacy runs. When you protect documentation, the pharmacy is defensible. When you enforce process, errors get caught. When you manage inventory, patients get what they need. When you function as a safety checkpoint, harm gets prevented before it reaches anyone.\n\nThat is not a support role. That is infrastructure."
+            }
+          ],
+          keyPoints:[
+            "Pharmacy is a regulated system, not just a service counter",
+            "Your role functions across five critical areas simultaneously",
+            "You do not need an advanced degree to make a meaningful impact",
+            "Every action you take either protects or weakens the chain of safety",
+            "Understanding your role is the first step toward advancing beyond it"
+          ],
+          takeaway:"The counter is where you start. It is not where your career ends.",
+          selfCheck:{
+            prompt:"When you think about your role in the pharmacy, which of these sounds most like you right now?",
+            options:[
+              {
+                label:"I focus on doing my tasks correctly and efficiently. I know my job and I do it well.",
+                response:"You have built a solid foundation. Start asking yourself why each task exists, not just how to do it. That shift separates good techs from indispensable ones."
+              },
+              {
+                label:"I think about how my work connects to everything else, patient safety, workflow, compliance.",
+                response:"You are already operating at a higher level. Make sure that awareness is visible. Document what you notice. Speak up when you see patterns."
+              },
+              {
+                label:"I am starting to see the bigger picture but I am not sure how to act on it yet.",
+                response:"This is exactly where PharmTech Path is designed to meet you. You have the instincts. Keep going."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are three weeks into a new retail position. A patient comes in frustrated because their prescription has been rejected twice this week. You process it, fix the insurance issue, and the patient leaves satisfied. Your pharmacist moves on. The line keeps moving.",
+            prompt:"What is the difference between a tech who closes that interaction and moves on, and a tech who does something more with it?"
+          },
+          answer:{
+            recommended:"The tech who closes and moves on did the job. The tech who does something more writes it down, the rejection type, the medication, the date, and later mentions to the pharmacist that this is the second time this week. That second tech is functioning as a safety checkpoint and a workflow stabilizer at the same time. Same interaction. Completely different value to the pharmacy."
+          },
+          connection:{
+            tag:"Senior Tech · Lead Tech · Pharmacy Supervisor · Medication Safety Tech",
+            aiPrompt:"I just completed the lesson The Role Is Bigger Than It Looks in the Explore Pharmacy module. Help me understand how to start seeing my current role through a bigger lens based on my background."
+          }
+        },
+        {
+          id:"l2",
+          title:"Retail vs Inpatient — Same Foundation, Different Pace",
+          sections:[
+            {
+              header:"SAME KNOWLEDGE, DIFFERENT WORLD",
+              body:"If you have ever looked at a hospital pharmacy job posting and thought you would not even know where to start, you are not alone. But here is what does not change: the knowledge you built in retail comes with you.\n\nIn retail, patients call with questions about their medications. In inpatient, replace the patients with nurses and providers. Same communication skill, different audience. In retail, you fill and sell a prescription. In inpatient, you deliver that medication to a floor or restock a Pyxis. Same accuracy requirement, different delivery point. The foundation is identical. The application shifts."
+            },
+            {
+              header:"UNDERSTANDING THE TWO ENVIRONMENTS",
+              body:"Retail is visible and fast. You manage intake, insurance processing, patient expectations, phone calls, inventory gaps, and controlled substance documentation, often all at the same time.\n\nInpatient is quieter but more system driven. You work within automated dispensing systems, manage cart fills, coordinate restocking, handle delivery, and maintain controlled substance accountability. Your patients are the nurses and providers relying on you to have the right medication in the right place at the right time."
+            }
+          ],
+          keyPoints:[
+            "Retail and inpatient require the same foundational knowledge applied differently",
+            "Your audience shifts from patients to nurses and providers in inpatient settings",
+            "Filling and selling becomes delivering and restocking",
+            "Both environments demand accuracy, documentation and composure",
+            "Understanding both settings makes you a more versatile and valuable tech"
+          ],
+          takeaway:"You are not starting over. You are transferring what you already know into a new environment.",
+          selfCheck:{
+            prompt:"Which of these best describes where you are right now?",
+            options:[
+              {
+                label:"I work in retail and inpatient feels completely foreign to me. I would not know where to start.",
+                response:"The transition is less of a leap than it looks. Your insurance knowledge, your controlled substance awareness, your communication skills, all of it transfers."
+              },
+              {
+                label:"I work in inpatient and I feel like I left a lot of retail knowledge behind when I made the switch.",
+                response:"Nothing you learned in retail disappeared. Those skills are still active in a hospital environment."
+              },
+              {
+                label:"I have experience in both and I can see how the skills carry over.",
+                response:"That cross-setting experience is genuinely valuable for leadership, training, and systems-level roles."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A retail tech with three years of experience applies for an inpatient position. During the interview she is asked how her retail background prepared her for hospital pharmacy. She freezes because she assumed the two settings had nothing in common.",
+            prompt:"What should she have said, and what does that tell you about how you should be thinking about your own experience?"
+          },
+          answer:{
+            recommended:"She should have said that retail pharmacy built her foundation in accuracy under pressure, insurance and documentation processes, controlled substance handling, and patient communication. Every year of retail experience is transferable. The tech who understands that walks into any setting with confidence."
+          },
+          connection:{
+            tag:"Inpatient Pharmacy Tech · Medication History Tech · Pharmacy Informatics Tech · Controlled Substance Tech",
+            aiPrompt:"I just completed the lesson Retail vs Inpatient in the Explore Pharmacy module. Help me understand how my current experience translates to a different pharmacy setting."
+          }
+        },
+        {
+          id:"l3",
+          title:"The Technician Mindset",
+          sections:[
+            {
+              header:"THE MOMENT IT CLICKS",
+              body:"There is a moment most strong techs can point to. It is the day they realized that what they do actually matters beyond the task itself. For some it happens when they catch an expired medication in an ADS restock. For others it happens when they notice a flaw in a workflow and instead of accepting it, they start thinking about how to fix it. The technician mindset is not about working harder. It is about seeing more clearly."
+            },
+            {
+              header:"THREE PILLARS OF A STRONG TECH",
+              body:"The first is accuracy before speed. A fast mistake is worse than a slow correction. The second is ask before assuming. Pharmacy has no room for guesswork. The third is document clearly. If it is not documented, it did not happen."
+            }
+          ],
+          keyPoints:[
+            "The technician mindset is about seeing your work inside a larger system",
+            "Accuracy before speed protects patients and builds long term efficiency",
+            "Asking before assuming is professional judgment, not a weakness",
+            "Clear documentation protects everyone including you",
+            "Noticing problems and thinking toward solutions is how techs advance"
+          ],
+          takeaway:"The tech who pays attention to the small things is the one the whole team relies on.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently approach your work?",
+            options:[
+              {
+                label:"I focus on getting through my tasks accurately and on time. I do what is expected and I do it well.",
+                response:"Start with one shift where you ask yourself why each task exists. That single question changes how you see everything."
+              },
+              {
+                label:"I pay attention to patterns, ask questions when something feels off, and document everything thoroughly.",
+                response:"Make it visible. Document what you notice. Let your awareness translate into action that other people can see."
+              },
+              {
+                label:"I know I should be more aware but the pace of the shift makes it hard to slow down and notice things.",
+                response:"Awareness is not about slowing down. It is about what you notice while you keep moving."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are restocking an ADS on a busy afternoon. You notice two vials are close to their expiration date but still technically within range.",
+            prompt:"Do you pull them or leave them? And why does your answer matter beyond this one moment?"
+          },
+          answer:{
+            recommended:"Pull them and replace them with newer stock. The nurse waiting behind you is not a reason to skip a safety step. The tech who makes that call consistently is the tech the team learns to trust."
+          },
+          firstWeekChecklist:[
+            "Learn the physical layout of your pharmacy and any connected units",
+            "Identify who to escalate to and how to reach them quickly",
+            "Observe workflow before jumping in, understand the rhythm first",
+            "Ask about controlled substance processes specific to your facility",
+            "Write down abbreviations, system names, and terms you do not recognize yet"
+          ],
+          connection:{
+            tag:"Senior Tech · Lead Tech · Pharmacy Supervisor · Controlled Substance Tech · Medication Safety Tech",
+            aiPrompt:"I just completed the lesson The Technician Mindset in the Explore Pharmacy module. Help me identify specific ways I can build stronger awareness and documentation habits in my current role."
+          }
+        },
       { id:"m2", title:"Workflow 101", lessons:[
         { id:"l4", title:"Retail Workflow Deep Dive", content:`Retail workflow is cyclical:\n1. Intake\n2. Data entry\n3. Insurance adjudication\n4. Filling\n5. Pharmacist verification\n6. Pickup\n\nBreakdowns often occur during:\n• Incorrect insurance entry\n• Missing prescriber details\n• Prior authorization delays\n\nNew tech mistake: Trying to fix everything alone.\nStrong tech move: Identify bottleneck → escalate appropriately.` },
         { id:"l5", title:"Inpatient Workflow Deep Dive", content:`Inpatient flow depends heavily on systems:\n1. Provider order entry\n2. Pharmacist verification\n3. Automated dispensing\n4. Restock / cart fill\n5. Documentation\n\nEven though automation is involved, accountability remains human.` },
