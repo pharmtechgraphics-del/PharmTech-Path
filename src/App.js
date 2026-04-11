@@ -1030,6 +1030,269 @@ function buildPreferencesPrompt(careerPreferences) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// EXPLORE PHARMACY — LESSON RENDERER
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ExplorePharmacyLesson({ lesson, go }) {
+  const [selfCheckPick, setSelfCheckPick] = useState(null);
+  const [answerOpen, setAnswerOpen] = useState(false);
+
+  const surface  = "#1a1d27";
+  const surface2 = "#22263a";
+  const teal     = "#00c9a7";
+  const tealDim  = "rgba(0,201,167,0.12)";
+  const tealBorder = "rgba(0,201,167,0.25)";
+  const blue     = "#0094ff";
+  const gold     = "#f59e0b";
+  const mu       = "#8b92a9";
+  const white    = "#ffffff";
+
+  const card = {
+    background: surface,
+    borderRadius: 14,
+    padding: "20px 22px",
+    marginBottom: 18,
+    border: "1px solid rgba(255,255,255,0.06)"
+  };
+
+  const sectionHeader = {
+    fontSize: 11,
+    fontWeight: 800,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: teal,
+    marginBottom: 8,
+    marginTop: 0
+  };
+
+  const bodyText = {
+    fontSize: 14,
+    lineHeight: 1.7,
+    color: "#c8cdd8",
+    margin: 0,
+    whiteSpace: "pre-line"
+  };
+
+  const pill = (color, bg) => ({
+    display: "inline-block",
+    fontSize: 11,
+    fontWeight: 700,
+    color,
+    background: bg,
+    borderRadius: 20,
+    padding: "3px 10px",
+    letterSpacing: "0.05em"
+  });
+
+  if (!lesson) return null;
+
+  return (
+    <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 4px 40px" }}>
+
+      {/* TITLE */}
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 10 }}>
+          Explore Pharmacy
+        </div>
+        <h1 style={{ fontSize: 22, fontWeight: 800, color: white, margin: 0, lineHeight: 1.3 }}>
+          {lesson.title}
+        </h1>
+      </div>
+
+      {/* LESSON CONTENT */}
+      <div style={card}>
+        <div style={{ ...pill("#0094ff", "rgba(0,148,255,0.1)"), border: "1px solid rgba(0,148,255,0.2)", marginBottom: 16 }}>
+          Lesson Content
+        </div>
+        {(lesson.sections || []).map((sec, i) => (
+          <div key={i} style={{ marginBottom: i < lesson.sections.length - 1 ? 20 : 0 }}>
+            <p style={sectionHeader}>{sec.header}</p>
+            <p style={bodyText}>{sec.body}</p>
+          </div>
+        ))}
+        {lesson.keyPoints && lesson.keyPoints.length > 0 && (
+          <div style={{ background: "rgba(0,148,255,0.06)", border: "1px solid rgba(0,148,255,0.15)", borderRadius: 10, padding: "14px 16px", marginTop: 20 }}>
+            <p style={{ ...sectionHeader, color: blue, marginBottom: 10 }}>Key Points</p>
+            <ul style={{ margin: 0, paddingLeft: 18 }}>
+              {lesson.keyPoints.map((pt, i) => (
+                <li key={i} style={{ ...bodyText, marginBottom: i < lesson.keyPoints.length - 1 ? 6 : 0 }}>{pt}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {lesson.takeaway && (
+          <div style={{ borderLeft: `3px solid ${teal}`, paddingLeft: 14, marginTop: 18 }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#e0e4f0", margin: 0, fontStyle: "italic" }}>
+              {lesson.takeaway}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* SELF-CHECK */}
+      {lesson.selfCheck && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(0,201,167,0.07), rgba(0,148,255,0.05))", border: `1px solid ${tealBorder}` }}>
+          <div style={{ ...pill(teal, tealDim), border: `1px solid ${tealBorder}`, marginBottom: 14 }}>Self-Check</div>
+          <p style={{ fontSize: 15, fontWeight: 700, color: white, margin: "0 0 16px" }}>{lesson.selfCheck.prompt}</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {(lesson.selfCheck.options || []).map((opt, i) => {
+              const picked = selfCheckPick === i;
+              return (
+                <div key={i}>
+                  <button
+                    onClick={() => setSelfCheckPick(i)}
+                    style={{
+                      width: "100%", textAlign: "left",
+                      background: picked ? "linear-gradient(135deg,rgba(0,201,167,0.18),rgba(0,148,255,0.12))" : surface2,
+                      border: picked ? `1.5px solid ${teal}` : "1.5px solid rgba(255,255,255,0.08)",
+                      borderRadius: picked && opt.response ? "10px 10px 0 0" : 10,
+                      padding: "12px 14px", color: picked ? white : "#c8cdd8",
+                      fontSize: 13, fontWeight: picked ? 600 : 400, cursor: "pointer",
+                      transition: "all 0.2s ease", display: "flex", alignItems: "center", gap: 10
+                    }}
+                  >
+                    <span style={{
+                      width: 22, height: 22, borderRadius: "50%",
+                      border: picked ? `2px solid ${teal}` : "2px solid rgba(255,255,255,0.2)",
+                      background: picked ? teal : "transparent", flexShrink: 0,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 11, color: picked ? "#000" : "transparent", fontWeight: 800
+                    }}>
+                      {picked ? "✓" : ""}
+                    </span>
+                    {opt.label}
+                  </button>
+                  {picked && opt.response && (
+                    <div style={{ background: "rgba(0,201,167,0.06)", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 10px 10px", padding: "12px 14px" }}>
+                      <p style={{ fontSize: 13, color: "#b8f5eb", margin: 0, lineHeight: 1.6 }}>{opt.response}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* REAL-WORLD SCENARIO */}
+      {lesson.scenario && (
+        <div style={{ ...card, background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(255,100,50,0.04))", border: "1px solid rgba(255,170,0,0.18)" }}>
+          <div style={{ ...pill("#ffaa00", "rgba(255,170,0,0.1)"), border: "1px solid rgba(255,170,0,0.2)", marginBottom: 14 }}>
+            Real-World Scenario
+          </div>
+          <p style={{ ...bodyText, marginBottom: 16 }}>{lesson.scenario.setup}</p>
+          <div style={{ background: "rgba(255,170,0,0.07)", border: "1px solid rgba(255,170,0,0.15)", borderRadius: 10, padding: "12px 14px" }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#ffd080", margin: 0 }}>{lesson.scenario.prompt}</p>
+          </div>
+          <p style={{ fontSize: 12, color: mu, margin: "12px 0 0", fontStyle: "italic" }}>
+            Take a moment to think it through. Then check the answer below.
+          </p>
+        </div>
+      )}
+
+      {/* SEE RECOMMENDED RESPONSE */}
+      {lesson.answer && (
+        <div style={{ marginBottom: 18 }}>
+          <button
+            onClick={() => setAnswerOpen(!answerOpen)}
+            style={{
+              width: "100%",
+              background: answerOpen ? "linear-gradient(135deg,rgba(0,201,167,0.12),rgba(0,148,255,0.08))" : surface,
+              border: answerOpen ? `1px solid ${tealBorder}` : "1px solid rgba(255,255,255,0.06)",
+              borderRadius: answerOpen ? "14px 14px 0 0" : 14,
+              padding: "16px 20px", display: "flex", alignItems: "center",
+              justifyContent: "space-between", cursor: "pointer", transition: "all 0.2s ease"
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 16 }}>💡</span>
+              <span style={{ fontSize: 14, fontWeight: 700, color: answerOpen ? teal : white }}>See Recommended Response</span>
+            </div>
+            <span style={{ color: answerOpen ? teal : mu, fontSize: 18, fontWeight: 300, display: "inline-block", transform: answerOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }}>▾</span>
+          </button>
+          {answerOpen && (
+            <div style={{ background: "linear-gradient(135deg,rgba(0,201,167,0.06),rgba(0,148,255,0.04))", border: `1px solid ${tealBorder}`, borderTop: "none", borderRadius: "0 0 14px 14px", padding: "20px 22px" }}>
+              <p style={{ ...sectionHeader, color: teal }}>Recommended Response</p>
+              <p style={bodyText}>{lesson.answer.recommended}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* FIRST WEEK CHECKLIST — Lesson 3 only */}
+      {lesson.firstWeekChecklist && lesson.firstWeekChecklist.length > 0 && (
+        <div style={{
+          background: "linear-gradient(135deg, rgba(255,170,0,0.06), rgba(245,158,11,0.04))",
+          border: "1px solid rgba(255,170,0,0.2)",
+          borderRadius: 14,
+          padding: "20px 22px",
+          marginBottom: 18
+        }}>
+          <div style={{ ...pill(gold, "rgba(245,158,11,0.12)"), border: "1px solid rgba(245,158,11,0.25)", marginBottom: 14 }}>
+            First Week Reference List
+          </div>
+          <p style={{ fontSize: 13, color: mu, margin: "0 0 14px", fontStyle: "italic" }}>
+            Screenshot this or save it before your first shift.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {lesson.firstWeekChecklist.map((item, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "flex-start", gap: 10,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,170,0,0.12)",
+                borderRadius: 9, padding: "10px 13px"
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: 5,
+                  border: "1.5px solid rgba(245,158,11,0.4)",
+                  background: "transparent", flexShrink: 0, marginTop: 1
+                }} />
+                <span style={{ fontSize: 13, color: "#c8cdd8", lineHeight: 1.6 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: mu, margin: "14px 0 0" }}>
+            Interactive checklist coming in a future update.
+          </p>
+        </div>
+      )}
+
+      {/* MARK LESSON COMPLETE */}
+      <div style={{ marginBottom: 18, display: "flex", justifyContent: "center" }}>
+        <button
+          onClick={() => { if (go) go("explore-complete", { lessonId: lesson.id }); }}
+          style={{
+            background: `linear-gradient(135deg,#00c9a7,#0094ff)`,
+            color: "#fff", border: "none", borderRadius: 12,
+            padding: "12px 28px", fontSize: 14, fontWeight: 800,
+            cursor: "pointer", letterSpacing: 0.2,
+          }}
+        >
+          ✓ Mark Lesson Complete
+        </button>
+      </div>
+
+      {/* SUPPORTS + ASK THE AI */}
+      {lesson.connection && (
+        <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <span style={{ fontSize: 11, color: mu, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em" }}>Supports</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: teal, background: tealDim, border: `1px solid ${tealBorder}`, borderRadius: 20, padding: "4px 12px", letterSpacing: "0.03em" }}>
+              {lesson.connection.tag}
+            </span>
+          </div>
+          <button
+            onClick={() => { if (go) go("career-ai", { preload: lesson.connection.aiPrompt }); }}
+            style={{ background: "linear-gradient(135deg,#00c9a7,#0094ff)", border: "none", borderRadius: 10, padding: "10px 18px", color: "#000", fontSize: 13, fontWeight: 800, cursor: "pointer", display: "flex", alignItems: "center", gap: 7, whiteSpace: "nowrap" }}
+          >
+            <span>✨</span>Ask the AI
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+// ─────────────────────────────────────────────────────────────────────────────
 // BEYOND THE COUNTER — MODULE DATA
 // 8 modules. Module 1 Lesson 1 fully populated.
 // Modules 2–8 ready for content.
