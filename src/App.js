@@ -1314,8 +1314,61 @@ const FREE_SECTIONS = [
   },
   { id:"certify", title:"Getting Certified", icon:"🎓", desc:"A complete roadmap from zero to certified pharmacy tech",
     modules:[
-      { id:"c1", title:"Structuring Your Study Plan", lessons:[
-        { id:"c1l1", title:"Why Most People Fail & How to Win", content:`WHY MOST PEOPLE FAIL:\n• Study inconsistently\n• Focus only on drugs\n• Avoid math\n• Skip practice exams\n\nCertification requires balance.\n\nSTUDY BLUEPRINT — 4 Pillars:\n────────────────────\n1. Math\n2. Law\n3. Drug Classes\n4. Workflow Knowledge\n\nStudy 45–60 minutes per session.\n3–5 sessions per week minimum.\n\nSelf-Assessment: Take a baseline practice test first.\nDo not panic at low scores. Use it as a map.` },
+{ id:"c1", title:"Structuring Your Study Plan", lessons:[
+        {
+          id:"c1l1",
+          title:"Why Most People Fail and How to Win",
+          sections:[
+            {
+              header:"THE REAL REASON PEOPLE FAIL",
+              body:"Most people who fail the certification exam do not fail because they are not smart enough. They fail because of how they studied. They tried to memorize everything instead of understanding anything. They focused almost entirely on drug names and ignored math. They skipped practice exams because they were afraid of low scores. Certification requires balance across four areas: math, law, drug classes, and workflow knowledge."
+            },
+            {
+              header:"THE MINDSET SHIFT THAT ACTUALLY MAKES THE DIFFERENCE",
+              body:"Memorization and understanding are not the same thing. When you understand why something is true, your brain builds a structure that makes the information stick. Take drug classes. Once you understand that beta blockers block the beta receptors that drive heart rate up, every drug ending in olol clicks into place. Memory hooks make this even stronger. One tech remembered that all pams are benzodiazepines because she worked with a pharmacist named Pam who matched the energy of that drug class perfectly. That kind of connection is exactly how memory works."
+            },
+            {
+              header:"HOW TO ACTUALLY STRUCTURE YOUR STUDY PLAN",
+              body:"Before you make a single flashcard, take a practice test. Test first and study what the results tell you. A baseline practice exam is not a judgment. It is a map of where to go. From there, build a study schedule around your actual weak areas. Study in sessions that work for your brain. Study three to five times per week at minimum. Take a full practice exam at the end of each week and write down the category, reason, and correction for every missed question."
+            }
+          ],
+          keyPoints:[
+            "Most people fail because of how they studied, not how hard they studied",
+            "Understanding why something is true is more powerful than memorizing that it is true",
+            "Drug suffixes are one of the most high value study tools on the certification exam",
+            "A baseline practice test before you start studying tells you exactly where to focus",
+            "Consistency over weeks beats intensity over days"
+          ],
+          takeaway:"Study what you do not know, not what makes you feel comfortable.",
+          selfCheck:{
+            prompt:"Which of these sounds most like how you currently approach studying?",
+            options:[
+              {
+                label:"I study by reading and rereading material and trying to memorize as much as possible before the exam.",
+                response:"After reading a section, close the material and try to write down what you just learned without looking."
+              },
+              {
+                label:"I identify my weak areas first and focus my time there, using understanding and memory hooks.",
+                response:"Make sure your practice tests are timed and simulate real conditions."
+              },
+              {
+                label:"I have been putting off starting because the volume of material feels overwhelming.",
+                response:"Start with one practice test today. Do not study first. Just take it cold and see where you land."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A tech is two weeks away from her certification exam. She has been studying every night for a month but has not taken a single practice exam because she is afraid of getting a low score.",
+            prompt:"What should she do right now, and what is the cost of waiting until she feels more confident?"
+          },
+          answer:{
+            recommended:"She should take a full practice exam today. A low score two weeks before the exam is useful information. A low score on exam day is a failed attempt. The practice exam is not a judgment. It is a diagnostic tool."
+          },
+          connection:{
+            tag:"Lead Tech · Senior Tech · Pharmacy Informatics Tech · Specialty Pharmacy Tech",
+            aiPrompt:"I just completed the lesson Why Most People Fail and How to Win in the Getting Certified module. Help me build a personalized study plan based on my current knowledge gaps and timeline."
+          }
+        },
       ]},
       { id:"c2", title:"Pharmacy Math Essentials", lessons:[
         { id:"c2l1", title:"Key Math Concepts & Sample Problems", content:`KEY CONCEPTS:\n• Ratio and proportion\n• Conversions\n• Alligation\n• IV rate basics\n• Percent strength\n\nSAMPLE PROBLEM:\n────────────────────\nOrder: 250 mg\nAvailable: 125 mg tablets\nHow many tablets?\n\n250 ÷ 125 = 2 tablets\n\nDECIMAL SAFETY RULE:\nIf you see .5 → rewrite as 0.5\nNever use trailing zeros in calculations.` },
