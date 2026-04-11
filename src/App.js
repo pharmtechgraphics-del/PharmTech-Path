@@ -1584,8 +1584,75 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"c5", title:"Practice Exam Strategy & 30-Day Plan", lessons:[
-        { id:"c5l1", title:"After Each Test + The Crash Plan", content:`AFTER EACH PRACTICE TEST:\nWrite down:\n• Category missed\n• Why missed\n• How to correct\n\nTrack patterns.\n\n30-DAY CRASH PLAN:\n────────────────────\nWeek 1: Math daily + Workflow review\nWeek 2: Law + Safety + Controlled substance basics\nWeek 3: Drug classes daily\nWeek 4: Full practice exams + Target weak areas\n\nYou passed. Now what?\nCertification is just the beginning.\nThe real differentiator is what you build next.` },
+{ id:"c5", title:"Practice Exam Strategy and 30-Day Plan", lessons:[
+        {
+          id:"c5l1",
+          title:"After Each Test and The Crash Plan",
+          sections:[
+            {
+              header:"THE PRACTICE EXAM IS YOUR MOST POWERFUL STUDY TOOL",
+              body:"Most candidates treat the practice exam as something you do at the end of studying to see if you are ready. That is the wrong order. The practice exam is not a finish line. It is a starting point. Taking a baseline practice exam before you begin studying gives you a map of exactly where to focus your time."
+            },
+            {
+              header:"WHAT TO DO AFTER EVERY PRACTICE TEST",
+              body:"After every practice exam, write down three things for every question you missed: the category it belongs to, why you missed it, and how to correct it. Track the patterns over time. If you miss insurance-related questions repeatedly, that is a category that needs more time, not bad luck."
+            },
+            {
+              header:"THE 30-DAY CRASH PLAN",
+              body:"Week 1: Math daily plus workflow review. Doing even ten math problems per day builds the muscle memory that makes calculations faster on exam day.\n\nWeek 2: Law, safety, and controlled substance basics. Federal requirements and patient safety together make up over 40% of the exam.\n\nWeek 3: Drug classes daily. Use the suffix method. Review the top 200 drugs by class. Add brand and generic name matching.\n\nWeek 4: Full practice exams plus targeting weak areas. Take a timed full practice exam every other day. On days between exams, focus exclusively on categories where you are still missing questions."
+            },
+            {
+              header:"YOU PASSED. NOW WHAT.",
+              body:"Certification is just the beginning. The real differentiator is what you build next. CPhT is the foundation. CPhT-Adv, specialty certifications through PTCB, and advanced experience in leadership or clinical roles are what open the doors that most techs never know exist. PharmTech Path was built for what comes after the exam. Keep going."
+            }
+          ],
+          keyPoints:[
+            "The practice exam is a diagnostic tool, not a finish line",
+            "After every practice exam write down category, reason, and correction for every missed question",
+            "Track patterns over time, not just individual scores",
+            "The 30-day plan covers all four domains with math daily in week one and full practice exams in week four",
+            "Certification is the foundation, not the destination"
+          ],
+          takeaway:"The tech who knows where they are weak before exam day is the tech who passes on the first attempt.",
+          selfCheck:{
+            prompt:"Which of these sounds most like where you are with practice exams right now?",
+            options:[
+              {
+                label:"I have not taken any practice exams yet because I want to study more before I test myself.",
+                response:"Take one today. Do not study first. A cold baseline exam is the single most efficient thing you can do right now."
+              },
+              {
+                label:"I take practice exams regularly and I review the breakdown of every question I miss.",
+                response:"Make sure your practice exams are timed under realistic conditions."
+              },
+              {
+                label:"I take practice exams but I mostly just check my score and move on.",
+                response:"The score tells you almost nothing on its own. The breakdown tells you everything."
+              }
+            ]
+          },
+          scenario:{
+            setup:"A tech is in week three of studying. Her overall practice exam scores are in the low 70s, just at the passing threshold. She is thinking about scheduling her exam for next week.",
+            prompt:"Is she ready, and what should she look at beyond the overall score before she decides?"
+          },
+          answer:{
+            recommended:"She should not schedule based on an overall score of 70 alone. A 70 that is evenly distributed across domains is different from a 70 where one domain is in the 90s and another is in the 50s. She needs to look at her domain breakdown. If any single domain is below 65, that domain could cost her the exam. She should complete week four of the crash plan and look for a consistent upward trend in her weakest domain before scheduling."
+          },
+          examWorksheet:[
+            { label:"Overall score", placeholder:"e.g. 74%" },
+            { label:"Strongest domain", placeholder:"e.g. Medications" },
+            { label:"Weakest domain", placeholder:"e.g. Federal Requirements" },
+            { label:"Category I keep missing", placeholder:"e.g. DEA forms, IV calculations" },
+            { label:"Why I missed those questions", placeholder:"e.g. Confused Form 106 and Form 41" },
+            { label:"How to correct it", placeholder:"e.g. Review DEA forms table daily this week" },
+            { label:"Pattern I am noticing", placeholder:"e.g. I rush through math and make unit errors" },
+            { label:"What I will focus on before my next practice exam", placeholder:"e.g. Alligation and law section" },
+          ],
+          connection:{
+            tag:"Lead Tech · Senior Tech · Specialty Pharmacy Tech · Pharmacy Informatics Tech",
+            aiPrompt:"I just completed the lesson After Each Test and The Crash Plan in the Getting Certified module. Help me build a personalized 30-day study plan based on my current exam timeline and weak areas."
+          }
+        },
       ]},
     ]
   },
