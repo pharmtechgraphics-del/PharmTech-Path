@@ -1521,8 +1521,68 @@ const FREE_SECTIONS = [
           }
         },
       ]},
-      { id:"c4", title:"Federal Law & Controlled Substances", lessons:[
-        { id:"c4l1", title:"What to Know for the Exam", content:`KNOW:\n• Schedule II–V structure\n• High-level refill rules\n• Transfer limitations (general awareness)\n• HIPAA basics\n• Medication safety reporting\n\nFocus on principles over memorization.` },
+{ id:"c4", title:"Federal Law and Controlled Substances", lessons:[
+        {
+          id:"c4l1",
+          title:"What to Know for the Exam",
+          sections:[
+            {
+              header:"FEDERAL LAW IS NOT JUST BACKGROUND KNOWLEDGE",
+              body:"The Federal Requirements domain makes up 18.75% of the PTCB exam. That is nearly one fifth of your total score. Within that domain, controlled substance regulations and DEA forms are among the most consistently tested topics. The most common mistake candidates make is trying to memorize DEA form numbers without understanding what each form is actually for. When you understand the situation each form addresses, the number becomes easy to recall."
+            },
+            {
+              header:"DEA FORMS, THE ONES THAT MATTER",
+              body:"DEA Form 222: Used any time a pharmacy orders Schedule II controlled substances. Schedule III through V drugs do not require this form. Valid for 60 days. Maximum 10 line items per form. Must be signed by the DEA registered pharmacist. Incomplete or damaged forms must be kept on file for two years and cannot be thrown away. CSOS, the Controlled Substance Ordering System, can be used electronically in place of Form 222.\n\nDEA Form 106: Used when controlled substances are stolen or significantly lost. Must be filed as soon as possible. The DEA and local law enforcement must both be notified. Pharmacy keeps a copy and original goes to the DEA. Key detail: not every loss requires Form 106. Spilling a small amount or breaking a tablet does not trigger this requirement. Only a significant loss does.\n\nDEA Form 41: Used when controlled substances are destroyed. Applies to expired, damaged, or unwanted controlled substances that cannot be returned. Requires NDC number, drug name, strength, dosage form, and quantity. Two witnesses must sign at the time of destruction. Expired controlled substances cannot be returned to the manufacturer.\n\nDEA Form 224: Used by pharmacies to register with the DEA to dispense controlled substances at all. Without it, no controlled substance dispensing is permitted."
+            },
+            {
+              header:"SCHEDULE RULES YOU MUST KNOW",
+              body:"Schedule I: No accepted medical use, highest abuse potential. Examples: heroin, LSD, ecstasy. Never dispensed in a pharmacy.\n\nSchedule II: Accepted medical use, highest abuse potential of dispensable medications. Examples: oxycodone, fentanyl, amphetamine, methylphenidate. Cannot be called in by phone. Cannot be refilled. A new written prescription is required each time. Valid up to six months from the date written.\n\nSchedule III and IV: Can be refilled up to five times within a six month period. Schedule III examples: testosterone, buprenorphine. Schedule IV examples: alprazolam, diazepam, zolpidem.\n\nSchedule V: Lowest abuse potential among controlled substances. Examples include cough preparations containing small amounts of codeine."
+            }
+          ],
+          keyPoints:[
+            "Federal Requirements makes up nearly one fifth of the total exam score",
+            "Form 222 is for ordering Schedule II drugs only, valid 60 days, maximum 10 line items",
+            "Form 106 is for theft or significant loss only, not every small spill or breakage",
+            "Form 41 is for destruction of expired or damaged controlled substances with two witness signatures",
+            "Form 224 is the pharmacy's DEA registration to dispense controlled substances at all",
+            "Schedule II prescriptions cannot be called in by phone and cannot be refilled"
+          ],
+          takeaway:"Know the situation each form addresses and the number will never trip you up.",
+          selfCheck:{
+            prompt:"Which of these sounds most like where you are with federal law and DEA regulations right now?",
+            options:[
+              {
+                label:"I find federal law confusing and I tend to skip it in my studying because it feels like a lot of memorization.",
+                response:"Federal law rewards understanding over memorization. Attach each form to a real scenario and study it that way."
+              },
+              {
+                label:"I understand the purpose of each DEA form and feel confident matching them to the right scenario.",
+                response:"Make sure your confidence holds up under scenario-based questions. Practice with that format specifically."
+              },
+              {
+                label:"I know some of the rules but the DEA form numbers and specific details still get mixed up in my head.",
+                response:"Write out all four forms with their purpose and one scenario where each applies. Review that table daily in the week before your exam."
+              }
+            ]
+          },
+          scenario:{
+            setup:"You are working a closing shift and discover that a bottle of Schedule II controlled substance tablets is missing from the safe. The count from earlier shows it was there at 2pm.",
+            prompt:"What steps do you take and which DEA form is involved?"
+          },
+          answer:{
+            recommended:"You notify your pharmacist immediately. The pharmacist notifies the DEA and local law enforcement as soon as possible. DEA Form 106 is completed documenting the theft or significant loss. The pharmacy retains a copy and the original is sent to the DEA. A missing bottle of Schedule II medication is a significant loss by definition and triggers immediate reporting requirements."
+          },
+          deaFormsTable:[
+            { form:"Form 222", purpose:"Ordering Schedule II drugs", details:"Valid 60 days. Max 10 line items. Pharmacist signature required. Keep incomplete forms 2 years. CSOS accepted electronically." },
+            { form:"Form 106", purpose:"Reporting theft or significant loss", details:"File immediately. Notify DEA and local law enforcement. Pharmacy keeps copy, original goes to DEA. Not triggered by small spills or breakage." },
+            { form:"Form 41", purpose:"Destruction of expired or damaged controlled substances", details:"Requires NDC, drug name, strength, dosage form and quantity. Two witness signatures required at time of destruction." },
+            { form:"Form 224", purpose:"Pharmacy DEA registration", details:"Required to dispense controlled substances at all. Without it no controlled substance dispensing is permitted." },
+          ],
+          connection:{
+            tag:"Controlled Substance Tech · Pharmacy Compliance and Regulatory Tech · Lead Tech · Pharmacy Supervisor",
+            aiPrompt:"I just completed the lesson What to Know for the Exam in the Federal Law and Controlled Substances module. Help me quiz myself on DEA forms and schedule rules using scenario-based questions."
+          }
+        },
       ]},
       { id:"c5", title:"Practice Exam Strategy & 30-Day Plan", lessons:[
         { id:"c5l1", title:"After Each Test + The Crash Plan", content:`AFTER EACH PRACTICE TEST:\nWrite down:\n• Category missed\n• Why missed\n• How to correct\n\nTrack patterns.\n\n30-DAY CRASH PLAN:\n────────────────────\nWeek 1: Math daily + Workflow review\nWeek 2: Law + Safety + Controlled substance basics\nWeek 3: Drug classes daily\nWeek 4: Full practice exams + Target weak areas\n\nYou passed. Now what?\nCertification is just the beginning.\nThe real differentiator is what you build next.` },
