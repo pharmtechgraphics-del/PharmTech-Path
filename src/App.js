@@ -1659,25 +1659,384 @@ const FREE_SECTIONS = [
 ];
 
 const PRO_SECTIONS = [
-  { id:"retail", title:"Retail Excellence", icon:"🏪", desc:"Advanced skills for techs who want to be the one everyone counts on.",
-    modules:[
-      { id:"r1", title:"Advanced Intake & Data Entry Precision", lessons:[
-        { id:"r1l1", title:"Data Entry Is a Safety Gate", content:`Data entry is not clerical. It is:\n• The first safety checkpoint\n• The foundation of insurance processing\n• The source of downstream accuracy\n\nSmall entry errors create:\n• Rejections\n• Delays\n• Incorrect labels\n• Patient frustration` },
-        { id:"r1l2", title:"High-Risk Entry Areas", content:`Pay extra attention to:\n• Drug strength\n• Quantity\n• Day supply\n• Prescriber information\n• Patient date of birth\n• Similar drug names\n\nMost entry mistakes happen during multitasking.` },
-        { id:"r1l3", title:"Incomplete Prescription Recognition", content:`Before typing, scan for:\n☐ Missing strength\n☐ Missing quantity\n☐ Unclear directions\n☐ Duplicate therapy\n☐ Illegible information\n\nEscalate early. Always clarify before processing.` },
-      ]},
-      { id:"r2", title:"Insurance & Rejection Strategy", lessons:[
-        { id:"r2l1", title:"Top Rejection Types", content:`• Refill too soon\n• Prior authorization required\n• Plan limitations exceeded\n• Non-covered drug\n• Invalid ID\n\nStrong techs recognize patterns quickly.` },
-        { id:"r2l2", title:"Troubleshoot vs Escalate", content:`CORRECT YOURSELF:\n• Wrong birthdate\n• Wrong BIN/PCN\n• Incorrect plan selected\n\nESCALATE:\n• Therapeutic interchange\n• Prior authorization\n• Insurance override needed\n\nAcknowledge → Explain → Offer next step.` },
-      ]},
-      { id:"r3", title:"Inventory & Ordering Intelligence", lessons:[
-        { id:"r3l1", title:"Par Levels, Backorders & Controlled Substances", content:`PAR LEVEL = target stock amount\nToo low → out-of-stocks, frustrated patients\nToo high → expired product, financial waste\n\nBACKORDER HANDLING:\n• Document clearly\n• Communicate timeline\n• Never promise unrealistic dates\n• Inform pharmacist early` },
-      ]},
-      { id:"r4", title:"Becoming the Go-To Retail Tech", lessons:[
-        { id:"r4l1", title:"Anticipation, Peak Hours & Informal Leadership", content:`ANTICIPATION — Strong techs:\n• Refill vials before they're empty\n• Prepare labels during downtime\n• Check stock before rush\n• Anticipate common questions\n\nStay calm. Others mirror your energy.\n\nManagers notice:\nConsistency. Accountability. Initiative.` },
-      ]},
-    ]
-  },
+ { id:"retail", title:"Retail Pharmacy Foundation", icon:"🏪", desc:"Advanced skills for techs who want to be the one everyone counts on.",
+  modules:[
+    { id:"r1", title:"Advanced Intake and Data Entry Precision", lessons:[
+      {
+        id:"r1l1",
+        isFreePreview: true,
+        title:"Data Entry Is a Safety Gate",
+        sections:[
+          {
+            header:"MORE THAN TYPING",
+            body:"Data entry is not a clerical task. It is the first safety checkpoint in the entire prescription workflow. Every piece of information you enter becomes the foundation for insurance adjudication, label generation, pharmacist verification and patient dispensing. When that foundation is wrong, everything built on top of it is wrong too.\n\nThis is not about being a slow typist or a fast one. It is about understanding that the keyboard in front of you is a patient safety tool. The tech who treats it that way catches errors before they travel forward. The tech who treats it like data input misses things that no one else may catch in time.\n\nNote: Workflows, systems and documentation requirements vary by employer, state and setting. Always follow your facility's standard operating procedures and your supervising pharmacist's direction."
+          },
+          {
+            header:"WHAT HAPPENS WHEN ENTRY GOES WRONG",
+            body:"A wrong date of birth moves forward silently until a pharmacist catches it at verification or a patient is given the wrong medication. A wrong days supply triggers a refill too soon rejection the next month that no one connects back to the original entry error. A transposed drug strength creates a label that looks right at a glance but delivers the wrong dose.\n\nThese are not hypothetical scenarios. They are the most common downstream consequences of data entry mistakes in retail pharmacy. The reason they happen is not carelessness. It is multitasking and rushing. Both are environmental realities in retail. Neither changes your accountability at the keyboard."
+          }
+        ],
+        keyPoints:[
+          "Data entry is the first safety checkpoint, not a clerical function",
+          "Entry errors travel forward silently and create downstream problems that are hard to trace back",
+          "Wrong date of birth, wrong days supply and wrong strength are the three most consequential entry errors",
+          "Multitasking and rushing are the primary conditions under which entry errors occur",
+          "Your accountability at the keyboard does not change based on how busy the pharmacy is",
+          "Always follow your employer's SOPs and state regulations for data entry procedures"
+        ],
+        takeaway:"What you type becomes what the patient receives. That is the standard to hold yourself to.",
+        selfCheck:{
+          prompt:"When you are working a busy shift and the queue is backing up, which of these sounds most like how you handle data entry?",
+          options:[
+            {
+              label:"I move through entries as quickly as I can to keep the line moving. I trust the pharmacist to catch anything I miss.",
+              response:"The pharmacist is a safety net, not a correction service. The entries that slip through are the ones that reach patients. Speed without accuracy costs more time than it saves."
+            },
+            {
+              label:"I slow down at the fields I know are high risk even when the pace is intense. The line can wait thirty seconds.",
+              response:"That discipline under pressure is exactly what patient safety looks like in practice. Keep that standard regardless of who is watching."
+            },
+            {
+              label:"I try to be careful but sometimes I realize afterward that I rushed through something I should have slowed down for.",
+              response:"Start with one field per shift where you commit to full accuracy regardless of pace. Date of birth is a good starting point. Build from there."
+            }
+          ]
+        },
+        scenario:{
+          setup:"It is a Friday afternoon and the queue has fifteen prescriptions waiting. You are entering a new patient and typing quickly. You enter the date of birth as 1987 instead of 1978. The prescription goes through, the pharmacist verifies and the patient picks it up.",
+          prompt:"What is the downstream risk of that one digit transposition and what would have caught it before it moved forward?"
+        },
+        answer:{
+          recommended:"A transposed date of birth can affect insurance processing, duplicate patient record creation and in some systems medication safety checks that are tied to patient age. What would have caught it is a deliberate pause after entering the date of birth to read it back against the prescription before moving to the next field. One second of verification is the entire gap between this error happening and not happening."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Prior Authorization Tech · Medication Safety Tech",
+          aiPrompt:"I just completed the lesson Data Entry Is a Safety Gate in the Retail Pharmacy Foundation module. Help me build specific data entry habits for my current retail setting based on my background."
+        }
+      },
+      {
+        id:"r1l2",
+        title:"High-Risk Entry Areas",
+        sections:[
+          {
+            header:"NOT ALL FIELDS CARRY THE SAME RISK",
+            body:"Every field in a prescription entry matters but some carry significantly more downstream risk than others. Knowing which fields those are lets you allocate your attention strategically instead of treating every keystroke the same way.\n\nHigh-risk fields are the ones where an error either reaches the patient directly through the label or creates a compliance problem that cannot be easily undone. These are the fields worth slowing down for even when the shift is at full speed.\n\nEntry requirements and system workflows vary by employer, software platform and state. Always follow your facility's standard operating procedures."
+          },
+          {
+            header:"THE HIGH-RISK FIELDS AND WHY THEY MATTER",
+            body:"Drug name and strength: Similar drug names and look-alike packaging are responsible for a significant percentage of dispensing errors nationwide. Reading the full drug name including the strength every time, without relying on pattern recognition, is the habit that catches these.\n\nQuantity and days supply: These two fields drive insurance adjudication and refill eligibility. A wrong quantity creates a label discrepancy. A wrong days supply triggers a refill too soon rejection weeks later that no one connects to the original entry. Both fields should match the prescription exactly.\n\nPrescriber information: An incorrect or missing prescriber DEA number on a controlled substance entry creates a compliance problem that requires pharmacist intervention to resolve. Verify prescriber information against the prescription before finalizing.\n\nPatient date of birth: As covered in the previous lesson, date of birth errors affect insurance processing, safety checks and patient record accuracy. Read it back against the prescription every time.\n\nDAW code: Dispense as Written codes directly affect whether a brand or generic is dispensed. A DAW 0 when the prescriber wrote DAW 1 is a compliance error. Know the codes and enter them accurately."
+          }
+        ],
+        keyPoints:[
+          "Drug name and strength require full reads every time, not pattern recognition",
+          "Quantity and days supply must match the prescription exactly to avoid downstream insurance and dispensing errors",
+          "Prescriber DEA number errors on controlled substances require pharmacist intervention to correct",
+          "Date of birth affects insurance processing, age-based safety checks and patient record accuracy",
+          "DAW codes directly determine brand versus generic dispensing and are a compliance field",
+          "Entry requirements vary by system, employer and state; always defer to your facility SOPs"
+        ],
+        takeaway:"The fields that look routine are the ones where the most consequential errors hide.",
+        selfCheck:{
+          prompt:"Which of these best describes how you currently handle high-risk entry fields during a busy shift?",
+          options:[
+            {
+              label:"I treat all fields the same. If I am careful in general I figure the important ones are covered.",
+              response:"General carefulness is not the same as targeted accuracy. Identify the five fields from this lesson and build a specific habit around each one."
+            },
+            {
+              label:"I know which fields carry the most risk and I deliberately slow down at those specific points even when the pace is high.",
+              response:"That targeted approach is exactly right. The fact that you can name the high-risk fields means you can protect them deliberately."
+            },
+            {
+              label:"I have made errors in some of these fields before and I am still building the habits to prevent them.",
+              response:"The awareness you have right now is the foundation. Pick the field where you have made errors most often and build one specific verification habit around it this week."
+            }
+          ]
+        },
+        scenario:{
+          setup:"A prescription comes in for metoprolol succinate 50mg. You are familiar with metoprolol and move through the entry quickly. You enter metoprolol tartrate 50mg instead because the names look similar in the system dropdown.",
+          prompt:"What is the clinical significance of that error and what entry habit prevents it?"
+        },
+        answer:{
+          recommended:"Metoprolol succinate and metoprolol tartrate are two different formulations with different dosing intervals. Succinate is extended release dosed once daily. Tartrate is immediate release typically dosed twice daily. Dispensing the wrong formulation affects the patient's therapeutic outcome. The habit that prevents it is reading the full drug name from the prescription and comparing it character by character against what appears in the system before confirming the entry. Never select from a dropdown based on the first match."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Medication Safety Tech · Controlled Substance Tech",
+          aiPrompt:"I just completed the lesson High-Risk Entry Areas in the Retail Pharmacy Foundation module. Help me build specific verification habits for the highest-risk entry fields in my current retail setting."
+        }
+      },
+      {
+        id:"r1l3",
+        title:"Incomplete Prescription Recognition",
+        sections:[
+          {
+            header:"THE COST OF PROCESSING FIRST AND ASKING LATER",
+            body:"One of the most consistent patterns in retail pharmacy errors is a tech who processed a prescription that was missing critical information and assumed it would get caught at verification. Sometimes it does. Sometimes the pharmacist is moving fast and the missing detail passes through. Sometimes the patient is standing at the counter and the pressure to move quickly overrides the instinct to hold.\n\nThe cost of processing first and asking later is almost always higher than the cost of holding the prescription and clarifying before you start. A prescription held at intake takes seconds to resolve. A prescription that moves through the workflow with missing information can require callbacks, prescription reversals and in some cases patient harm.\n\nNote: What constitutes a complete prescription and what requires pharmacist clarification varies by state law and employer policy. Always follow your state board of pharmacy requirements and facility SOPs."
+          },
+          {
+            header:"WHAT TO LOOK FOR BEFORE YOU TYPE",
+            body:"Before entering any prescription, scan it for completeness. The fields that most commonly cause problems when missing are: drug name and strength, quantity and directions, prescriber name and DEA number on controlled substances, patient name and date of birth, and date written.\n\nIllegible handwriting is not the same as missing information but it carries the same risk. If you cannot read a field clearly enough to enter it accurately, that prescription needs to be held for pharmacist review before entry. Do not interpret. Do not make your best guess. Escalate.\n\nFor controlled substances specifically, a prescription with missing or questionable prescriber DEA information must be reviewed by the pharmacist before processing. This is a regulatory requirement in most states, not a judgment call."
+          }
+        ],
+        keyPoints:[
+          "Processing an incomplete prescription and hoping it gets caught at verification is a patient safety risk",
+          "Holding a prescription at intake for clarification is almost always less costly than correcting it after processing",
+          "Drug name and strength, quantity and directions, prescriber information and patient information are the primary completeness fields",
+          "Illegible handwriting carries the same downstream risk as missing information and requires the same response",
+          "Controlled substance prescriptions with missing or questionable prescriber DEA information require pharmacist review before processing",
+          "What constitutes a complete prescription is defined by your state board of pharmacy and employer policy"
+        ],
+        takeaway:"A prescription held for clarification is doing its job. A prescription processed with missing information is a problem waiting to surface.",
+        selfCheck:{
+          prompt:"When a prescription comes in with something unclear or missing, which of these sounds most like what you do?",
+          options:[
+            {
+              label:"I enter what I can and flag it mentally, assuming the pharmacist will catch whatever is missing at verification.",
+              response:"The pharmacist is the last line of defense, not the first. Entering what you can and hoping for the catch is how incomplete information travels forward."
+            },
+            {
+              label:"I hold the prescription before entry and either clarify directly or bring it to the pharmacist depending on what is missing.",
+              response:"That is the right instinct and the right process. Holding before entry protects the workflow, the patient and you."
+            },
+            {
+              label:"I am not always sure what I am allowed to clarify on my own versus what needs to go to the pharmacist.",
+              response:"That is a useful distinction to get clear on with your pharmacist. A general rule: patient demographic questions you can often clarify. Drug, dose and prescriber questions typically require pharmacist involvement. Confirm your facility's specific protocol."
+            }
+          ]
+        },
+        scenario:{
+          setup:"A paper prescription comes in for a controlled substance. The drug name and quantity are clear but the prescriber's DEA number is partially illegible. The patient is waiting at the counter and says they need it today.",
+          prompt:"What do you do and how do you handle the patient's expectation while you do it?"
+        },
+        answer:{
+          recommended:"You bring the prescription to the pharmacist immediately and explain that the DEA number is not fully legible. You do not attempt to interpret or fill in what you think it says. While the pharmacist reviews it, you return to the patient and say something like: I need to verify a couple of details on this prescription with our pharmacist before I can process it. It should only take a few minutes. That response is accurate, professional and sets a realistic expectation without disclosing clinical details."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Controlled Substance Tech · Prior Authorization Tech",
+          aiPrompt:"I just completed the lesson Incomplete Prescription Recognition in the Retail Pharmacy Foundation module. Help me build a clear process for identifying and handling incomplete prescriptions in my current retail setting."
+        }
+      }
+    ]},
+    { id:"r2", title:"Insurance and Rejection Strategy", lessons:[
+      {
+        id:"r2l1",
+        title:"Top Rejection Types",
+        sections:[
+          {
+            header:"REJECTIONS ARE INFORMATION",
+            body:"Every insurance rejection tells you something specific. Techs who treat rejections as obstacles to clear are slower and less accurate than techs who treat them as diagnostic information. When you understand what a rejection code actually means, you know immediately whether you can fix it, what fixing it requires and whether it needs to go to the pharmacist.\n\nThe most common rejection codes in retail pharmacy repeat across plans, patients and medications. Learning them is one of the highest-return investments you can make in your daily workflow efficiency.\n\nNote: Rejection codes, plan structures and resolution processes vary by payer, software platform and state. Always follow your employer's rejection handling protocols."
+          },
+          {
+            header:"THE REJECTIONS YOU WILL SEE MOST OFTEN",
+            body:"Refill too soon: The plan has a record of a recent fill and will not pay for another yet. Check the fill history to confirm the last fill date and calculate when the patient will be eligible. Do not tell the patient a pickup time until you know the actual status.\n\nPrior authorization required: The plan requires clinical justification from the prescriber before covering this medication. This is a pharmacist and prescriber workflow. Your role is to communicate clearly to the patient that a PA is needed and that the pharmacy will initiate contact with the prescriber.\n\nNon-covered drug: The medication is not on the plan's formulary. Resolution options include therapeutic alternatives, a formulary exception request or the patient paying out of pocket. All of these involve the pharmacist.\n\nInvalid ID or plan not found: Patient insurance information in the system does not match what the plan has on file. Verify the information against the patient's insurance card. A simple data correction often resolves this immediately.\n\nPlan limitations exceeded: The patient has reached a plan-imposed quantity or refill limit. This requires pharmacist review and potentially a prescriber conversation."
+          }
+        ],
+        keyPoints:[
+          "Rejection codes are diagnostic information, not just obstacles",
+          "Refill too soon requires fill history verification before any patient communication about pickup time",
+          "Prior authorization required means the prescriber and pharmacist own the resolution, not the tech",
+          "Invalid ID rejections are often immediately resolvable with accurate insurance card information",
+          "Plan limitations exceeded and non-covered drug rejections require pharmacist involvement",
+          "Rejection handling protocols vary by employer, payer and state; always follow your facility SOPs"
+        ],
+        takeaway:"The tech who can name a rejection code and describe its resolution path in thirty seconds is the tech the team depends on.",
+        selfCheck:{
+          prompt:"When you hit a rejection you have not seen before, which of these sounds most like what you do?",
+          options:[
+            {
+              label:"I try different things until something works or I give up and hand it to the pharmacist.",
+              response:"Trial and error on rejections wastes time and can create additional adjudication issues. Learn the code first, then apply the correct resolution."
+            },
+            {
+              label:"I look up the rejection code, identify what it means and apply the appropriate resolution or escalate correctly.",
+              response:"That systematic approach is exactly right. The code tells you what to do. Your job is to read it accurately."
+            },
+            {
+              label:"I escalate most rejections to the pharmacist because I am not confident I know the resolution.",
+              response:"That caution protects patients. The next step is building your rejection code knowledge so you can handle the routine ones independently and escalate the right ones faster."
+            }
+          ]
+        },
+        scenario:{
+          setup:"A patient drops off a prescription and tells you her insurance changed last month. You process it and get a plan not found rejection. She does not have her new insurance card with her.",
+          prompt:"What do you do next and what do you tell the patient?"
+        },
+        answer:{
+          recommended:"Ask the patient if she has any documentation of the new plan, a welcome letter, an email or the plan name and member ID from memory. If she can provide any of that you can attempt to locate the correct BIN and PCN. If she has nothing, explain that without the correct insurance information you cannot process the claim today and offer her options: call back with the card information, have the prescription filled at cash price, or return when she has the card. Do not create a pickup expectation you cannot fulfill."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Prior Authorization Tech · Pharmacy Supervisor · PBM Claims Tech",
+          aiPrompt:"I just completed the lesson Top Rejection Types in the Retail Pharmacy Foundation module. Help me build a quick reference framework for handling the most common insurance rejections in my current retail setting."
+        }
+      },
+      {
+        id:"r2l2",
+        title:"Troubleshoot vs Escalate",
+        sections:[
+          {
+            header:"KNOWING THE LINE",
+            body:"One of the most valuable skills a retail tech builds over time is knowing exactly where their resolution authority ends and where the pharmacist needs to step in. Techs who escalate everything slow the pharmacist down unnecessarily. Techs who resolve everything on their own create compliance and safety risks.\n\nThe line between troubleshoot and escalate is not always obvious but it is always consistent. When the resolution requires clinical judgment, prescriber contact, plan override authorization or controlled substance handling, that is pharmacist territory. When the resolution is a data correction, an insurance information update or a standard adjudication fix, that is tech territory.\n\nEscalation thresholds vary by employer, state and pharmacist preference. Confirm your specific boundaries with your supervising pharmacist."
+          },
+          {
+            header:"THE FRAMEWORK",
+            body:"Troubleshoot on your own when the fix is: correcting a data entry error such as wrong date of birth or wrong plan information, updating insurance information from a patient's card, applying a standard override code for a refill too soon with documented supply, or verifying fill history to confirm eligibility.\n\nEscalate to the pharmacist when the fix requires: prior authorization initiation or follow-up, therapeutic alternative discussion with the patient or prescriber, controlled substance prescription questions including DEA verification or prescription validity, clinical review of a rejection related to drug interactions or contraindications, or any situation where you are not certain of the correct resolution.\n\nWhen in doubt, escalate. Every time. The cost of an unnecessary escalation is a few seconds of the pharmacist's time. The cost of a missed escalation can be significantly higher."
+          }
+        ],
+        keyPoints:[
+          "Escalating everything slows the pharmacist unnecessarily; resolving everything independently creates risk",
+          "Data corrections and standard insurance updates are typically tech territory",
+          "Prior authorization, clinical review, prescriber contact and controlled substance questions are pharmacist territory",
+          "When in doubt, escalate; the cost of unnecessary escalation is always lower than the cost of a missed one",
+          "Your specific escalation thresholds are set by your employer, state and supervising pharmacist",
+          "Confirm your boundaries directly with your pharmacist rather than assuming"
+        ],
+        takeaway:"The tech who knows exactly when to stop and escalate is more valuable than the tech who tries to resolve everything.",
+        selfCheck:{
+          prompt:"Think about the last time you hit a rejection that required a decision. Which of these sounds most like what happened?",
+          options:[
+            {
+              label:"I resolved it on my own because I did not want to bother the pharmacist with something I could probably figure out.",
+              response:"The reluctance to interrupt is understandable but it creates risk. If the resolution involved clinical judgment or prescriber contact, that belongs with the pharmacist regardless of how confident you felt."
+            },
+            {
+              label:"I assessed what the rejection required, handled what was in my scope and brought the pharmacist in for the part that was not.",
+              response:"That judgment is exactly what strong retail workflow looks like. You are protecting both the patient and the pharmacist's time."
+            },
+            {
+              label:"I am still figuring out where my authority ends. I either escalate too much or not enough.",
+              response:"Have a direct conversation with your pharmacist about specific scenarios. Ask: if I see a prior auth rejection, what do you want me to do first? That conversation builds the clarity that experience alone takes much longer to develop."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You get a refill too soon rejection on a patient's blood pressure medication. You check the fill history and see the last fill was 28 days ago on a 30-day supply. The patient says she dropped her bottle and needs an early refill.",
+          prompt:"What is in your scope to do here and at what point does this become a pharmacist decision?"
+        },
+        answer:{
+          recommended:"Verifying the fill history and confirming the rejection reason is in your scope. Documenting what the patient told you about the dropped bottle is in your scope. Attempting a standard override code if your employer's protocol supports it for this scenario may be in your scope depending on your facility. What is not in your scope is making the final decision about whether to process an early fill based on a patient's verbal report without pharmacist authorization. Bring the pharmacist the fill history, the rejection reason and the patient's explanation. The authorization decision belongs with them."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Prior Authorization Tech · Controlled Substance Tech",
+          aiPrompt:"I just completed the lesson Troubleshoot vs Escalate in the Retail Pharmacy Foundation module. Help me build a clearer framework for knowing when to resolve versus escalate in my current retail setting."
+        }
+      }
+    ]},
+    { id:"r3", title:"Inventory and Ordering Intelligence", lessons:[
+      {
+        id:"r3l1",
+        title:"Par Levels, Backorders and Controlled Substances",
+        sections:[
+          {
+            header:"INVENTORY IS PATIENT ACCESS",
+            body:"Every out-of-stock situation in a retail pharmacy is a patient who does not have their medication on time. That framing matters because it changes how seriously you take inventory management as a daily responsibility rather than a background task.\n\nPar levels, ordering processes and controlled substance inventory requirements vary significantly by employer, wholesaler relationship and state law. What is consistent is the principle: accurate inventory management directly affects whether patients get what they need when they need it.\n\nAlways follow your employer's inventory management SOPs, your state board of pharmacy regulations and DEA requirements for controlled substance ordering and documentation."
+          },
+          {
+            header:"PAR LEVELS AND WHAT THEY PROTECT",
+            body:"A par level is the minimum quantity of a medication that should be on hand before a reorder is triggered. Par levels are set based on dispensing volume, supplier lead time and storage capacity. When par levels are maintained accurately, the pharmacy rarely runs out of high-volume medications. When they are ignored or not updated, out-of-stocks happen predictably.\n\nYour role in par level management depends on your employer's system but the awareness is universal. If you notice a medication consistently running below par before the next order arrives, that is information worth bringing to the lead tech or pharmacist. Patterns in inventory gaps are visible from the floor before they become patient-facing problems."
+          },
+          {
+            header:"BACKORDERS AND HOW TO HANDLE THEM",
+            body:"Drug shortages and backorders are a persistent reality in pharmacy. When a medication is on backorder, your responsibility is accurate communication and documentation, not promises you cannot keep.\n\nWhen a backorder affects a patient's medication: document the backorder status in the system, notify the pharmacist, and communicate honestly with the patient about the situation and timeline if known. Do not give a pickup date you cannot confirm. Do not tell a patient a medication will be available tomorrow if you do not have verified supply information.\n\nFor controlled substances on backorder, follow your facility's specific protocols. Controlled substance ordering involves DEA documentation requirements that must be followed exactly."
+          }
+        ],
+        keyPoints:[
+          "Out-of-stocks are patient access failures, not just inventory problems",
+          "Par levels exist to prevent out-of-stocks by triggering reorders before supply runs critically low",
+          "Patterns in inventory gaps are visible from the floor and worth escalating before they become patient-facing",
+          "Backorder communication requires accuracy over optimism; never give a pickup date you cannot confirm",
+          "Controlled substance ordering involves DEA documentation requirements that must be followed exactly",
+          "Inventory procedures vary by employer, wholesaler and state; always follow your facility SOPs and state board regulations"
+        ],
+        takeaway:"The tech who manages inventory proactively prevents the problem the reactive tech spends their shift apologizing for.",
+        selfCheck:{
+          prompt:"Which of these best describes how you currently think about inventory in your daily work?",
+          options:[
+            {
+              label:"I restock when I am told to and handle out-of-stocks when they come up. It is not something I think about proactively.",
+              response:"Reactive inventory management is the norm in most retail settings. The upgrade is starting to notice patterns: which medications run low consistently, which days see the highest volume, which backorders tend to recur. That awareness costs nothing and prevents a lot."
+            },
+            {
+              label:"I pay attention to stock levels during my shift and flag things that look low before they become an issue.",
+              response:"That proactive awareness is exactly what separates a tech who manages inventory from one who just responds to it."
+            },
+            {
+              label:"I am not fully clear on how our ordering and par level system works.",
+              response:"Ask your lead tech or pharmacist to walk you through your system's ordering process. Understanding how it works takes one conversation and pays off every shift."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You notice during your shift that a commonly dispensed blood pressure medication has been running low three to four days before each weekly order for the past month. No one has flagged it.",
+          prompt:"What do you do with that information and why does it matter beyond this one medication?"
+        },
+        answer:{
+          recommended:"Bring it to your lead tech or pharmacist as a pattern observation rather than an individual stock complaint. Say: I have noticed this medication consistently runs out three to four days before our order arrives. It has happened at least four weeks in a row. It might be worth adjusting the par level or ordering frequency. That observation takes thirty seconds to communicate and could prevent a month of patient-facing out-of-stock conversations. It also demonstrates exactly the kind of systems-level awareness that distinguishes a strong tech from one who only manages what is directly in front of them."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Pharmacy Operations Tech · Controlled Substance Tech",
+          aiPrompt:"I just completed the lesson Par Levels, Backorders and Controlled Substances in the Retail Pharmacy Foundation module. Help me understand how to apply proactive inventory awareness in my current retail setting."
+        }
+      }
+    ]},
+    { id:"r4", title:"Becoming the Go-To Retail Tech", lessons:[
+      {
+        id:"r4l1",
+        title:"Anticipation, Peak Hours and Informal Leadership",
+        sections:[
+          {
+            header:"THE DIFFERENCE BETWEEN REACTING AND PREPARING",
+            body:"Every retail pharmacy has a rhythm. Drop-off volume peaks at predictable times. The post-lunch rush follows a pattern. Monday mornings after a weekend of urgent care visits look different from Tuesday afternoons. The tech who knows the rhythm of their pharmacy and prepares for it before it arrives operates at a completely different level than the tech who reacts to it as it happens.\n\nThis is not about working harder. It is about working one step ahead. Refilling vial stock before the rush hits. Checking label supplies before the queue backs up. Knowing which medications are on backorder before a patient asks. Anticipation is a skill and it is built on attention."
+          },
+          {
+            header:"INFORMAL LEADERSHIP WITHOUT A TITLE",
+            body:"The go-to tech does not always have a lead title. What they have is a reputation built on consistency, composure and reliability. Other techs ask them questions. The pharmacist trusts them with the harder tasks. Patients ask for them by name.\n\nThat reputation is built through specific behaviors. Staying calm when the shift gets difficult. Helping a newer tech without making them feel incompetent. Knowing when to take initiative and when to ask. Managing your own frustration in a way that does not affect the people around you.\n\nThe tech who manages their energy and their attitude during peak hours shapes the environment for everyone working alongside them. That is leadership regardless of what the badge says."
+          },
+          {
+            header:"WHAT MANAGERS NOTICE AND REMEMBER",
+            body:"Pharmacy managers and pharmacists notice consistency more than individual moments of excellence. The tech who is reliable on a slow Tuesday is the same tech they remember when a lead position opens. The tech who only performs when something is at stake is not the one they think of first.\n\nConsistency means the same level of accuracy at hour seven as at hour one. The same communication with a frustrated patient at the end of a hard shift as at the beginning of an easy one. The same documentation quality when no one is watching as when the district manager is in the building."
+          }
+        ],
+        keyPoints:[
+          "Anticipation is a skill built on knowing your pharmacy's rhythm and preparing before demand arrives",
+          "The go-to tech earns their reputation through consistency, composure and reliability, not just technical skill",
+          "Informal leadership means shaping the environment around you through behavior, not authority",
+          "Managers remember consistency across ordinary shifts, not just performance during high-stakes moments",
+          "Managing your own energy and attitude during peak hours directly affects everyone working alongside you",
+          "The behaviors that build a leadership reputation are the same ones that protect patient safety"
+        ],
+        takeaway:"The tech who is the same person at hour seven as at hour one is the one the whole team builds around.",
+        selfCheck:{
+          prompt:"Think about how you show up during your pharmacy's peak hours. Which of these sounds most accurate?",
+          options:[
+            {
+              label:"I focus on getting through the rush and I do what I need to do to keep the line moving. It is survival mode.",
+              response:"Survival mode is understandable and sometimes necessary. The shift is identifying one specific thing you can prepare before the rush hits that makes survival mode less frequent."
+            },
+            {
+              label:"I pay attention to when the rush is coming and I prepare for it. I also try to manage my energy so I do not drag the environment down.",
+              response:"That combination of preparation and self-management is exactly what informal leadership looks like in practice."
+            },
+            {
+              label:"I perform well technically but I know my attitude sometimes suffers when the shift gets hard.",
+              response:"That self-awareness is the starting point. Identify one specific moment in your shift where your attitude most often slips and build one small reset habit for that moment."
+            }
+          ]
+        },
+        scenario:{
+          setup:"It is a Monday morning and you can see from the queue that you are heading into a heavy rush. Two newer techs are on with you and they look unsure of how to prioritize. The pharmacist is already on the phone.",
+          prompt:"What do you do in the next two minutes that either helps or misses a leadership opportunity?"
+        },
+        answer:{
+          recommended:"You take a quick look at the queue and make a simple prioritization call out loud for the team. Something like: I am going to take the verification queue and new drops. Can you two handle pickup and phones and flag me if you hit a rejection you are not sure about? You are not overstepping. You are filling a coordination gap that exists because the pharmacist is unavailable and the newer techs are uncertain. That two-minute action keeps the shift from backing up and demonstrates exactly the kind of informal leadership that gets noticed and remembered when opportunities open up."
+        },
+        connection:{
+          tag:"Lead Pharmacy Technician · Pharmacy Supervisor · Retail Pharmacy Tech · CQI Coordinator",
+          aiPrompt:"I just completed the lesson Anticipation, Peak Hours and Informal Leadership in the Retail Pharmacy Foundation module. Help me identify specific ways I can build a leadership reputation in my current retail setting based on my background."
+        }
+      }
+    ]}
+  ]
+},
   { id:"inpatient", title:"Hospital Pharmacy Essentials", icon:"🏥", desc:"How hospital pharmacy works and what it takes to thrive in it.",
     modules:[
       { id:"i1", title:"Understanding Distribution Systems", lessons:[{ id:"i1l1", title:"Centralized vs Decentralized Systems", content:`• Centralized vs decentralized pharmacy\n• Automated dispensing system logic\n• Restock patterns\n• Risk points at each stage\n\nEven highly automated environments require human accountability at every step.` }]},
@@ -4658,7 +5017,7 @@ const [promoMessage, setPromoMessage] = useState("");
     await recordAISession(user.uid);
   }, [user]);
 
-  const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
+const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:[...FREE_SECTIONS,...PRO_SECTIONS.filter(s=>!s.isBeyond)];
   const allL=sections.filter(s=>!s.isBeyond).flatMap(s=>s.modules.flatMap(m=>m.lessons));
   const doneN=allL.filter(l=>done[l.id]).length;
   const pct=allL.length?Math.round((doneN/allL.length)*100):0;
@@ -4868,21 +5227,44 @@ const redeemPromoCode = async () => {
     }
   </>);
 
-  if(view==="learn"&&mod) return wrap(<>
+if(view==="learn"&&mod) return wrap(<>
     <Bk/>
     <H1 ch={mod.title}/>
     <div style={{fontSize:12,color:mu,marginBottom:3}}>{mod.lessons.filter(l=>done[l.id]).length}/{mod.lessons.length} lessons complete</div>
     <Bar p={mod.lessons.length?(mod.lessons.filter(l=>done[l.id]).length/mod.lessons.length)*100:0}/>
     <div style={{marginTop:16,display:"flex",flexDirection:"column",gap:8}}>
-      {mod.lessons.map((ls,i)=>(
-        <div key={ls.id} onClick={()=>setLesson(ls)} style={{background:done[ls.id]?"rgba(0,201,167,.08)":sf,border:done[ls.id]?"1px solid rgba(0,201,167,.25)":`1px solid ${br}`,borderRadius:10,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <div style={{display:"flex",alignItems:"center",gap:11}}>
-            <div style={{width:27,height:27,borderRadius:"50%",background:done[ls.id]?ac:"rgba(255,255,255,.08)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}}>{done[ls.id]?"✓":i+1}</div>
-            <span style={{fontSize:14,fontWeight:600,color:tx}}>{ls.title}</span>
+      {mod.lessons.map((ls,i)=>{
+        const isProSection = sec && PRO_SECTIONS.some(s=>s.id===sec.id && !s.isBeyond);
+        const isLocked = isProSection && !isPro && !ls.isFreePreview;
+        return (
+          <div key={ls.id}>
+            <div
+              onClick={()=>{ if(!isLocked) setLesson(ls); }}
+              style={{background:done[ls.id]?"rgba(0,201,167,.08)":sf,border:done[ls.id]?"1px solid rgba(0,201,167,.25)":`1px solid ${br}`,borderRadius:10,padding:"14px 16px",cursor:isLocked?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"space-between",opacity:isLocked?0.6:1}}
+            >
+              <div style={{display:"flex",alignItems:"center",gap:11}}>
+                <div style={{width:27,height:27,borderRadius:"50%",background:done[ls.id]?ac:isLocked?"rgba(255,255,255,.04)":"rgba(255,255,255,.08)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}}>
+                  {done[ls.id]?"✓":isLocked?"🔒":i+1}
+                </div>
+                <span style={{fontSize:14,fontWeight:600,color:isLocked?mu:tx}}>{ls.title}</span>
+              </div>
+              {isLocked
+                ? <span style={{fontSize:10,fontWeight:700,color:mu,background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,padding:"3px 9px"}}>Pro</span>
+                : <span style={{color:mu,fontSize:17}}>›</span>
+              }
+            </div>
+            {isLocked && i===1 && (
+              <div style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.2)",borderRadius:10,padding:"14px 16px",marginTop:6,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
+                <div>
+                  <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:3}}>Unlock the full module</div>
+                  <div style={{fontSize:11,color:mu}}>Upgrade to Pro to access all lessons in this path.</div>
+                </div>
+                <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:12,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>Upgrade to Pro →</button>
+              </div>
+            )}
           </div>
-          <span style={{color:mu,fontSize:17}}>›</span>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </>);
 
