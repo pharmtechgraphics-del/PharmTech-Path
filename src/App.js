@@ -5227,21 +5227,44 @@ const redeemPromoCode = async () => {
     }
   </>);
 
-  if(view==="learn"&&mod) return wrap(<>
+if(view==="learn"&&mod) return wrap(<>
     <Bk/>
     <H1 ch={mod.title}/>
     <div style={{fontSize:12,color:mu,marginBottom:3}}>{mod.lessons.filter(l=>done[l.id]).length}/{mod.lessons.length} lessons complete</div>
     <Bar p={mod.lessons.length?(mod.lessons.filter(l=>done[l.id]).length/mod.lessons.length)*100:0}/>
     <div style={{marginTop:16,display:"flex",flexDirection:"column",gap:8}}>
-      {mod.lessons.map((ls,i)=>(
-        <div key={ls.id} onClick={()=>setLesson(ls)} style={{background:done[ls.id]?"rgba(0,201,167,.08)":sf,border:done[ls.id]?"1px solid rgba(0,201,167,.25)":`1px solid ${br}`,borderRadius:10,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <div style={{display:"flex",alignItems:"center",gap:11}}>
-            <div style={{width:27,height:27,borderRadius:"50%",background:done[ls.id]?ac:"rgba(255,255,255,.08)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}}>{done[ls.id]?"✓":i+1}</div>
-            <span style={{fontSize:14,fontWeight:600,color:tx}}>{ls.title}</span>
+      {mod.lessons.map((ls,i)=>{
+        const isProSection = sec && PRO_SECTIONS.some(s=>s.id===sec.id && !s.isBeyond);
+        const isLocked = isProSection && !isPro && !ls.isFreePreview;
+        return (
+          <div key={ls.id}>
+            <div
+              onClick={()=>{ if(!isLocked) setLesson(ls); }}
+              style={{background:done[ls.id]?"rgba(0,201,167,.08)":sf,border:done[ls.id]?"1px solid rgba(0,201,167,.25)":`1px solid ${br}`,borderRadius:10,padding:"14px 16px",cursor:isLocked?"default":"pointer",display:"flex",alignItems:"center",justifyContent:"space-between",opacity:isLocked?0.6:1}}
+            >
+              <div style={{display:"flex",alignItems:"center",gap:11}}>
+                <div style={{width:27,height:27,borderRadius:"50%",background:done[ls.id]?ac:isLocked?"rgba(255,255,255,.04)":"rgba(255,255,255,.08)",color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}}>
+                  {done[ls.id]?"✓":isLocked?"🔒":i+1}
+                </div>
+                <span style={{fontSize:14,fontWeight:600,color:isLocked?mu:tx}}>{ls.title}</span>
+              </div>
+              {isLocked
+                ? <span style={{fontSize:10,fontWeight:700,color:mu,background:"rgba(255,255,255,.05)",border:`1px solid ${br}`,borderRadius:10,padding:"3px 9px"}}>Pro</span>
+                : <span style={{color:mu,fontSize:17}}>›</span>
+              }
+            </div>
+            {isLocked && i===1 && (
+              <div style={{background:"rgba(0,201,167,.06)",border:"1px solid rgba(0,201,167,.2)",borderRadius:10,padding:"14px 16px",marginTop:6,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
+                <div>
+                  <div style={{fontSize:13,fontWeight:700,color:"#fff",marginBottom:3}}>Unlock the full module</div>
+                  <div style={{fontSize:11,color:mu}}>Upgrade to Pro to access all lessons in this path.</div>
+                </div>
+                <button onClick={()=>go("upgrade")} style={{background:`linear-gradient(135deg,${ac},${bl})`,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:12,fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>Upgrade to Pro →</button>
+              </div>
+            )}
           </div>
-          <span style={{color:mu,fontSize:17}}>›</span>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </>);
 
