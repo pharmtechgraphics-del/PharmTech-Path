@@ -5017,7 +5017,7 @@ const [promoMessage, setPromoMessage] = useState("");
     await recordAISession(user.uid);
   }, [user]);
 
-  const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:FREE_SECTIONS;
+const sections=user&&isPro?[...FREE_SECTIONS,...PRO_SECTIONS]:[...FREE_SECTIONS,...PRO_SECTIONS.filter(s=>!s.isBeyond)];
   const allL=sections.filter(s=>!s.isBeyond).flatMap(s=>s.modules.flatMap(m=>m.lessons));
   const doneN=allL.filter(l=>done[l.id]).length;
   const pct=allL.length?Math.round((doneN/allL.length)*100):0;
