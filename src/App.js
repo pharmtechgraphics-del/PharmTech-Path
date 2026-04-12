@@ -2037,15 +2037,306 @@ const PRO_SECTIONS = [
     ]}
   ]
 },
-  { id:"inpatient", title:"Hospital Pharmacy Essentials", icon:"🏥", desc:"How hospital pharmacy works and what it takes to thrive in it.",
-    modules:[
-      { id:"i1", title:"Understanding Distribution Systems", lessons:[{ id:"i1l1", title:"Centralized vs Decentralized Systems", content:`• Centralized vs decentralized pharmacy\n• Automated dispensing system logic\n• Restock patterns\n• Risk points at each stage\n\nEven highly automated environments require human accountability at every step.` }]},
-      { id:"i2", title:"Automation Awareness", lessons:[{ id:"i2l1", title:"Why Counts & Documentation Matter", content:`• Why counts matter\n• Documentation chain\n• Common discrepancy causes\n• Pattern recognition mindset\n\nUnderstand why each step exists. That mindset separates average techs from strong ones.` }]},
-      { id:"i3", title:"Cart Fill & Workflow Efficiency", lessons:[{ id:"i3l1", title:"Prioritization, Communication & Documentation", content:`• Prioritization logic\n• Error prevention habits\n• Shift-to-shift communication\n• Documentation hygiene\n\nEvery handoff is a risk point. Document clearly.` }]},
-      { id:"i4", title:"Controlled Substance Accountability", lessons:[{ id:"i4l1", title:"Reconciliation, Escalation & Documentation", content:`If a count is off:\nDo not fix it quietly.\nReport and document immediately.\n\nThis protects you, your team, and your license.` }]},
-      { id:"i5", title:"Sterile Compounding Awareness", lessons:[{ id:"i5l1", title:"Cleanroom Principles (High-Level)", content:`• Cleanroom principles\n• Why environment matters\n• Documentation significance\n\nAlways defer to your facility's SOPs and licensed pharmacist supervision.` }]},
-    ]
-  },
+  { id:"inpatient", title:"Hospital Pharmacy Foundation", icon:"🏥", desc:"How hospital pharmacy works and what it takes to thrive in it.",
+  modules:[
+    { id:"i1", title:"Understanding Distribution Systems", lessons:[
+      {
+        id:"i1l1",
+        isFreePreview: true,
+        title:"Centralized vs Decentralized Systems",
+        sections:[
+          {
+            header:"TWO MODELS, ONE GOAL",
+            body:"Every hospital pharmacy exists to get the right medication to the right patient at the right time. How that happens depends on whether the facility uses a centralized or decentralized distribution model. Understanding the difference is not academic. It directly affects where you work, what your responsibilities look like on any given shift and how you interact with the clinical team.\n\nNote: Distribution models, automation systems and workflow structures vary significantly by facility, health system and state. Always follow your employer's standard operating procedures and your supervising pharmacist's direction."
+          },
+          {
+            header:"CENTRALIZED DISTRIBUTION",
+            body:"In a centralized model, all medication preparation and dispensing happens from one central pharmacy location. Medications are packaged and sent out to patient care units from that central hub. Techs in this model spend most of their time in the pharmacy itself, managing cart fills, unit dose packaging, IV preparation and controlled substance handling.\n\nThe centralized model gives the pharmacy tight control over inventory and documentation. The tradeoff is distance from the clinical team. When a nurse needs a medication urgently, the response time depends on how quickly the central pharmacy can prepare and deliver it."
+          },
+          {
+            header:"DECENTRALIZED DISTRIBUTION",
+            body:"In a decentralized model, medications are stored closer to the patient through satellite pharmacies or automated dispensing cabinets placed directly on patient care units. Techs in this model spend more time on the floors, restocking cabinets, managing unit-level inventory and interacting directly with nurses and other clinical staff.\n\nAutomated dispensing cabinets are the most common form of decentralized distribution in modern hospitals. They allow nurses to access commonly needed medications immediately while maintaining electronic documentation of every transaction. Your role in maintaining those cabinets accurately is a direct patient safety function."
+          },
+          {
+            header:"WHY THIS MATTERS FOR YOUR DAILY WORK",
+            body:"Most hospital pharmacies use a hybrid of both models. Understanding which model governs which part of your workflow helps you understand why tasks are structured the way they are and what the consequences are when they are not done correctly.\n\nA restock missed in a centralized cart fill delays a patient's scheduled medication. A restock missed in a decentralized cabinet means a nurse cannot access a medication at the point of care. Both have patient safety implications. The visibility of the consequence is different. The accountability is the same."
+          }
+        ],
+        keyPoints:[
+          "Centralized distribution means all dispensing happens from one central pharmacy location",
+          "Decentralized distribution places medications closer to patients through satellite pharmacies or automated dispensing cabinets",
+          "Most hospital pharmacies use a hybrid of both models",
+          "Automated dispensing cabinets are the most common form of decentralized distribution in modern hospitals",
+          "Your accuracy in either model has direct patient safety implications regardless of how visible the consequence is",
+          "Distribution models and workflows vary by facility; always follow your employer's SOPs and pharmacist direction"
+        ],
+        takeaway:"Understanding why the system is structured the way it is changes how seriously you take every task within it.",
+        selfCheck:{
+          prompt:"Which of these best describes your current familiarity with hospital distribution systems?",
+          options:[
+            {
+              label:"I work in retail and hospital pharmacy feels like a completely different world to me.",
+              response:"The foundation transfers more than you think. Your accuracy habits, your controlled substance awareness and your communication skills all apply directly. What changes is the environment and the workflow structure."
+            },
+            {
+              label:"I work in an inpatient setting and I recognize both models from my own experience.",
+              response:"Use that experience as your anchor. The next step is being able to articulate how your daily tasks connect to patient outcomes. That clarity is what leadership roles look for."
+            },
+            {
+              label:"I have heard these terms but I am still building a clear picture of how they work in practice.",
+              response:"That clarity comes fastest from observation. Next shift, pay attention to where medications come from before they reach the patient. Trace the path backward and you will see the model in action."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You are restocking an automated dispensing cabinet on a medical floor. A nurse approaches and tells you that a medication she needed for her patient was not in the cabinet when she pulled for it an hour ago. The dose was delayed.",
+          prompt:"What questions should you be asking yourself after this interaction and what does it tell you about your role in the distribution system?"
+        },
+        answer:{
+          recommended:"Ask yourself whether that medication was on your restock list and whether you missed it, whether it was out of stock at the time of your last restock and whether you communicated that, and whether the par level for that medication is set appropriately for that unit's usage. A delayed dose is a patient care event. Your restock is part of the chain that either prevented or contributed to it. The tech who asks these questions after an incident like this is the one who prevents the next one."
+        },
+        connection:{
+          tag:"Inpatient Pharmacy Tech · Lead Pharmacy Technician · Medication History Tech · Pharmacy Informatics Tech",
+          aiPrompt:"I just completed the lesson Centralized vs Decentralized Systems in the Hospital Pharmacy Foundation module. Help me understand how my current experience translates to an inpatient distribution role based on my background."
+        }
+      }
+    ]},
+    { id:"i2", title:"Automation Awareness", lessons:[
+      {
+        id:"i2l1",
+        title:"Why Counts and Documentation Matter",
+        sections:[
+          {
+            header:"AUTOMATION DOES NOT REMOVE ACCOUNTABILITY",
+            body:"Automated dispensing cabinets, carousel systems and barcode verification technology have made hospital pharmacy faster and more accurate in many ways. What they have not done is remove human accountability from the process. Every automated system in a hospital pharmacy depends on a human being doing their part correctly for the automation to work as designed.\n\nWhen a tech restocks the wrong medication into a cabinet pocket, the automation dispenses the wrong medication. When a count discrepancy goes undocumented, the system loses integrity. When a barcode scan is bypassed to save time, the verification layer that was specifically designed to catch errors is removed.\n\nNote: Automation systems, documentation requirements and verification protocols vary by facility and state. Always follow your employer's SOPs and your supervising pharmacist's direction."
+          },
+          {
+            header:"COUNTS AND WHY THEY MATTER",
+            body:"Controlled substance counts in an inpatient setting are a regulatory and patient safety requirement. They exist because controlled substances have a high potential for diversion and because a count discrepancy is often the first visible sign that something has gone wrong.\n\nWhen you perform a count, you are not completing a formality. You are certifying that a specific quantity of a controlled substance is present and accounted for at that moment in time. If the count is off, something happened between the last count and this one. That something needs to be identified, not assumed away.\n\nA discrepancy reported immediately is almost always resolvable. A discrepancy that passes through multiple shifts undocumented becomes a legal and regulatory problem that is significantly harder to address."
+          },
+          {
+            header:"DOCUMENTATION AS A COMMUNICATION TOOL",
+            body:"Every entry you make in an automated system is a communication to the next person in the chain. The nurse pulling a medication at 2am is relying on the documentation you completed during your shift to be accurate. The pharmacist reviewing a discrepancy the next morning is working from the record you created.\n\nDocumentation in inpatient pharmacy is not paperwork. It is the chain of evidence that either supports or undermines every safety and compliance function the pharmacy is responsible for. Treat every entry as if someone will need to rely on it later, because they will."
+          }
+        ],
+        keyPoints:[
+          "Automated systems depend on human accuracy to function correctly; automation does not remove accountability",
+          "Restocking the wrong medication into a cabinet pocket bypasses every safety layer the system is designed to provide",
+          "Controlled substance counts are a regulatory requirement and a patient safety function, not a formality",
+          "A discrepancy reported immediately is almost always resolvable; one that passes through multiple shifts undocumented is not",
+          "Every documentation entry is a communication to the next person in the chain who will rely on it",
+          "Automation systems and documentation requirements vary by facility; always follow your employer's SOPs"
+        ],
+        takeaway:"Automated systems make pharmacy faster. Your accuracy and documentation are what make them safe.",
+        selfCheck:{
+          prompt:"Which of these best describes how you currently think about counts and documentation in your setting?",
+          options:[
+            {
+              label:"I complete counts and documentation because I am required to. I do not always think about why each step exists.",
+              response:"The next time you complete a count, ask yourself what would happen if this step did not exist. That question changes how you perform every step that follows."
+            },
+            {
+              label:"I understand why each documentation step exists and that understanding changes how carefully I complete each one.",
+              response:"That level of awareness is exactly what separates a tech who follows process from one who upholds it. Keep building on that."
+            },
+            {
+              label:"I sometimes rush through documentation steps when the shift is busy. I know I should slow down.",
+              response:"Pick one documentation step this week and commit to full accuracy on it regardless of pace. Build from there one step at a time."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You are working a busy evening shift and you notice that the barcode scanner at one of the restocking stations is malfunctioning. A colleague suggests just skipping the scan and restocking manually to keep the workflow moving.",
+          prompt:"What do you do and why does it matter beyond the inconvenience of a broken scanner?"
+        },
+        answer:{
+          recommended:"You do not skip the scan. You report the malfunctioning scanner to your pharmacist immediately and document that it is down. If your facility has a downtime procedure for this situation you follow it exactly. The barcode scan is not a convenience feature. It is a verification layer that was specifically designed to catch restocking errors before they reach patients. Removing it to maintain workflow speed trades a short term efficiency gain for a patient safety risk that could result in a serious medication error."
+        },
+        connection:{
+          tag:"Inpatient Pharmacy Tech · Lead Pharmacy Technician · Medication Safety Tech · Pharmacy Informatics Tech",
+          aiPrompt:"I just completed the lesson Why Counts and Documentation Matter in the Hospital Pharmacy Foundation module. Help me build stronger documentation and count habits for my current inpatient setting based on my background."
+        }
+      }
+    ]},
+    { id:"i3", title:"Cart Fill and Workflow Efficiency", lessons:[
+      {
+        id:"i3l1",
+        title:"Prioritization, Communication and Documentation",
+        sections:[
+          {
+            header:"CART FILL IS A PATIENT CARE FUNCTION",
+            body:"Cart fill is one of the most routine tasks in inpatient pharmacy and one of the most consequential. Every medication that goes into a patient-specific cassette or drawer is a scheduled dose that a nurse will pull and administer based on the assumption that it is correct. When cart fill is accurate and on time, the clinical team can do their job. When it is not, the downstream effects reach patients directly.\n\nNote: Cart fill processes, scheduling systems and verification requirements vary by facility. Always follow your employer's standard operating procedures and your supervising pharmacist's direction."
+          },
+          {
+            header:"PRIORITIZATION UNDER PRESSURE",
+            body:"Cart fill shifts often involve competing priorities. Stat orders come in while the fill is in progress. Cabinets need restocking while the cart is not finished. A nurse calls about a missing medication while you are mid-fill.\n\nThe techs who manage this well are not the ones who move fastest. They are the ones who triage accurately. Stat orders take priority over scheduled fills. A missing medication that is affecting active patient care takes priority over a cabinet restock that is not yet critical. Knowing the difference between urgent and routine is a judgment skill that develops with experience and deliberate attention.\n\nWhen you are unsure how to prioritize, ask your pharmacist. A thirty second clarification question is always better than a wrong prioritization decision made independently."
+          },
+          {
+            header:"HANDOFFS AND WHY THEY ARE RISK POINTS",
+            body:"Every shift handoff in inpatient pharmacy is a moment where information can be lost. What was pulled, what is missing, what needs follow-up, what discrepancies were identified but not yet resolved. If that information does not transfer clearly to the incoming tech or pharmacist, it disappears.\n\nDocumenting the status of your cart fill at handoff is not extra work. It is the minimum standard for a safe transition. The incoming tech should never have to guess where you left off or whether something was addressed."
+          }
+        ],
+        keyPoints:[
+          "Cart fill accuracy directly affects whether nurses can administer scheduled medications correctly and on time",
+          "Prioritization under pressure requires triage judgment not just speed",
+          "Stat orders take priority over scheduled fills; active patient care needs take priority over routine restocking",
+          "When prioritization is unclear, ask the pharmacist rather than deciding independently",
+          "Every shift handoff is a risk point where undocumented information disappears",
+          "Cart fill processes and verification requirements vary by facility; always follow your employer's SOPs"
+        ],
+        takeaway:"Every handoff is a risk point. Document clearly and communicate completely so the next person can pick up exactly where you left off.",
+        selfCheck:{
+          prompt:"Which of these best describes how you currently handle competing priorities during a busy shift?",
+          options:[
+            {
+              label:"I try to do everything at once and sometimes important things fall through the gaps.",
+              response:"Multitasking in a clinical environment is where errors happen. Start building a triage habit: pause, identify what is most urgent, address that first, then move to the next priority."
+            },
+            {
+              label:"I triage based on urgency and I communicate with the pharmacist when I am not sure how to prioritize.",
+              response:"That combination of judgment and communication is exactly right. The willingness to ask when unsure is what makes the triage reliable."
+            },
+            {
+              label:"I handle what comes at me but I am not always sure I am prioritizing the right things.",
+              response:"Start with one rule: stat orders and active patient care needs always come first. Build your prioritization framework out from that single anchor."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You are in the middle of a cart fill when a stat order comes in for a patient in the ICU. You are halfway through the fill and the pharmacist is occupied with a clinical consultation.",
+          prompt:"What do you do and how do you make sure nothing falls through the gap when you shift your attention?"
+        },
+        answer:{
+          recommended:"You stop the cart fill and address the stat order immediately. Before you shift your attention you make a quick note of exactly where you stopped in the fill so you can return to the right point without missing anything. When the pharmacist is available you briefly communicate that you paused the fill to address the stat and confirm whether there are any other priorities you should be aware of before you resume. The fill can wait. The ICU patient cannot."
+        },
+        connection:{
+          tag:"Inpatient Pharmacy Tech · Lead Pharmacy Technician · Medication History Tech · Sterile Compounding Tech",
+          aiPrompt:"I just completed the lesson Prioritization, Communication and Documentation in the Hospital Pharmacy Foundation module. Help me build stronger prioritization habits for my current inpatient setting based on my background."
+        }
+      }
+    ]},
+    { id:"i4", title:"Controlled Substance Accountability", lessons:[
+      {
+        id:"i4l1",
+        title:"Reconciliation, Escalation and Documentation",
+        sections:[
+          {
+            header:"THE STANDARD IS NON-NEGOTIABLE",
+            body:"Controlled substance accountability in an inpatient setting operates under a level of regulatory scrutiny that does not exist anywhere else in the pharmacy. DEA requirements, state board regulations and institutional policies all converge on the same expectation: every controlled substance must be accounted for at every point in the chain, every time.\n\nThis is not a standard that adjusts based on how busy the shift is or how minor the discrepancy appears. A missing half tablet and a missing full vial are both discrepancies. Both require the same response: immediate documentation and immediate escalation to the pharmacist.\n\nNote: Controlled substance procedures, documentation requirements and escalation protocols vary by facility, state law and DEA regulations. Always follow your employer's SOPs and your supervising pharmacist's direction."
+          },
+          {
+            header:"RECONCILIATION IN PRACTICE",
+            body:"Reconciliation means verifying that the quantity of a controlled substance documented as dispensed or wasted matches the quantity actually accounted for. When reconciliation produces a match, the chain of accountability is intact. When it does not, something happened between the last verified count and this one.\n\nThe most important thing to understand about reconciliation is that your job is to report accurately, not to resolve the discrepancy independently. You are not responsible for determining what happened. You are responsible for documenting what you found and escalating it immediately so the people with the authority to investigate can do their job.\n\nAttempting to resolve a controlled substance discrepancy without pharmacist involvement, even with good intentions, is a serious error in judgment that can have legal consequences."
+          },
+          {
+            header:"WASTE DOCUMENTATION",
+            body:"Wasted controlled substances must be documented accurately and witnessed by a second authorized person at the time of waste. This requirement exists because waste is one of the most common points of diversion in inpatient settings. When waste documentation is completed correctly and consistently it creates an accountable record. When it is rushed, estimated or completed after the fact it creates a gap that is difficult or impossible to close.\n\nNever document a waste you did not witness. Never ask someone to witness a waste they did not observe. These are not technicalities. They are the integrity of the entire accountability system."
+          }
+        ],
+        keyPoints:[
+          "Controlled substance accountability operates under DEA, state board and institutional requirements simultaneously",
+          "A discrepancy of any size requires immediate documentation and escalation to the pharmacist",
+          "Your role in a discrepancy is accurate reporting not independent resolution",
+          "Attempting to resolve a controlled substance discrepancy without pharmacist involvement can have legal consequences",
+          "Waste documentation must be completed accurately and witnessed at the time of waste not after the fact",
+          "Never document a waste you did not witness and never ask someone to witness a waste they did not observe",
+          "Controlled substance procedures vary by facility and state; always follow your employer's SOPs and DEA requirements"
+        ],
+        takeaway:"A discrepancy you report immediately is a problem that can be solved. A discrepancy you try to resolve quietly is a problem that grows.",
+        selfCheck:{
+          prompt:"Which of these best describes how you currently approach controlled substance counts and documentation?",
+          options:[
+            {
+              label:"I handle them carefully but I sometimes move through the steps faster than I should when the shift is busy.",
+              response:"The controlled substance steps are exactly the ones most worth slowing down for regardless of shift pace. Build one deliberate pause into your count process and start there."
+            },
+            {
+              label:"I take my time, complete every step accurately and escalate anything that does not reconcile immediately.",
+              response:"That combination of care and transparency is exactly right. That standard protects you, your team and your patients."
+            },
+            {
+              label:"I am still building confidence with controlled substance processes and I sometimes feel unsure about the steps.",
+              response:"Ask your pharmacist or lead tech to walk you through your facility's specific controlled substance protocol. One focused conversation is worth more than weeks of uncertainty."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You are completing a controlled substance count at the end of your shift and the count is off by one tablet. Your pharmacist is still on site. The oncoming tech is waiting to start their shift.",
+          prompt:"What do you do right now and what is the cost of waiting until tomorrow to address it?"
+        },
+        answer:{
+          recommended:"You go to your pharmacist immediately and tell them exactly what you found. You do not assume it is a documentation error from an earlier shift. You do not attempt to reconcile it yourself. You do not pass it to the oncoming tech without flagging it. You say: my count at end of shift is off by one tablet on this medication. Here is what I found and here are the steps I already retraced. The cost of waiting until tomorrow is that the window for resolution narrows significantly with every hour that passes and every additional person who touches that count without knowing there is a discrepancy."
+        },
+        connection:{
+          tag:"Controlled Substance Tech · Inpatient Pharmacy Tech · Lead Pharmacy Technician · Pharmacy Compliance Tech",
+          aiPrompt:"I just completed the lesson Reconciliation, Escalation and Documentation in the Hospital Pharmacy Foundation module. Help me build stronger controlled substance accountability habits for my current inpatient setting based on my background."
+        }
+      }
+    ]},
+    { id:"i5", title:"Sterile Compounding Awareness", lessons:[
+      {
+        id:"i5l1",
+        title:"Cleanroom Principles High Level",
+        sections:[
+          {
+            header:"AWARENESS IS NOT TRAINING",
+            body:"This lesson is a high-level overview of sterile compounding principles for awareness purposes only. It is not a substitute for formal sterile compounding training, USP 797 compliance training, your facility's cleanroom SOPs or hands-on competency assessment under pharmacist supervision.\n\nIf you work in or are moving toward an IV room role, the content here is a starting point for understanding why the environment and its requirements exist. The actual training required to compound sterile preparations safely is formal, facility-specific and supervised.\n\nNote: Sterile compounding regulations, environmental standards and personnel requirements are governed by USP 797, state boards of pharmacy and individual facility policies. Requirements vary and are subject to change. Always follow your facility's current SOPs and your supervising pharmacist's direction."
+          },
+          {
+            header:"WHY THE ENVIRONMENT MATTERS",
+            body:"Sterile preparations are medications that are administered directly into a patient's bloodstream, eyes or other sterile body spaces. There is no downstream filter between what is compounded and what reaches the patient. If a sterile preparation is contaminated, the contamination reaches the patient directly.\n\nThe cleanroom environment exists to minimize the introduction of contaminants during the compounding process. Temperature, air pressure differentials, particle counts and surface cleanliness are all controlled because each one affects the sterility of the final product. These are not preferences. They are patient safety requirements with regulatory backing."
+          },
+          {
+            header:"ASEPTIC TECHNIQUE AT A HIGH LEVEL",
+            body:"Aseptic technique refers to the practices used during sterile compounding to prevent contamination. This includes proper hand hygiene and garbing, correct use of primary engineering controls like laminar airflow workbenches and biological safety cabinets, and maintaining first air by keeping the critical site in the uninterrupted flow of HEPA-filtered air.\n\nEvery step in the garbing process and every movement within the cleanroom environment is designed to protect the sterility of the preparation. When steps are skipped or performed incorrectly, the contamination risk increases in ways that are not always visible to the person compounding."
+          },
+          {
+            header:"DOCUMENTATION IN STERILE COMPOUNDING",
+            body:"Documentation in sterile compounding is more extensive than in other pharmacy settings because the regulatory requirements are more stringent and the patient safety stakes are higher. Beyond use dates, lot numbers, compounding records and environmental monitoring logs are all part of the documentation chain that supports the integrity of every sterile preparation.\n\nAs a tech working in or near a sterile compounding environment your documentation accuracy is a direct patient safety function, not an administrative one."
+          }
+        ],
+        keyPoints:[
+          "This lesson is awareness only and does not replace formal sterile compounding training or USP 797 compliance education",
+          "Sterile preparations are administered directly into sterile body spaces with no downstream filter between the compound and the patient",
+          "The cleanroom environment controls temperature, pressure, particle counts and surface cleanliness to protect sterility",
+          "Aseptic technique includes proper garbing, correct use of primary engineering controls and maintaining first air",
+          "Every step skipped in aseptic technique increases contamination risk in ways that are not always visible",
+          "Documentation in sterile compounding is more extensive due to higher regulatory requirements and patient safety stakes",
+          "Sterile compounding requirements are governed by USP 797, state boards and facility policies; always follow your current facility SOPs"
+        ],
+        takeaway:"The cleanroom environment exists because there is no second chance once a sterile preparation reaches a patient. Every step in that environment is designed with that reality in mind.",
+        selfCheck:{
+          prompt:"Which of these best describes where you are with sterile compounding right now?",
+          options:[
+            {
+              label:"I have never worked in an IV room and sterile compounding feels like a completely separate world.",
+              response:"This lesson gives you the foundation for understanding why the environment and its requirements exist. If an IV room role is part of your career direction, the next step is identifying formal training programs at your facility or through a accredited program."
+            },
+            {
+              label:"I work in or near a sterile compounding environment and I recognize the principles described here.",
+              response:"Use this as a prompt to audit your own habits. Are there any aseptic technique steps you have started to treat as routine rather than critical? That is where the risk lives."
+            },
+            {
+              label:"I am interested in moving into sterile compounding and I want to understand what formal training would require.",
+              response:"Talk to your pharmacist about your facility's IV room training pathway. PTCB also offers the CSPT credential for techs who want to formalize their sterile compounding competency. That credential is worth researching as a career goal."
+            }
+          ]
+        },
+        scenario:{
+          setup:"You are preparing to enter the cleanroom for a restocking task. You notice that a colleague who went in before you skipped two steps in the garbing process because they said they were only going in for a minute.",
+          prompt:"What do you do and why does the duration of time in the cleanroom not change the requirement?"
+        },
+        answer:{
+          recommended:"You complete your own garbing process fully regardless of what your colleague did. Then in a quiet moment after the task you address it with your colleague directly: I noticed you skipped a couple of the garbing steps earlier. I know it feels like it does not matter for a quick task but the requirement does not change based on how long we are in there. If this is a pattern you observe, bring it to your pharmacist as a process observation rather than a complaint about the individual. The duration of time in the cleanroom does not reduce the contamination risk introduced by incomplete garbing. The risk is created at the point of entry, not accumulated over time."
+        },
+        connection:{
+          tag:"Sterile Compounding Tech · IV Room Tech · Lead Pharmacy Technician · Pharmacy Quality Assurance Tech",
+          aiPrompt:"I just completed the lesson Cleanroom Principles High Level in the Hospital Pharmacy Foundation module. Help me understand what formal sterile compounding training would look like for someone at my experience level and what credentials I should consider."
+        }
+      }
+    ]}
+  ]
+},
   { id:"advanced", title:"Beyond the Counter", icon:"🚀", desc:"Leadership, career pathways & long-term positioning",
     modules:[], // Beyond the Counter now uses its own dedicated view — see BeyondTheCounter component below
     isBeyond: true
